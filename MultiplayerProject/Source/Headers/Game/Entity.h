@@ -24,6 +24,7 @@ struct NetworkedVariableData
 
 class Entity
 {
+public:
 	CreateClassReflectionMetadata(Entity);
 	friend class EntityManager;
 public:
@@ -40,9 +41,11 @@ public://TODO: Make this private
 	void DeserializeNetworkedVariable(unsigned int offset, unsigned int size, char* dataSrc);
 	int networkID;
 	float width, height;
+
+	CreateVariableMetadata(Entity, posX, AuthorityType::OwningClient)
+	CreateVariableMetadata(Entity, posY, AuthorityType::OwningClient)
 	float posX, posY;
 	SDL_Texture* texture;
 
 	std::vector<NetworkedVariableData> networkedVariables;
-	unsigned int sizeOfNetworkedData;
 };
