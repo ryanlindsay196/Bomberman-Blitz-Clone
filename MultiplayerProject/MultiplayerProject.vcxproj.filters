@@ -436,7 +436,7 @@
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkManager.h">
       <Filter>Source Files\Headers\Engine\Networking</Filter>
     </ClInclude>
-    <ClInclude Include="Reflection.h">
+    <ClInclude Include="Source\Headers\Engine\Reflection\Reflection.h">
       <Filter>Source Files\Headers\Engine\Reflection</Filter>
     </ClInclude>
   </ItemGroup>

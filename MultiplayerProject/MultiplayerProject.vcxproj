@@ -142,9 +142,9 @@
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Reflection.h" />
     <ClInclude Include="Source\Headers\Engine\InputManager.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkManager.h" />
+    <ClInclude Include="Source\Headers\Engine\Reflection\Reflection.h" />
     <ClInclude Include="Source\Headers\Engine\Rendering\Renderer.h" />
     <ClInclude Include="Source\Headers\Game\Entity.h" />
     <ClInclude Include="Source\Headers\Game\EntityManager.h" />
