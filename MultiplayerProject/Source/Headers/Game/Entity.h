@@ -1,5 +1,6 @@
 #pragma once
 #include "GameManager.h"
+#include "Engine/Reflection/Reflection.h"
 
 class SDL_Surface;
 class SDL_Texture;
@@ -23,6 +24,7 @@ struct NetworkedVariableData
 
 class Entity
 {
+	CreateClassReflectionMetadata(Entity);
 	friend class EntityManager;
 public:
 	virtual ~Entity() {};

@@ -4,7 +4,6 @@
 #include "BitStream.h"
 #include "MessageIdentifiers.h"
 
-
 class Entity;
 
 enum class AuthorityType

@@ -49,6 +49,9 @@
     <Filter Include="Source Files\Headers\Engine\Rendering">
       <UniqueIdentifier>{866a6abf-e668-48d1-8499-ff037f52cb51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Headers\Engine\Reflection">
+      <UniqueIdentifier>{a2cf3d78-9c6d-4d59-a53b-ef5188cae397}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -432,6 +435,9 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkManager.h">
       <Filter>Source Files\Headers\Engine\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Reflection.h">
+      <Filter>Source Files\Headers\Engine\Reflection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

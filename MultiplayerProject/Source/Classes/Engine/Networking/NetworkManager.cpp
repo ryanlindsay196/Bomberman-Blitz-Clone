@@ -68,7 +68,6 @@ void NetworkManager::HandlePackets()
 	
 	for (RakNet::Packet* packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive())
 	{
-		std::cout << "Reading packet!" << std::endl;
 		switch (packet->data[0])
 		{
 		case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -174,6 +173,8 @@ void NetworkManager::HandlePackets()
 	
 					char* dataToUpdate = (char*)entity + (offset);
 					memcpy(dataToUpdate, output, sizeofData);
+					//TODO: free dataToUpdate
+					//free(dataToUpdate);
 				}
 			}
 			//TODO: delete output for real
@@ -212,7 +213,6 @@ void NetworkManager::SendSerializedData()
 	{
 		assert(peer->Send(&outputStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE, 0, serverGUID, false));
 	}
-	printf("Sending serialized data!\n");
 	outputStream.Reset();
 }
 
