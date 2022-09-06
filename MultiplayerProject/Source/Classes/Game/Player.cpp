@@ -27,7 +27,7 @@ void Player::Update(float deltaTime)
 bool Player::Initialize(const char* imagePath, float inWidth, float inHeight, float inPosX, float inPosY)
 {
 	health = 1;
-	RegisterNetworkedVariable(Player, health, AuthorityType::Server);
 
+	CreateVariableMetadata(Player, health, AuthorityType::Server)
 	return Entity::Initialize(imagePath, inWidth, inHeight, inPosX, inPosY);
 }

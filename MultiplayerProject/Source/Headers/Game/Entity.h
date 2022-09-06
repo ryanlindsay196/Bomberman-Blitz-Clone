@@ -36,14 +36,12 @@ public:
 protected:
 	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, float inPosX, float inPosY);
 
-public://TODO: Make this private
+private:
 	void SerializeNetworkedVariables();
 	void DeserializeNetworkedVariable(unsigned int offset, unsigned int size, char* dataSrc);
 	int networkID;
 	float width, height;
 
-	CreateVariableMetadata(Entity, posX, AuthorityType::OwningClient)
-	CreateVariableMetadata(Entity, posY, AuthorityType::OwningClient)
 	float posX, posY;
 	SDL_Texture* texture;
 

@@ -36,4 +36,4 @@ struct ReflectionVariable : public AutoLister<ReflectionVariable>\
 };
 
 #define CreateVariableMetadata(class, var, authType)\
-ReflectionVariable rv_##var = ReflectionVariable(#var, offsetof(class, var), sizeof(var), authType);
+static ReflectionVariable rv_##var = ReflectionVariable(#var, offsetof(class, var), sizeof(var), authType);

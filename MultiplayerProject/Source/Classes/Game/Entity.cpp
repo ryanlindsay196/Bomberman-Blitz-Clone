@@ -15,9 +15,8 @@ bool Entity::Initialize(const char *imagePath, float inWidth, float inHeight, fl
 	GameManager& gameManager = GameManager::Get();
 	texture = gameManager.GetRenderer()->LoadTexture(imagePath);
 
-	RegisterNetworkedEntity(this);
-	RegisterNetworkedVariable(Entity, posX, AuthorityType::OwningClient);
-	RegisterNetworkedVariable(Entity, posY, AuthorityType::OwningClient);
+	CreateVariableMetadata(Entity, posX, AuthorityType::OwningClient)
+	CreateVariableMetadata(Entity, posY, AuthorityType::OwningClient)
 
 	return texture != nullptr;
 }
