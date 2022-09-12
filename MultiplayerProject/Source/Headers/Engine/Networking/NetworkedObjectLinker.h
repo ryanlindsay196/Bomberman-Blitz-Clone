@@ -1,8 +1,11 @@
 #pragma once
 
 #include "NetworkEnums.h"
+#include <vector>
+#include <unordered_map>
+#include "Engine/Networking/NetworkManager.h"
 
-#include "Engine/BaseObject.h"
+class BaseObject;
 
 struct NetworkedReflectionVariable
 {
@@ -28,7 +31,7 @@ public:
 		unsigned int GetNetworkID() { return networkID; }
 		BaseObject* GetNetworkedObject() { return networkedObject; }
 
-		void AddNetworkedVariable(void* reflectionVariable, AuthorityType authorityType);
+		void AddNetworkedVariable(BaseObject::ReflectionVariable* reflectionVariable, AuthorityType authorityType);
 	private:
 		unsigned int networkID;
 		BaseObject* networkedObject;

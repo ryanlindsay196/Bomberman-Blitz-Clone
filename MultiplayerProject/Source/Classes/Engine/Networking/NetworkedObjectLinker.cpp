@@ -1,4 +1,5 @@
 #include "Engine/Networking/NetworkedObjectLinker.h"
+#include "Engine/BaseObject.h"
 
 NetworkedObjectLinker& NetworkedObjectLinker::GetInstance()
 {
@@ -34,8 +35,7 @@ NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * i
 	networkedObject(inObject)
 {}
 
-void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(void* reflectionVariable, AuthorityType authorityType)
+void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::ReflectionVariable* reflectionVariable, AuthorityType authorityType)
 {
-	BaseObject::ReflectionVariable* networkedVariable = (BaseObject::ReflectionVariable*)reflectionVariable;
-	networkedVariables.push_back(NetworkedReflectionVariable{ networkedVariable, authorityType });
+	networkedVariables.push_back(NetworkedReflectionVariable{ reflectionVariable, authorityType });
 }

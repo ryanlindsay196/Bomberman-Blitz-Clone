@@ -35,7 +35,7 @@ public:\
 };
 
 #define Networked(AuthorityType, var)\
-RegisterNetworkedVariable(AuthorityType, (void*)&rv_##var);
+RegisterNetworkedVariable(AuthorityType, (BaseObject::ReflectionVariable*)&rv_##var);
 
 #define CreateVariableMetadata(class, var, ...)\
 static ReflectionVariable rv_##var = ReflectionVariable(#var, offsetof(class, var), sizeof(var));\

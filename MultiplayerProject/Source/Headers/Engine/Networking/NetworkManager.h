@@ -2,8 +2,7 @@
 #include <unordered_map>
 #include "BitStream.h"
 #include "Engine/Networking/NetworkEnums.h"
-
-class BaseObject;
+#include "Engine/BaseObject.h"
 
 class NetworkManager
 {
@@ -15,10 +14,10 @@ public:
 	//Returns true if we have enough space to serialize "size" number of bytes.
 	bool CanSerializeNumberOfBytes(unsigned int size);
 	void SendSerializedData();
-	bool Serialize(void* data, unsigned int size);
+	bool Serialize(BaseObject::ReflectionVariable* data, unsigned int size);
 
 	void RegisterNetworkedObject(BaseObject* objectPtr);
-	void RegisterNetworkedVariable(unsigned int networkID, void* networkedVariable, AuthorityType authorityType);
+	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::ReflectionVariable* networkedVariable, AuthorityType authorityType);
 	int GenerateNewNetworkID();
 
 	bool GetIsServer() { return isServer; }

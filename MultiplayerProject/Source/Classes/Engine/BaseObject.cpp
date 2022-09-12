@@ -1,5 +1,6 @@
 #include "Engine/BaseObject.h"
 #include "Game/GameManager.h"
+#include "Engine/Networking/NetworkManager.h"
 
 
 void BaseObject::RegisterSelfAsNetworked()
@@ -11,7 +12,7 @@ void BaseObject::RegisterSelfAsNetworked()
 	}
 }
 
-void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, void* reflectionVariable)
+void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::ReflectionVariable* reflectionVariable)
 {
 	if (!reflectionVariable)
 	{
