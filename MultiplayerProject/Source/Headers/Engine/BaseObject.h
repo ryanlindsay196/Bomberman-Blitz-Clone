@@ -5,11 +5,11 @@
 class BaseObject
 {
 public:
-	CreateClassReflectionMetadata(BaseObject)
+	CreateClassMetadata(BaseObject)
 
 	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, float inPosX, float inPosY) = 0;
 	void RegisterSelfAsNetworked();
-	void RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::ReflectionVariable* reflectionVariable);
+	void RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::MetaVariable* metaVariable);
 	unsigned int GetNetworkID() { return networkID; }
 	void GenerateNetworkID();
 	bool HasValidNetworkID() { return networkID != 0; }

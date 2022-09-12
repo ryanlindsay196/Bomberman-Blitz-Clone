@@ -8,7 +8,7 @@ class SDL_Texture;
 class Entity : public BaseObject
 {
 public:
-	CreateClassReflectionMetadata(Entity)
+	CreateClassMetadata(Entity)
 	friend class EntityManager;
 
 

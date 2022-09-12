@@ -7,9 +7,9 @@
 
 class BaseObject;
 
-struct NetworkedReflectionVariable
+struct NetworkedMetaVariable
 {
-	BaseObject::ReflectionVariable* reflectionVariable;
+	BaseObject::MetaVariable* metaVariable;
 	AuthorityType authorityType;
 };
 
@@ -31,11 +31,11 @@ public:
 		unsigned int GetNetworkID() { return networkID; }
 		BaseObject* GetNetworkedObject() { return networkedObject; }
 
-		void AddNetworkedVariable(BaseObject::ReflectionVariable* reflectionVariable, AuthorityType authorityType);
+		void AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, AuthorityType authorityType);
 	private:
 		unsigned int networkID;
 		BaseObject* networkedObject;
-		std::vector<NetworkedReflectionVariable> networkedVariables;
+		std::vector<NetworkedMetaVariable> networkedVariables;
 	};
 
 	void AddBaseObject(BaseObject* inObject);

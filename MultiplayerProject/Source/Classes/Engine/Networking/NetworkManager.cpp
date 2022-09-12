@@ -212,7 +212,7 @@ void NetworkManager::SendSerializedData()
 	outputStream.Reset();
 }
 
-bool NetworkManager::Serialize(BaseObject::ReflectionVariable* data, unsigned int size)
+bool NetworkManager::Serialize(BaseObject::MetaVariable* data, unsigned int size)
 {
 	if(!CanSerializeNumberOfBytes(size))
 	{
@@ -231,7 +231,7 @@ void NetworkManager::RegisterNetworkedObject(BaseObject * objectPtr)
 	NetworkedObjectLinker::GetInstance().AddBaseObject(objectPtr);
 }
 
-void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObject::ReflectionVariable* networkedVariable, AuthorityType authorityType)
+void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType)
 {
 	static NetworkedObjectLinker& networkedObjectLinker = NetworkedObjectLinker::GetInstance();
 	auto proxy = networkedObjectLinker.networkIdToBaseObjectMap.find(networkID);

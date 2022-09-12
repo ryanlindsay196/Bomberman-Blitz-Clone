@@ -35,7 +35,7 @@ NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * i
 	networkedObject(inObject)
 {}
 
-void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::ReflectionVariable* reflectionVariable, AuthorityType authorityType)
+void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, AuthorityType authorityType)
 {
-	networkedVariables.push_back(NetworkedReflectionVariable{ reflectionVariable, authorityType });
+	networkedVariables.push_back(NetworkedMetaVariable{ metaVariable, authorityType });
 }

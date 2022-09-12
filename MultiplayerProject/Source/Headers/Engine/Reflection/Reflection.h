@@ -19,13 +19,13 @@ private:
 	T* m_next;
 };
 
-#define CreateClassReflectionMetadata(Class)\
+#define CreateClassMetadata(Class)\
 static int GetClassID() { return __COUNTER__; }\
 static char* GetClassName() { return (char*)#Class; }\
-struct ReflectionVariable : public AutoLister<ReflectionVariable>\
+struct MetaVariable : public AutoLister<MetaVariable>\
 {\
 public:\
-	ReflectionVariable(const char* name_, unsigned int offset_, unsigned int size_) :\
+	MetaVariable(const char* name_, unsigned int offset_, unsigned int size_) :\
 		name(name_),\
 		offset(offset_),\
 		size(size_) {}\
@@ -35,8 +35,8 @@ public:\
 };
 
 #define Networked(AuthorityType, var)\
-RegisterNetworkedVariable(AuthorityType, (BaseObject::ReflectionVariable*)&rv_##var);
+RegisterNetworkedVariable(AuthorityType, (BaseObject::MetaVariable*)&mv_##var);
 
 #define CreateVariableMetadata(class, var, ...)\
-static ReflectionVariable rv_##var = ReflectionVariable(#var, offsetof(class, var), sizeof(var));\
+static MetaVariable mv_##var = MetaVariable(#var, offsetof(class, var), sizeof(var));\
 __VA_ARGS__

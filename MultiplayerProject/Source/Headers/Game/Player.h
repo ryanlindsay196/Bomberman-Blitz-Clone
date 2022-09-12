@@ -5,7 +5,7 @@
 class Player : public Entity
 {
 public:
-	CreateClassReflectionMetadata(Player)
+	CreateClassMetadata(Player)
 	friend class EntityManager;
 public:
 	virtual void Update(float deltaTime) override;

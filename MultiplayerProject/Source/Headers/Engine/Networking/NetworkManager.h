@@ -14,10 +14,10 @@ public:
 	//Returns true if we have enough space to serialize "size" number of bytes.
 	bool CanSerializeNumberOfBytes(unsigned int size);
 	void SendSerializedData();
-	bool Serialize(BaseObject::ReflectionVariable* data, unsigned int size);
+	bool Serialize(BaseObject::MetaVariable* data, unsigned int size);
 
 	void RegisterNetworkedObject(BaseObject* objectPtr);
-	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::ReflectionVariable* networkedVariable, AuthorityType authorityType);
+	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType);
 	int GenerateNewNetworkID();
 
 	bool GetIsServer() { return isServer; }
