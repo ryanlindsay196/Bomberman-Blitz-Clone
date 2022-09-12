@@ -28,6 +28,7 @@ bool Player::Initialize(const char* imagePath, float inWidth, float inHeight, fl
 {
 	health = 1;
 
-	CreateVariableMetadata(Player, health, AuthorityType::Server)
+	RegisterSelfAsNetworked();
+	CreateVariableMetadata(Player, health, Networked(AuthorityType::Server, health))
 	return Entity::Initialize(imagePath, inWidth, inHeight, inPosX, inPosY);
 }

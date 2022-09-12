@@ -24,16 +24,19 @@ static int GetClassID() { return __COUNTER__; }\
 static char* GetClassName() { return (char*)#Class; }\
 struct ReflectionVariable : public AutoLister<ReflectionVariable>\
 {\
-	ReflectionVariable(const char* name_, unsigned int offset_, unsigned int size_, AuthorityType authorityType_) :\
+public:\
+	ReflectionVariable(const char* name_, unsigned int offset_, unsigned int size_) :\
 		name(name_),\
 		offset(offset_),\
-		size(size_),\
-		authorityType(authorityType){}\
+		size(size_) {}\
 	const char* const name;\
-	unsigned int offset;\
-	unsigned int size;\
-	AuthorityType authorityType;\
+	const unsigned int offset;\
+	const unsigned int size;\
 };
 
-#define CreateVariableMetadata(class, var, authType)\
-static ReflectionVariable rv_##var = ReflectionVariable(#var, offsetof(class, var), sizeof(var), authType);
+#define Networked(AuthorityType, var)\
+RegisterNetworkedVariable(AuthorityType, (void*)&rv_##var);
+
+#define CreateVariableMetadata(class, var, ...)\
+static ReflectionVariable rv_##var = ReflectionVariable(#var, offsetof(class, var), sizeof(var));\
+__VA_ARGS__

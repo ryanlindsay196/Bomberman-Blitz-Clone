@@ -16,7 +16,7 @@ public:
 	bool Update();
 	void Destroy();
 
-	NetworkManager* GetNetworkManager() { return &networkManager; }
+	static NetworkManager& GetNetworkManager() { return Get().networkManager; }
 	Renderer* GetRenderer() { return &renderer; }
 	InputManager* GetInputManager() { return &inputManager; }
 

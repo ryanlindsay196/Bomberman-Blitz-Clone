@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "Engine/Networking/NetworkManager.h"
+#include "Engine/Networking/NetworkedObjectLinker.h"
 #include "RakPeerInterface.h"
-#include "Game/Entity.h"
 #include <bitset>
 
 #define MAX_CLIENTS 10
@@ -83,10 +83,6 @@ void NetworkManager::HandlePackets()
 			printf("Our connection request has been accepted.\n");
 			{
 				serverGUID = packet->guid;
-	
-				Entity* entity = networkedObjectLinker.GetEntity(0);
-				entity->posX = 500;
-				entity->SerializeNetworkedVariables();
 				peer->Send(&outputStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE_ORDERED, 0, packet->systemAddress, false);
 			}
 			break;
@@ -129,53 +125,53 @@ void NetworkManager::HandlePackets()
 				bsIn.Read(output, sizeof(unsigned int));
 				memcpy(&totalBytesToDeserialize, output, sizeof(unsigned int));
 	
-				Entity* entity = networkedObjectLinker.GetEntity(networkID);
+				//BaseObject* baseObject = networkedObjectLinker.GetBaseObject(networkID);
 	
 				unsigned int entityBytesRead = 0;
-				NetworkedVariableData nvd{0, 0, (AuthorityType)0};
+				//NetworkedVariableData nvd{0, 0, (AuthorityType)0};
 	
 	
-				unsigned int sizeofOffset = 0;
-				GetBitFieldSize(sizeofOffset, nvd.offset);
+				//unsigned int sizeofOffset = 0;
+				//GetBitFieldSize(sizeofOffset, nvd.offset);
 	
-				unsigned int sizeofSize = 0;
-				GetBitFieldSize(sizeofSize, nvd.size);
+				//unsigned int sizeofSize = 0;
+				//GetBitFieldSize(sizeofSize, nvd.size);
 	
 				unsigned int sizeofAuthorityType = 1;
 	
-				while (entityBytesRead < totalBytesToDeserialize)
-				{
-					unsigned int offset = 0;
-					bsIn.Read(output, sizeofOffset);
-					entityBytesRead += sizeofOffset;
-					memcpy(&offset, output, sizeofOffset);
-	
-					unsigned int sizeofData = 0;
-					bsIn.Read(output, sizeofSize);
-					entityBytesRead += sizeofSize;
-					memcpy(&sizeofData, output, sizeofSize);
-	
-					AuthorityType authorityType;
-					bsIn.Read(output, sizeofAuthorityType);
-					entityBytesRead += sizeofAuthorityType;
-					memcpy(&authorityType, output, sizeofAuthorityType);
-	
-					bool variableAuthorityMatchesServerState =
-						(authorityType == AuthorityType::Server && GetIsServer()) ||
-						(authorityType == AuthorityType::OwningClient && !GetIsServer());
-	
-					bsIn.Read(output, sizeofData);
-					entityBytesRead += sizeofData;
-					if (variableAuthorityMatchesServerState)
-					{
-						continue;
-					}
-	
-					char* dataToUpdate = (char*)entity + (offset);
-					memcpy(dataToUpdate, output, sizeofData);
-					//TODO: free dataToUpdate
-					//free(dataToUpdate);
-				}
+				//while (entityBytesRead < totalBytesToDeserialize)
+				//{
+				//	unsigned int offset = 0;
+				//	bsIn.Read(output, sizeofOffset);
+				//	entityBytesRead += sizeofOffset;
+				//	memcpy(&offset, output, sizeofOffset);
+				//
+				//	unsigned int sizeofData = 0;
+				//	bsIn.Read(output, sizeofSize);
+				//	entityBytesRead += sizeofSize;
+				//	memcpy(&sizeofData, output, sizeofSize);
+				//
+				//	AuthorityType authorityType;
+				//	bsIn.Read(output, sizeofAuthorityType);
+				//	entityBytesRead += sizeofAuthorityType;
+				//	memcpy(&authorityType, output, sizeofAuthorityType);
+				//
+				//	bool variableAuthorityMatchesServerState =
+				//		(authorityType == AuthorityType::Server && GetIsServer()) ||
+				//		(authorityType == AuthorityType::OwningClient && !GetIsServer());
+				//
+				//	bsIn.Read(output, sizeofData);
+				//	entityBytesRead += sizeofData;
+				//	if (variableAuthorityMatchesServerState)
+				//	{
+				//		continue;
+				//	}
+				//
+				//	char* dataToUpdate = (char*)entity + (offset);
+				//	memcpy(dataToUpdate, output, sizeofData);
+				//	//TODO: free dataToUpdate
+				//	//free(dataToUpdate);
+				//}
 			}
 			//TODO: delete output for real
 			//delete(output);
@@ -226,13 +222,30 @@ bool NetworkManager::Serialize(void* data, unsigned int size)
 	return true;
 }
 
-void NetworkManager::Deserialize()
+void NetworkManager::RegisterNetworkedObject(BaseObject * objectPtr)
 {
+	if (!objectPtr)
+	{
+		return;
+	}
+	NetworkedObjectLinker::GetInstance().AddBaseObject(objectPtr);
+}
+
+void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, void* networkedVariable, AuthorityType authorityType)
+{
+	static NetworkedObjectLinker& networkedObjectLinker = NetworkedObjectLinker::GetInstance();
+	auto proxy = networkedObjectLinker.networkIdToBaseObjectMap.find(networkID);
+	if (proxy == networkedObjectLinker.networkIdToBaseObjectMap.end())
+	{
+		return;
+	}
+
+	proxy->second.AddNetworkedVariable(networkedVariable, authorityType);
 }
 
 int NetworkManager::GenerateNewNetworkID()
 {
-	static int highestEntityID = -1;
+	static int highestEntityID = 0;
 	++highestEntityID;
 	return highestEntityID;
 }

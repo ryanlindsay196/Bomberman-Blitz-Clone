@@ -408,6 +408,12 @@
     <ClCompile Include="Source\Classes\Game\Entity.cpp">
       <Filter>Source Files\Classes\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\BaseObject.cpp">
+      <Filter>Source Files\Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp">
+      <Filter>Source Files\Classes\Engine\Networking</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -438,6 +444,15 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\Reflection\Reflection.h">
       <Filter>Source Files\Headers\Engine\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\BaseObject.h">
+      <Filter>Source Files\Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkedObjectLinker.h">
+      <Filter>Source Files\Headers\Engine\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkEnums.h">
+      <Filter>Source Files\Headers\Engine\Networking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
