@@ -448,10 +448,10 @@
     <ClInclude Include="Source\Headers\Engine\BaseObject.h">
       <Filter>Source Files\Headers\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkedObjectLinker.h">
+    <ClInclude Include="Source\Headers\Engine\Networking\NetworkedObjectLinker.h">
       <Filter>Source Files\Headers\Engine\Networking</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkEnums.h">
+    <ClInclude Include="Source\Headers\Engine\Networking\NetworkEnums.h">
       <Filter>Source Files\Headers\Engine\Networking</Filter>
     </ClInclude>
   </ItemGroup>

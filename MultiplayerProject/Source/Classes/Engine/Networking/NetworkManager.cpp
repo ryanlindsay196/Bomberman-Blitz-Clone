@@ -189,7 +189,7 @@ void NetworkManager::Destroy()
 	RakNet::RakPeerInterface::DestroyInstance(peer);
 }
 
-bool NetworkManager::CanSerializeNumberOfBytes(unsigned int size)
+bool NetworkManager::CanSerializeNumberOfBytes(unsigned int size) const
 {
 	return outputStream.GetNumberOfBytesUsed() + size < MAX_BYTES_FOR_STREAM;
 }
@@ -224,10 +224,8 @@ bool NetworkManager::Serialize(BaseObject::MetaVariable* data, unsigned int size
 
 void NetworkManager::RegisterNetworkedObject(BaseObject * objectPtr)
 {
-	if (!objectPtr)
-	{
-		return;
-	}
+	assert(objectPtr);
+
 	NetworkedObjectLinker::GetInstance().AddBaseObject(objectPtr);
 }
 

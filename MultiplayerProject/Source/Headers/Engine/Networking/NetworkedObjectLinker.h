@@ -28,8 +28,8 @@ public:
 	public:
 		NetworkedObjectProxy() {}
 		NetworkedObjectProxy(BaseObject * inObject);
-		unsigned int GetNetworkID() { return networkID; }
-		BaseObject* GetNetworkedObject() { return networkedObject; }
+		unsigned int GetNetworkID() const { return networkID; }
+		BaseObject* GetNetworkedObject() const { return networkedObject; }
 
 		void AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, AuthorityType authorityType);
 	private:

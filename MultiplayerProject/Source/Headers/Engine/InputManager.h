@@ -24,7 +24,7 @@ class InputManager
 public:
 	void Initialize();
 	void Update();
-	bool WantsToQuit();
+	bool WantsToQuit() const;
 
 	bool IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent);
 	bool IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent);

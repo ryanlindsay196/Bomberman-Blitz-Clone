@@ -12,7 +12,7 @@ public:
 	void Destroy();
 
 	//Returns true if we have enough space to serialize "size" number of bytes.
-	bool CanSerializeNumberOfBytes(unsigned int size);
+	bool CanSerializeNumberOfBytes(unsigned int size) const;
 	void SendSerializedData();
 	bool Serialize(BaseObject::MetaVariable* data, unsigned int size);
 
@@ -20,8 +20,8 @@ public:
 	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType);
 	int GenerateNewNetworkID();
 
-	bool GetIsServer() { return isServer; }
-	bool IsOutputStreamEmpty() { return outputStream.GetNumberOfBitsUsed() == 0; }
+	bool GetIsServer() const { return isServer; }
+	bool IsOutputStreamEmpty() const { return outputStream.GetNumberOfBitsUsed() == 0; }
 private:
 	class RakNet::RakPeerInterface* peer;
 	bool isServer;

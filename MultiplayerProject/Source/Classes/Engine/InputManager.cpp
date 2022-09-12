@@ -60,7 +60,7 @@ void InputManager::Update()
 	}
 }
 
-bool InputManager::WantsToQuit()
+bool InputManager::WantsToQuit() const
 {
 	return wantsToQuit;
 }

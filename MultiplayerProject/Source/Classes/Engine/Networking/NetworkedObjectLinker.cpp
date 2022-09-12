@@ -14,6 +14,8 @@ BaseObject* NetworkedObjectLinker::GetBaseObject(unsigned int networkId)
 
 void NetworkedObjectLinker::AddBaseObject(BaseObject * inObject)
 {
+	assert(inObject);
+
 	unsigned int networkID = inObject->GetNetworkID();
 
 	auto it = networkIdToBaseObjectMap.find(networkID);
@@ -37,5 +39,7 @@ NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * i
 
 void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, AuthorityType authorityType)
 {
+	assert(metaVariable);
+
 	networkedVariables.push_back(NetworkedMetaVariable{ metaVariable, authorityType });
 }
