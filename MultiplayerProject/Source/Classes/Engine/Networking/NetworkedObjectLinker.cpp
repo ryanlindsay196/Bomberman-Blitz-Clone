@@ -9,7 +9,7 @@ NetworkedObjectLinker& NetworkedObjectLinker::GetInstance()
 
 BaseObject* NetworkedObjectLinker::GetBaseObject(unsigned int networkId)
 {
-	return networkIdToBaseObjectMap[networkId].GetNetworkedObject();
+	return networkIdToNetworkObjectProxyMap[networkId].GetNetworkedObject();
 }
 
 void NetworkedObjectLinker::AddBaseObject(BaseObject * inObject)
@@ -18,18 +18,18 @@ void NetworkedObjectLinker::AddBaseObject(BaseObject * inObject)
 
 	unsigned int networkID = inObject->GetNetworkID();
 
-	auto it = networkIdToBaseObjectMap.find(networkID);
-	if (it != networkIdToBaseObjectMap.end())
+	auto it = networkIdToNetworkObjectProxyMap.find(networkID);
+	if (it != networkIdToNetworkObjectProxyMap.end())
 	{
 		return;
 	}
 	//We should only register a networked object once.
-	networkIdToBaseObjectMap[networkID] = NetworkedObjectProxy(inObject);
+	networkIdToNetworkObjectProxyMap[networkID] = NetworkedObjectProxy(inObject);
 }
 
 void NetworkedObjectLinker::RemoveBaseObject(unsigned int inNetworkId)
 {
-	networkIdToBaseObjectMap.erase(inNetworkId);
+	networkIdToNetworkObjectProxyMap.erase(inNetworkId);
 }
 
 NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * inObject) :
@@ -41,5 +41,5 @@ void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObjec
 {
 	assert(metaVariable);
 
-	networkedVariables.push_back(NetworkedMetaVariable{ metaVariable, authorityType });
+	networkedMetaVariables.push_back(NetworkedMetaVariable(metaVariable, authorityType));
 }

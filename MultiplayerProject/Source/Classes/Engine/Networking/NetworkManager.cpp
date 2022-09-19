@@ -62,7 +62,7 @@ void NetworkManager::Initialize()
 	}
 }
 
-void NetworkManager::HandlePackets()
+void NetworkManager::HandleReceivedPackets()
 {
 	assert(peer);
 	
@@ -83,7 +83,6 @@ void NetworkManager::HandlePackets()
 			printf("Our connection request has been accepted.\n");
 			{
 				serverGUID = packet->guid;
-				peer->Send(&outputStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE_ORDERED, 0, packet->systemAddress, false);
 			}
 			break;
 		case ID_NEW_INCOMING_CONNECTION:
@@ -113,68 +112,51 @@ void NetworkManager::HandlePackets()
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
 			bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 	
-			char* output = new char;
-	
 			while (bsIn.GetNumberOfBitsUsed() > bsIn.GetReadOffset())
 			{
+				char tempOutputBuffer[4];
+
 				unsigned int networkID = -1;
-				bsIn.Read(output, sizeof(unsigned int));
-				memcpy(&networkID, output, sizeof(unsigned int));
+				bsIn.Read(tempOutputBuffer, sizeof(unsigned int));
+				memcpy(&networkID, tempOutputBuffer, sizeof(unsigned int));
 	
 				unsigned int totalBytesToDeserialize = 0;
-				bsIn.Read(output, sizeof(unsigned int));
-				memcpy(&totalBytesToDeserialize, output, sizeof(unsigned int));
-	
-				//BaseObject* baseObject = networkedObjectLinker.GetBaseObject(networkID);
-	
+				bsIn.Read(tempOutputBuffer, sizeof(unsigned int));
+				memcpy(&totalBytesToDeserialize, tempOutputBuffer, sizeof(unsigned int));
+				
+				NetworkedObjectLinker::NetworkedObjectProxy* proxy = &NetworkedObjectLinker::GetInstance().networkIdToNetworkObjectProxyMap[networkID];
+
 				unsigned int entityBytesRead = 0;
-				//NetworkedVariableData nvd{0, 0, (AuthorityType)0};
-	
-	
-				//unsigned int sizeofOffset = 0;
-				//GetBitFieldSize(sizeofOffset, nvd.offset);
-	
-				//unsigned int sizeofSize = 0;
-				//GetBitFieldSize(sizeofSize, nvd.size);
-	
-				unsigned int sizeofAuthorityType = 1;
-	
-				//while (entityBytesRead < totalBytesToDeserialize)
-				//{
-				//	unsigned int offset = 0;
-				//	bsIn.Read(output, sizeofOffset);
-				//	entityBytesRead += sizeofOffset;
-				//	memcpy(&offset, output, sizeofOffset);
-				//
-				//	unsigned int sizeofData = 0;
-				//	bsIn.Read(output, sizeofSize);
-				//	entityBytesRead += sizeofSize;
-				//	memcpy(&sizeofData, output, sizeofSize);
-				//
-				//	AuthorityType authorityType;
-				//	bsIn.Read(output, sizeofAuthorityType);
-				//	entityBytesRead += sizeofAuthorityType;
-				//	memcpy(&authorityType, output, sizeofAuthorityType);
-				//
-				//	bool variableAuthorityMatchesServerState =
-				//		(authorityType == AuthorityType::Server && GetIsServer()) ||
-				//		(authorityType == AuthorityType::OwningClient && !GetIsServer());
-				//
-				//	bsIn.Read(output, sizeofData);
-				//	entityBytesRead += sizeofData;
-				//	if (variableAuthorityMatchesServerState)
-				//	{
-				//		continue;
-				//	}
-				//
-				//	char* dataToUpdate = (char*)entity + (offset);
-				//	memcpy(dataToUpdate, output, sizeofData);
-				//	//TODO: free dataToUpdate
-				//	//free(dataToUpdate);
-				//}
+				//Deserialize all bytes for a particular entity
+				while (entityBytesRead < totalBytesToDeserialize)
+				{
+					unsigned int networkedVariableIndex = -1;
+					bsIn.Read(tempOutputBuffer, sizeof(networkedVariableIndex));
+					entityBytesRead += sizeof(networkedVariableIndex);
+					memcpy(&networkedVariableIndex, tempOutputBuffer, sizeof(networkedVariableIndex));
+
+					const NetworkedMetaVariable& networkedMetaVariable = proxy->GetNetworkedVariables()[networkedVariableIndex];
+					AuthorityType authorityType = AuthorityType::OwningClient;
+					authorityType = networkedMetaVariable.authorityType;
+
+					bool variableAuthorityMatchesServerState =
+						(authorityType == AuthorityType::Server && GetIsServer()) ||
+						(authorityType == AuthorityType::OwningClient && !GetIsServer());
+
+					unsigned int sizeofVariableData = networkedMetaVariable.metaVariable->GetSize();
+					bsIn.Read(tempOutputBuffer, sizeofVariableData);
+					entityBytesRead += sizeofVariableData;
+
+					//If we have authority over this variable, then we shouldn't update based on packets received from clients
+					if (variableAuthorityMatchesServerState)
+					{
+						continue;
+					}
+
+					char* dataToUpdate = (char*)proxy->GetNetworkedObject() + networkedMetaVariable.metaVariable->GetOffset();
+					memcpy(dataToUpdate, tempOutputBuffer, sizeofVariableData);
+				}
 			}
-			//TODO: delete output for real
-			//delete(output);
 		}
 		break;
 		default:
@@ -212,7 +194,76 @@ void NetworkManager::SendSerializedData()
 	outputStream.Reset();
 }
 
-bool NetworkManager::Serialize(BaseObject::MetaVariable* data, unsigned int size)
+void PrepareDataToSerialize(const NetworkedObjectLinker::NetworkedObjectProxy* proxy, bool isServer,
+	std::vector<unsigned int>& outVariablesToReplicate, unsigned int& outProxyDataSizeInBytes)
+{
+	const std::vector<NetworkedMetaVariable>& networkedMetaVariables = proxy->GetNetworkedVariables();
+	for (unsigned int i = 0; i < networkedMetaVariables.size(); ++i)
+	{
+		const NetworkedMetaVariable& networkedMetaVar = networkedMetaVariables[i];
+
+		bool variableAuthorityMatchesServerState =
+			(networkedMetaVar.authorityType == AuthorityType::Server && isServer) ||
+			(networkedMetaVar.authorityType == AuthorityType::OwningClient && !isServer);
+
+		const MetaType& desiredMetaType = networkedMetaVar.metaVariable->GetMetaType();
+		void* dataToSerialize = (char*)proxy->GetNetworkedObject() + networkedMetaVar.metaVariable->GetOffset();
+		bool wasVariableUpdatedLocally = memcmp(dataToSerialize, (void*)networkedMetaVar.data, networkedMetaVar.metaVariable->GetSize());
+
+		if (variableAuthorityMatchesServerState && wasVariableUpdatedLocally)
+		{
+			outVariablesToReplicate.push_back(i);
+			outProxyDataSizeInBytes += sizeof(unsigned int);//Adding this here because we want to serialize the index.
+			outProxyDataSizeInBytes += networkedMetaVar.metaVariable->GetSize();
+		}
+	}
+}
+
+void NetworkManager::SerializeNetworkedObjects()
+{
+	for (const NetworkedObjectLinker::NetworkedObjectProxy* proxy = NetworkedObjectLinker::NetworkedObjectProxy::Head(); proxy; proxy = proxy->Next())
+	{
+		unsigned int proxyDataSizeInBytes = 0;
+		std::vector<unsigned int> replicatedVariableIndices;
+		PrepareDataToSerialize(proxy, GetIsServer(), replicatedVariableIndices, proxyDataSizeInBytes);
+
+		if (proxyDataSizeInBytes <= 0)
+		{
+			continue;
+		}
+
+		unsigned int networkID = proxy->GetNetworkID();
+		if (!CanSerializeNumberOfBytes(sizeof(networkID) + sizeof(proxyDataSizeInBytes) + proxyDataSizeInBytes))
+		{
+			SendSerializedData();
+		}
+
+		if (IsOutputStreamEmpty())
+		{
+			RakNet::MessageID messID = (RakNet::MessageID)ID_UPDATE_ENTITY;
+			Serialize(&messID, sizeof(messID));
+		}
+
+
+		Serialize(&networkID, sizeof(networkID));
+		Serialize(&proxyDataSizeInBytes, sizeof(proxyDataSizeInBytes));
+
+		for(unsigned int i = 0; i < replicatedVariableIndices.size(); ++i)
+		{
+			Serialize((void*)&replicatedVariableIndices[i], sizeof(i));//Serializing networkVariableIndex
+			
+			const std::vector<NetworkedMetaVariable>& networkedVars = proxy->GetNetworkedVariables();
+			const NetworkedMetaVariable& varToReplicate = networkedVars[replicatedVariableIndices[i]];
+			void* dataToSerialize = (char*)proxy->GetNetworkedObject() + varToReplicate.metaVariable->GetOffset();
+			Serialize(dataToSerialize, varToReplicate.metaVariable->GetSize());
+
+			//Updating cached data
+			memcpy((void*)&varToReplicate.data, dataToSerialize, varToReplicate.metaVariable->GetSize());
+		}
+	}
+}
+
+bool NetworkManager::Serialize(void* data, unsigned int size)
 {
 	if(!CanSerializeNumberOfBytes(size))
 	{
@@ -232,8 +283,8 @@ void NetworkManager::RegisterNetworkedObject(BaseObject * objectPtr)
 void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType)
 {
 	static NetworkedObjectLinker& networkedObjectLinker = NetworkedObjectLinker::GetInstance();
-	auto proxy = networkedObjectLinker.networkIdToBaseObjectMap.find(networkID);
-	if (proxy == networkedObjectLinker.networkIdToBaseObjectMap.end())
+	auto proxy = networkedObjectLinker.networkIdToNetworkObjectProxyMap.find(networkID);
+	if (proxy == networkedObjectLinker.networkIdToNetworkObjectProxyMap.end())
 	{
 		return;
 	}

@@ -52,6 +52,9 @@
     <Filter Include="Source Files\Headers\Engine\Reflection">
       <UniqueIdentifier>{a2cf3d78-9c6d-4d59-a53b-ef5188cae397}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Engine\Reflection">
+      <UniqueIdentifier>{cfe1af7c-e730-486a-98fa-9a691ab217d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -413,6 +416,9 @@
     </ClCompile>
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp">
       <Filter>Source Files\Classes\Engine\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Reflection\Reflection.cpp">
+      <Filter>Source Files\Classes\Engine\Reflection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

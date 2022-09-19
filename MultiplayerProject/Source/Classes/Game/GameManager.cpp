@@ -26,7 +26,7 @@ bool GameManager::Initialize()
 
 bool GameManager::Update()
 {
-	networkManager.HandlePackets();
+	networkManager.HandleReceivedPackets();
 	inputManager.Update();
 	
 	static float deltaTime = 0;
@@ -37,6 +37,7 @@ bool GameManager::Update()
 	static EntityManager* entityManager = EntityManager::GetInstance();
 	entityManager->UpdateEntities(deltaTime);
 	
+	networkManager.SerializeNetworkedObjects();
 	networkManager.SendSerializedData();
 	
 	entityManager->RenderEntities();

@@ -8,13 +8,13 @@ class NetworkManager
 {
 public:
 	void Initialize();
-	void HandlePackets();
+	void HandleReceivedPackets();
 	void Destroy();
 
 	//Returns true if we have enough space to serialize "size" number of bytes.
 	bool CanSerializeNumberOfBytes(unsigned int size) const;
 	void SendSerializedData();
-	bool Serialize(BaseObject::MetaVariable* data, unsigned int size);
+	void SerializeNetworkedObjects();
 
 	void RegisterNetworkedObject(BaseObject* objectPtr);
 	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType);
@@ -23,6 +23,7 @@ public:
 	bool GetIsServer() const { return isServer; }
 	bool IsOutputStreamEmpty() const { return outputStream.GetNumberOfBitsUsed() == 0; }
 private:
+	bool Serialize(void* data, unsigned int size);
 	class RakNet::RakPeerInterface* peer;
 	bool isServer;
 
