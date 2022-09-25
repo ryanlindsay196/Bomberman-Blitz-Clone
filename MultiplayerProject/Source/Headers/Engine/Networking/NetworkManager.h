@@ -18,15 +18,20 @@ public:
 
 	void RegisterNetworkedObject(BaseObject* objectPtr);
 	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType);
-	int GenerateNewNetworkID();
+	unsigned int GenerateNewNetworkID();
+	unsigned int GenerateClientID();
 
 	bool GetIsServer() const { return isServer; }
 	bool IsOutputStreamEmpty() const { return outputStream.GetNumberOfBitsUsed() == 0; }
 private:
 	bool Serialize(void* data, unsigned int size);
+	bool IsClientIDValidForPacket(const RakNet::Packet* packetToCheck, unsigned int clientIDToCheck) const;
+
 	class RakNet::RakPeerInterface* peer;
 	bool isServer;
+	unsigned int clientID;
 
+	std::vector<std::pair<unsigned int, RakNet::RakNetGUID>> clientIDToGuidVector;
 	RakNet::BitStream outputStream;
 	RakNet::BitStream inputStream;
 };

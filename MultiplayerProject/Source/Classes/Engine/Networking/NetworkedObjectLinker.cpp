@@ -34,7 +34,8 @@ void NetworkedObjectLinker::RemoveBaseObject(unsigned int inNetworkId)
 
 NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * inObject) :
 	networkID(inObject->GetNetworkID()),
-	networkedObject(inObject)
+	networkedObject(inObject),
+	owningClientID(1)
 {}
 
 void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, AuthorityType authorityType)
