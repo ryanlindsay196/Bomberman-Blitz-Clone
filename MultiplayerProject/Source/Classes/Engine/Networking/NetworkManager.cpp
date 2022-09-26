@@ -136,7 +136,7 @@ void NetworkManager::HandleReceivedPackets()
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
-				char tempOutputBuffer[4];
+				char tempOutputBuffer[8];
 
 				unsigned int senderClientID = 0;
 				bsIn.Read(tempOutputBuffer, sizeof(senderClientID));
@@ -276,15 +276,19 @@ void NetworkManager::SerializeNetworkedObjects()
 
 		Serialize(&networkID, sizeof(networkID));
 		Serialize(&proxyDataSizeInBytes, sizeof(proxyDataSizeInBytes));
+		
+		const std::vector<NetworkedMetaVariable>& networkedVars = proxy->GetNetworkedVariables();
 
 		for(unsigned int i = 0; i < replicatedVariableIndices.size(); ++i)
 		{
 			Serialize((void*)&replicatedVariableIndices[i], sizeof(i));//Serializing networkVariableIndex
 			
-			const std::vector<NetworkedMetaVariable>& networkedVars = proxy->GetNetworkedVariables();
 			const NetworkedMetaVariable& varToReplicate = networkedVars[replicatedVariableIndices[i]];
 			void* dataToSerialize = (char*)proxy->GetNetworkedObject() + varToReplicate.metaVariable->GetOffset();
 			Serialize(dataToSerialize, varToReplicate.metaVariable->GetSize());
+
+			//Make sure we have enough room to cache this variable.
+			assert(sizeof(varToReplicate.data) > sizeof(varToReplicate.metaVariable->GetSize()));
 
 			//Updating cached data
 			memcpy((void*)&varToReplicate.data, dataToSerialize, varToReplicate.metaVariable->GetSize());

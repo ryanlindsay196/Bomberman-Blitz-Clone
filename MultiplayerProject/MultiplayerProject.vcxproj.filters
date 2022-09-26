@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Classes\Engine\Reflection">
       <UniqueIdentifier>{cfe1af7c-e730-486a-98fa-9a691ab217d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Vendor\Math">
+      <UniqueIdentifier>{2bee70c9-6856-4a29-9507-e894fbadb5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vendor\Math\vectorial">
+      <UniqueIdentifier>{6880b355-5005-4693-a231-21bc4bcc3b08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -420,6 +426,9 @@
     <ClCompile Include="Source\Classes\Engine\Reflection\Reflection.cpp">
       <Filter>Source Files\Classes\Engine\Reflection</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\CharacterController.cpp">
+      <Filter>Source Files\Classes\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -459,6 +468,99 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkEnums.h">
       <Filter>Source Files\Headers\Engine\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\CharacterController.h">
+      <Filter>Source Files\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\constants.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\glsl_mappings.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\hlsl_mappings.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\io.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\matrix.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\quaternion.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\rect.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\utilities.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\vector.h">
+      <Filter>Source Files\Vendor\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\config.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\mat4f.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd2f.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd2f_common.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd2f_neon.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_common.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_gnu.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_neon.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_scalar.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_sse.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_gnu.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_neon.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_scalar.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_sse.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec_convert.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec2f.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec3f.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec4f.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vectorial.h">
+      <Filter>Source Files\Vendor\Math\vectorial</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

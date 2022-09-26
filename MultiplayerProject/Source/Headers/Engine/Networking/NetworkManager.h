@@ -22,6 +22,7 @@ public:
 	unsigned int GenerateClientID();
 
 	bool GetIsServer() const { return isServer; }
+	unsigned int GetClientID() const { return clientID; }
 	bool IsOutputStreamEmpty() const { return outputStream.GetNumberOfBitsUsed() == 0; }
 private:
 	bool Serialize(void* data, unsigned int size);

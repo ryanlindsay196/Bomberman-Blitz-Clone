@@ -15,15 +15,23 @@ bool Entity::Initialize(const char *imagePath, float inWidth, float inHeight, fl
 	texture = gameManager.GetRenderer()->LoadTexture(imagePath);
 
 	RegisterSelfAsNetworked();
-	CreateVariableMetadata(Entity, posX, Networked(AuthorityType::OwningClient, posX))
-	CreateVariableMetadata(Entity, posY, Networked(AuthorityType::OwningClient, posY))
 
 	return texture != nullptr;
 }
 
+void Entity::ReceiveControllerInput(float deltaTime)
+{
+	if (controller)
+	{
+		controller->UpdateInputs();
+		posX += controller->GetLeftAxis().x * deltaTime;
+		posY += controller->GetLeftAxis().y * deltaTime;
+	}
+}
+
 void Entity::Update(float deltaTime)
 {
-
+	ReceiveControllerInput(deltaTime);
 }
 
 void Entity::Render()

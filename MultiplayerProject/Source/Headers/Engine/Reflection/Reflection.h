@@ -28,9 +28,23 @@ struct DoubleMetaType : public MetaType
 	virtual size_t SizeOf() const override { return sizeof(double); }
 };
 
+template <typename T>
+class MetaTypeTemplate : public MetaType
+{
+	virtual double ToNumber(void* v) const { return 0; };
+	virtual const char* Name() const { return (char*)"MetaTypeTemplate"; };
+	virtual size_t SizeOf() const { return sizeof(T); };
+};
+
 const MetaType& GetGlobalMetaType(int);
 const MetaType& GetGlobalMetaType(const float&);
 const MetaType& GetGlobalMetaType(const double&);
+template<typename T>
+const MetaType & GetGlobalMetaType(const T &)
+{
+	static MetaTypeTemplate<T> metaType = MetaTypeTemplate<T>();
+	return metaType;
+}
 
 template <typename T>
 class AutoLister

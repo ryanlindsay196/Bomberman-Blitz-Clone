@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Classes\Engine\BaseObject.cpp" />
+    <ClCompile Include="Source\Classes\Engine\CharacterController.cpp" />
     <ClCompile Include="Source\Classes\Engine\InputManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp" />
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkManager.cpp" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\Engine\BaseObject.h" />
+    <ClInclude Include="Source\Headers\Engine\CharacterController.h" />
     <ClInclude Include="Source\Headers\Engine\InputManager.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkedObjectLinker.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkEnums.h" />
@@ -156,6 +158,36 @@
     <ClInclude Include="Source\Headers\Game\EntityManager.h" />
     <ClInclude Include="Source\Headers\Game\GameManager.h" />
     <ClInclude Include="Source\Headers\Game\Player.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\constants.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\glsl_mappings.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\hlsl_mappings.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\io.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\matrix.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\quaternion.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\rect.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\utilities.h" />
+    <ClInclude Include="Source\Vendor\Math\include\mathfu\vector.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\config.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\mat4f.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd2f.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd2f_common.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd2f_neon.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_common.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_gnu.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_neon.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_scalar.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4f_sse.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_gnu.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_neon.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_scalar.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\simd4x4f_sse.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec2f.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec3f.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec4f.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vectorial.h" />
+    <ClInclude Include="Source\Vendor\Math\include\vectorial\vec_convert.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -215,7 +247,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;C:\SDL2\include;C:\SDL2_image\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;C:\SDL2\include;C:\SDL2_image\include;C:\Users\Ryan\source\repos\MultiplayerProject\MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>

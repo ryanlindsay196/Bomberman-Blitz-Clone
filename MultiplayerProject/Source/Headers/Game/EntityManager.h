@@ -14,18 +14,18 @@ class EntityManager
 public:
 	static EntityManager* GetInstance();
 	template<typename T>
-	T* CreateEntity()
+	T& CreateEntity()
 	{
-		T* newEntity = new T();
-		newEntity->Initialize("Resources/Images/helloworld.png", 300, 200, 0, 0);
+		T newEntity = T();
+		newEntity.Initialize("Resources/Images/helloworld.png", 300, 200, 0, 0);
 
 		entities.push_back(newEntity);
-		return (T*)entities[entities.size() - 1];
+		return (T&)entities[entities.size() - 1];
 	}
 
 	void UpdateEntities(float deltaTime);
 	void RenderEntities();
 
 private:
-	std::vector<Entity*> entities;
+	std::vector<Entity> entities;
 };

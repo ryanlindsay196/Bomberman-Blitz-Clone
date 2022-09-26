@@ -15,7 +15,7 @@ struct NetworkedMetaVariable
 	{}
 	BaseObject::MetaVariable* metaVariable;
 	AuthorityType authorityType;
-	char data[4];
+	char data[8];
 };
 
 class NetworkedObjectLinker
