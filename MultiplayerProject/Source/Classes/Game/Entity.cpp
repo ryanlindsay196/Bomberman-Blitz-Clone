@@ -4,12 +4,12 @@
 #include "Game/Entity.h"
 #include "Engine/Rendering/Renderer.h"
 
-bool Entity::Initialize(const char *imagePath, float inWidth, float inHeight, float inPosX, float inPosY)
+bool Entity::Initialize(const char *imagePath, float inWidth, float inHeight, mathfu::Vector<float, 2> inPosition)
 {
 	width = inWidth;
 	height = inHeight;
-	posX = inPosX;
-	posY = inPosY;
+	position.x = inPosition.x;
+	position.y = inPosition.y;
 
 	GameManager& gameManager = GameManager::Get();
 	texture = gameManager.GetRenderer()->LoadTexture(imagePath);
@@ -24,8 +24,8 @@ void Entity::ReceiveControllerInput(float deltaTime)
 	if (controller)
 	{
 		controller->UpdateInputs();
-		posX += controller->GetLeftAxis().x * deltaTime;
-		posY += controller->GetLeftAxis().y * deltaTime;
+		position.x += controller->GetLeftAxis().x * deltaTime;
+		position.y += controller->GetLeftAxis().y * deltaTime;
 	}
 }
 
@@ -37,8 +37,8 @@ void Entity::Update(float deltaTime)
 void Entity::Render()
 {
 	SDL_Rect destRect;
-	destRect.x = posX;
-	destRect.y = posY;
+	destRect.x = position.x;
+	destRect.y = position.y;
 	destRect.w = width;
 	destRect.h = height;
 

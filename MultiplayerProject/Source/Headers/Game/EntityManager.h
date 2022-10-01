@@ -2,6 +2,8 @@
 #include <vector>
 #include <memory>
 
+#include "mathfu/vector.h"
+
 class Entity;
 
 class EntityManager
@@ -17,7 +19,7 @@ public:
 	T& CreateEntity()
 	{
 		T newEntity = T();
-		newEntity.Initialize("Resources/Images/helloworld.png", 300, 200, 0, 0);
+		newEntity.Initialize("Resources/Images/helloworld.png", 300, 200, mathfu::Vector<float, 2> {0, 0});
 
 		entities.push_back(newEntity);
 		return (T&)entities[entities.size() - 1];

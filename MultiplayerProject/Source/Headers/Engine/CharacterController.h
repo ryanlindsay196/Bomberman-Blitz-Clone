@@ -1,6 +1,5 @@
 #pragma once
 #include "BaseObject.h"
-#include "mathfu/vector.h"
 
 class CharacterController : public BaseObject
 {
@@ -8,7 +7,7 @@ class CharacterController : public BaseObject
 
 public:
 	//TODO: Make it so we don't need any of these parameters.
-	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, float inPosX, float inPosY) override;
+	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, mathfu::Vector<float, 2> inPosition) override;
 
 	virtual void UpdateInputs();
 

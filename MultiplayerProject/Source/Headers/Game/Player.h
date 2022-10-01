@@ -8,10 +8,11 @@ public:
 	CreateClassMetadata(Player)
 
 	friend class EntityManager;
-public:
+
 	virtual void Update(float deltaTime) override;
-private:
-	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, float inPosX, float inPosY) override;
+
+protected:
+	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, mathfu::Vector<float, 2> inPosition) override;
 	virtual void Destroy();
 
 	int health;

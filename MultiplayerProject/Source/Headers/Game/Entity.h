@@ -19,13 +19,13 @@ public:
 	virtual void Destroy();
 
 protected:
-	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, float inPosX, float inPosY);
+	virtual bool Initialize(const char* imagePath, float inWidth, float inHeight, mathfu::Vector<float, 2> inPosition) override;
 	void ReceiveControllerInput(float deltaTime);
 
 	float width, height;
 
 	//TODO: Change posX and posY to a vector2
-	float posX, posY;
+	mathfu::Vector<float, 2> position;
 	SDL_Texture* texture;
 	CharacterController* controller;
 };
