@@ -16,10 +16,12 @@ class EntityManager
 public:
 	static EntityManager* GetInstance();
 	template<typename T>
-	T& CreateEntity()
+	T& CreateEntity(const char* fileName, mathfu::Vector<int, 2> textureDimensions)
 	{
 		T newEntity = T();
-		newEntity.Initialize("Resources/Images/helloworld.png", 300, 200, mathfu::Vector<float, 2> {0, 0});
+		newEntity.Initialize();
+		newEntity.Spawn(mathfu::Vector<float, 2> {0, 0});
+		newEntity.InitTexture(fileName, textureDimensions);
 
 		entities.push_back(newEntity);
 		return (T&)entities[entities.size() - 1];

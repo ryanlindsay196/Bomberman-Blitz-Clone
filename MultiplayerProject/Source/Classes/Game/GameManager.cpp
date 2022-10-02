@@ -19,7 +19,7 @@ bool GameManager::Initialize()
 	inputManager.Initialize();
 
 	EntityManager* entityManager = EntityManager::GetInstance();
-	entityManager->CreateEntity<Player>();
+	entityManager->CreateEntity<Player>("Resources/Images/helloworld.png", { 300, 200 });
 
 	return true;
 }

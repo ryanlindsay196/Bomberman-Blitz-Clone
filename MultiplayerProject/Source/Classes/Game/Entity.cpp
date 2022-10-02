@@ -4,19 +4,27 @@
 #include "Game/Entity.h"
 #include "Engine/Rendering/Renderer.h"
 
-bool Entity::Initialize(const char *imagePath, float inWidth, float inHeight, mathfu::Vector<float, 2> inPosition)
+bool Entity::Initialize()
 {
-	width = inWidth;
-	height = inHeight;
-	position.x = inPosition.x;
-	position.y = inPosition.y;
-
-	GameManager& gameManager = GameManager::Get();
-	texture = gameManager.GetRenderer()->LoadTexture(imagePath);
-
 	RegisterSelfAsNetworked();
 
-	return texture != nullptr;
+	return true;
+}
+
+void Entity::Spawn(mathfu::Vector<float, 2> inPosition)
+{
+	//TODO: Set up logic so we can't spawn if we're already spawned
+	position.x = inPosition.x;
+	position.y = inPosition.y;
+}
+
+void Entity::InitTexture(const char* inTextureFilename, mathfu::Vector<int, 2> textureDimensions)
+{
+	width = textureDimensions.x;
+	height = textureDimensions.y;
+
+	GameManager& gameManager = GameManager::Get();
+	texture = gameManager.GetRenderer()->LoadTexture(inTextureFilename);
 }
 
 void Entity::ReceiveControllerInput(float deltaTime)

@@ -1,8 +1,7 @@
 #include "Engine/CharacterController.h"
 #include "Game/GameManager.h"
 
-//TODO: Make it so we don't need any of these parameters.
-bool CharacterController::Initialize(const char * imagePath, float inWidth, float inHeight, mathfu::Vector<float, 2> inPosition)
+bool CharacterController::Initialize()
 {
 	RegisterSelfAsNetworked();
 	CreateVariableMetadata(CharacterController, leftAxis, Networked(AuthorityType::OwningClient, leftAxis))
