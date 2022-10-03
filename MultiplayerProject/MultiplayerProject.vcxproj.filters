@@ -423,11 +423,11 @@
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp">
       <Filter>Source Files\Classes\Engine\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Classes\Engine\Reflection\Reflection.cpp">
-      <Filter>Source Files\Classes\Engine\Reflection</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Classes\Engine\CharacterController.cpp">
       <Filter>Source Files\Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Reflection\Reflection.cpp">
+      <Filter>Source Files\Classes\Engine\Reflection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -561,6 +561,9 @@
     </ClInclude>
     <ClInclude Include="Source\Vendor\Math\include\vectorial\vectorial.h">
       <Filter>Source Files\Vendor\Math\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\Delegate.h">
+      <Filter>Source Files\Headers\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

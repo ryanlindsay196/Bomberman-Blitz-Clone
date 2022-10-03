@@ -2,6 +2,8 @@
 #include "SDL_image.h"
 
 #include "Game/Entity.h"
+#include "Game/GameManager.h"
+
 #include "Engine/Rendering/Renderer.h"
 
 bool Entity::Initialize()

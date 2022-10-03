@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Headers\Engine\BaseObject.h" />
     <ClInclude Include="Source\Headers\Engine\CharacterController.h" />
+    <ClInclude Include="Source\Headers\Engine\Delegate.h" />
     <ClInclude Include="Source\Headers\Engine\InputManager.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkedObjectLinker.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkEnums.h" />

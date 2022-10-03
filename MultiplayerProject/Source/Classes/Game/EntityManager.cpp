@@ -9,16 +9,16 @@ EntityManager * EntityManager::GetInstance()
 
 void EntityManager::UpdateEntities(float deltaTime)
 {
-	for (Entity& entity : entities)
+	for (Entity* entity : entities)
 	{
-		entity.Update(deltaTime);
+		entity->Update(deltaTime);
 	}
 }
 
 void EntityManager::RenderEntities()
 {
-	for (Entity& entity : entities)
+	for (Entity* entity : entities)
 	{
-		entity.Render();
+		entity->Render();
 	}
 }

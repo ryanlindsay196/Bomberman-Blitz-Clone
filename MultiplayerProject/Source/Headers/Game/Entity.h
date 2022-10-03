@@ -1,5 +1,4 @@
 #pragma once
-#include "GameManager.h"
 #include "Engine/BaseObject.h"
 #include "Engine/CharacterController.h"
 
@@ -12,7 +11,6 @@ public:
 	CreateClassMetadata(Entity)
 	friend class EntityManager;
 
-
 	virtual ~Entity() {};
 	virtual void Update(float deltaTime);
 	virtual void Render();
@@ -21,6 +19,7 @@ public:
 protected:
 	virtual bool Initialize() override;
 	virtual void Spawn(mathfu::Vector<float, 2> inPosition);
+
 	void InitTexture(const char* inTextureFilename, mathfu::Vector<int, 2> textureDimensions);
 	void ReceiveControllerInput(float deltaTime);
 
