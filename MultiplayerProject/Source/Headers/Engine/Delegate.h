@@ -21,24 +21,25 @@ template<class MyClass, typename ReturnType, typename... Args>
 class MemberFunctionPtr : public NullFunctionPtr<ReturnType, Args...>
 {
 public:
-	MemberFunctionPtr(MyClass* inObject, ReturnType(MyClass::*delegateToBind)(Args...)) :
+	MemberFunctionPtr(std::weak_ptr<MyClass> inObject, ReturnType(MyClass::*delegateToBind)(Args...)) :
 		boundObject(inObject),
 		myDelegate(delegateToBind)
 	{}
 
-	virtual bool IsBound() override { return boundObject && myDelegate != nullptr; }
+	virtual bool IsBound() override { return !boundObject.expired() && myDelegate != nullptr; }
 
 	virtual ReturnType Execute(Args&&...args) override
 	{
 		if (IsBound())
 		{
-			return (boundObject->*myDelegate)(std::forward<Args>(args)...);
+			auto boundObjectLock = boundObject.lock();
+			return (boundObjectLock.get()->*myDelegate)(std::forward<Args>(args)...);
 		}
 		return ReturnType();
 	}
 
 private:
-	MyClass* boundObject;
+	std::weak_ptr<MyClass> boundObject;
 	ReturnType(MyClass::*myDelegate)(Args...);
 };
 
@@ -46,23 +47,24 @@ template<class MyClass, typename... Args>
 class MemberFunctionPtr<MyClass, void, Args...> : public NullFunctionPtr<void, Args...>
 {
 public:
-	MemberFunctionPtr(MyClass* inObject, void(MyClass::*delegateToBind)(Args...)) :
+	MemberFunctionPtr(std::weak_ptr<MyClass> inObject, void(MyClass::*delegateToBind)(Args...)) :
 		boundObject(inObject),
 		myDelegate(delegateToBind)
 	{}
 
-	virtual bool IsBound() override { return boundObject && myDelegate != nullptr; }
+	virtual bool IsBound() override { return !boundObject.expired() && myDelegate != nullptr; }
 
 	virtual void Execute(Args&&...args) override
 	{
 		if (IsBound())
 		{
-			(boundObject->*myDelegate)(std::forward<Args>(args)...);
+			auto boundObjectLock = boundObject.lock();
+			(boundObjectLock.get()->*myDelegate)(std::forward<Args>(args)...);
 		}
 	}
 
 private:
-	MyClass* boundObject;
+	std::weak_ptr<MyClass> boundObject;
 	void(MyClass::*myDelegate)(Args...);
 };
 
@@ -115,25 +117,27 @@ template<typename ReturnType, typename... Args>
 class SingleCastDelegate
 {
 public:
-	template <typename MyClass>
-	void BindMemberFunction(MyClass* inObject, ReturnType(MyClass::*delegateToBind)(Args...))
+	~SingleCastDelegate()
 	{
-		Unbind();
+		CleanupFunctionPtr();
+	}
+
+	template <typename MyClass>
+	void BindMemberFunction(std::weak_ptr<MyClass> inObject, ReturnType(MyClass::*delegateToBind)(Args...))
+	{
+		CleanupFunctionPtr();
 		functionType = new MemberFunctionPtr<MyClass, ReturnType, Args...>(inObject, delegateToBind);
 	}
 
 	void BindStaticFunction(ReturnType(*delegateToBind)(Args...))
 	{
-		Unbind();
+		CleanupFunctionPtr();
 		functionType = new StaticFunctionPtr<ReturnType, Args...>(delegateToBind);
 	}
 
 	void Unbind()
 	{
-		if (functionType)
-		{
-			delete(functionType);
-		}
+		CleanupFunctionPtr();
 		functionType = NullFunctionPtr<Args...>();
 	}
 
@@ -145,9 +149,23 @@ public:
 		{
 			return functionType->Execute(std::forward<Args>(args)...);
 		}
+		else if (functionType)
+		{
+			CleanupFunctionPtr();
+		}
+
 		return ReturnType();
-	};
+	}
 private:
+	void CleanupFunctionPtr()
+	{
+		if (functionType)
+		{
+			delete(functionType);
+		}
+		functionType = nullptr;
+	}
+
 	NullFunctionPtr<ReturnType, Args...>* functionType;
 };
 
@@ -155,27 +173,27 @@ template<typename... Args>
 class SingleCastDelegate<void, Args...>
 {
 public:
-	template <typename MyClass>
-	void BindMemberFunction(MyClass* inObject, void(MyClass::*delegateToBind)(Args...))
+	~SingleCastDelegate()
 	{
-		if (functionType)
-		{
-			delete functionType;
-		}
+		CleanupFunctionPtr();
+	}
+
+	template <typename MyClass>
+	void BindMemberFunction(std::weak_ptr<MyClass> inObject, void(MyClass::*delegateToBind)(Args...))
+	{
+		CleanupFunctionPtr();
 		functionType = new MemberFunctionPtr<MyClass, void, Args...>(inObject, delegateToBind);
 	}
 
 	void BindStaticFunction(void(*delegateToBind)(Args...))
 	{
-		if (functionType)
-		{
-			delete functionType;
-		}
+		CleanupFunctionPtr();
 		functionType = new StaticFunctionPtr<void, Args...>(delegateToBind);
 	}
 
 	void Unbind()
 	{
+		CleanupFunctionPtr();
 		functionType = NullFunctionPtr<Args...>();
 	}
 
@@ -187,7 +205,21 @@ public:
 		{
 			functionType->Execute(std::forward<Args>(args)...);
 		}
-	};
+		else if(functionType)
+		{
+			CleanupFunctionPtr();
+		}
+	}
+
 private:
+	void CleanupFunctionPtr()
+	{
+		if (functionType)
+		{
+			delete(functionType);
+		}
+		functionType = nullptr;
+	}
+
 	NullFunctionPtr<void, Args...>* functionType;
 };
