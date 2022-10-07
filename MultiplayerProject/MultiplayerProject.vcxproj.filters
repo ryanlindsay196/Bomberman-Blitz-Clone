@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Vendor\Math\vectorial">
       <UniqueIdentifier>{6880b355-5005-4693-a231-21bc4bcc3b08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Engine\GameMode">
+      <UniqueIdentifier>{f67f07ce-230d-4173-aa7b-1c0600527344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Headers\Engine\GameMode">
+      <UniqueIdentifier>{ae8fddd5-af2e-47d8-8dcc-8d829a22d887}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -429,6 +435,12 @@
     <ClCompile Include="Source\Classes\Engine\Reflection\Reflection.cpp">
       <Filter>Source Files\Classes\Engine\Reflection</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\GameMode\GameMode.cpp">
+      <Filter>Source Files\Classes\Engine\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\RCP.cpp">
+      <Filter>Source Files\Classes\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -563,6 +575,12 @@
       <Filter>Source Files\Vendor\Math\vectorial</Filter>
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\Delegate.h">
+      <Filter>Source Files\Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\GameMode\GameMode.h">
+      <Filter>Source Files\Headers\Engine\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\RCP.h">
       <Filter>Source Files\Headers\Engine</Filter>
     </ClInclude>
   </ItemGroup>

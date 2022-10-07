@@ -1,5 +1,15 @@
 #include "Game/EntityManager.h"
+#include "Game/GameManager.h"
+#include "Engine/Networking/NetworkManager.h"
+#include "Game/Player.h"
 #include "Game/Entity.h"
+
+EntityManager::EntityManager()
+{
+	InitializeNetworkID(GameManager::GetNetworkManager().GenerateNewNetworkID());
+	RegisterSelfAsNetworked();
+	CreateTemplatedClassFunctionMetadata(EntityManager, CreateEntity, Player);
+};
 
 EntityManager * EntityManager::GetInstance()
 {

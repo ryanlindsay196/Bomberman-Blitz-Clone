@@ -18,19 +18,19 @@ bool GameManager::Initialize()
 	renderer.Initialize();
 	inputManager.Initialize();
 
-	EntityManager* entityManager = EntityManager::GetInstance();
-	entityManager->CreateEntity<Player>("Resources/Images/helloworld.png", { 300, 200 });
+	//This is here to instantiate an entityManager. This way we can call RPCs on it.
+	EntityManager::GetInstance();
 
 	return true;
 }
 
 bool GameManager::Update()
 {
-	networkManager.HandleReceivedPackets();
-	inputManager.Update();
-	
 	static float deltaTime = 0;
 	static float frameStart = 0;
+
+	networkManager.Update(deltaTime);
+	inputManager.Update();	
 	
 	frameStart = SDL_GetTicks64();
 	
@@ -38,7 +38,6 @@ bool GameManager::Update()
 	entityManager->UpdateEntities(deltaTime);
 	
 	networkManager.SerializeNetworkedObjects();
-	networkManager.SendSerializedData();
 	
 	entityManager->RenderEntities();
 	

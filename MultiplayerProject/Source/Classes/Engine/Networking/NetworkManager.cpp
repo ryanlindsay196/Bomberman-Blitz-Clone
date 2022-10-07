@@ -2,6 +2,8 @@
 
 #include "Engine/Networking/NetworkManager.h"
 #include "Engine/Networking/NetworkedObjectLinker.h"
+#include "Engine/GameMode/GameMode.h"
+#include "Engine/RCP.h"
 #include "RakPeerInterface.h"
 #include <bitset>
 
@@ -63,6 +65,16 @@ void NetworkManager::Initialize()
 	}
 }
 
+void NetworkManager::Update(float deltaTime)
+{
+	HandleReceivedPackets();
+	if (gameMode)
+	{
+		gameMode->Update(deltaTime);
+	}
+	RPC::SendSerializedRpcData();
+}
+
 void NetworkManager::HandleReceivedPackets()
 {
 	assert(peer);
@@ -90,14 +102,17 @@ void NetworkManager::HandleReceivedPackets()
 			printf("A connection is incoming.\n");
 			{
 				RakNet::MessageID messID = (RakNet::MessageID)ID_INITIALIZE_NEW_CLIENT;
-				Serialize(&messID, sizeof(messID));
+				Serialize(&messID, sizeof(messID), outputStream);
 
 				unsigned int clientID = GenerateClientID();
-				Serialize((void*)&clientID, sizeof(clientID));
+				Serialize((void*)&clientID, sizeof(clientID), outputStream);
 				clientIDToGuidVector.push_back(std::pair<unsigned int, RakNet::RakNetGUID>(clientID, packet->guid));
 
 				peer->Send(&outputStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE, 0, packet->guid, false);
 				outputStream.Reset();
+
+				gameMode = new GameMode();
+				gameMode->StartGameMode(new MatchSetupPhase());
 			}
 			break;
 		case ID_NO_FREE_INCOMING_CONNECTIONS:
@@ -157,35 +172,49 @@ void NetworkManager::HandleReceivedPackets()
 					bsIn.Read(tempOutputBuffer, sizeof(unsigned int));
 					memcpy(&totalBytesToDeserialize, tempOutputBuffer, sizeof(unsigned int));
 					
-					NetworkedObjectLinker::NetworkedObjectProxy* proxy = &NetworkedObjectLinker::GetInstance().networkIdToNetworkObjectProxyMap[networkID];
-
+					auto proxy = NetworkedObjectLinker::GetInstance().networkIdToNetworkObjectProxyMap.find(networkID);
+					
 					unsigned int entityBytesRead = 0;
 					//Deserialize all bytes for a particular entity
-					while (entityBytesRead < totalBytesToDeserialize)
-					{
+					while (entityBytesRead < totalBytesToDeserialize && proxy != NetworkedObjectLinker::GetInstance().networkIdToNetworkObjectProxyMap.end())
+					{//TODO: Do something else with the proxy inside the while statement above
 						unsigned int networkedVariableIndex = -1;
 						bsIn.Read(tempOutputBuffer, sizeof(networkedVariableIndex));
 						entityBytesRead += sizeof(networkedVariableIndex);
 						memcpy(&networkedVariableIndex, tempOutputBuffer, sizeof(networkedVariableIndex));
 
-						const NetworkedMetaVariable& networkedMetaVariable = proxy->GetNetworkedVariables()[networkedVariableIndex];
-						AuthorityType authorityType = networkedMetaVariable.authorityType;
+						const std::vector<NetworkedMetaVariable>& networkedMetaVariables = proxy->second.GetNetworkedVariables();
 
-						bool senderHasAuthority = (authorityType == AuthorityType::OwningClient && proxy->GetOwningClientID() == senderClientID) ||
-							(proxy->GetOwningClientID() != clientID && senderClientID == SERVER_ID);
+						const NetworkedMetaVariable* networkedMetaVariable = networkedVariableIndex < networkedMetaVariables.size() ? 
+							&networkedMetaVariables[networkedVariableIndex] : nullptr;
+
+						AuthorityType authorityType = networkedMetaVariable ? networkedMetaVariable->authorityType : AuthorityType::Server;
+
+						bool senderHasAuthority = (authorityType == AuthorityType::OwningClient && proxy->second.GetOwningClientID() == senderClientID) ||
+							(proxy->second.GetOwningClientID() != clientID && senderClientID == SERVER_ID);
 							//TODO: proxy->GetOwningClientID() != clientID will need to change for implementing dead reckoning and client-side prediction
 
-						unsigned int sizeofVariableData = networkedMetaVariable.metaVariable->GetSize();
+						unsigned int sizeofVariableData = networkedMetaVariable ? networkedMetaVariable->metaVariable->GetSize() : 0;
 						bsIn.Read(tempOutputBuffer, sizeofVariableData);
 						entityBytesRead += sizeofVariableData;
 
 						//If we have authority over this variable, then we shouldn't update based on packets received from clients
-						if (senderHasAuthority)
+						if (senderHasAuthority && networkedMetaVariable != nullptr)
 						{
-							char* dataToUpdate = (char*)proxy->GetNetworkedObject() + networkedMetaVariable.metaVariable->GetOffset();
+							char* dataToUpdate = (char*)proxy->second.GetNetworkedObject() + networkedMetaVariable->metaVariable->GetOffset();
 							memcpy(dataToUpdate, tempOutputBuffer, sizeofVariableData);
 						}
 					}
+				}
+			}
+			break;
+		case ID_CALL_RPC:
+			{
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				while (bsIn.GetNumberOfBitsUsed() > bsIn.GetReadOffset())
+				{
+					RPC::ReceiveRpc(bsIn);
 				}
 			}
 			break;
@@ -206,22 +235,22 @@ bool NetworkManager::CanSerializeNumberOfBytes(unsigned int size) const
 	return outputStream.GetNumberOfBytesUsed() + size < MAX_BYTES_FOR_STREAM;
 }
 
-void NetworkManager::SendSerializedData()
+void NetworkManager::SendSerializedData(RakNet::BitStream& bitStream)
 {
-	if (outputStream.GetWriteOffset() <= 0)
+	if (bitStream.GetWriteOffset() <= 0)
 	{
 		return;
 	}
 	
 	if (isServer)
 	{
-		assert(peer->Send(&outputStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true));
+		assert(peer->Send(&bitStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true));
 	}
 	else
 	{
-		assert(peer->Send(&outputStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE, 0, serverGUID, false));
+		assert(peer->Send(&bitStream, PacketPriority::HIGH_PRIORITY, PacketReliability::RELIABLE, 0, serverGUID, false));
 	}
-	outputStream.Reset();
+	bitStream.Reset();
 }
 
 void PrepareDataToSerialize(const NetworkedObjectLinker::NetworkedObjectProxy* proxy, bool isServer, unsigned int clientID,
@@ -263,29 +292,29 @@ void NetworkManager::SerializeNetworkedObjects()
 		unsigned int networkID = proxy->GetNetworkID();
 		if (!CanSerializeNumberOfBytes(sizeof(networkID) + sizeof(proxyDataSizeInBytes) + proxyDataSizeInBytes))
 		{
-			SendSerializedData();
+			SendSerializedData(outputStream);
 		}
 
 		if (IsOutputStreamEmpty())
 		{
 			RakNet::MessageID messID = (RakNet::MessageID)ID_UPDATE_ENTITY;
-			Serialize(&messID, sizeof(messID));
-			Serialize(&clientID, sizeof(clientID));
+			Serialize(&messID, sizeof(messID), outputStream);
+			Serialize(&clientID, sizeof(clientID), outputStream);
 		}
 
 
-		Serialize(&networkID, sizeof(networkID));
-		Serialize(&proxyDataSizeInBytes, sizeof(proxyDataSizeInBytes));
+		Serialize(&networkID, sizeof(networkID), outputStream);
+		Serialize(&proxyDataSizeInBytes, sizeof(proxyDataSizeInBytes), outputStream);
 		
 		const std::vector<NetworkedMetaVariable>& networkedVars = proxy->GetNetworkedVariables();
 
 		for(unsigned int i = 0; i < replicatedVariableIndices.size(); ++i)
 		{
-			Serialize((void*)&replicatedVariableIndices[i], sizeof(i));//Serializing networkVariableIndex
+			Serialize((void*)&replicatedVariableIndices[i], sizeof(i), outputStream);//Serializing networkVariableIndex
 			
 			const NetworkedMetaVariable& varToReplicate = networkedVars[replicatedVariableIndices[i]];
 			void* dataToSerialize = (char*)proxy->GetNetworkedObject() + varToReplicate.metaVariable->GetOffset();
-			Serialize(dataToSerialize, varToReplicate.metaVariable->GetSize());
+			Serialize(dataToSerialize, varToReplicate.metaVariable->GetSize(), outputStream);
 
 			//Make sure we have enough room to cache this variable.
 			assert(sizeof(varToReplicate.data) > sizeof(varToReplicate.metaVariable->GetSize()));
@@ -294,15 +323,16 @@ void NetworkManager::SerializeNetworkedObjects()
 			memcpy((void*)&varToReplicate.data, dataToSerialize, varToReplicate.metaVariable->GetSize());
 		}
 	}
+	SendSerializedData(outputStream);
 }
 
-bool NetworkManager::Serialize(void* data, unsigned int size)
+bool NetworkManager::Serialize(void* data, unsigned int size, RakNet::BitStream& bitStream)
 {
 	if(!CanSerializeNumberOfBytes(size))
 	{
 		return false;
 	}
-	outputStream.Write((char*)data, size);
+	bitStream.Write((char*)data, size);
 	return true;
 }
 

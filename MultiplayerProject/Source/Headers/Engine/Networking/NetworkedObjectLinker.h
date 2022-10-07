@@ -25,6 +25,7 @@ class NetworkedObjectLinker
 
 public:
 	friend NetworkManager;
+	friend class RPC;
 
 	BaseObject* GetBaseObject(unsigned int networkId);
 

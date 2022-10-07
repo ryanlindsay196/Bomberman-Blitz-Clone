@@ -10,10 +10,10 @@ public:
 	CreateClassMetadata(BaseObject)
 
 	virtual bool Initialize() = 0;
+	void InitializeNetworkID(unsigned int newNetworkID);
 	void RegisterSelfAsNetworked();
 	void RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::MetaVariable* metaVariable);
 	unsigned int GetNetworkID() const { return networkID; }
-	void GenerateNetworkID();
 	bool HasValidNetworkID() const { return networkID != 0; }
 private:
 	unsigned int networkID = 0;

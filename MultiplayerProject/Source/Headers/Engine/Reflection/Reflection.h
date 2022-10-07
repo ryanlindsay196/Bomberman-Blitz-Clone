@@ -172,6 +172,8 @@ public:\
 	{\
 		m_fun = (void(Class::*)())fun;\
 		m_applyWrapper = &ApplyWrapper<Fun, Class>;\
+		m_metaFunctionID = 0;\
+		InitializeID();\
 	}\
 \
 	const char* Name() const { return m_name; }\
@@ -184,12 +186,37 @@ public:\
 		m_applyWrapper(entity, m_fun, ret, args, argCount);\
 	}\
 \
+	void InitializeID()\
+	{\
+		static unsigned int maximumID = 0;\
+		if (m_metaFunctionID == 0)\
+		{\
+			maximumID++;\
+			m_metaFunctionID = maximumID;\
+		}\
+	}\
+\
+	inline unsigned int GetMetaFunctionID() { return m_metaFunctionID; }\
+\
 private:\
+	unsigned int m_metaFunctionID;\
 	const char* m_name;\
 	FunctionSignature m_sig;\
 	void(Class::*m_fun)();\
 	void(*m_applyWrapper)(Class* entity, void(Class::*fun)(), Variable, Variable*, int);\
 };\
+\
+virtual BaseObject::MetaFunction* GetMetaFunctionByID(unsigned int id)\
+{\
+	for(MetaFunction* metaFunction = MetaFunction::Head(); metaFunction; metaFunction = metaFunction->Next())\
+	{\
+		if(id == metaFunction->GetMetaFunctionID())\
+		{\
+			return (BaseObject::MetaFunction*)metaFunction;\
+		}\
+	}\
+	return nullptr;\
+}\
 
 template <typename Type>
 const MetaType& GetMetaTypeByType()
@@ -298,3 +325,6 @@ __VA_ARGS__
 
 #define CreateClassFunctionMetadata(Class, func)\
 static MetaFunction mf_##func = MetaFunction(#func, &Class##::func)
+
+#define CreateTemplatedClassFunctionMetadata(Class, func, myTemplates)\
+static MetaFunction mf_##func = MetaFunction(#func, &Class##::func<myTemplates>)

@@ -1,0 +1,46 @@
+#include "Engine/RCP.h"
+#include "Game/GameManager.h"
+#include "Game/EntityManager.h"
+#include "Engine/BaseObject.h"
+#include "BitStream.h"
+
+
+RakNet::BitStream rpcStream;
+
+void RPC::SerializeRpcData(Variable* vars, unsigned int varCount)
+{
+	//TODO: Check if this functions is similar to the normal SerializedNetworkedEntities()
+	unsigned int sizeofRpcData = 0;
+	
+	RakNet::MessageID messID = (RakNet::MessageID)ID_CALL_RPC;
+
+	//TODO: Make this NetworkManager::CanSerializeNumberOfBytes()
+	if (rpcStream.GetNumberOfBitsUsed() == 0)
+	{
+		sizeofRpcData += sizeof(messID);
+	}
+
+	for (unsigned int i = 0; i < varCount; ++i)
+	{
+		sizeofRpcData += vars[i].m->SizeOf();
+	}
+
+	if (!GameManager::GetNetworkManager().CanSerializeNumberOfBytes(sizeofRpcData))
+	{
+		SendSerializedRpcData();
+	}
+	if (rpcStream.GetNumberOfBitsUsed() == 0)
+	{
+		GameManager::GetNetworkManager().Serialize((void*)&messID, sizeof(messID), rpcStream);
+	}
+
+	for (unsigned int i = 0; i < varCount; ++i)
+	{
+		GameManager::GetNetworkManager().Serialize(vars[i].v, vars[i].m->SizeOf(), rpcStream);
+	}
+}
+
+void RPC::SendSerializedRpcData()
+{
+	GameManager::Get().GetNetworkManager().SendSerializedData(rpcStream);
+}
