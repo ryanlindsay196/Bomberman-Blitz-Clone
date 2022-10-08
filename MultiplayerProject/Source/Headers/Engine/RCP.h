@@ -5,23 +5,30 @@ class RPC
 {
 	static void SerializeRpcData(Variable* vars, unsigned int varCount);
 public:
-	template<typename Class, typename MetaFunctionType, typename ...Args>
-	static void SendRpc(Class* object, MetaFunctionType* metaFunction, Args&&... args)
+	template<typename Class, typename ...Args>
+	static void SendRpc(Class* object, const char* functionName, Args&&... args)
 	{
-		if (!metaFunction || !object)
+		if (!object)
 		{
 			return;
 		}
+		
+		auto* metaFunction = Class::GetMetaFunctionByName(functionName);
 
+		if (!metaFunction)
+		{
+			return;
+		}
+		
 		unsigned int networkID = object->GetNetworkID();
 		unsigned int metaFunctionID = metaFunction->GetMetaFunctionID();
 		Variable vars[]{ networkID, metaFunctionID, args... };
 		
 		const unsigned int varsToSerializeCount = (sizeof(vars) / sizeof(Variable));
 		const unsigned int argCount = varsToSerializeCount - 2;
-
+		
 		metaFunction->Apply(object, Variable(), &vars[2], argCount);
-
+		
 		SerializeRpcData(vars, argCount + 2);
 	}
 

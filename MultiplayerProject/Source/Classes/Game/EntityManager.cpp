@@ -8,7 +8,7 @@ EntityManager::EntityManager()
 {
 	InitializeNetworkID(GameManager::GetNetworkManager().GenerateNewNetworkID());
 	RegisterSelfAsNetworked();
-	CreateTemplatedClassFunctionMetadata(EntityManager, CreateEntity, Player);
+	CreateTemplatedClassFunctionMetadata(EntityManager, CreateEntity, <Player>);
 };
 
 EntityManager * EntityManager::GetInstance()

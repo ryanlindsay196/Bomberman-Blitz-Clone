@@ -217,6 +217,19 @@ virtual BaseObject::MetaFunction* GetMetaFunctionByID(unsigned int id)\
 	}\
 	return nullptr;\
 }\
+static Class::MetaFunction* GetMetaFunctionByName(const char* Name)\
+{\
+	for (Class::MetaFunction* mf = Class::MetaFunction::Head(); mf; mf = mf->Next())\
+	{\
+		if (mf->Name() == Name)\
+		{\
+			return (Class::MetaFunction*)mf;\
+		}\
+	}\
+\
+	assert(false && "No meta function has been found. Check that the Name parameter matches a meta function instance.");\
+	return nullptr;\
+}
 
 template <typename Type>
 const MetaType& GetMetaTypeByType()
@@ -327,4 +340,4 @@ __VA_ARGS__
 static MetaFunction mf_##func = MetaFunction(#func, &Class##::func)
 
 #define CreateTemplatedClassFunctionMetadata(Class, func, myTemplates)\
-static MetaFunction mf_##func = MetaFunction(#func, &Class##::func<myTemplates>)
+static MetaFunction mf_##func = MetaFunction(#func #myTemplates, &Class##::func##myTemplates)

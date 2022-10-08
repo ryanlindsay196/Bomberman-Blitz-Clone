@@ -31,23 +31,22 @@ void MatchSetupPhase::OnPhaseEnd()
 
 	Variable vars[3]{ arg0, arg1, arg2 };
 
-	//TODO: Don't do GetMetaFunctionByID. Instead, get it by signature or function name.
-	RPC::SendRpc(EntityManager::GetInstance(), EntityManager::GetInstance()->GetMetaFunctionByID(1), arg0, arg1, arg2);
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
 
 	arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	arg1.x = 240.0f;
 	arg1.y = 20.0;
-	RPC::SendRpc(EntityManager::GetInstance(), EntityManager::GetInstance()->GetMetaFunctionByID(1), arg0, arg1, arg2);
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
 
 	arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	arg1.x = 20.0f;
 	arg1.y = 240.0;
-	RPC::SendRpc(EntityManager::GetInstance(), EntityManager::GetInstance()->GetMetaFunctionByID(1), arg0, arg1, arg2);
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
 
 	arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	arg1.x = 240.0f;
 	arg1.y = 240.0;
-	RPC::SendRpc(EntityManager::GetInstance(), EntityManager::GetInstance()->GetMetaFunctionByID(1), arg0, arg1, arg2);
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
 }
 
 void MatchStartPhase::OnPhaseStart()
