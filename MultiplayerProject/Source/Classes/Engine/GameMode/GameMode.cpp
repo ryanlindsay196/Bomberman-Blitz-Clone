@@ -31,6 +31,7 @@ void MatchSetupPhase::OnPhaseEnd()
 
 	Variable vars[3]{ arg0, arg1, arg2 };
 
+	//TODO: Don't do GetMetaFunctionByID. Instead, get it by signature or function name.
 	RPC::SendRpc(EntityManager::GetInstance(), EntityManager::GetInstance()->GetMetaFunctionByID(1), arg0, arg1, arg2);
 
 	arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();

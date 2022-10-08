@@ -23,8 +23,8 @@ public:
 	std::shared_ptr<T> CreateEntity(unsigned int networkID, mathfu::Vector<float, 2> startPosition, mathfu::Vector<int, 2> textureDimensions)
 	{
 		std::shared_ptr <T> newEntity(new T());
-		newEntity->Initialize();
 		newEntity->InitializeNetworkID(networkID);
+		newEntity->Initialize();
 		newEntity->Spawn(startPosition);
 		newEntity->InitTexture((char*)"Resources/Images/helloworld.png", textureDimensions);
 

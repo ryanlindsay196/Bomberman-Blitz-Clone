@@ -208,7 +208,7 @@ private:\
 \
 virtual BaseObject::MetaFunction* GetMetaFunctionByID(unsigned int id)\
 {\
-	for(MetaFunction* metaFunction = MetaFunction::Head(); metaFunction; metaFunction = metaFunction->Next())\
+	for(Class::MetaFunction* metaFunction = Class::MetaFunction::Head(); metaFunction; metaFunction = metaFunction->Next())\
 	{\
 		if(id == metaFunction->GetMetaFunctionID())\
 		{\

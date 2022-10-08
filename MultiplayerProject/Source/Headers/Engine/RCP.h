@@ -15,17 +15,14 @@ public:
 
 		unsigned int networkID = object->GetNetworkID();
 		unsigned int metaFunctionID = metaFunction->GetMetaFunctionID();
-		
 		Variable vars[]{ networkID, metaFunctionID, args... };
-		BaseObject* classInstance = NetworkedObjectLinker::GetInstance().GetBaseObject(networkID);
+		
+		const unsigned int varsToSerializeCount = (sizeof(vars) / sizeof(Variable));
+		const unsigned int argCount = varsToSerializeCount - 2;
 
-		MetaFunctionType* metaFunc = object->GetMetaFunctionByID(metaFunctionID);
-		if (metaFunc)
-		{
-			metaFunc->Apply(classInstance, Variable(), &vars[2], 3);
-		}
+		metaFunction->Apply(object, Variable(), &vars[2], argCount);
 
-		SerializeRpcData(vars, sizeof(vars) / sizeof(Variable));
+		SerializeRpcData(vars, argCount + 2);
 	}
 
 	static void ReceiveRpc(RakNet::BitStream& bsIn)
@@ -43,26 +40,34 @@ public:
 		BaseObject* object = NetworkedObjectLinker::GetInstance().GetBaseObject(networkID);
 		BaseObject::MetaFunction* metaFunc = object ? object->GetMetaFunctionByID(functionID) : nullptr;
 
-		//TODO: Make this buffer vary in size
-		char tempOutputBuffer[8];
+		if (!metaFunc)
+		{
+			return;
+		}
 
-		unsigned int arg0;
-		bsIn.Read(tempOutputBuffer, sizeof(arg0));
-		memcpy(&arg0, tempOutputBuffer, sizeof(arg0));
+		std::vector<Variable> vars;
+		vars.reserve(metaFunc->ArgCount());
+		
+		constexpr unsigned int maxArgCount = 8;
+		constexpr unsigned int argBufferSize = 8;
+		
+		//We don't support functions with more arguments than maxArgCount
+		assert(metaFunc->ArgCount() <= maxArgCount);
 
-		mathfu::Vector<float, 2> arg1;
-		bsIn.Read(tempOutputBuffer, sizeof(arg1));
-		memcpy(&arg1, tempOutputBuffer, sizeof(arg1));
+		char buffers[maxArgCount][argBufferSize];
 
-		mathfu::Vector<int, 2> arg2;
-		bsIn.Read(tempOutputBuffer, sizeof(arg2));
-		memcpy(&arg2, tempOutputBuffer, sizeof(arg2));
+		for (unsigned int i = 0; i < metaFunc->ArgCount(); ++i)
+		{
+			//We don't support parameters bigger than argBufferSize.
+			assert(metaFunc->ArgType(i)->SizeOf() <= argBufferSize);
 
-		Variable vars[3]{ arg0, arg1, arg2 };
+			bsIn.Read(buffers[i], metaFunc->ArgType(i)->SizeOf());
+			vars.push_back(Variable(buffers[i]));
+		}
 
 		if (metaFunc)
 		{
-			metaFunc->Apply(object, Variable(), &vars[0], 3);
+			metaFunc->Apply(object, Variable(), &vars[0], metaFunc->ArgCount());
 		}
 	}
 

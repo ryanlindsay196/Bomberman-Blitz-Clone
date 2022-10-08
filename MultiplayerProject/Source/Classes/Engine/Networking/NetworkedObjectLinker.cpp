@@ -9,7 +9,9 @@ NetworkedObjectLinker& NetworkedObjectLinker::GetInstance()
 
 BaseObject* NetworkedObjectLinker::GetBaseObject(unsigned int networkId)
 {
-	return networkIdToNetworkObjectProxyMap[networkId].GetNetworkedObject();
+	auto it = networkIdToNetworkObjectProxyMap.find(networkId);
+	bool objectExistsForNetworkId = it != networkIdToNetworkObjectProxyMap.end();
+	return objectExistsForNetworkId ? it->second.GetNetworkedObject() : nullptr;
 }
 
 void NetworkedObjectLinker::AddBaseObject(BaseObject * inObject)
