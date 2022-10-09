@@ -37,13 +37,11 @@ public:
 		NetworkedObjectProxy() {}
 		NetworkedObjectProxy(BaseObject * inObject);
 		unsigned int GetNetworkID() const { return networkID; }
-		unsigned int GetOwningClientID() const { return owningClientID; }
 		BaseObject* GetNetworkedObject() const { return networkedObject; }
 
 		void AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType);
 		const std::vector<NetworkedMetaVariable>& GetNetworkedVariables() const { return networkedMetaVariables; }
 	private:
-		unsigned int owningClientID;
 		unsigned int networkID;
 		BaseObject* networkedObject;
 		std::vector<NetworkedMetaVariable> networkedMetaVariables;

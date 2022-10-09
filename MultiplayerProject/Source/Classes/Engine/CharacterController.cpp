@@ -15,8 +15,7 @@ bool CharacterController::Initialize()
 
 void CharacterController::UpdateInputs()
 {
-	//TODO: This is temporary until we get a networked controller variant
-	if (GameManager::GetNetworkManager().GetIsServer())
+	if (GetOwningClientID() != GameManager::GetNetworkManager().GetClientID())
 		return;
 
 	leftAxis = mathfu::Vector<float, 2>(0, 0);

@@ -11,6 +11,14 @@ void BaseObject::InitializeNetworkID(unsigned int newNetworkID)
 	}
 }
 
+void BaseObject::InitializeOwningClientID(unsigned int newOwningClientID)
+{
+	if (!HasValidOwningClientID())
+	{
+		owningClientID = newOwningClientID;
+	}
+}
+
 void BaseObject::RegisterSelfAsNetworked()
 {
 	GameManager::GetNetworkManager().RegisterNetworkedObject(this);

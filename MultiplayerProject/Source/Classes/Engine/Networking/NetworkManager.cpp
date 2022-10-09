@@ -190,8 +190,8 @@ void NetworkManager::HandleReceivedPackets()
 
 						AuthorityType authorityType = networkedMetaVariable ? networkedMetaVariable->authorityType : AuthorityType::Server;
 
-						bool senderHasAuthority = (authorityType == AuthorityType::OwningClient && proxy->second.GetOwningClientID() == senderClientID) ||
-							(proxy->second.GetOwningClientID() != clientID && senderClientID == SERVER_ID);
+						bool senderHasAuthority = (authorityType == AuthorityType::OwningClient && proxy->second.GetNetworkedObject()->GetOwningClientID() == senderClientID) ||
+							(proxy->second.GetNetworkedObject()->GetOwningClientID() != clientID && senderClientID == SERVER_ID);
 							//TODO: proxy->GetOwningClientID() != clientID will need to change for implementing dead reckoning and client-side prediction
 
 						unsigned int sizeofVariableData = networkedMetaVariable ? networkedMetaVariable->metaVariable->GetSize() : 0;
@@ -270,7 +270,7 @@ void PrepareDataToSerialize(const NetworkedObjectLinker::NetworkedObjectProxy* p
 	{
 		const NetworkedMetaVariable& networkedMetaVar = networkedMetaVariables[i];
 		bool localMachineHasAuthority = isServer ||
-			(proxy->GetOwningClientID() == clientID && networkedMetaVar.authorityType == AuthorityType::OwningClient);
+			(proxy->GetNetworkedObject()->GetOwningClientID() == clientID && networkedMetaVar.authorityType == AuthorityType::OwningClient);
 
 		const MetaType& desiredMetaType = networkedMetaVar.metaVariable->GetMetaType();
 		void* dataToSerialize = (char*)proxy->GetNetworkedObject() + networkedMetaVar.metaVariable->GetOffset();

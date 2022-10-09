@@ -19,12 +19,13 @@ EntityManager * EntityManager::GetInstance()
 }
 
 
-std::shared_ptr<CharacterController> EntityManager::CreateController(unsigned int characterNetworkID, unsigned int controllerNetworkID)
+std::shared_ptr<CharacterController> EntityManager::CreateController(unsigned int characterNetworkID, unsigned int controllerNetworkID, unsigned int owningClientID)
 {
 
 	std::shared_ptr<CharacterController> characterControllerPtr(new CharacterController);
 	controllers.push_back(characterControllerPtr);
 	characterControllerPtr->InitializeNetworkID(controllerNetworkID);
+	characterControllerPtr->InitializeOwningClientID(owningClientID);
 	characterControllerPtr->Initialize();
 
 	Entity* entity = static_cast<Entity*>(GameManager::GetNetworkManager().GetObjectByNetworkID(characterNetworkID));
