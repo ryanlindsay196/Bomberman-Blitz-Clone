@@ -202,7 +202,16 @@ void NetworkManager::HandleReceivedPackets()
 						if (senderHasAuthority && networkedMetaVariable != nullptr)
 						{
 							char* dataToUpdate = (char*)proxy->second.GetNetworkedObject() + networkedMetaVariable->metaVariable->GetOffset();
-							memcpy(dataToUpdate, tempOutputBuffer, sizeofVariableData);
+
+							if (networkedMetaVariable->onRepMetaFunction)
+							{
+								Variable vars[3]{ tempOutputBuffer, *dataToUpdate, dataToUpdate };
+								networkedMetaVariable->onRepMetaFunction->Apply(proxy->second.GetNetworkedObject(), Variable(), vars, 3);
+							}
+							else
+							{
+								memcpy(dataToUpdate, tempOutputBuffer, sizeofVariableData);
+							}
 						}
 					}
 				}
@@ -355,7 +364,7 @@ void NetworkManager::RegisterNetworkedObject(BaseObject * objectPtr)
 	NetworkedObjectLinker::GetInstance().AddBaseObject(objectPtr);
 }
 
-void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType)
+void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType)
 {
 	static NetworkedObjectLinker& networkedObjectLinker = NetworkedObjectLinker::GetInstance();
 	auto proxy = networkedObjectLinker.networkIdToNetworkObjectProxyMap.find(networkID);
@@ -364,7 +373,7 @@ void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObjec
 		return;
 	}
 
-	proxy->second.AddNetworkedVariable(networkedVariable, authorityType);
+	proxy->second.AddNetworkedVariable(networkedVariable, onRepMetaFunction, authorityType);
 }
 
 unsigned int NetworkManager::GenerateNewNetworkID()

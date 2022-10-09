@@ -40,9 +40,9 @@ NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * i
 	owningClientID(1)
 {}
 
-void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, AuthorityType authorityType)
+void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType)
 {
 	assert(metaVariable);
 
-	networkedMetaVariables.push_back(NetworkedMetaVariable(metaVariable, authorityType));
+	networkedMetaVariables.push_back(NetworkedMetaVariable(metaVariable, authorityType, onRepMetaFunction));
 }

@@ -328,9 +328,12 @@ inline void Apply(Class* classInstance, void(Class::*fun) (Arg0, Arg1, Arg2, Arg
 	(classInstance->*fun)(*(Arg0*)args[0].v, *(Arg1*)args[1].v, *(Arg2*)args[2].v, *(Arg3*)args[3].v);
 }
 
-
 #define Networked(AuthorityType, var)\
 RegisterNetworkedVariable(AuthorityType, (BaseObject::MetaVariable*)&mv_##var);
+
+#define Networked_WithRepNotify(Class, AuthorityType, var, OnRepFunction)\
+static MetaFunction mf_##OnRepFunction(#OnRepFunction, &Class##::OnRepFunction);\
+RegisterNetworkedVariable(AuthorityType, (BaseObject::MetaVariable*)&mv_##var, (BaseObject::MetaFunction*)&mf_##OnRepFunction);
 
 #define CreateVariableMetadata(class, var, ...)\
 static MetaVariable mv_##var = MetaVariable(&var, #var, offsetof(class, var), sizeof(var));\

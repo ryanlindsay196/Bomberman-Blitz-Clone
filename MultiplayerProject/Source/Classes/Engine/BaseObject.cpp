@@ -16,7 +16,7 @@ void BaseObject::RegisterSelfAsNetworked()
 	GameManager::GetNetworkManager().RegisterNetworkedObject(this);
 }
 
-void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::MetaVariable* metaVariable)
+void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::MetaVariable* metaVariable, MetaFunction* onRepMetaFunction)
 {
 	if (!metaVariable)
 	{
@@ -24,5 +24,5 @@ void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, Ba
 	}
 
 	static NetworkManager& networkManager = GameManager::GetNetworkManager();
-	networkManager.RegisterNetworkedVariable(GetNetworkID(), metaVariable, authorityType);
+	networkManager.RegisterNetworkedVariable(GetNetworkID(), metaVariable, onRepMetaFunction, authorityType);
 }

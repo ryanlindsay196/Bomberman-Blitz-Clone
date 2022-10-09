@@ -21,7 +21,7 @@ public:
 	void SerializeNetworkedObjects();
 
 	void RegisterNetworkedObject(BaseObject* objectPtr);
-	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, AuthorityType authorityType);
+	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType);
 	unsigned int GenerateNewNetworkID();
 	unsigned int GenerateClientID();
 
