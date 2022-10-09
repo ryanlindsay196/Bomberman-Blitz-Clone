@@ -14,7 +14,7 @@ void RPC::SerializeRpcData(Variable* vars, unsigned int varCount)
 	
 	RakNet::MessageID messID = (RakNet::MessageID)ID_CALL_RPC;
 
-	//TODO: Make this NetworkManager::CanSerializeNumberOfBytes()
+	//Is the stream empty?
 	if (rpcStream.GetNumberOfBitsUsed() == 0)
 	{
 		sizeofRpcData += sizeof(messID);
@@ -25,13 +25,13 @@ void RPC::SerializeRpcData(Variable* vars, unsigned int varCount)
 		sizeofRpcData += vars[i].m->SizeOf();
 	}
 
-	if (!GameManager::GetNetworkManager().CanSerializeNumberOfBytes(sizeofRpcData))
+	if (!GameManager::GetNetworkManager().CanSerializeNumberOfBytes(sizeofRpcData, rpcStream))
 	{
 		SendSerializedRpcData();
 	}
 	if (rpcStream.GetNumberOfBitsUsed() == 0)
 	{
-		GameManager::GetNetworkManager().Serialize((void*)&messID, sizeof(messID), rpcStream);
+		GameManager::GetNetworkManager().Serialize(&messID, sizeof(messID), rpcStream);
 	}
 
 	for (unsigned int i = 0; i < varCount; ++i)

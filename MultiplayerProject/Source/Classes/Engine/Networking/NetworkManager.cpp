@@ -239,9 +239,9 @@ void NetworkManager::Destroy()
 	RakNet::RakPeerInterface::DestroyInstance(peer);
 }
 
-bool NetworkManager::CanSerializeNumberOfBytes(unsigned int size) const
+bool NetworkManager::CanSerializeNumberOfBytes(unsigned int size, const RakNet::BitStream& bsIn) const
 {
-	return outputStream.GetNumberOfBytesUsed() + size < MAX_BYTES_FOR_STREAM;
+	return bsIn.GetNumberOfBytesUsed() + size < MAX_BYTES_FOR_STREAM;
 }
 
 void NetworkManager::SendSerializedData(RakNet::BitStream& bitStream)
@@ -299,7 +299,7 @@ void NetworkManager::SerializeNetworkedObjects()
 		}
 
 		unsigned int networkID = proxy->GetNetworkID();
-		if (!CanSerializeNumberOfBytes(sizeof(networkID) + sizeof(proxyDataSizeInBytes) + proxyDataSizeInBytes))
+		if (!CanSerializeNumberOfBytes(sizeof(networkID) + sizeof(proxyDataSizeInBytes) + proxyDataSizeInBytes, outputStream))
 		{
 			SendSerializedData(outputStream);
 		}
@@ -337,7 +337,7 @@ void NetworkManager::SerializeNetworkedObjects()
 
 bool NetworkManager::Serialize(void* data, unsigned int size, RakNet::BitStream& bitStream)
 {
-	if(!CanSerializeNumberOfBytes(size))
+	if(!CanSerializeNumberOfBytes(size, bitStream))
 	{
 		return false;
 	}

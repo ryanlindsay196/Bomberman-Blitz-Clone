@@ -16,7 +16,7 @@ public:
 	void Destroy();
 
 	//Returns true if we have enough space to serialize "size" number of bytes.
-	bool CanSerializeNumberOfBytes(unsigned int size) const;
+	bool CanSerializeNumberOfBytes(unsigned int size, const RakNet::BitStream& bsIn) const;
 	void SendSerializedData(RakNet::BitStream& bitStream);
 	void SerializeNetworkedObjects();
 
