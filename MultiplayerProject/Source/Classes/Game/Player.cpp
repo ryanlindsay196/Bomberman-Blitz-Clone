@@ -13,13 +13,9 @@ bool Player::Initialize()
 	RegisterSelfAsNetworked();
 	CreateVariableMetadata(Player, health, Networked(AuthorityType::Server, health))
 
-	controller = new CharacterController();
-	controller->Initialize();
-
 	return Entity::Initialize();
 }
 
 void Player::Destroy()
 {
-	delete(controller);
 }

@@ -27,6 +27,7 @@ public:
 
 	bool GetIsServer() const { return isServer; }
 	unsigned int GetClientID() const { return clientID; }
+	BaseObject* GetObjectByNetworkID(unsigned int networkID);
 	bool IsOutputStreamEmpty() const { return outputStream.GetNumberOfBitsUsed() == 0; }
 	bool Serialize(void* data, unsigned int size, RakNet::BitStream& bitStream);
 private:

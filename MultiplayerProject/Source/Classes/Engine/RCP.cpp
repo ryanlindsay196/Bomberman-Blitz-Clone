@@ -9,7 +9,6 @@ RakNet::BitStream rpcStream;
 
 void RPC::SerializeRpcData(Variable* vars, unsigned int varCount)
 {
-	//TODO: Check if this functions is similar to the normal SerializedNetworkedEntities()
 	unsigned int sizeofRpcData = 0;
 	
 	RakNet::MessageID messID = (RakNet::MessageID)ID_CALL_RPC;

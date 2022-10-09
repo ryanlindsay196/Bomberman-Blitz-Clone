@@ -7,6 +7,7 @@
 #include "mathfu/vector.h"
 
 class Entity;
+class CharacterController;
 
 class EntityManager : public BaseObject
 {
@@ -32,10 +33,13 @@ public:
 		return newEntity;
 	}
 
+	std::shared_ptr<CharacterController> CreateController(unsigned int characterNetworkID, unsigned int controllerNetworkID);
+
 	void UpdateEntities(float deltaTime);
 	void RenderEntities();
 
 private:
 	std::vector<std::shared_ptr<Entity>> entities;
+	std::vector<std::shared_ptr<CharacterController>> controllers;
 	bool Initialize() { return true; }
 };

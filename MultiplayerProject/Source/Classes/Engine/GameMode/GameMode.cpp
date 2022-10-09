@@ -25,28 +25,42 @@ GamePhase * MatchSetupPhase::CheckForNextPhase()
 
 void MatchSetupPhase::OnPhaseEnd()
 {
-	unsigned int arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
-	mathfu::Vector<float, 2> arg1{ 20.0f, 20.0f };
-	mathfu::Vector<int, 2> arg2{ 100, 100 };
+	unsigned int CreatePlayer_arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	mathfu::Vector<float, 2> CreatePlayer_arg1{ 20.0f, 20.0f };
+	mathfu::Vector<int, 2> CreatePlayer_arg2{ 100, 100 };
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_arg0, CreatePlayer_arg1, CreatePlayer_arg2);
 
-	Variable vars[3]{ arg0, arg1, arg2 };
+	unsigned int CreateController_arg0 = CreatePlayer_arg0;
+	unsigned int CreateController_arg1 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_arg0, CreateController_arg1);
 
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
+	CreatePlayer_arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	CreatePlayer_arg1.x = 240.0f;
+	CreatePlayer_arg1.y = 20.0;
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_arg0, CreatePlayer_arg1, CreatePlayer_arg2);
 
-	arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
-	arg1.x = 240.0f;
-	arg1.y = 20.0;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
+	CreateController_arg0 = CreatePlayer_arg0;
+	CreateController_arg1 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_arg0, CreateController_arg1);
 
-	arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
-	arg1.x = 20.0f;
-	arg1.y = 240.0;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
+	CreatePlayer_arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	CreatePlayer_arg1.x = 20.0f;
+	CreatePlayer_arg1.y = 240.0;
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_arg0, CreatePlayer_arg1, CreatePlayer_arg2);
+	
+	CreateController_arg0 = CreatePlayer_arg0;
+	CreateController_arg1 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_arg0, CreateController_arg1);
 
-	arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
-	arg1.x = 240.0f;
-	arg1.y = 240.0;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", arg0, arg1, arg2);
+	CreatePlayer_arg0 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	CreatePlayer_arg1.x = 240.0f;
+	CreatePlayer_arg1.y = 240.0;
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_arg0, CreatePlayer_arg1, CreatePlayer_arg2);
+	
+	CreateController_arg0 = CreatePlayer_arg0;
+	CreateController_arg1 = GameManager::GetNetworkManager().GenerateNewNetworkID();
+	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_arg0, CreateController_arg1);
+
 }
 
 void MatchStartPhase::OnPhaseStart()

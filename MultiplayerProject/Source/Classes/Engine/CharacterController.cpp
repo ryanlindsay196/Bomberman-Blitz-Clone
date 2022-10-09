@@ -6,6 +6,9 @@ bool CharacterController::Initialize()
 	RegisterSelfAsNetworked();
 	CreateVariableMetadata(CharacterController, leftAxis, Networked(AuthorityType::OwningClient, leftAxis))
 	CreateVariableMetadata(CharacterController, rightAxis, Networked(AuthorityType::OwningClient, rightAxis))
+
+	leftAxis = mathfu::Vector<float, 2>{ 0,0 };
+	rightAxis = mathfu::Vector<float, 2>{ 0,0 };
 	
 	return true;
 }

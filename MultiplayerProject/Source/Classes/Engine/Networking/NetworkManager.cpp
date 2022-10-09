@@ -335,6 +335,11 @@ void NetworkManager::SerializeNetworkedObjects()
 	SendSerializedData(outputStream);
 }
 
+BaseObject * NetworkManager::GetObjectByNetworkID(unsigned int networkID)
+{
+	return NetworkedObjectLinker::GetInstance().GetBaseObject(networkID);
+}
+
 bool NetworkManager::Serialize(void* data, unsigned int size, RakNet::BitStream& bitStream)
 {
 	if(!CanSerializeNumberOfBytes(size, bitStream))

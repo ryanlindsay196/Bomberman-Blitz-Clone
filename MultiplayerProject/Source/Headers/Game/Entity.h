@@ -16,6 +16,7 @@ public:
 	virtual void Render();
 	virtual void Destroy();
 
+	void SetController(std::shared_ptr<CharacterController> newController) { controller = newController; }
 protected:
 	virtual bool Initialize() override;
 	void Spawn(mathfu::Vector<float, 2> inPosition);
@@ -27,5 +28,5 @@ protected:
 
 	mathfu::Vector<float, 2> position;
 	SDL_Texture* texture;
-	CharacterController* controller;
+	std::shared_ptr<CharacterController> controller;
 };
