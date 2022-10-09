@@ -25,16 +25,16 @@ void InputManager::Update()
 	//Poll for newly pressed/released inputs
 	while (SDL_PollEvent(&e) != 0)
 	{
-		if (e.key.repeat)
-		{
-			continue;
-		}
-	
 		if (e.type == SDL_QUIT)
 		{
 			wantsToQuit = true;
 		}
-	
+		
+		if (e.key.repeat)
+		{
+			continue;
+		}
+
 		switch(e.key.type)
 		{
 		case SDL_KEYDOWN:
