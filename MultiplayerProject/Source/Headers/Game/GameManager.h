@@ -17,8 +17,8 @@ public:
 	void Destroy();
 
 	static NetworkManager& GetNetworkManager() { return Get().networkManager; }
-	Renderer* GetRenderer() { return &renderer; }
-	InputManager* GetInputManager() { return &inputManager; }
+	static Renderer* GetRenderer() { return &Get().renderer; }
+	static InputManager* GetInputManager() { return &Get().inputManager; }
 
 private:
 	Renderer renderer;

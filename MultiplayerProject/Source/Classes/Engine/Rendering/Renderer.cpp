@@ -11,6 +11,13 @@ bool Renderer::Initialize()
 {
 	window = nullptr;
 
+	hasMouseFocus = true;
+	hasKeyboardFocus = true;
+	isFullScreen = false;
+	isMinimized = false;
+	windowWidth = SCREEN_WIDTH;
+	windowHeight = SCREEN_HEIGHT;
+
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -19,14 +26,14 @@ bool Renderer::Initialize()
 	}
 
 	//Create window
-	window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (!window)
 	{
 		std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		return false;
 	}
 
-	SDLRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	SDLRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (!SDLRenderer)
 	{
 		std::cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << std::endl;
@@ -56,8 +63,11 @@ void Renderer::UpdateRender(SDL_Texture * textureToAdd, SDL_Rect * srcRect, SDL_
 
 void Renderer::Render()
 {
-	SDL_RenderPresent(SDLRenderer);
-	SDL_RenderClear(SDLRenderer);
+	if (!isMinimized)
+	{
+		SDL_RenderPresent(SDLRenderer);
+		SDL_RenderClear(SDLRenderer);
+	}
 }
 
 SDL_Texture* Renderer::LoadTexture(const char * path)
@@ -91,4 +101,73 @@ void Renderer::Destroy()
 
 	SDLRenderer = nullptr;
 	window = nullptr;
+}
+
+void Renderer::HandleWindowEvent(SDL_Event& e)
+{
+	switch (e.window.event)
+	{
+		//Get new dimensions and repaint on window size change
+	case SDL_WINDOWEVENT_SIZE_CHANGED:
+		windowWidth = e.window.data1;
+		windowHeight = e.window.data2;
+		SDL_RenderPresent(SDLRenderer);
+		break;
+
+		//Repaint on exposure
+	case SDL_WINDOWEVENT_EXPOSED:
+		SDL_RenderPresent(SDLRenderer);
+		break;
+	
+		//Mouse entered window
+	case SDL_WINDOWEVENT_ENTER:
+		hasMouseFocus = true;
+		break;
+	
+		//Mouse left window
+	case SDL_WINDOWEVENT_LEAVE:
+		hasMouseFocus = false;
+		break;
+	
+		//Window has keyboard focus
+	case SDL_WINDOWEVENT_FOCUS_GAINED:
+		hasKeyboardFocus = true;
+		break;
+	
+		//Window lost keyboard focus
+	case SDL_WINDOWEVENT_FOCUS_LOST:
+		hasKeyboardFocus = false;
+		break;
+	
+		//Window minimized
+	case SDL_WINDOWEVENT_MINIMIZED:
+		isMinimized = true;
+		break;
+	
+		//Window maximized
+	case SDL_WINDOWEVENT_MAXIMIZED:
+		isMinimized = false;
+		break;
+	
+		//Window restored
+	case SDL_WINDOWEVENT_RESTORED:
+		isMinimized = false;
+		break;
+	}
+	
+	//Enter exit full screen on return key
+	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN)
+	{
+		if (isFullScreen)
+		{
+			SDL_SetWindowFullscreen(window, SDL_FALSE);
+			isFullScreen = false;
+		}
+		else
+		{
+			SDL_SetWindowFullscreen(window, SDL_TRUE);
+			isFullScreen = true;
+			isMinimized = false;
+		}
+	}
 }

@@ -1,4 +1,5 @@
 #include "Engine/InputManager.h"
+#include "Game/GameManager.h"
 
 void InputManager::Initialize()
 {
@@ -33,6 +34,11 @@ void InputManager::Update()
 		if (e.key.repeat)
 		{
 			continue;
+		}
+
+		if (e.window.event)
+		{
+			GameManager::GetRenderer()->HandleWindowEvent(e);
 		}
 
 		switch(e.key.type)
