@@ -11,6 +11,8 @@ class Renderer
 public:
 	bool Initialize();
 
+	void Update(float deltaTime);
+
 	void UpdateRender(SDL_Texture* textureToAdd, SDL_Rect* srcRect, SDL_Rect* destRect);
 	void Render();
 
@@ -28,10 +30,15 @@ public:
 	void HandleWindowEvent(SDL_Event& e);
 
 private:
+	float GetWindowAspectRatio();
+	float GetViewportAspectRatio();
+	void CalculateViewportSize();
+
 	SDL_Renderer* SDLRenderer;
 	class SDL_Window* window;
 
 	int windowWidth, windowHeight;
+	int viewportWidth, viewportHeight;
 
 	//Window focus
 	bool hasMouseFocus;

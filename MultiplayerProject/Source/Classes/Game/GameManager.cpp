@@ -31,6 +31,7 @@ bool GameManager::Update()
 
 	networkManager.Update(deltaTime);
 	inputManager.Update();	
+	renderer.Update(deltaTime);
 	
 	frameStart = SDL_GetTicks64();
 	

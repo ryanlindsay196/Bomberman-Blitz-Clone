@@ -4,8 +4,9 @@
 
 #include <iostream>
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+constexpr int DEFAULT_SCREEN_WIDTH = 640;
+constexpr int DEFAULT_SCREEN_HEIGHT = 480;
+constexpr float DEFAULT_ASPECT_RATIO = (float)DEFAULT_SCREEN_WIDTH / DEFAULT_SCREEN_HEIGHT;
 
 bool Renderer::Initialize()
 {
@@ -15,8 +16,11 @@ bool Renderer::Initialize()
 	hasKeyboardFocus = true;
 	isFullScreen = false;
 	isMinimized = false;
-	windowWidth = SCREEN_WIDTH;
-	windowHeight = SCREEN_HEIGHT;
+	windowWidth = DEFAULT_SCREEN_WIDTH;
+	windowHeight = DEFAULT_SCREEN_HEIGHT;
+	viewportWidth = windowWidth;
+	viewportHeight = windowHeight;
+	CalculateViewportSize();
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -26,7 +30,7 @@ bool Renderer::Initialize()
 	}
 
 	//Create window
-	window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (!window)
 	{
 		std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
@@ -56,8 +60,21 @@ bool Renderer::Initialize()
 	return false;
 }
 
+void Renderer::Update(float deltaTime)
+{
+	CalculateViewportSize();
+}
+
 void Renderer::UpdateRender(SDL_Texture * textureToAdd, SDL_Rect * srcRect, SDL_Rect * destRect)
 {
+	destRect->x *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
+	destRect->x += (windowWidth - viewportWidth) / 2;
+	destRect->w *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
+
+	destRect->y *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
+	destRect->y += (windowHeight - viewportHeight) / 2;
+	destRect->h *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
+
 	SDL_RenderCopy(SDLRenderer, textureToAdd, srcRect, destRect);
 }
 
@@ -103,6 +120,40 @@ void Renderer::Destroy()
 	window = nullptr;
 }
 
+float Renderer::GetWindowAspectRatio()
+{
+	return (float)windowWidth / (float)windowHeight;
+}
+
+float Renderer::GetViewportAspectRatio()
+{
+	return (float)viewportWidth / (float)viewportHeight;
+}
+
+void Renderer::CalculateViewportSize()
+{
+	float oldWindowWidth = windowWidth;
+	float oldWindowHeight = windowHeight;
+	SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+
+	bool viewportSizeChanged = oldWindowWidth != windowWidth || oldWindowHeight != windowHeight;
+	if (!viewportSizeChanged)
+	{
+		return;
+	}
+
+	if (GetWindowAspectRatio() > DEFAULT_ASPECT_RATIO)
+	{
+		viewportHeight = windowHeight;
+		viewportWidth = DEFAULT_ASPECT_RATIO * windowHeight;
+	}
+	else
+	{
+		viewportWidth = windowWidth;
+		viewportHeight = windowWidth / DEFAULT_ASPECT_RATIO;
+	}
+}
+
 void Renderer::HandleWindowEvent(SDL_Event& e)
 {
 	switch (e.window.event)
@@ -111,6 +162,8 @@ void Renderer::HandleWindowEvent(SDL_Event& e)
 	case SDL_WINDOWEVENT_SIZE_CHANGED:
 		windowWidth = e.window.data1;
 		windowHeight = e.window.data2;
+
+		CalculateViewportSize();
 		SDL_RenderPresent(SDLRenderer);
 		break;
 
