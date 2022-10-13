@@ -25,46 +25,48 @@ GamePhase * MatchSetupPhase::CheckForNextPhase()
 
 void MatchSetupPhase::OnPhaseEnd()
 {
+	EntityManager* entityManager = GameManager::GetEntityManager();
+
 	unsigned int CreatePlayer_networkID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	unsigned int CreatePlayer_owningClientID = 1;
 	mathfu::Vector<float, 2> CreatePlayer_position{ 20.0f, 20.0f };
 	mathfu::Vector<int, 2> CreatePlayer_textureDimensions{ 100, 100 };
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
+	RPC::SendRpc(entityManager, "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
 
 	unsigned int CreateController_networkID = CreatePlayer_networkID;
 	unsigned int CreateController_controllerID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	unsigned int CreateController_owningClientID = 1;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
+	RPC::SendRpc(entityManager, "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
 
 	CreatePlayer_networkID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	CreatePlayer_position.x = 240.0f;
 	CreatePlayer_position.y = 20.0;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
+	RPC::SendRpc(entityManager, "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
 	
 	CreateController_networkID = CreatePlayer_networkID;
 	CreateController_controllerID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	CreateController_owningClientID++;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
+	RPC::SendRpc(entityManager, "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
 	
 	CreatePlayer_networkID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	CreatePlayer_position.x = 20.0f;
 	CreatePlayer_position.y = 240.0;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
+	RPC::SendRpc(entityManager, "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
 	
 	CreateController_networkID = CreatePlayer_networkID;
 	CreateController_controllerID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	CreateController_owningClientID++;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
+	RPC::SendRpc(entityManager, "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
 	
 	CreatePlayer_networkID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	CreatePlayer_position.x = 240.0f;
 	CreatePlayer_position.y = 240.0;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
+	RPC::SendRpc(entityManager, "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
 	
 	CreateController_networkID = CreatePlayer_networkID;
 	CreateController_controllerID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	CreateController_owningClientID++;
-	RPC::SendRpc(EntityManager::GetInstance(), "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
+	RPC::SendRpc(entityManager, "CreateController", CreateController_networkID, CreateController_controllerID, CreateController_owningClientID);
 
 }
 

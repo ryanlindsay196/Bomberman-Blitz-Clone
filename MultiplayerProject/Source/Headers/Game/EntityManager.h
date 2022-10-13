@@ -13,13 +13,15 @@ class EntityManager : public BaseObject
 {
 public:
 	CreateClassMetadata(EntityManager)
-	EntityManager();
+
+	EntityManager() {}
 
 	EntityManager(EntityManager const&) = delete;
 	void operator=(EntityManager const&) = delete;
 
 public:
-	static EntityManager* GetInstance();
+	virtual bool Initialize() override;
+
 	template<typename T>
 	std::shared_ptr<T> CreateEntity(unsigned int networkID, unsigned int owningClientID, mathfu::Vector<float, 2> startPosition, mathfu::Vector<int, 2> textureDimensions)
 	{
@@ -42,5 +44,4 @@ public:
 private:
 	std::vector<std::shared_ptr<Entity>> entities;
 	std::vector<std::shared_ptr<CharacterController>> controllers;
-	bool Initialize() { return true; }
 };

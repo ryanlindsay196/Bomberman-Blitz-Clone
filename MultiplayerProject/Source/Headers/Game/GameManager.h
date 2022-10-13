@@ -2,6 +2,7 @@
 #include "Engine/Rendering/Renderer.h"
 #include "Engine/InputManager.h"
 #include "Engine/Networking/NetworkManager.h"
+#include "Game/EntityManager.h"
 
 class GameManager
 {
@@ -19,9 +20,11 @@ public:
 	static NetworkManager& GetNetworkManager() { return Get().networkManager; }
 	static Renderer* GetRenderer() { return &Get().renderer; }
 	static InputManager* GetInputManager() { return &Get().inputManager; }
+	static EntityManager* GetEntityManager() {return &Get().entityManager; }
 
 private:
 	Renderer renderer;
 	InputManager inputManager;
 	NetworkManager networkManager;
+	EntityManager entityManager;
 };

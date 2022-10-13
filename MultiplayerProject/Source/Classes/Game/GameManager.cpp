@@ -3,7 +3,6 @@
 #include "SDL.h"
 
 #include "Game/Entity.h"
-#include "Game/EntityManager.h"
 #include "Game/Player.h"
 
 GameManager& GameManager::Get()
@@ -17,9 +16,7 @@ bool GameManager::Initialize()
 	networkManager.Initialize();
 	renderer.Initialize();
 	inputManager.Initialize();
-
-	//This is here to instantiate an entityManager. This way we can call RPCs on it.
-	EntityManager::GetInstance();
+	entityManager.Initialize();
 
 	return true;
 }
@@ -35,12 +32,11 @@ bool GameManager::Update()
 	
 	frameStart = SDL_GetTicks64();
 	
-	static EntityManager* entityManager = EntityManager::GetInstance();
-	entityManager->UpdateEntities(deltaTime);
+	entityManager.UpdateEntities(deltaTime);
 	
 	networkManager.SerializeNetworkedObjects();
 	
-	entityManager->RenderEntities();
+	entityManager.RenderEntities();
 	
 	renderer.Render();
 	

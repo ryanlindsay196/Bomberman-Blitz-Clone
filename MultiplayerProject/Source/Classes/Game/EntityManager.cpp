@@ -4,20 +4,15 @@
 #include "Game/Player.h"
 #include "Game/Entity.h"
 
-EntityManager::EntityManager()
+bool EntityManager::Initialize()
 {
 	InitializeNetworkID(GameManager::GetNetworkManager().GenerateNewNetworkID());
 	RegisterSelfAsNetworked();
 	CreateTemplatedClassFunctionMetadata(EntityManager, CreateEntity, <Player>);
 	CreateClassFunctionMetadata(EntityManager, CreateController);
+
+	return true;
 };
-
-EntityManager * EntityManager::GetInstance()
-{
-	static EntityManager* instance = new EntityManager();
-	return instance;
-}
-
 
 std::shared_ptr<CharacterController> EntityManager::CreateController(unsigned int characterNetworkID, unsigned int controllerNetworkID, unsigned int owningClientID)
 {
