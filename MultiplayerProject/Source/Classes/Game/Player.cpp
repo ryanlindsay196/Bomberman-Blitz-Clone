@@ -13,6 +13,10 @@ bool Player::Initialize()
 	RegisterSelfAsNetworked();
 	CreateVariableMetadata(Player, health, Networked(AuthorityType::Server, health))
 
+	spriteSheet.Initialize();
+	spriteSheet.InitializeFrameBounds();
+	spriteSheet.InitializeAnimations();
+
 	return Entity::Initialize();
 }
 

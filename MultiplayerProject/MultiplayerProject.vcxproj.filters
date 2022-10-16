@@ -441,6 +441,9 @@
     <ClCompile Include="Source\Classes\Engine\RCP.cpp">
       <Filter>Source Files\Classes\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Rendering\SpriteSheet.cpp">
+      <Filter>Source Files\Classes\Engine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -582,6 +585,9 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\RCP.h">
       <Filter>Source Files\Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\Rendering\SpriteSheet.h">
+      <Filter>Source Files\Headers\Engine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -41,6 +41,7 @@ void Entity::ReceiveControllerInput(float deltaTime)
 
 void Entity::Update(float deltaTime)
 {
+	spriteSheet.Update(deltaTime);
 	ReceiveControllerInput(deltaTime);
 }
 
@@ -52,8 +53,14 @@ void Entity::Render()
 	destRect.w = width;
 	destRect.h = height;
 
+	SDL_Rect srcRect;
+	srcRect.x = spriteSheet.GetDisplayedFrameBounds().startBounds.x;
+	srcRect.y = spriteSheet.GetDisplayedFrameBounds().startBounds.y;
+	srcRect.w = spriteSheet.GetDisplayedFrameBounds().endBounds.x - srcRect.x;
+	srcRect.h = spriteSheet.GetDisplayedFrameBounds().endBounds.y - srcRect.y;
+
 	GameManager& gameManager = GameManager::Get();
-	gameManager.GetRenderer()->UpdateRender(texture, nullptr, &destRect);
+	gameManager.GetRenderer()->UpdateRender(texture, &srcRect, &destRect);
 }
 
 void Entity::Destroy()

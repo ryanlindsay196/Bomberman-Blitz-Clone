@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine/BaseObject.h"
 #include "Engine/CharacterController.h"
+#include "Engine/Rendering/SpriteSheet.h"
 
 class SDL_Surface;
 class SDL_Texture;
@@ -28,5 +29,6 @@ protected:
 
 	mathfu::Vector<float, 2> position;
 	SDL_Texture* texture;
+	SpriteSheet spriteSheet;
 	std::shared_ptr<CharacterController> controller;
 };

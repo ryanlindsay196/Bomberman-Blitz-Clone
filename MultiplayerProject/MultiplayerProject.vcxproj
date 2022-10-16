@@ -28,6 +28,7 @@
     <ClCompile Include="Source\Classes\Engine\RCP.cpp" />
     <ClCompile Include="Source\Classes\Engine\Reflection\Reflection.cpp" />
     <ClCompile Include="Source\Classes\Engine\Rendering\Renderer.cpp" />
+    <ClCompile Include="Source\Classes\Engine\Rendering\SpriteSheet.cpp" />
     <ClCompile Include="Source\Classes\Game\Entity.cpp" />
     <ClCompile Include="Source\Classes\Game\EntityManager.cpp" />
     <ClCompile Include="Source\Classes\Game\GameManager.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Source\Headers\Engine\RCP.h" />
     <ClInclude Include="Source\Headers\Engine\Reflection\Reflection.h" />
     <ClInclude Include="Source\Headers\Engine\Rendering\Renderer.h" />
+    <ClInclude Include="Source\Headers\Engine\Rendering\SpriteSheet.h" />
     <ClInclude Include="Source\Headers\Game\Entity.h" />
     <ClInclude Include="Source\Headers\Game\EntityManager.h" />
     <ClInclude Include="Source\Headers\Game\GameManager.h" />

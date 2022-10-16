@@ -30,7 +30,7 @@ public:
 		newEntity->InitializeOwningClientID(owningClientID);
 		newEntity->Initialize();
 		newEntity->Spawn(startPosition);
-		newEntity->InitTexture((char*)"Resources/Images/helloworld.png", textureDimensions);
+		newEntity->InitTexture((char*)"Resources/Images/Bomberman Spritesheet.png", textureDimensions);
 
 		entities.push_back(newEntity);
 		return newEntity;
