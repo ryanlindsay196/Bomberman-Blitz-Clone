@@ -2,9 +2,10 @@
 #include "Engine/BaseObject.h"
 #include "Engine/CharacterController.h"
 #include "Engine/Rendering/SpriteSheet.h"
+#include "Engine/Managers/TextureManager.h"
 
-class SDL_Surface;
 class SDL_Texture;
+struct SDL_Rect;
 
 class Entity : public BaseObject
 {
@@ -28,7 +29,7 @@ protected:
 	float width, height;
 
 	mathfu::Vector<float, 2> position;
-	SDL_Texture* texture;
 	SpriteSheet spriteSheet;
+	std::shared_ptr<Texture> texture;
 	std::shared_ptr<CharacterController> controller;
 };

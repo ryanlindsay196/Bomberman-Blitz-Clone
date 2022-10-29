@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "Engine/Rendering/Renderer.h"
+#include "Engine/Managers/TextureManager.h"
 
 #include <iostream>
 
@@ -66,15 +67,17 @@ void Renderer::Update(float deltaTime)
 	SDL_RenderSetLogicalSize(SDLRenderer, viewportWidth, viewportHeight);
 }
 
-void Renderer::UpdateRender(SDL_Texture * textureToAdd, SDL_Rect * srcRect, SDL_Rect * destRect)
+void Renderer::UpdateRender(Texture* textureToAdd, SDL_Rect * srcRect, SDL_Rect * destRect)
 {
 	destRect->x *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
 	destRect->w *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
-
+	
 	destRect->y *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
 	destRect->h *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
 
-	SDL_RenderCopy(SDLRenderer, textureToAdd, srcRect, destRect);
+	SDL_Texture* sdlTexToAdd = textureToAdd->GetTexture();
+
+	SDL_RenderCopy(SDLRenderer, sdlTexToAdd, srcRect, destRect);
 }
 
 void Renderer::Render()
@@ -84,30 +87,6 @@ void Renderer::Render()
 		SDL_RenderPresent(SDLRenderer);
 		SDL_RenderClear(SDLRenderer);
 	}
-}
-
-SDL_Texture* Renderer::LoadTexture(const char * path)
-{
-	SDL_Texture* newTexture = nullptr;
-	SDL_Surface* loadedSurface = IMG_Load(path);
-
-	if (!loadedSurface)
-	{
-		std::cout << "Unable to load image " << path << "! SDL Error: " << SDL_GetError() << std::endl;
-		return nullptr;
-	}
-
-	newTexture = SDL_CreateTextureFromSurface(SDLRenderer, loadedSurface);
-
-	if (!newTexture)
-	{
-		std::cout << "Unable to create texture from " << path << " ! SDL Error: " << SDL_GetError() << std::endl;
-		return nullptr;
-	}
-
-	SDL_FreeSurface(loadedSurface);
-
-	return newTexture;
 }
 
 void Renderer::Destroy()

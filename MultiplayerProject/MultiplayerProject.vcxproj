@@ -23,6 +23,7 @@
     <ClCompile Include="Source\Classes\Engine\CharacterController.cpp" />
     <ClCompile Include="Source\Classes\Engine\GameMode\GameMode.cpp" />
     <ClCompile Include="Source\Classes\Engine\InputManager.cpp" />
+    <ClCompile Include="Source\Classes\Engine\Managers\TextureManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp" />
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\RCP.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Source\Headers\Engine\Delegate.h" />
     <ClInclude Include="Source\Headers\Engine\GameMode\GameMode.h" />
     <ClInclude Include="Source\Headers\Engine\InputManager.h" />
+    <ClInclude Include="Source\Headers\Engine\Managers\TextureManager.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkedObjectLinker.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkEnums.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkManager.h" />

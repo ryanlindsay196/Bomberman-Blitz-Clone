@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Headers\Engine\GameMode">
       <UniqueIdentifier>{ae8fddd5-af2e-47d8-8dcc-8d829a22d887}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Engine\Managers">
+      <UniqueIdentifier>{9c9a67fe-6196-455d-9793-f95b81889348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Headers\Engine\Managers">
+      <UniqueIdentifier>{86c7482d-82d1-475f-9d8d-df23d32297f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -444,6 +450,9 @@
     <ClCompile Include="Source\Classes\Engine\Rendering\SpriteSheet.cpp">
       <Filter>Source Files\Classes\Engine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Managers\TextureManager.cpp">
+      <Filter>Source Files\Classes\Engine\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -588,6 +597,9 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\Rendering\SpriteSheet.h">
       <Filter>Source Files\Headers\Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\Managers\TextureManager.h">
+      <Filter>Source Files\Headers\Engine\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

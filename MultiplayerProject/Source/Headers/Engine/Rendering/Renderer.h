@@ -2,9 +2,10 @@
 
 class SDL_Surface;
 class SDL_Rect;
-class SDL_Texture;
 class SDL_Renderer;
 union SDL_Event;
+
+class Texture;
 
 class Renderer
 {
@@ -13,10 +14,8 @@ public:
 
 	void Update(float deltaTime);
 
-	void UpdateRender(SDL_Texture* textureToAdd, SDL_Rect* srcRect, SDL_Rect* destRect);
+	void UpdateRender(Texture* textureToAdd, SDL_Rect* srcRect, SDL_Rect* destRect);
 	void Render();
-
-	SDL_Texture* LoadTexture(const char* path);
 
 	void Destroy();
 
@@ -28,6 +27,8 @@ public:
 	bool IsMinimized() { return isMinimized; }
 
 	void HandleWindowEvent(SDL_Event& e);
+
+	SDL_Renderer* GetSDLRenderer() { return SDLRenderer; }
 
 private:
 	float GetWindowAspectRatio();

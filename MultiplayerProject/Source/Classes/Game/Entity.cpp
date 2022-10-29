@@ -1,6 +1,3 @@
-#include "SDL.h"
-#include "SDL_image.h"
-
 #include "Game/Entity.h"
 #include "Game/GameManager.h"
 
@@ -26,7 +23,7 @@ void Entity::InitTexture(const char* inTextureFilename, mathfu::Vector<int, 2> t
 	height = textureDimensions.y;
 
 	GameManager& gameManager = GameManager::Get();
-	texture = gameManager.GetRenderer()->LoadTexture(inTextureFilename);
+	texture = gameManager.GetTextureManager()->LoadTexture(inTextureFilename);
 }
 
 void Entity::ReceiveControllerInput(float deltaTime)
@@ -60,10 +57,10 @@ void Entity::Render()
 	srcRect.h = spriteSheet.GetDisplayedFrameBounds().endBounds.y - srcRect.y;
 
 	GameManager& gameManager = GameManager::Get();
-	gameManager.GetRenderer()->UpdateRender(texture, &srcRect, &destRect);
+	Renderer* renderer = gameManager.GetRenderer();
+	renderer->UpdateRender(texture.get(), &srcRect, &destRect);
 }
 
 void Entity::Destroy()
 {
-	SDL_DestroyTexture(texture);
 }
