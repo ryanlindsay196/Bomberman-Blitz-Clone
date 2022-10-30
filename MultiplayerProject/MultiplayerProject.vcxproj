@@ -249,18 +249,23 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;C:\SDL2\include;C:\SDL2_image\include;C:\Users\Ryan\source\repos\MultiplayerProject\MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\SDL2\lib\x86;C:\SDL2_image\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -270,7 +275,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -280,10 +291,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -294,10 +309,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
