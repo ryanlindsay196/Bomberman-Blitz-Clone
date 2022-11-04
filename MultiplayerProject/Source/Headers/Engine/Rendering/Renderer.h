@@ -10,7 +10,7 @@ class Texture;
 class Renderer
 {
 public:
-	bool Initialize();
+	bool Initialize(unsigned int inWidth, unsigned int inHeight, bool shouldMaximizeWindow);
 
 	void Update(float deltaTime);
 

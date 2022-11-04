@@ -1,9 +1,4 @@
 #include "Game/GameManager.h"
-#include <iostream>
-#include "SDL.h"
-
-#include "Game/Entity.h"
-#include "Game/Player.h"
 
 GameManager& GameManager::Get()
 {
@@ -14,23 +9,18 @@ GameManager& GameManager::Get()
 bool GameManager::Initialize()
 {
 	networkManager.Initialize();
-	renderer.Initialize();
+	renderer.Initialize(640, 480, false);
 	inputManager.Initialize();
 	entityManager.Initialize();
 
 	return true;
 }
 
-bool GameManager::Update()
+bool GameManager::Update(float deltaTime)
 {
-	static float deltaTime = 0;
-	static float frameStart = 0;
-
 	networkManager.Update(deltaTime);
 	inputManager.Update();	
 	renderer.Update(deltaTime);
-	
-	frameStart = SDL_GetTicks64();
 	
 	entityManager.UpdateEntities(deltaTime);
 	
@@ -39,9 +29,6 @@ bool GameManager::Update()
 	entityManager.RenderEntities();
 	
 	renderer.Render();
-	
-	deltaTime = SDL_GetTicks64() - frameStart;
-
 	return !inputManager.WantsToQuit();
 }
 

@@ -15,7 +15,7 @@ public:
 	static GameManager& Get();
 
 	bool Initialize();
-	bool Update();
+	bool Update(float deltaTime);
 	void Destroy();
 
 	static NetworkManager& GetNetworkManager() { return Get().networkManager; }
