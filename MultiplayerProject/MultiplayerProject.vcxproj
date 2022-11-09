@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Classes\Engine\Allocators\AllocatorCommon.cpp" />
+    <ClCompile Include="Source\Classes\Engine\Allocators\FreeListAllocator.cpp" />
+    <ClCompile Include="Source\Classes\Engine\Allocators\StackAllocator.cpp" />
     <ClCompile Include="Source\Classes\Engine\BaseObject.cpp" />
     <ClCompile Include="Source\Classes\Engine\CharacterController.cpp" />
     <ClCompile Include="Source\Classes\Engine\Engine.cpp" />
@@ -31,6 +34,8 @@
     <ClCompile Include="Source\Classes\Engine\Reflection\Reflection.cpp" />
     <ClCompile Include="Source\Classes\Engine\Rendering\Renderer.cpp" />
     <ClCompile Include="Source\Classes\Engine\Rendering\SpriteSheet.cpp" />
+    <ClCompile Include="Source\Classes\Engine\UI\BaseWidget.cpp" />
+    <ClCompile Include="Source\Classes\Engine\UI\WidgetTree.cpp" />
     <ClCompile Include="Source\Classes\Game\Entity.cpp" />
     <ClCompile Include="Source\Classes\Game\EntityManager.cpp" />
     <ClCompile Include="Source\Classes\Game\GameManager.cpp" />
@@ -151,6 +156,9 @@
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Engine\Allocators\AllocatorCommon.h" />
+    <ClInclude Include="Source\Headers\Engine\Allocators\FreeListAllocator.h" />
+    <ClInclude Include="Source\Headers\Engine\Allocators\StackAllocator.h" />
     <ClInclude Include="Source\Headers\Engine\BaseObject.h" />
     <ClInclude Include="Source\Headers\Engine\CharacterController.h" />
     <ClInclude Include="Source\Headers\Engine\Delegate.h" />
@@ -165,6 +173,8 @@
     <ClInclude Include="Source\Headers\Engine\Reflection\Reflection.h" />
     <ClInclude Include="Source\Headers\Engine\Rendering\Renderer.h" />
     <ClInclude Include="Source\Headers\Engine\Rendering\SpriteSheet.h" />
+    <ClInclude Include="Source\Headers\Engine\UI\BaseWidget.h" />
+    <ClInclude Include="Source\Headers\Engine\UI\WidgetTree.h" />
     <ClInclude Include="Source\Headers\Game\Entity.h" />
     <ClInclude Include="Source\Headers\Game\EntityManager.h" />
     <ClInclude Include="Source\Headers\Game\GameManager.h" />
@@ -264,7 +274,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>RunInEngine;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RunInEngine;RunDebugMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -284,7 +294,7 @@ xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resour
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>RunInEngine;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RunInEngine;RunDebugMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -306,6 +316,7 @@ xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resour
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -329,6 +340,7 @@ xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resour
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

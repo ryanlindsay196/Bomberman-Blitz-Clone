@@ -73,6 +73,18 @@
     <Filter Include="Source Files\Headers\Engine\Managers">
       <UniqueIdentifier>{86c7482d-82d1-475f-9d8d-df23d32297f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Engine\UI">
+      <UniqueIdentifier>{5a9f318a-871e-48f8-8dba-87e0cb8b33d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Headers\Engine\UI">
+      <UniqueIdentifier>{47e293cc-3c39-4da3-b5b9-c8510ab7d09e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Engine\Allocators">
+      <UniqueIdentifier>{3f355bf4-2359-4142-a593-0f764f9d3899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Headers\Engine\Allocators">
+      <UniqueIdentifier>{bb720354-ec55-48fe-a873-0511607650b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -429,9 +441,6 @@
     <ClCompile Include="Source\Classes\Game\Entity.cpp">
       <Filter>Source Files\Classes\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Classes\Engine\BaseObject.cpp">
-      <Filter>Source Files\Classes\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp">
       <Filter>Source Files\Classes\Engine\Networking</Filter>
     </ClCompile>
@@ -455,6 +464,24 @@
     </ClCompile>
     <ClCompile Include="Source\Classes\Engine\Engine.cpp">
       <Filter>Source Files\Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\BaseObject.cpp">
+      <Filter>Source Files\Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\UI\BaseWidget.cpp">
+      <Filter>Source Files\Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Allocators\StackAllocator.cpp">
+      <Filter>Source Files\Classes\Engine\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\UI\WidgetTree.cpp">
+      <Filter>Source Files\Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Allocators\FreeListAllocator.cpp">
+      <Filter>Source Files\Classes\Engine\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Allocators\AllocatorCommon.cpp">
+      <Filter>Source Files\Classes\Engine\Allocators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -606,6 +633,21 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\Engine.h">
       <Filter>Source Files\Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\UI\BaseWidget.h">
+      <Filter>Source Files\Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\Allocators\AllocatorCommon.h">
+      <Filter>Source Files\Headers\Engine\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\UI\WidgetTree.h">
+      <Filter>Source Files\Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\Allocators\StackAllocator.h">
+      <Filter>Source Files\Headers\Engine\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\Allocators\FreeListAllocator.h">
+      <Filter>Source Files\Headers\Engine\Allocators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
