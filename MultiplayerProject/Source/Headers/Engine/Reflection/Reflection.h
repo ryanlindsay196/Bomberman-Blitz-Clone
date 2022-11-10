@@ -154,12 +154,12 @@ public:\
 \
 	const MetaType* RetType() const { return ret; }\
 	const MetaType* ArgType(int idx) const { return args[idx]; }\
-	int ArgCount() const { return argCount; }\
+	unsigned int ArgCount() const { return argCount; }\
 \
 private:\
 	const MetaType* ret;\
 	const MetaType** args;\
-	int argCount;\
+	unsigned int argCount;\
 };\
 \
 struct MetaFunction : public AutoLister<MetaFunction>\
@@ -179,7 +179,7 @@ public:\
 	const char* Name() const { return m_name; }\
 	const MetaType* RetType() const { return m_sig.RetType(); }\
 	const MetaType* ArgType(int idx) const { return m_sig.ArgType(idx); }\
-	int ArgCount() const { return m_sig.ArgCount(); };\
+	unsigned int ArgCount() const { return m_sig.ArgCount(); };\
 \
 	void Apply(Class* entity, Variable ret, Variable* args, int argCount) const\
 	{\

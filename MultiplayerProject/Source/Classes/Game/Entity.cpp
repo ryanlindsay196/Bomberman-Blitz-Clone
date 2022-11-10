@@ -17,7 +17,7 @@ void Entity::Spawn(mathfu::Vector<float, 2> inPosition)
 	position.y = inPosition.y;
 }
 
-void Entity::InitTexture(const char* inTextureFilename, mathfu::Vector<int, 2> textureDimensions)
+void Entity::InitTexture(const char* inTextureFilename, mathfu::Vector<float, 2> textureDimensions)
 {
 	width = textureDimensions.x;
 	height = textureDimensions.y;
@@ -45,10 +45,10 @@ void Entity::Update(float deltaTime)
 void Entity::Render()
 {
 	SDL_Rect destRect;
-	destRect.x = position.x;
-	destRect.y = position.y;
-	destRect.w = width;
-	destRect.h = height;
+	destRect.x = (int)position.x;
+	destRect.y = (int)position.y;
+	destRect.w = (int)width;
+	destRect.h = (int)height;
 
 	SDL_Rect srcRect;
 	srcRect.x = spriteSheet.GetDisplayedFrameBounds().startBounds.x;

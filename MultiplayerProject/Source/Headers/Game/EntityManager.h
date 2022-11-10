@@ -23,7 +23,7 @@ public:
 	virtual bool Initialize() override;
 
 	template<typename T>
-	std::shared_ptr<T> CreateEntity(unsigned int networkID, unsigned int owningClientID, mathfu::Vector<float, 2> startPosition, mathfu::Vector<int, 2> textureDimensions)
+	std::shared_ptr<T> CreateEntity(unsigned int networkID, unsigned int owningClientID, mathfu::Vector<float, 2> startPosition, mathfu::Vector<float, 2> textureDimensions)
 	{
 		std::shared_ptr <T> newEntity(new T());
 		newEntity->InitializeNetworkID(networkID);

@@ -8,7 +8,7 @@ void InputManager::Initialize()
 void InputManager::Update()
 {
 	//Update inputs from the previous frame
-	for (int i = 0; i < inputs.size(); ++i)
+	for (unsigned int i = 0; i < inputs.size(); ++i)
 	{
 		inputs[i].isConsumed = false;
 		switch (inputs[i].inputState)

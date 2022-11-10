@@ -4,7 +4,7 @@
 #include "Engine/Rendering/SpriteSheet.h"
 #include "Engine/Managers/TextureManager.h"
 
-class SDL_Texture;
+struct SDL_Texture;
 struct SDL_Rect;
 
 class Entity : public BaseObject
@@ -23,7 +23,7 @@ protected:
 	virtual bool Initialize() override;
 	void Spawn(mathfu::Vector<float, 2> inPosition);
 
-	void InitTexture(const char* inTextureFilename, mathfu::Vector<int, 2> textureDimensions);
+	void InitTexture(const char* inTextureFilename, mathfu::Vector<float, 2> textureDimensions);
 	void ReceiveControllerInput(float deltaTime);
 
 	float width, height;
