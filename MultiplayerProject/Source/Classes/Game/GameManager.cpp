@@ -10,6 +10,7 @@ bool GameManager::Initialize()
 {
 	networkManager.Initialize();
 	renderer.Initialize(640, 480, false);
+	uiManager.Initialize(&renderer);
 	inputManager.Initialize();
 	entityManager.Initialize();
 
@@ -27,6 +28,8 @@ bool GameManager::Update(float deltaTime)
 	networkManager.SerializeNetworkedObjects();
 	
 	entityManager.RenderEntities();
+
+	uiManager.Update(&renderer);
 	
 	renderer.Render();
 	return !inputManager.WantsToQuit();

@@ -4,8 +4,8 @@
 class UIManager
 {
 public:
-	void Initialize();
-	void Update(float deltaTime);
+	void Initialize(Renderer* renderer);
+	void Update(Renderer* renderer);
 
 private:
 	WidgetTree tree;

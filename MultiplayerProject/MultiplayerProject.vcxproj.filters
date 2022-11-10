@@ -483,6 +483,12 @@
     <ClCompile Include="Source\Classes\Engine\Allocators\AllocatorCommon.cpp">
       <Filter>Source Files\Classes\Engine\Allocators</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\UI\UIManager.cpp">
+      <Filter>Source Files\Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\UI\ImageWidget.cpp">
+      <Filter>Source Files\Classes\Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -648,6 +654,12 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\Allocators\FreeListAllocator.h">
       <Filter>Source Files\Headers\Engine\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\UI\UIManager.h">
+      <Filter>Source Files\Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\UI\ImageWidget.h">
+      <Filter>Source Files\Headers\Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

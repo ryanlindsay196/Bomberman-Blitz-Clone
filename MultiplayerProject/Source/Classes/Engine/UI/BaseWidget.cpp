@@ -30,7 +30,13 @@ void BaseWidget::SetParent(BaseWidget * inParent)
 	parent = inParent;
 }
 
-void BaseWidget::Draw()
+void BaseWidget::Draw(Renderer* renderer)
 {
-
+	for (BaseWidget* child : children)
+	{
+		if (child)
+		{
+			child->Draw(renderer);
+		}
+	}
 }

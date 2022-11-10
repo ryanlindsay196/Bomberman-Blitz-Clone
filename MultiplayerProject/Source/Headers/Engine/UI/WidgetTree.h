@@ -9,10 +9,16 @@ public:
 	void Initialize(size_t widgetAllocatorSizeInBytes);
 
 	template<class T>
-	T* CreateWidget(T* parentWidget)
+	T* CreateWidget(T* parentWidget, Renderer* renderer)
 	{
+		if (!renderer)
+		{
+			return nullptr;
+		}
+
 		void* newPtr = allocator.Alloc(sizeof(T), 8);
 		T* newWidget = new(newPtr) T;
+		newWidget->Initialize(renderer);
 #ifdef RunDebugMode
 		static_cast<T*>(newWidget);
 #endif
@@ -32,6 +38,8 @@ public:
 	}
 
 	void RemoveWidget(BaseWidget* widgetToRemove);
+
+	void Draw(Renderer* renderer) { rootWidget.Draw(renderer); }
 
 private:
 	BaseWidget rootWidget;

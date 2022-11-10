@@ -1,24 +1,25 @@
 #include "Engine/UI/UIManager.h"
-#include "Engine/UI/BaseWidget.h"
+#include "Engine/UI/ImageWidget.h"
 
-void UIManager::Initialize()
+void UIManager::Initialize(Renderer* renderer)
 {
 	tree.Initialize(1000000);
 
 	//TODO: Remove this. This is just test code.
-	BaseWidget* myWidget = tree.CreateWidget<BaseWidget>(nullptr);
-	tree.CreateWidget<BaseWidget>(myWidget);
-	tree.CreateWidget<BaseWidget>(myWidget);
-	tree.CreateWidget<BaseWidget>(nullptr);
+	Image* myWidget = tree.CreateWidget<Image>(nullptr, renderer);
+	tree.CreateWidget<Image>(myWidget, renderer);
+	tree.CreateWidget<Image>(myWidget, renderer);
+	tree.CreateWidget<Image>(nullptr, renderer);
 
-	for (int i = 0; i < 1000; ++i)
-	{
-		BaseWidget* removeThis = tree.CreateWidget<BaseWidget>(myWidget);
-		tree.CreateWidget<BaseWidget>(myWidget);
-		tree.RemoveWidget(removeThis);
-	}
+	//for (int i = 0; i < 1000; ++i)
+	//{
+	//	Image* removeThis = tree.CreateWidget<Image>(myWidget);
+	//	tree.CreateWidget<Image>(myWidget);
+	//	tree.RemoveWidget(removeThis);
+	//}
 }
 
-void UIManager::Update(float deltaTime)
+void UIManager::Update(Renderer* renderer)
 {
+	tree.Draw(renderer);
 }

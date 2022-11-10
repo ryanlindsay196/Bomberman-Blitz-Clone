@@ -1,8 +1,8 @@
 #pragma once
 
-class SDL_Surface;
-class SDL_Rect;
-class SDL_Renderer;
+struct SDL_Surface;
+struct SDL_Rect;
+struct SDL_Renderer;
 union SDL_Event;
 
 class Texture;
@@ -36,7 +36,7 @@ private:
 	void CalculateViewportSize();
 
 	SDL_Renderer* SDLRenderer;
-	class SDL_Window* window;
+	struct SDL_Window* window;
 
 	int windowWidth, windowHeight;
 	int viewportWidth, viewportHeight;

@@ -35,6 +35,8 @@
     <ClCompile Include="Source\Classes\Engine\Rendering\Renderer.cpp" />
     <ClCompile Include="Source\Classes\Engine\Rendering\SpriteSheet.cpp" />
     <ClCompile Include="Source\Classes\Engine\UI\BaseWidget.cpp" />
+    <ClCompile Include="Source\Classes\Engine\UI\ImageWidget.cpp" />
+    <ClCompile Include="Source\Classes\Engine\UI\UIManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\UI\WidgetTree.cpp" />
     <ClCompile Include="Source\Classes\Game\Entity.cpp" />
     <ClCompile Include="Source\Classes\Game\EntityManager.cpp" />
@@ -174,6 +176,8 @@
     <ClInclude Include="Source\Headers\Engine\Rendering\Renderer.h" />
     <ClInclude Include="Source\Headers\Engine\Rendering\SpriteSheet.h" />
     <ClInclude Include="Source\Headers\Engine\UI\BaseWidget.h" />
+    <ClInclude Include="Source\Headers\Engine\UI\ImageWidget.h" />
+    <ClInclude Include="Source\Headers\Engine\UI\UIManager.h" />
     <ClInclude Include="Source\Headers\Engine\UI\WidgetTree.h" />
     <ClInclude Include="Source\Headers\Game\Entity.h" />
     <ClInclude Include="Source\Headers\Game\EntityManager.h" />

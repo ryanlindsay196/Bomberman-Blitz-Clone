@@ -3,6 +3,7 @@
 #include "Engine/InputManager.h"
 #include "Engine/Networking/NetworkManager.h"
 #include "Engine/Managers/TextureManager.h"
+#include "Engine/UI/UIManager.h"
 #include "Game/EntityManager.h"
 
 class GameManager
@@ -30,4 +31,5 @@ private:
 	NetworkManager networkManager;
 	EntityManager entityManager;
 	TextureManager textureManager;
+	UIManager uiManager;
 };
