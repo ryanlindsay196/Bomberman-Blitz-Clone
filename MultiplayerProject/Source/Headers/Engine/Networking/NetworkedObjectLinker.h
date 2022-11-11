@@ -3,7 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include "Engine/Networking/NetworkEnums.h"
-#include "Engine/Networking/NetworkManager.h"
+#include "Engine/BaseObject.h"
 
 class BaseObject;
 
@@ -22,14 +22,8 @@ struct NetworkedMetaVariable
 
 class NetworkedObjectLinker
 {
-	NetworkedObjectLinker() {};
-	static NetworkedObjectLinker& GetInstance();
-
 public:
-	friend NetworkManager;
-	friend class RPC;
-
-	BaseObject* GetBaseObject(unsigned int networkId);
+	BaseObject* GetBaseObject(unsigned int networkId) const;
 
 	class NetworkedObjectProxy : public AutoLister<NetworkedObjectProxy>
 	{
@@ -50,7 +44,10 @@ public:
 	void AddBaseObject(BaseObject* inObject);
 	void RemoveBaseObject(unsigned int inNetworkId);
 
-	NetworkedObjectProxy* GetNetworkedObjectProxy(unsigned int networkID) { return &networkIdToNetworkObjectProxyMap[networkID]; }
+	NetworkedObjectProxy* GetNetworkedObjectProxy(unsigned int networkID) { 
+		auto it = networkIdToNetworkObjectProxyMap.find(networkID);
+		return it != networkIdToNetworkObjectProxyMap.end() ? &it->second : nullptr;
+	}
 
 private:
 	std::unordered_map<uint32_t, NetworkedObjectProxy> networkIdToNetworkObjectProxyMap;

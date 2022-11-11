@@ -12,7 +12,7 @@ void Image::Initialize(Renderer* renderer)
 void Image::Draw(Renderer * renderer)
 {
 	SDL_Rect srcRect{ 0, 0, 100, 100 };
-	SDL_Rect destRect = { 0, 0, 640, 480 };
+	SDL_Rect destRect = { 0, 0, 100, 100 };
 
 	renderer->UpdateRender(texture.get(), &srcRect, &destRect);
 	BaseWidget::Draw(renderer);

@@ -4,6 +4,7 @@
 #include "Engine/Networking/NetworkEnums.h"
 #include "Engine/BaseObject.h"
 #include "Engine/Reflection/Reflection.h"
+#include "Engine/Networking/NetworkedObjectLinker.h"
 
 class GameMode;
 
@@ -30,6 +31,7 @@ public:
 	BaseObject* GetObjectByNetworkID(unsigned int networkID);
 	bool IsOutputStreamEmpty() const { return outputStream.GetNumberOfBitsUsed() == 0; }
 	bool Serialize(void* data, unsigned int size, RakNet::BitStream& bitStream);
+
 private:
 	bool IsClientIDValidForPacket(const RakNet::Packet* packetToCheck, unsigned int clientIDToCheck) const;
 	void HandleReceivedPackets();
@@ -37,10 +39,11 @@ private:
 	class RakNet::RakPeerInterface* peer;
 	bool isServer;
 	unsigned int clientID;
-
+	int highestNetworkID;
 	std::vector<std::pair<unsigned int, RakNet::RakNetGUID>> clientIDToGuidVector;
 	RakNet::BitStream outputStream;
 	RakNet::BitStream inputStream;
 
+	NetworkedObjectLinker networkedObjectLinker;
 	GameMode* gameMode;
 };

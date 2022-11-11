@@ -1,13 +1,7 @@
 #include "Engine/Networking/NetworkedObjectLinker.h"
 #include "Engine/BaseObject.h"
 
-NetworkedObjectLinker& NetworkedObjectLinker::GetInstance()
-{
-	static NetworkedObjectLinker instance;
-	return instance;
-}
-
-BaseObject* NetworkedObjectLinker::GetBaseObject(unsigned int networkId)
+BaseObject* NetworkedObjectLinker::GetBaseObject(unsigned int networkId) const
 {
 	auto it = networkIdToNetworkObjectProxyMap.find(networkId);
 	bool objectExistsForNetworkId = it != networkIdToNetworkObjectProxyMap.end();

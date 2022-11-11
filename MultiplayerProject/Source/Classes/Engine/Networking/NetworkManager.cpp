@@ -25,6 +25,8 @@ static RakNet::AddressOrGUID serverGUID = RakNet::UNASSIGNED_RAKNET_GUID;
 
 void NetworkManager::Initialize()
 {
+	highestNetworkID = 0;
+
 	char str[512];
 	peer = RakNet::RakPeerInterface::GetInstance();
 	
@@ -78,7 +80,7 @@ void NetworkManager::Update(float deltaTime)
 void NetworkManager::HandleReceivedPackets()
 {
 	assert(peer);
-	
+
 	for (RakNet::Packet* packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive())
 	{
 		switch (packet->data[0])
@@ -172,26 +174,25 @@ void NetworkManager::HandleReceivedPackets()
 					bsIn.Read(tempOutputBuffer, sizeof(unsigned int));
 					memcpy(&totalBytesToDeserialize, tempOutputBuffer, sizeof(unsigned int));
 					
-					auto proxy = NetworkedObjectLinker::GetInstance().networkIdToNetworkObjectProxyMap.find(networkID);
-					
+					auto* proxy = networkedObjectLinker.GetNetworkedObjectProxy(networkID);
 					unsigned int entityBytesRead = 0;
 					//Deserialize all bytes for a particular entity
-					while (entityBytesRead < totalBytesToDeserialize && proxy != NetworkedObjectLinker::GetInstance().networkIdToNetworkObjectProxyMap.end())
+					while (entityBytesRead < totalBytesToDeserialize && proxy != nullptr)
 					{//TODO: Do something else with the proxy inside the while statement above
 						unsigned int networkedVariableIndex = -1;
 						bsIn.Read(tempOutputBuffer, sizeof(networkedVariableIndex));
 						entityBytesRead += sizeof(networkedVariableIndex);
 						memcpy(&networkedVariableIndex, tempOutputBuffer, sizeof(networkedVariableIndex));
 
-						const std::vector<NetworkedMetaVariable>& networkedMetaVariables = proxy->second.GetNetworkedVariables();
+						const std::vector<NetworkedMetaVariable>& networkedMetaVariables = proxy->GetNetworkedVariables();
 
 						const NetworkedMetaVariable* networkedMetaVariable = networkedVariableIndex < networkedMetaVariables.size() ? 
 							&networkedMetaVariables[networkedVariableIndex] : nullptr;
 
 						AuthorityType authorityType = networkedMetaVariable ? networkedMetaVariable->authorityType : AuthorityType::Server;
 
-						bool senderHasAuthority = (authorityType == AuthorityType::OwningClient && proxy->second.GetNetworkedObject()->GetOwningClientID() == senderClientID) ||
-							(proxy->second.GetNetworkedObject()->GetOwningClientID() != clientID && senderClientID == SERVER_ID);
+						bool senderHasAuthority = (authorityType == AuthorityType::OwningClient && proxy->GetNetworkedObject()->GetOwningClientID() == senderClientID) ||
+							(proxy->GetNetworkedObject()->GetOwningClientID() != clientID && senderClientID == SERVER_ID);
 							//TODO: proxy->GetOwningClientID() != clientID will need to change for implementing dead reckoning and client-side prediction
 
 						unsigned int sizeofVariableData = networkedMetaVariable ? networkedMetaVariable->metaVariable->GetSize() : 0;
@@ -201,12 +202,12 @@ void NetworkManager::HandleReceivedPackets()
 						//If we have authority over this variable, then we shouldn't update based on packets received from clients
 						if (senderHasAuthority && networkedMetaVariable != nullptr)
 						{
-							char* dataToUpdate = (char*)proxy->second.GetNetworkedObject() + networkedMetaVariable->metaVariable->GetOffset();
+							char* dataToUpdate = (char*)proxy->GetNetworkedObject() + networkedMetaVariable->metaVariable->GetOffset();
 
 							if (networkedMetaVariable->onRepMetaFunction)
 							{
 								Variable vars[3]{ tempOutputBuffer, *dataToUpdate, dataToUpdate };
-								networkedMetaVariable->onRepMetaFunction->Apply(proxy->second.GetNetworkedObject(), Variable(), vars, 3);
+								networkedMetaVariable->onRepMetaFunction->Apply(proxy->GetNetworkedObject(), Variable(), vars, 3);
 							}
 							else
 							{
@@ -223,7 +224,7 @@ void NetworkManager::HandleReceivedPackets()
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				while (bsIn.GetNumberOfBitsUsed() > bsIn.GetReadOffset())
 				{
-					RPC::ReceiveRpc(bsIn);
+					RPC::ReceiveRpc(bsIn, networkedObjectLinker);
 				}
 			}
 			break;
@@ -337,7 +338,7 @@ void NetworkManager::SerializeNetworkedObjects()
 
 BaseObject * NetworkManager::GetObjectByNetworkID(unsigned int networkID)
 {
-	return NetworkedObjectLinker::GetInstance().GetBaseObject(networkID);
+	return networkedObjectLinker.GetBaseObject(networkID);
 }
 
 bool NetworkManager::Serialize(void* data, unsigned int size, RakNet::BitStream& bitStream)
@@ -366,26 +367,24 @@ void NetworkManager::RegisterNetworkedObject(BaseObject * objectPtr)
 {
 	assert(objectPtr);
 
-	NetworkedObjectLinker::GetInstance().AddBaseObject(objectPtr);
+	networkedObjectLinker.AddBaseObject(objectPtr);
 }
 
 void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType)
 {
-	static NetworkedObjectLinker& networkedObjectLinker = NetworkedObjectLinker::GetInstance();
-	auto proxy = networkedObjectLinker.networkIdToNetworkObjectProxyMap.find(networkID);
-	if (proxy == networkedObjectLinker.networkIdToNetworkObjectProxyMap.end())
+	auto* proxy = networkedObjectLinker.GetNetworkedObjectProxy(networkID);
+	if (!proxy)
 	{
 		return;
 	}
 
-	proxy->second.AddNetworkedVariable(networkedVariable, onRepMetaFunction, authorityType);
+	proxy->AddNetworkedVariable(networkedVariable, onRepMetaFunction, authorityType);
 }
 
 unsigned int NetworkManager::GenerateNewNetworkID()
 {
-	static int highestEntityID = 0;
-	++highestEntityID;
-	return highestEntityID;
+	++highestNetworkID;
+	return highestNetworkID;
 }
 
 unsigned int NetworkManager::GenerateClientID()

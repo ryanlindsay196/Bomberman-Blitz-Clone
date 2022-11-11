@@ -1,5 +1,6 @@
 #include "BaseObject.h"
 #include "Engine/Networking/NetworkedObjectLinker.h"
+#include "Bitstream.h"
 
 class RPC
 {
@@ -32,7 +33,7 @@ public:
 		SerializeRpcData(vars, argCount + 2);
 	}
 
-	static void ReceiveRpc(RakNet::BitStream& bsIn)
+	static void ReceiveRpc(RakNet::BitStream& bsIn, const NetworkedObjectLinker& networkedObjectLinker)
 	{
 		if (bsIn.GetNumberOfUnreadBits() <= 0)
 		{
@@ -44,7 +45,7 @@ public:
 		unsigned int functionID = 0;
 		bsIn.Read((char*)&functionID, sizeof(functionID));
 
-		BaseObject* object = NetworkedObjectLinker::GetInstance().GetBaseObject(networkID);
+		BaseObject* object = networkedObjectLinker.GetBaseObject(networkID);
 		BaseObject::MetaFunction* metaFunc = object ? object->GetMetaFunctionByID(functionID) : nullptr;
 
 		if (!metaFunc)

@@ -30,7 +30,7 @@ void MatchSetupPhase::OnPhaseEnd()
 	unsigned int CreatePlayer_networkID = GameManager::GetNetworkManager().GenerateNewNetworkID();
 	unsigned int CreatePlayer_owningClientID = 1;
 	mathfu::Vector<float, 2> CreatePlayer_position{ 20.0f, 20.0f };
-	mathfu::Vector<int, 2> CreatePlayer_textureDimensions{ 100, 100 };
+	mathfu::Vector<float, 2> CreatePlayer_textureDimensions{ 100, 100 };
 	RPC::SendRpc(entityManager, "CreateEntity<Player>", CreatePlayer_networkID, CreatePlayer_owningClientID, CreatePlayer_position, CreatePlayer_textureDimensions);
 
 	unsigned int CreateController_networkID = CreatePlayer_networkID;

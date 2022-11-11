@@ -17,10 +17,10 @@ bool Renderer::Initialize(unsigned int inWidth, unsigned int inHeight, bool shou
 	hasKeyboardFocus = true;
 	isFullScreen = false;
 	isMinimized = false;
-	windowWidth = DEFAULT_SCREEN_WIDTH;
-	windowHeight = DEFAULT_SCREEN_HEIGHT;
-	viewportWidth = windowWidth;
-	viewportHeight = windowHeight;
+	windowWidth = inWidth;
+	windowHeight = inHeight;
+	viewportWidth = DEFAULT_SCREEN_WIDTH;
+	viewportHeight = DEFAULT_SCREEN_HEIGHT;
 	CalculateViewportSize();
 
 	//Initialize SDL
@@ -31,7 +31,7 @@ bool Renderer::Initialize(unsigned int inWidth, unsigned int inHeight, bool shou
 	}
 
 	//Create window
-	window = SDL_CreateWindow("Blast Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("Blast Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (!window)
 	{
 		std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;

@@ -1,14 +1,19 @@
 #include "Engine/Engine.h"
+#include "Game/GameManager.h"
 
 void Engine::Initialize()
 {
-	renderer.Initialize(640, 480, true);
+	GameManager::Get().Initialize();
+
+	renderer.Initialize(480, 640, true);
 	uiManager.Initialize(&renderer);
 	inputManager.Initialize();
 }
 
 bool Engine::Update(float deltaTime)
 {
+	GameManager::Get().Update(deltaTime);
+
 	uiManager.Update(&renderer);
 	inputManager.Update();
 	renderer.Update(deltaTime);

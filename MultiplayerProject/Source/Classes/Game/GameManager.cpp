@@ -1,12 +1,40 @@
 #include "Game/GameManager.h"
 
+void GameManager::Initialize()
+{
+	for (GameInstance& gameInstance : gameInstances)
+	{
+		currentGameInstance = &gameInstance;
+		gameInstance.Initialize();
+	}
+}
+
+bool GameManager::Update(float deltaTime)
+{
+	for (GameInstance& gameInstance : gameInstances)
+	{
+		currentGameInstance = &gameInstance;
+		gameInstance.Update(deltaTime);
+	}
+
+	return true;
+}
+
+void GameManager::Destroy()
+{
+	for (GameInstance& gameInstance : gameInstances)
+	{
+		gameInstance.Destroy();
+	}
+}
+
 GameManager& GameManager::Get()
 {
 	static GameManager instance;
 	return instance;
 }
 
-bool GameManager::Initialize()
+bool GameInstance::Initialize()
 {
 	networkManager.Initialize();
 	renderer.Initialize(640, 480, false);
@@ -17,7 +45,7 @@ bool GameManager::Initialize()
 	return true;
 }
 
-bool GameManager::Update(float deltaTime)
+bool GameInstance::Update(float deltaTime)
 {
 	networkManager.Update(deltaTime);
 	inputManager.Update();	
@@ -35,7 +63,7 @@ bool GameManager::Update(float deltaTime)
 	return !inputManager.WantsToQuit();
 }
 
-void GameManager::Destroy()
+void GameInstance::Destroy()
 {
 	networkManager.Destroy();
 	renderer.Destroy();
