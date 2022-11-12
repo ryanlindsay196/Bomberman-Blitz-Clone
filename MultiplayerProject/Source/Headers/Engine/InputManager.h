@@ -33,5 +33,4 @@ public:
 private:
 	SDL_Event e;
 	bool wantsToQuit;
-	std::vector<Input> inputs;
 };

@@ -16,18 +16,16 @@ class GameInstance
 {
 public:
 	bool Initialize(bool isServer);
-	bool Update(float deltaTime);
+	void Update(float deltaTime);
 	void Destroy();
 
 	NetworkManager& GetNetworkManager() { return networkManager; }
 	Renderer* GetRenderer() { return &renderer; }
-	InputManager* GetInputManager() { return &inputManager; }
 	EntityManager* GetEntityManager() { return &entityManager; }
 	TextureManager* GetTextureManager() { return &textureManager; }
 
 private:
 	Renderer renderer;
-	InputManager inputManager;
 	NetworkManager networkManager;
 	EntityManager entityManager;
 	TextureManager textureManager;
@@ -50,10 +48,13 @@ public:
 
 	static NetworkManager& GetNetworkManager() { return Get().GetCurrentGameInstance()->GetNetworkManager(); }
 	static Renderer* GetRenderer() { return Get().GetCurrentGameInstance()->GetRenderer(); }
-	static InputManager* GetInputManager() { return Get().GetCurrentGameInstance()->GetInputManager(); }
+	static InputManager* GetInputManager() { return &Get().inputManager; }
 	static EntityManager* GetEntityManager() { return Get().GetCurrentGameInstance()->GetEntityManager(); }
 	static TextureManager* GetTextureManager() { return Get().GetCurrentGameInstance()->GetTextureManager(); }
 
 	static GameManager& Get();
 	static GameInstance* GetCurrentGameInstance() { return Get().currentGameInstance; }
+
+private:
+	InputManager inputManager;
 };

@@ -1,6 +1,8 @@
 #include "Engine/InputManager.h"
 #include "Game/GameManager.h"
 
+std::vector<Input> inputs;
+
 void InputManager::Initialize()
 {
 }

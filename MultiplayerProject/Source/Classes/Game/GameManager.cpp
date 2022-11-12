@@ -2,6 +2,8 @@
 
 void GameManager::Initialize()
 {
+	inputManager.Initialize();
+
 	bool isServer = true;
 	for (GameInstance& gameInstance : gameInstances)
 	{
@@ -13,13 +15,15 @@ void GameManager::Initialize()
 
 bool GameManager::Update(float deltaTime)
 {
+	inputManager.Update();
+
 	for (GameInstance& gameInstance : gameInstances)
 	{
 		currentGameInstance = &gameInstance;
 		gameInstance.Update(deltaTime);
 	}
 
-	return true;
+	return !inputManager.WantsToQuit();
 }
 
 void GameManager::Destroy()
@@ -41,16 +45,14 @@ bool GameInstance::Initialize(bool isServer)
 	networkManager.Initialize(isServer);
 	renderer.Initialize(640, 480, false);
 	uiManager.Initialize(&renderer);
-	inputManager.Initialize();
 	entityManager.Initialize();
 
 	return true;
 }
 
-bool GameInstance::Update(float deltaTime)
+void GameInstance::Update(float deltaTime)
 {
 	networkManager.Update(deltaTime);
-	inputManager.Update();	
 	renderer.Update(deltaTime);
 	
 	entityManager.UpdateEntities(deltaTime);
@@ -62,7 +64,6 @@ bool GameInstance::Update(float deltaTime)
 	uiManager.Update(&renderer);
 	
 	renderer.Render();
-	return !inputManager.WantsToQuit();
 }
 
 void GameInstance::Destroy()
