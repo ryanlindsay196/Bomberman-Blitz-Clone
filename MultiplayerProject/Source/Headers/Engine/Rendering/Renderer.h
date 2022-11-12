@@ -3,6 +3,7 @@
 struct SDL_Surface;
 struct SDL_Rect;
 struct SDL_Renderer;
+struct SDL_Window;
 union SDL_Event;
 
 class Texture;
@@ -28,7 +29,8 @@ public:
 
 	void HandleWindowEvent(SDL_Event& e);
 
-	SDL_Renderer* GetSDLRenderer() { return SDLRenderer; }
+	SDL_Renderer* GetSDLRenderer() const { return SDLRenderer; }
+	unsigned int GetWindowFlags() const;
 
 private:
 	float GetWindowAspectRatio();
@@ -36,7 +38,7 @@ private:
 	void CalculateViewportSize();
 
 	SDL_Renderer* SDLRenderer;
-	struct SDL_Window* window;
+	SDL_Window* window;
 
 	int windowWidth, windowHeight;
 	int viewportWidth, viewportHeight;

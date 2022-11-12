@@ -3,6 +3,16 @@
 
 std::vector<Input> inputs;
 
+bool IsUpdatingFocusedWindow()
+{
+	static GameManager* gameManager = &GameManager::Get();
+
+	Uint32 currentWindowFlags = gameManager->GetRenderer()->GetWindowFlags();
+	bool isUpdatingFocusedWindow = currentWindowFlags & SDL_WINDOW_INPUT_FOCUS;
+	return isUpdatingFocusedWindow;
+}
+
+
 void InputManager::Initialize()
 {
 }
@@ -75,6 +85,11 @@ bool InputManager::WantsToQuit() const
 
 bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent)
 {
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
 	for (Input& input : inputs)
 	{
 		SDL_KeyboardEvent& key = input.e.key;
@@ -97,6 +112,11 @@ bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent)
 
 bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent)
 {
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
 	for (Input& input : inputs)
 	{
 		SDL_KeyboardEvent& key = input.e.key;
@@ -119,6 +139,11 @@ bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent)
 
 bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool consumeEvent)
 {
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
 	for (Input& input : inputs)
 	{
 		SDL_KeyboardEvent& key = input.e.key;

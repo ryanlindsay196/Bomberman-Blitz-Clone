@@ -207,3 +207,8 @@ void Renderer::HandleWindowEvent(SDL_Event& e)
 		}
 	}
 }
+
+unsigned int Renderer::GetWindowFlags() const
+{
+	return SDL_GetWindowFlags(window);
+}
