@@ -50,7 +50,7 @@ private:
 	void* data;
 	size_t size;
 	size_t used;
-public://TODO: Make this private
+
 	FreeListNode* head;
 	PlacementPolicy policy;
 };
