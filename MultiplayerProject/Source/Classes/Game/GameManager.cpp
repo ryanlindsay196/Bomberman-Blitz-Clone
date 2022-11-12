@@ -2,10 +2,12 @@
 
 void GameManager::Initialize()
 {
+	bool isServer = true;
 	for (GameInstance& gameInstance : gameInstances)
 	{
 		currentGameInstance = &gameInstance;
-		gameInstance.Initialize();
+		gameInstance.Initialize(isServer);
+		isServer = false;
 	}
 }
 
@@ -34,9 +36,9 @@ GameManager& GameManager::Get()
 	return instance;
 }
 
-bool GameInstance::Initialize()
+bool GameInstance::Initialize(bool isServer)
 {
-	networkManager.Initialize();
+	networkManager.Initialize(isServer);
 	renderer.Initialize(640, 480, false);
 	uiManager.Initialize(&renderer);
 	inputManager.Initialize();

@@ -15,7 +15,7 @@
 class GameInstance
 {
 public:
-	bool Initialize();
+	bool Initialize(bool isServer);
 	bool Update(float deltaTime);
 	void Destroy();
 

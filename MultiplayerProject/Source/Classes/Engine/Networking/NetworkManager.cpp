@@ -23,19 +23,14 @@ fieldSize = BITS_TO_BYTES(fieldBitset.count());\
 
 static RakNet::AddressOrGUID serverGUID = RakNet::UNASSIGNED_RAKNET_GUID;
 
-void NetworkManager::Initialize()
+void NetworkManager::Initialize(bool inIsServer)
 {
 	highestNetworkID = 0;
 
 	char str[512];
 	peer = RakNet::RakPeerInterface::GetInstance();
 	
-	printf("(C) or (S)erver?\n");
-	std::cin >> str;
-	if (
-		//true
-		(str[0] == 'c') || (str[0] == 'C')
-		)
+	if (!inIsServer)
 	{
 		RakNet::SocketDescriptor sd;
 		peer->Startup(1, &sd, 1);
@@ -56,7 +51,7 @@ void NetworkManager::Initialize()
 	}
 	else
 	{
-		std::cout << "Enter server IP or hit enter for 127.0.0.1" << std::endl;
+		//std::cout << "Enter server IP or hit enter for 127.0.0.1" << std::endl;
 		//std::cin >> str;
 		//if (str[0] == 0 || str[0] == '\0')
 		{

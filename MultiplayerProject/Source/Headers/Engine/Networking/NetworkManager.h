@@ -12,7 +12,7 @@ class NetworkManager
 {
 	CreateClassMetadata(NetworkManager)
 public:
-	void Initialize();
+	void Initialize(bool inIsServer);
 	void Update(float deltaTime);
 	void Destroy();
 
