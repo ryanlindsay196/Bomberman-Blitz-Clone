@@ -1,10 +1,23 @@
 #include "Game/GameManager.h"
+#if !RunInEngine
+#include <iostream>
+#endif
 
 void GameManager::Initialize()
 {
 	inputManager.Initialize();
-
+#if !RunInEngine
+	bool isServer = false;
+	std::cout << "Client (C) or server (S)?" << std::endl;
+	char str[512];
+	std::cin >> str;
+	if (str[0] == 'S' || str[0] == 's')
+	{
+		isServer = true;
+	}
+#else
 	bool isServer = true;
+#endif
 	for (GameInstance& gameInstance : gameInstances)
 	{
 		currentGameInstance = &gameInstance;
