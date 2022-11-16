@@ -88,20 +88,18 @@ struct MetaVariable : public AutoLister<MetaVariable>\
 {\
 public:\
 	template <typename Var>\
-	MetaVariable(Var* var, const char* name_, unsigned int offset_, unsigned int size_) :\
+	MetaVariable(Var* var, const char* name_, unsigned int offset_) :\
 		name(name_),\
 		offset(offset_),\
-		size(size_),\
 		metaType(GetGlobalMetaType(*var))\
 		{}\
-	const char* GetName() { return name; }\
+	const char* GetName() const { return name; }\
 	const unsigned int GetOffset() { return offset; }\
-	const unsigned int GetSize() { return size; }\
-	const MetaType& GetMetaType() { return metaType; }\
+	const unsigned int GetSize() const { return metaType.SizeOf(); }\
+	const MetaType& GetMetaType() const { return metaType; }\
 private:\
 	const char* const name;\
 	const unsigned int offset;\
-	const unsigned int size;\
 	const MetaType& metaType;\
 };\
 \
@@ -336,7 +334,7 @@ static MetaFunction mf_##OnRepFunction(#OnRepFunction, &Class##::OnRepFunction);
 RegisterNetworkedVariable(AuthorityType, (BaseObject::MetaVariable*)&mv_##var, (BaseObject::MetaFunction*)&mf_##OnRepFunction);
 
 #define CreateVariableMetadata(class, var, ...)\
-static MetaVariable mv_##var = MetaVariable(&var, #var, offsetof(class, var), sizeof(var));\
+static MetaVariable mv_##var = MetaVariable(&var, #var, offsetof(class, var));\
 __VA_ARGS__
 
 #define CreateClassFunctionMetadata(Class, func)\
