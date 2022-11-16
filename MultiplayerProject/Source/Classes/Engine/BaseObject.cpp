@@ -31,6 +31,6 @@ void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, Ba
 		return;
 	}
 
-	static NetworkManager& networkManager = GameManager::GetNetworkManager();
+	NetworkManager& networkManager = GameManager::GetNetworkManager();
 	networkManager.RegisterNetworkedVariable(GetNetworkID(), metaVariable, onRepMetaFunction, authorityType);
 }
