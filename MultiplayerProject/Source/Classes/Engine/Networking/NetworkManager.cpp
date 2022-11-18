@@ -25,6 +25,8 @@ static RakNet::AddressOrGUID serverGUID = RakNet::UNASSIGNED_RAKNET_GUID;
 
 void NetworkManager::Initialize(bool inIsServer)
 {
+	networkedObjectLinker.Initialize();
+
 	highestNetworkID = 0;
 
 	char str[512];
@@ -283,7 +285,7 @@ void PrepareDataToSerialize(const NetworkedObjectLinker::NetworkedObjectProxy* p
 
 void NetworkManager::SerializeNetworkedObjects()
 {
-	for (const NetworkedObjectLinker::NetworkedObjectProxy* proxy = NetworkedObjectLinker::NetworkedObjectProxy::Head(); proxy; proxy = proxy->Next())
+	for (NetworkedObjectLinker::NetworkedObjectProxy* proxy = networkedObjectLinker.GetNetworkedObjectProxyHead(); proxy; proxy = proxy->Next())
 	{
 		unsigned int proxyDataSizeInBytes = 0;
 		std::vector<unsigned int> replicatedVariableIndices;

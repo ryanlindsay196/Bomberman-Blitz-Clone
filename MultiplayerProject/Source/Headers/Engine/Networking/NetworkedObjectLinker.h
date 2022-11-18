@@ -23,13 +23,15 @@ struct NetworkedMetaVariable
 class NetworkedObjectLinker
 {
 public:
+	void Initialize();
+
 	BaseObject* GetBaseObject(unsigned int networkId) const;
 
-	class NetworkedObjectProxy : public AutoLister<NetworkedObjectProxy>
+	class NetworkedObjectProxy : public InstancedAutoLister<NetworkedObjectProxy>
 	{
 	public:
 		NetworkedObjectProxy() {}
-		NetworkedObjectProxy(BaseObject * inObject);
+		NetworkedObjectProxy(BaseObject * inObject, NetworkedObjectProxy*& proxyHead);
 		unsigned int GetNetworkID() const { return networkID; }
 		BaseObject* GetNetworkedObject() const { return networkedObject; }
 
@@ -48,7 +50,10 @@ public:
 		auto it = networkIdToNetworkObjectProxyMap.find(networkID);
 		return it != networkIdToNetworkObjectProxyMap.end() ? &it->second : nullptr;
 	}
+	
+	NetworkedObjectLinker::NetworkedObjectProxy* GetNetworkedObjectProxyHead() const { return headNetworkedObjectProxy; }
 
 private:
 	std::unordered_map<uint32_t, NetworkedObjectProxy> networkIdToNetworkObjectProxyMap;
+	NetworkedObjectLinker::NetworkedObjectProxy* headNetworkedObjectProxy;
 };

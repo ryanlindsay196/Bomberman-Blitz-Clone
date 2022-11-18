@@ -63,6 +63,22 @@ const MetaType & GetGlobalMetaType(const T &)
 }
 
 template <typename T>
+class InstancedAutoLister
+{
+public:
+	InstancedAutoLister() {}
+	InstancedAutoLister(T*& inHead)
+	{
+		m_next = inHead;
+		inHead = static_cast<T*>(this);
+	}
+	T* Next() { return m_next; }
+
+private:
+	T* m_next;
+};
+
+template <typename T>
 class AutoLister
 {
 public:

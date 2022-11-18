@@ -1,6 +1,11 @@
 #include "Engine/Networking/NetworkedObjectLinker.h"
 #include "Engine/BaseObject.h"
 
+void NetworkedObjectLinker::Initialize()
+{
+	headNetworkedObjectProxy = nullptr;
+}
+
 BaseObject* NetworkedObjectLinker::GetBaseObject(unsigned int networkId) const
 {
 	auto it = networkIdToNetworkObjectProxyMap.find(networkId);
@@ -20,7 +25,7 @@ void NetworkedObjectLinker::AddBaseObject(BaseObject * inObject)
 		return;
 	}
 	//We should only register a networked object once.
-	networkIdToNetworkObjectProxyMap[networkID] = NetworkedObjectProxy(inObject);
+	networkIdToNetworkObjectProxyMap.emplace(std::piecewise_construct, std::forward_as_tuple(networkID), std::forward_as_tuple(inObject, headNetworkedObjectProxy));
 }
 
 void NetworkedObjectLinker::RemoveBaseObject(unsigned int inNetworkId)
@@ -28,7 +33,8 @@ void NetworkedObjectLinker::RemoveBaseObject(unsigned int inNetworkId)
 	networkIdToNetworkObjectProxyMap.erase(inNetworkId);
 }
 
-NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * inObject) :
+NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * inObject, NetworkedObjectProxy*& proxyHead) :
+	InstancedAutoLister<NetworkedObjectProxy>(proxyHead),
 	networkID(inObject->GetNetworkID()),
 	networkedObject(inObject)
 {}
