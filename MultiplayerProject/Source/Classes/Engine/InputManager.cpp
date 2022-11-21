@@ -35,47 +35,7 @@ void InputManager::Update()
 		}
 	}
 
-	//Poll for newly pressed/released inputs
-	while (SDL_PollEvent(&e) != 0)
-	{
-		if (e.type == SDL_QUIT)
-		{
-			wantsToQuit = true;
-		}
-		
-		if (e.key.repeat)
-		{
-			continue;
-		}
-
-		if (e.window.event)
-		{
-			GameManager::GetRenderer()->HandleWindowEvent(e);
-		}
-
-		switch(e.key.type)
-		{
-		case SDL_KEYDOWN:
-			if (!IsKeyPressed(e.key.keysym.sym, false) && !IsKeyDown(e.key.keysym.sym, false) && !IsKeyReleased(e.key.keysym.sym, false))
-			{
-				inputs.push_back({ e, InputState::Pressed, false });
-			}
-			else
-			{
-				printf("InputManager::Error: %i key is already pressed!\n", e.key.keysym.sym);
-			}
-			break;
-		case SDL_KEYUP:
-			for (Input& input : inputs)
-			{
-				if (input.e.key.keysym.sym == e.key.keysym.sym)
-				{
-					input.inputState = InputState::Released;
-					break;
-				}
-			}
-		}
-	}
+	PollEvents();
 }
 
 bool InputManager::WantsToQuit() const
@@ -83,7 +43,7 @@ bool InputManager::WantsToQuit() const
 	return wantsToQuit;
 }
 
-bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent)
+bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent) const
 {
 	if (!IsUpdatingFocusedWindow())
 	{
@@ -110,7 +70,7 @@ bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent)
 	return false;
 }
 
-bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent)
+bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent) const
 {
 	if (!IsUpdatingFocusedWindow())
 	{
@@ -137,7 +97,7 @@ bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent)
 	return false;
 }
 
-bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool consumeEvent)
+bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool consumeEvent) const
 {
 	if (!IsUpdatingFocusedWindow())
 	{
@@ -165,3 +125,71 @@ bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool consumeEvent)
 }
 
 
+void InputManager::HandleWindowEvent(const SDL_Event & e)
+{
+	GameManager& gameManager = GameManager::Get();
+	
+	if (e.window.event == SDL_WINDOWEVENT_CLOSE)
+	{
+		gameManager.CloseGameInstances();
+	}
+
+	Renderer* renderer = gameManager.GetRendererFromWindowID(e.window.windowID);
+
+	if (!renderer)
+	{
+		return;
+	}
+	renderer->HandleWindowEvent(e);
+}
+
+void InputManager::HandleKeyEvent(const SDL_Event & e)
+{
+	if (e.key.repeat)
+	{
+		return;
+	}
+
+	switch (e.key.type)
+	{
+	case SDL_KEYDOWN:
+		if (!IsKeyPressed(e.key.keysym.sym, false) && !IsKeyDown(e.key.keysym.sym, false) && !IsKeyReleased(e.key.keysym.sym, false))
+		{
+			inputs.push_back({ e, InputState::Pressed, false });
+		}
+		else
+		{
+			printf("InputManager::Error: %i key is already pressed!\n", e.key.keysym.sym);
+		}
+		break;
+	case SDL_KEYUP:
+		for (Input& input : inputs)
+		{
+			if (input.e.key.keysym.sym == e.key.keysym.sym)
+			{
+				input.inputState = InputState::Released;
+				break;
+			}
+		}
+	}
+}
+
+void InputManager::PollEvents()
+{
+	//Poll for newly pressed/released inputs
+	while (SDL_PollEvent(&e) != 0)
+	{
+		switch (e.type)
+		{
+		case SDL_WINDOWEVENT_CLOSE:
+			wantsToQuit = true;
+			break;
+		case SDL_WINDOWEVENT:
+			HandleWindowEvent(e);
+			break;
+		case SDL_KEYDOWN:
+		case SDL_KEYUP:
+			HandleKeyEvent(e);
+		}
+	}
+}

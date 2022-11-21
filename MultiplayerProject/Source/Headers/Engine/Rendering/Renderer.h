@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_stdinc.h>
 
 struct SDL_Surface;
 struct SDL_Rect;
@@ -27,15 +28,19 @@ public:
 	bool HasKeyboardFocus() { return hasKeyboardFocus; }
 	bool IsMinimized() { return isMinimized; }
 
-	void HandleWindowEvent(SDL_Event& e);
+	void HandleWindowEvent(const SDL_Event& e);
+
+	void Close();
+	void Open();
 
 	SDL_Renderer* GetSDLRenderer() const { return SDLRenderer; }
+	Uint32 GetWindowID() const;
 	unsigned int GetWindowFlags() const;
 
 private:
 	float GetWindowAspectRatio();
 	float GetViewportAspectRatio();
-	void CalculateViewportSize();
+	void TryUpdateViewportSize();
 
 	SDL_Renderer* SDLRenderer;
 	SDL_Window* window;

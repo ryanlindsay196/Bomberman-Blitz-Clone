@@ -17,6 +17,8 @@ class GameInstance
 public:
 	bool Initialize(bool isServer);
 	void Update(float deltaTime);
+	void Open();
+	void Close();
 	void Destroy();
 
 	NetworkManager& GetNetworkManager() { return networkManager; }
@@ -30,6 +32,8 @@ private:
 	EntityManager entityManager;
 	TextureManager textureManager;
 	UIManager uiManager;
+
+	bool isOpen;
 };
 
 class GameManager
@@ -48,12 +52,15 @@ public:
 
 	static NetworkManager& GetNetworkManager() { return Get().GetCurrentGameInstance()->GetNetworkManager(); }
 	static Renderer* GetRenderer() { return Get().GetCurrentGameInstance()->GetRenderer(); }
+	static Renderer* GetRendererFromWindowID(Uint32 windowID);
 	static InputManager* GetInputManager() { return &Get().inputManager; }
 	static EntityManager* GetEntityManager() { return Get().GetCurrentGameInstance()->GetEntityManager(); }
 	static TextureManager* GetTextureManager() { return Get().GetCurrentGameInstance()->GetTextureManager(); }
 
 	static GameManager& Get();
 	static GameInstance* GetCurrentGameInstance() { return Get().currentGameInstance; }
+	static void CloseGameInstance(int i);
+	static void CloseGameInstances();
 
 private:
 	InputManager inputManager;

@@ -26,11 +26,16 @@ public:
 	void Update();
 	bool WantsToQuit() const;
 
-	bool IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent);
-	bool IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent);
-	bool IsKeyDown(SDL_Keycode keyCode, bool consumeEvent);
+	bool IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent) const;
+	bool IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent) const;
+	bool IsKeyDown(SDL_Keycode keyCode, bool consumeEvent) const;
 
 private:
+	void HandleWindowEvent(const SDL_Event& e);
+	void HandleKeyEvent(const SDL_Event& e);
+
+	void PollEvents();
+
 	SDL_Event e;
 	bool wantsToQuit;
 };

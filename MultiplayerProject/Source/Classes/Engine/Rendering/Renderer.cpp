@@ -21,7 +21,7 @@ bool Renderer::Initialize(unsigned int inWidth, unsigned int inHeight, bool shou
 	windowHeight = inHeight;
 	viewportWidth = DEFAULT_SCREEN_WIDTH;
 	viewportHeight = DEFAULT_SCREEN_HEIGHT;
-	CalculateViewportSize();
+	TryUpdateViewportSize();
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -68,7 +68,7 @@ bool Renderer::Initialize(unsigned int inWidth, unsigned int inHeight, bool shou
 
 void Renderer::Update(float deltaTime)
 {
-	CalculateViewportSize();
+	TryUpdateViewportSize();
 	SDL_RenderSetLogicalSize(SDLRenderer, viewportWidth, viewportHeight);
 }
 
@@ -113,7 +113,7 @@ float Renderer::GetViewportAspectRatio()
 	return (float)viewportWidth / (float)viewportHeight;
 }
 
-void Renderer::CalculateViewportSize()
+void Renderer::TryUpdateViewportSize()
 {
 	float oldWindowWidth = windowWidth;
 	float oldWindowHeight = windowHeight;
@@ -137,7 +137,7 @@ void Renderer::CalculateViewportSize()
 	}
 }
 
-void Renderer::HandleWindowEvent(SDL_Event& e)
+void Renderer::HandleWindowEvent(const SDL_Event& e)
 {
 	switch (e.window.event)
 	{
@@ -146,7 +146,7 @@ void Renderer::HandleWindowEvent(SDL_Event& e)
 		windowWidth = e.window.data1;
 		windowHeight = e.window.data2;
 
-		CalculateViewportSize();
+		TryUpdateViewportSize();
 		SDL_RenderPresent(SDLRenderer);
 		break;
 
@@ -206,6 +206,21 @@ void Renderer::HandleWindowEvent(SDL_Event& e)
 			isMinimized = false;
 		}
 	}
+}
+
+void Renderer::Close()
+{
+	SDL_HideWindow(window);
+}
+
+void Renderer::Open()
+{
+	SDL_ShowWindow(window);
+}
+
+Uint32 Renderer::GetWindowID() const
+{
+	return SDL_GetWindowID(window);
 }
 
 unsigned int Renderer::GetWindowFlags() const

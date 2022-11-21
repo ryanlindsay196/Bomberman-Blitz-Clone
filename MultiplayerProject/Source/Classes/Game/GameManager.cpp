@@ -47,10 +47,37 @@ void GameManager::Destroy()
 	}
 }
 
+Renderer* GameManager::GetRendererFromWindowID(Uint32 windowID)
+{ 
+	for (GameInstance& instance : Get().gameInstances)
+	{
+		if (instance.GetRenderer()->GetWindowID() == windowID)
+		{
+			return instance.GetRenderer();
+		}
+	}
+	return nullptr;
+}
+
 GameManager& GameManager::Get()
 {
 	static GameManager instance;
 	return instance;
+}
+
+void GameManager::CloseGameInstance(int i)
+{
+	GameManager& gameManager = GameManager::Get();
+	gameManager.gameInstances[i].Close();
+}
+
+void GameManager::CloseGameInstances()
+{
+	GameManager& gameManager = GameManager::Get();
+	for (unsigned int i = 0; i < GameInstanceCount; ++i)
+	{
+		CloseGameInstance(i);
+	}
 }
 
 bool GameInstance::Initialize(bool isServer)
@@ -60,11 +87,18 @@ bool GameInstance::Initialize(bool isServer)
 	uiManager.Initialize(&renderer);
 	entityManager.Initialize();
 
+	Open();
+
 	return true;
 }
 
 void GameInstance::Update(float deltaTime)
 {
+	if (!isOpen)
+	{
+		return;
+	}
+
 	networkManager.Update(deltaTime);
 	renderer.Update(deltaTime);
 	
@@ -79,10 +113,22 @@ void GameInstance::Update(float deltaTime)
 	renderer.Render();
 }
 
+void GameInstance::Open()
+{
+	isOpen = true;
+}
+
+void GameInstance::Close()
+{
+	isOpen = false;
+	renderer.Close();
+}
+
 void GameInstance::Destroy()
 {
 	networkManager.Destroy();
 	renderer.Destroy();
 
+	//TODO: Quitting should happen on game manager destroy?
 	SDL_Quit();
 }
