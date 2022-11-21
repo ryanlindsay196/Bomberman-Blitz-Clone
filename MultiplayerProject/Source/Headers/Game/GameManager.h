@@ -50,12 +50,12 @@ public:
 	bool Update(float deltaTime);
 	void Destroy();
 
-	static NetworkManager& GetNetworkManager() { return Get().GetCurrentGameInstance()->GetNetworkManager(); }
-	static Renderer* GetRenderer() { return Get().GetCurrentGameInstance()->GetRenderer(); }
+	static NetworkManager& GetNetworkManager() { return GetCurrentGameInstance()->GetNetworkManager(); }
+	static Renderer* GetRenderer() { return GetCurrentGameInstance()->GetRenderer(); }
 	static Renderer* GetRendererFromWindowID(Uint32 windowID);
 	static InputManager* GetInputManager() { return &Get().inputManager; }
-	static EntityManager* GetEntityManager() { return Get().GetCurrentGameInstance()->GetEntityManager(); }
-	static TextureManager* GetTextureManager() { return Get().GetCurrentGameInstance()->GetTextureManager(); }
+	static EntityManager* GetEntityManager() { return GetCurrentGameInstance()->GetEntityManager(); }
+	static TextureManager* GetTextureManager() { return GetCurrentGameInstance()->GetTextureManager(); }
 
 	static GameManager& Get();
 	static GameInstance* GetCurrentGameInstance() { return Get().currentGameInstance; }
