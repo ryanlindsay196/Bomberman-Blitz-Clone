@@ -85,6 +85,12 @@
     <Filter Include="Source Files\Headers\Engine\Allocators">
       <UniqueIdentifier>{bb720354-ec55-48fe-a873-0511607650b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Headers\Engine\GameInstances">
+      <UniqueIdentifier>{b0b6c607-1be5-4b05-9cf8-e4c29ac43467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Engine\GameInstances">
+      <UniqueIdentifier>{01dea0b9-1e12-4ade-9730-ff622319ec9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -489,6 +495,12 @@
     <ClCompile Include="Source\Classes\Engine\UI\ImageWidget.cpp">
       <Filter>Source Files\Classes\Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\GameInstances\ServerInstance.cpp">
+      <Filter>Source Files\Classes\Engine\GameInstances</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\GameInstances\ClientInstance.cpp">
+      <Filter>Source Files\Classes\Engine\GameInstances</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -660,6 +672,15 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\UI\ImageWidget.h">
       <Filter>Source Files\Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\GameInstances\ClientInstance.h">
+      <Filter>Source Files\Headers\Engine\GameInstances</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\GameInstances\ServerInstance.h">
+      <Filter>Source Files\Headers\Engine\GameInstances</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\GameInstances\GameInstance.h">
+      <Filter>Source Files\Headers\Engine\GameInstances</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

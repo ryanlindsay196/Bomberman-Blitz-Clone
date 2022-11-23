@@ -23,7 +23,11 @@ void Entity::InitTexture(const char* inTextureFilename, mathfu::Vector<float, 2>
 	height = textureDimensions.y;
 
 	GameManager& gameManager = GameManager::Get();
-	texture = gameManager.GetTextureManager()->LoadTexture(GameManager::GetRenderer(), inTextureFilename);
+	TextureManager* textureManager = gameManager.GetTextureManager();
+	if (textureManager)
+	{
+		texture = textureManager->LoadTexture(GameManager::GetRenderer(), inTextureFilename);
+	}
 }
 
 void Entity::ReceiveControllerInput(float deltaTime)

@@ -2,3 +2,9 @@ Debug
 .vs
 Release
 x64
+Debug Client
+Debug Editor
+Debug Server
+Release Client
+Release Editor
+Release Server

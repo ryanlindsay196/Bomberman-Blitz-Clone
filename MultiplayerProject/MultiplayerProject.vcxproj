@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
+    <ProjectConfiguration Include="Debug Client|Win32">
+      <Configuration>Debug Client</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
+    <ProjectConfiguration Include="Debug Client|x64">
+      <Configuration>Debug Client</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
+    <ProjectConfiguration Include="Debug Editor|Win32">
+      <Configuration>Debug Editor</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Editor|x64">
+      <Configuration>Debug Editor</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Server|Win32">
+      <Configuration>Debug Server</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Server|x64">
+      <Configuration>Debug Server</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug (DEPRECIATED)|Win32">
+      <Configuration>Debug (DEPRECIATED)</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Client|Win32">
+      <Configuration>Release Client</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Client|x64">
+      <Configuration>Release Client</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Editor|Win32">
+      <Configuration>Release Editor</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Editor|x64">
+      <Configuration>Release Editor</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Server|Win32">
+      <Configuration>Release Server</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Server|x64">
+      <Configuration>Release Server</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release (DEPRECIATED)|Win32">
+      <Configuration>Release (DEPRECIATED)</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug (DEPRECIATED)|x64">
+      <Configuration>Debug (DEPRECIATED)</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release (DEPRECIATED)|x64">
+      <Configuration>Release (DEPRECIATED)</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -25,6 +73,8 @@
     <ClCompile Include="Source\Classes\Engine\BaseObject.cpp" />
     <ClCompile Include="Source\Classes\Engine\CharacterController.cpp" />
     <ClCompile Include="Source\Classes\Engine\Engine.cpp" />
+    <ClCompile Include="Source\Classes\Engine\GameInstances\ClientInstance.cpp" />
+    <ClCompile Include="Source\Classes\Engine\GameInstances\ServerInstance.cpp" />
     <ClCompile Include="Source\Classes\Engine\GameMode\GameMode.cpp" />
     <ClCompile Include="Source\Classes\Engine\InputManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\Managers\TextureManager.cpp" />
@@ -165,6 +215,9 @@
     <ClInclude Include="Source\Headers\Engine\CharacterController.h" />
     <ClInclude Include="Source\Headers\Engine\Delegate.h" />
     <ClInclude Include="Source\Headers\Engine\Engine.h" />
+    <ClInclude Include="Source\Headers\Engine\GameInstances\ClientInstance.h" />
+    <ClInclude Include="Source\Headers\Engine\GameInstances\GameInstance.h" />
+    <ClInclude Include="Source\Headers\Engine\GameInstances\ServerInstance.h" />
     <ClInclude Include="Source\Headers\Engine\GameMode\GameMode.h" />
     <ClInclude Include="Source\Headers\Engine\InputManager.h" />
     <ClInclude Include="Source\Headers\Engine\Managers\TextureManager.h" />
@@ -221,57 +274,165 @@
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DEPRECIATED)|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Editor|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DEPRECIATED)|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Editor|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Client|Win32'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Server|Win32'" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Client|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Server|x64'" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug (DEPRECIATED)|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Editor|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug (DEPRECIATED)|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Editor|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DEPRECIATED)|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -291,7 +452,27 @@ xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SD
 xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Editor|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunInEngine;RunDebugMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DEPRECIATED)|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -311,7 +492,27 @@ xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64\SD
 xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Editor|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunInEngine;RunDebugMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
@@ -335,7 +536,78 @@ xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SD
 xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;RunInEngine;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;RunServerMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SDL2_image.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;RunClientMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release (DEPRECIATED)|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
@@ -352,6 +624,139 @@ xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resour
       <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Editor|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;RunInEngine;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Server|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;RunServerMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Client|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RunReleaseMode;RunClientMode;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Client|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>RunDebugMode;RunClientMode</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Client|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>RunDebugMode;RunClientMode</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64\SDL2_image.dll" "$(OutDir)"
+xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Server|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>RunDebugMode;RunServerMode</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SDL2_image.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Server|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>RunDebugMode;RunServerMode</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)MultiplayerProject\Source\Headers;$(SolutionDir)MultiplayerProject\Source\Vendor\Raknet\Include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\include;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\include;$(SolutionDir)MultiplayerProject\Source\Vendor\Math\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"

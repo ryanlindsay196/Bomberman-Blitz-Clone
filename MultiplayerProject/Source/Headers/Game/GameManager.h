@@ -1,10 +1,10 @@
 #pragma once
-#include "Engine/Rendering/Renderer.h"
-#include "Engine/InputManager.h"
-#include "Engine/Networking/NetworkManager.h"
-#include "Engine/Managers/TextureManager.h"
-#include "Engine/UI/UIManager.h"
-#include "Game/EntityManager.h"
+#if RunClientMode || RunInEngine
+#include "Engine/GameInstances/ClientInstance.h"
+#endif
+#if RunServerMode || RunInEngine
+#include "Engine/GameInstances/ServerInstance.h"
+#endif
 
 #ifdef RunInEngine
 #define GameInstanceCount 4
@@ -12,37 +12,18 @@
 #define GameInstanceCount 1
 #endif
 
-class GameInstance
-{
-public:
-	bool Initialize(bool isServer);
-	void Update(float deltaTime);
-	void Open();
-	void Close();
-	void Destroy();
-
-	NetworkManager& GetNetworkManager() { return networkManager; }
-	Renderer* GetRenderer() { return &renderer; }
-	EntityManager* GetEntityManager() { return &entityManager; }
-	TextureManager* GetTextureManager() { return &textureManager; }
-
-private:
-	Renderer renderer;
-	NetworkManager networkManager;
-	EntityManager entityManager;
-	TextureManager textureManager;
-	UIManager uiManager;
-
-	bool isOpen;
-};
-
 class GameManager
 {
 	GameManager() {}
 	GameManager(GameManager const&) = delete;
 	void operator=(GameManager const&) = delete;
 
-	GameInstance gameInstances[GameInstanceCount];
+#if RunServerMode || RunInEngine
+	ServerInstance serverInstance;
+#endif
+#if RunClientMode || RunInEngine
+	ClientInstance gameInstances[GameInstanceCount];
+#endif
 	GameInstance* currentGameInstance;
 
 public:

@@ -6,49 +6,57 @@
 void GameManager::Initialize()
 {
 	inputManager.Initialize();
-#if !RunInEngine
-	bool isServer = false;
-	std::cout << "Client (C) or server (S)?" << std::endl;
-	char str[512];
-	std::cin >> str;
-	if (str[0] == 'S' || str[0] == 's')
-	{
-		isServer = true;
-	}
-#else
-	bool isServer = true;
+#if RunInEngine || RunServerMode
+	currentGameInstance = &serverInstance;
+	serverInstance.Initialize();
 #endif
+#if RunInEngine || RunClientMode
 	for (GameInstance& gameInstance : gameInstances)
 	{
 		currentGameInstance = &gameInstance;
-		gameInstance.Initialize(isServer);
-		isServer = false;
+		gameInstance.Initialize();
 	}
+#endif
 }
 
 bool GameManager::Update(float deltaTime)
 {
 	inputManager.Update();
 
+#if RunInEngine || RunServerMode
+	currentGameInstance = &serverInstance;
+	serverInstance.Update(deltaTime);
+#endif
+#if RunInEngine || RunClientMode
 	for (GameInstance& gameInstance : gameInstances)
 	{
 		currentGameInstance = &gameInstance;
 		gameInstance.Update(deltaTime);
 	}
+#endif RunServerMode
 
 	return !inputManager.WantsToQuit();
 }
 
 void GameManager::Destroy()
 {
+#if RunInEngine || RunServerMode
+	serverInstance.Destroy();
+#endif
+#if RunInEngine || RunClientMode
 	for (GameInstance& gameInstance : gameInstances)
 	{
 		gameInstance.Destroy();
 	}
+#endif
 }
 
 Renderer* GameManager::GetRendererFromWindowID(Uint32 windowID)
 { 
+#if RunServerMode
+	return nullptr;
+#endif
+#if RunClientMode || RunInEngine
 	for (GameInstance& instance : Get().gameInstances)
 	{
 		if (instance.GetRenderer()->GetWindowID() == windowID)
@@ -57,6 +65,7 @@ Renderer* GameManager::GetRendererFromWindowID(Uint32 windowID)
 		}
 	}
 	return nullptr;
+#endif
 }
 
 GameManager& GameManager::Get()
@@ -67,8 +76,13 @@ GameManager& GameManager::Get()
 
 void GameManager::CloseGameInstance(int i)
 {
+#if RunClientMode || RunInEditor
 	GameManager& gameManager = GameManager::Get();
 	gameManager.gameInstances[i].Close();
+#elif RunServerMode
+	GameManager& gameManager = GameManager::Get();
+	gameManager.serverInstance.Close();
+#endif
 }
 
 void GameManager::CloseGameInstances()
@@ -78,57 +92,4 @@ void GameManager::CloseGameInstances()
 	{
 		CloseGameInstance(i);
 	}
-}
-
-bool GameInstance::Initialize(bool isServer)
-{
-	networkManager.Initialize(isServer);
-	renderer.Initialize(640, 480, false);
-	uiManager.Initialize(&renderer);
-	entityManager.Initialize();
-
-	Open();
-
-	return true;
-}
-
-void GameInstance::Update(float deltaTime)
-{
-	if (!isOpen)
-	{
-		return;
-	}
-
-	networkManager.Update(deltaTime);
-	renderer.Update(deltaTime);
-	
-	entityManager.UpdateEntities(deltaTime);
-	
-	networkManager.SerializeNetworkedObjects();
-	
-	entityManager.RenderEntities();
-
-	uiManager.Update(&renderer);
-	
-	renderer.Render();
-}
-
-void GameInstance::Open()
-{
-	isOpen = true;
-}
-
-void GameInstance::Close()
-{
-	isOpen = false;
-	renderer.Close();
-}
-
-void GameInstance::Destroy()
-{
-	networkManager.Destroy();
-	renderer.Destroy();
-
-	//TODO: Quitting should happen on game manager destroy?
-	SDL_Quit();
 }
