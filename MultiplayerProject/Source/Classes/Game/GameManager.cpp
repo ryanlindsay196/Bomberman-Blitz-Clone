@@ -84,7 +84,7 @@ GameManager& GameManager::Get()
 
 void GameManager::CloseGameInstance(int i)
 {
-#if RunClientMode || RunInEditor
+#if RunClientMode || RunInEngine
 	GameManager& gameManager = GameManager::Get();
 	gameManager.gameInstances[i].Close();
 #elif RunServerMode
