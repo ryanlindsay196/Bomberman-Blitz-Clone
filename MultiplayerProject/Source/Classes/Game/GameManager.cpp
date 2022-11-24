@@ -96,6 +96,7 @@ void GameManager::CloseGameInstance(int i)
 void GameManager::CloseGameInstances()
 {
 	GameManager& gameManager = GameManager::Get();
+	gameManager.serverInstance.Close();
 	for (unsigned int i = 0; i < GameInstanceCount; ++i)
 	{
 		CloseGameInstance(i);
