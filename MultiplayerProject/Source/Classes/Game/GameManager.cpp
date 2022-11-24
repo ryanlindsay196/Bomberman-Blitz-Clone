@@ -7,16 +7,20 @@ void GameManager::Initialize()
 {
 	inputManager.Initialize();
 #if RunInEngine || RunServerMode
-	currentGameInstance = &serverInstance;
-	serverInstance.Initialize();
+	InitializeGameInstance(serverInstance);
 #endif
 #if RunInEngine || RunClientMode
 	for (GameInstance& gameInstance : gameInstances)
 	{
-		currentGameInstance = &gameInstance;
-		gameInstance.Initialize();
+		InitializeGameInstance(gameInstance);
 	}
 #endif
+}
+
+void GameManager::InitializeGameInstance(GameInstance& gameInstance)
+{
+	currentGameInstance = &gameInstance;
+	gameInstance.Initialize();
 }
 
 bool GameManager::Update(float deltaTime)
@@ -24,18 +28,22 @@ bool GameManager::Update(float deltaTime)
 	inputManager.Update();
 
 #if RunInEngine || RunServerMode
-	currentGameInstance = &serverInstance;
-	serverInstance.Update(deltaTime);
+	UpdateGameInstance(deltaTime, serverInstance);
 #endif
 #if RunInEngine || RunClientMode
 	for (GameInstance& gameInstance : gameInstances)
 	{
-		currentGameInstance = &gameInstance;
-		gameInstance.Update(deltaTime);
+		UpdateGameInstance(deltaTime, gameInstance);
 	}
 #endif RunServerMode
 
 	return !inputManager.WantsToQuit();
+}
+
+void GameManager::UpdateGameInstance(float deltaTime, GameInstance & gameInstance)
+{
+	currentGameInstance = &gameInstance;
+	gameInstance.Update(deltaTime);
 }
 
 void GameManager::Destroy()

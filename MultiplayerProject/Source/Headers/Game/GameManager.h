@@ -45,4 +45,6 @@ public:
 
 private:
 	InputManager inputManager;
+	void InitializeGameInstance(GameInstance& gameInstance);
+	void UpdateGameInstance(float deltaTime, GameInstance& gameInstance);
 };
