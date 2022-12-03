@@ -36,6 +36,7 @@ bool GameManager::Update(float deltaTime)
 		UpdateGameInstance(deltaTime, gameInstance);
 	}
 #endif RunServerMode
+	currentGameInstance = nullptr;
 
 	return !inputManager.WantsToQuit();
 }
