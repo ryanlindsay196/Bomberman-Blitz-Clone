@@ -32,6 +32,7 @@ public:
 
 	void Close();
 	void Open();
+	bool IsOpen();
 
 	SDL_Renderer* GetSDLRenderer() const { return SDLRenderer; }
 	Uint32 GetWindowID() const;

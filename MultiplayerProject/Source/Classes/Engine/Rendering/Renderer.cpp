@@ -218,6 +218,11 @@ void Renderer::Open()
 	SDL_ShowWindow(window);
 }
 
+bool Renderer::IsOpen()
+{ 
+	return SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN;
+}
+
 Uint32 Renderer::GetWindowID() const
 {
 	return SDL_GetWindowID(window);

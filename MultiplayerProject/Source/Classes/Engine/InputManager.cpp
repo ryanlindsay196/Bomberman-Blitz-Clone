@@ -128,13 +128,20 @@ bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool consumeEvent) const
 void InputManager::HandleWindowEvent(const SDL_Event & e)
 {
 	GameManager& gameManager = GameManager::Get();
+	Renderer* renderer = gameManager.GetRendererFromWindowID(e.window.windowID);
 	
 	if (e.window.event == SDL_WINDOWEVENT_CLOSE)
 	{
+#if RunInEngine
 		gameManager.CloseGameInstances();
+		//TODO: This assumes that the only way to get a null renderer is for the window to be the editor window.
+		SDL_Window* window = SDL_GetWindowFromID(e.window.windowID);
+		SDL_HideWindow(window);
+#endif
+#if RunClientMode
+		wantsToQuit = true;
+#endif
 	}
-
-	Renderer* renderer = gameManager.GetRendererFromWindowID(e.window.windowID);
 
 	if (!renderer)
 	{

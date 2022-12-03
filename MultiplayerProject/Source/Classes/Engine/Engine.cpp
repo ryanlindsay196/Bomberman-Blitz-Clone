@@ -20,5 +20,5 @@ bool Engine::Update(float deltaTime)
 
 	renderer.Render();
 
-	return !inputManager.WantsToQuit();
+	return !inputManager.WantsToQuit() && renderer.IsOpen();
 }

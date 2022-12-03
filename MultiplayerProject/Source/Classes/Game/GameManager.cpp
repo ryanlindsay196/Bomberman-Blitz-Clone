@@ -96,9 +96,13 @@ void GameManager::CloseGameInstance(int i)
 void GameManager::CloseGameInstances()
 {
 	GameManager& gameManager = GameManager::Get();
+#if RunInEngine || RunServerMode
 	gameManager.serverInstance.Close();
+#endif
+#if RunInEngine || RunClientMode
 	for (unsigned int i = 0; i < GameInstanceCount; ++i)
 	{
 		CloseGameInstance(i);
 	}
+#endif
 }
