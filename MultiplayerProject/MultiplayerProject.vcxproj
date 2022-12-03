@@ -727,6 +727,7 @@ xcopy /y /d /e /i "$(SolutionDir)MultiplayerProject\Resources" "$(OutDir)\Resour
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
@@ -757,6 +758,7 @@ xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x86\SD
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64;$(SolutionDir)MultiplayerProject\Source\Vendor\SDL_image\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d "$(SolutionDir)MultiplayerProject\Source\Vendor\SDL\lib\x64\SDL2.dll" "$(OutDir)"
