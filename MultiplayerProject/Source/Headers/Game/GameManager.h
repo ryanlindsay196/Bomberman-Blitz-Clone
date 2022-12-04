@@ -31,12 +31,32 @@ public:
 	bool Update(float deltaTime);
 	void Destroy();
 
-	static NetworkManager& GetNetworkManager() { return GetCurrentGameInstance()->GetNetworkManager(); }
-	static Renderer* GetRenderer() { return GetCurrentGameInstance()->GetRenderer(); }
+	static NetworkManager* GetNetworkManager() 
+	{
+		GameInstance* gameInstance = GetCurrentGameInstance();
+		assert(gameInstance && "Error: NetworkManager cannot be found.");
+		return gameInstance ? &gameInstance->GetNetworkManager() : nullptr; 
+	}
+
+	static Renderer* GetRenderer() 
+	{ 
+		GameInstance* gameInstance = GetCurrentGameInstance();
+		return gameInstance ? gameInstance->GetRenderer() : nullptr; 
+	}
 	static Renderer* GetRendererFromWindowID(Uint32 windowID);
 	static InputManager* GetInputManager() { return &Get().inputManager; }
-	static EntityManager* GetEntityManager() { return GetCurrentGameInstance()->GetEntityManager(); }
-	static TextureManager* GetTextureManager() { return GetCurrentGameInstance()->GetTextureManager(); }
+	static EntityManager* GetEntityManager() 
+	{ 
+		GameInstance* gameInstance = GetCurrentGameInstance();
+		assert(gameInstance && "Error: EntityManager cannot be found.");
+		return gameInstance ? gameInstance->GetEntityManager() : nullptr; 
+	}
+
+	static TextureManager* GetTextureManager() 
+	{ 
+		GameInstance* gameInstance = GetCurrentGameInstance(); 
+		return gameInstance ? gameInstance->GetTextureManager() : nullptr;
+	}
 
 	static GameManager& Get();
 	static GameInstance* GetCurrentGameInstance() { return Get().currentGameInstance; }

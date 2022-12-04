@@ -15,8 +15,11 @@ bool CharacterController::Initialize()
 
 void CharacterController::UpdateInputs()
 {
-	if (GetOwningClientID() != GameManager::GetNetworkManager().GetClientID())
+	NetworkManager* networkManager = GameManager::GetNetworkManager();
+	if (GetOwningClientID() != networkManager->GetClientID())
+	{
 		return;
+	}
 
 	leftAxis = mathfu::Vector<float, 2>(0, 0);
 	rightAxis = mathfu::Vector<float, 2>(0, 0);

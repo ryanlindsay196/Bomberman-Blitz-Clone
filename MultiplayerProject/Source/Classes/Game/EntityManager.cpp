@@ -6,7 +6,9 @@
 
 bool EntityManager::Initialize()
 {
-	InitializeNetworkID(GameManager::GetNetworkManager().GenerateNewNetworkID());
+	NetworkManager* networkManager = GameManager::GetNetworkManager();
+
+	InitializeNetworkID(networkManager->GenerateNewNetworkID());
 	RegisterSelfAsNetworked();
 	CreateTemplatedClassFunctionMetadata(EntityManager, CreateEntity, <Player>);
 	CreateClassFunctionMetadata(EntityManager, CreateController);
@@ -23,7 +25,9 @@ std::shared_ptr<CharacterController> EntityManager::CreateController(unsigned in
 	characterControllerPtr->InitializeOwningClientID(owningClientID);
 	characterControllerPtr->Initialize();
 
-	Entity* entity = static_cast<Entity*>(GameManager::GetNetworkManager().GetObjectByNetworkID(characterNetworkID));
+	NetworkManager* networkManager = GameManager::GetNetworkManager();
+
+	Entity* entity = static_cast<Entity*>(networkManager->GetObjectByNetworkID(characterNetworkID));
 	if (entity != nullptr)
 	{
 		entity->SetController(characterControllerPtr);

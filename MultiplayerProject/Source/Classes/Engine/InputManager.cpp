@@ -6,10 +6,16 @@ std::vector<Input> inputs;
 bool IsUpdatingFocusedWindow()
 {
 	static GameManager* gameManager = &GameManager::Get();
+	Renderer* renderer = gameManager->GetRenderer();
 
-	Uint32 currentWindowFlags = gameManager->GetRenderer()->GetWindowFlags();
-	bool isUpdatingFocusedWindow = currentWindowFlags & SDL_WINDOW_INPUT_FOCUS;
-	return isUpdatingFocusedWindow;
+	if (renderer)
+	{
+		Uint32 currentWindowFlags = gameManager->GetRenderer()->GetWindowFlags();
+		bool isUpdatingFocusedWindow = currentWindowFlags & SDL_WINDOW_INPUT_FOCUS;
+		return isUpdatingFocusedWindow;
+	}
+
+	return false;
 }
 
 

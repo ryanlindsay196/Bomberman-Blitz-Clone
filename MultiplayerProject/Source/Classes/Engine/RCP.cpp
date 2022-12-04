@@ -24,22 +24,25 @@ void RPC::SerializeRpcData(Variable* vars, unsigned int varCount)
 		sizeofRpcData += vars[i].m->SizeOf();
 	}
 
-	if (!GameManager::GetNetworkManager().CanSerializeNumberOfBytes(sizeofRpcData, rpcStream))
+	NetworkManager* networkManager = GameManager::GetNetworkManager();
+
+	if (!networkManager->CanSerializeNumberOfBytes(sizeofRpcData, rpcStream))
 	{
 		SendSerializedRpcData();
 	}
 	if (rpcStream.GetNumberOfBitsUsed() == 0)
 	{
-		GameManager::GetNetworkManager().Serialize(&messID, sizeof(messID), rpcStream);
+		networkManager->Serialize(&messID, sizeof(messID), rpcStream);
 	}
 
 	for (unsigned int i = 0; i < varCount; ++i)
 	{
-		GameManager::GetNetworkManager().Serialize(vars[i].v, vars[i].m->SizeOf(), rpcStream);
+		networkManager->Serialize(vars[i].v, vars[i].m->SizeOf(), rpcStream);
 	}
 }
 
 void RPC::SendSerializedRpcData()
 {
-	GameManager::Get().GetNetworkManager().SendSerializedData(rpcStream);
+	NetworkManager* networkManager = GameManager::GetNetworkManager();
+	networkManager->SendSerializedData(rpcStream);
 }
