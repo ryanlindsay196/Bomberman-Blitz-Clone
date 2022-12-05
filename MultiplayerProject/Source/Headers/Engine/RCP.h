@@ -33,51 +33,7 @@ public:
 		SerializeRpcData(vars, argCount + 2);
 	}
 
-	static void ReceiveRpc(RakNet::BitStream& bsIn, const NetworkedObjectLinker& networkedObjectLinker)
-	{
-		if (bsIn.GetNumberOfUnreadBits() <= 0)
-		{
-			return;
-		}
-
-		unsigned int networkID = 0;
-		bsIn.Read((char*)&networkID, sizeof(networkID));
-		unsigned int functionID = 0;
-		bsIn.Read((char*)&functionID, sizeof(functionID));
-
-		BaseObject* object = networkedObjectLinker.GetBaseObject(networkID);
-		BaseObject::MetaFunction* metaFunc = object ? object->GetMetaFunctionByID(functionID) : nullptr;
-
-		if (!metaFunc)
-		{
-			return;
-		}
-
-		std::vector<Variable> vars;
-		vars.reserve(metaFunc->ArgCount());
-		
-		constexpr unsigned int maxArgCount = 8;
-		constexpr unsigned int argBufferSize = 8;
-		
-		//We don't support functions with more arguments than maxArgCount
-		assert(metaFunc->ArgCount() <= maxArgCount);
-
-		char buffers[maxArgCount][argBufferSize];
-
-		for (unsigned int i = 0; i < metaFunc->ArgCount(); ++i)
-		{
-			//We don't support parameters bigger than argBufferSize.
-			assert(metaFunc->ArgType(i)->SizeOf() <= argBufferSize);
-
-			bsIn.Read(buffers[i], metaFunc->ArgType(i)->SizeOf());
-			vars.push_back(Variable(buffers[i]));
-		}
-
-		if (metaFunc)
-		{
-			metaFunc->Apply(object, Variable(), &vars[0], metaFunc->ArgCount());
-		}
-	}
+	static void ReceiveRpc(RakNet::BitStream& bsIn, const NetworkedObjectLinker& networkedObjectLinker);
 
 	static void SendSerializedRpcData();
 };
