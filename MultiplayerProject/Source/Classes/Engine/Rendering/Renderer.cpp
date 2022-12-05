@@ -9,7 +9,7 @@ constexpr int DEFAULT_SCREEN_WIDTH = 640;
 constexpr int DEFAULT_SCREEN_HEIGHT = 480;
 constexpr float DEFAULT_ASPECT_RATIO = (float)DEFAULT_SCREEN_WIDTH / DEFAULT_SCREEN_HEIGHT;
 
-bool Renderer::Initialize(unsigned int inWidth, unsigned int inHeight, bool shouldMaximizeWindow)
+bool Renderer::Initialize(unsigned int inWidth, unsigned int inHeight, bool shouldMaximizeWindow, const char* windowName)
 {
 	window = nullptr;
 
@@ -31,7 +31,7 @@ bool Renderer::Initialize(unsigned int inWidth, unsigned int inHeight, bool shou
 	}
 
 	//Create window
-	window = SDL_CreateWindow("Blast Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (!window)
 	{
 		std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;

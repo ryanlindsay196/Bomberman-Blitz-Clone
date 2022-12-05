@@ -5,7 +5,7 @@ void Engine::Initialize()
 {
 	GameManager::Get().Initialize();
 
-	renderer.Initialize(480, 640, true);
+	renderer.Initialize(480, 640, true, "Blast Engine");
 	uiManager.Initialize(&renderer);
 	inputManager.Initialize();
 }

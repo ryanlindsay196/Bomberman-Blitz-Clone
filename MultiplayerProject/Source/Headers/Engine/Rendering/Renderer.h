@@ -12,7 +12,7 @@ class Texture;
 class Renderer
 {
 public:
-	bool Initialize(unsigned int inWidth, unsigned int inHeight, bool shouldMaximizeWindow);
+	bool Initialize(unsigned int inWidth, unsigned int inHeight, bool shouldMaximizeWindow, const char* windowName);
 
 	void Update(float deltaTime);
 

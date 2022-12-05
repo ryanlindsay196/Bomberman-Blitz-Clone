@@ -3,7 +3,7 @@
 bool ClientInstance::Initialize()
 {
 	networkManager.Initialize(false);
-	renderer.Initialize(640, 480, false);
+	renderer.Initialize(640, 480, false, "Bomberman");
 	uiManager.Initialize(&renderer);
 	entityManager.Initialize();
 
