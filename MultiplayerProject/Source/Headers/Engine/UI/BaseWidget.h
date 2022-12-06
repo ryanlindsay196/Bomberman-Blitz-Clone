@@ -6,17 +6,28 @@ class Renderer;
 
 class Anchor
 {
-	static const mathfu::Vector<float, 2> TopLeft()			{ return { 0.0f, 0.0f }; }
-	static const mathfu::Vector<float, 2> CenterLeft()		{ return { 0.0f, 0.5f }; }
-	static const mathfu::Vector<float, 2> BottomLeft()		{ return { 0.0f, 1.0f }; }
-	static const mathfu::Vector<float, 2> TopCenter()		{ return { 0.5f, 0.0f }; }
-	static const mathfu::Vector<float, 2> CenterCenter()	{ return { 0.5f, 0.5f }; }
-	static const mathfu::Vector<float, 2> BottomCenter()	{ return { 0.5f, 1.0f }; }
-	static const mathfu::Vector<float, 2> TopRight()		{ return { 1.0f, 0.0f }; }
-	static const mathfu::Vector<float, 2> CenterRight()		{ return { 1.0f, 0.5f }; }
-	static const mathfu::Vector<float, 2> BottomRight()		{ return { 1.0f, 1.0f }; }
-	mathfu::Vector<float, 2> normalizedAnchor;
+public:
+	Anchor() : normalizedValue(0, 0) {}
+	Anchor(mathfu::Vector<float, 2> inNormalizedValue) : normalizedValue(inNormalizedValue) {}
+	
+	static const Anchor TopLeft()			{ return Anchor(mathfu::Vector<float, 2>(0.0f, 0.0f)); }
+	static const Anchor CenterLeft()		{ return Anchor(mathfu::Vector<float, 2>(0.0f, 0.5f)); }
+	static const Anchor BottomLeft()		{ return Anchor(mathfu::Vector<float, 2>(0.0f, 1.0f)); }
+	static const Anchor TopCenter()			{ return Anchor(mathfu::Vector<float, 2>(0.5f, 0.0f)); }
+	static const Anchor CenterCenter()		{ return Anchor(mathfu::Vector<float, 2>(0.5f, 0.5f)); }
+	static const Anchor BottomCenter()		{ return Anchor(mathfu::Vector<float, 2>(0.5f, 1.0f)); }
+	static const Anchor TopRight()			{ return Anchor(mathfu::Vector<float, 2>(1.0f, 0.0f)); }
+	static const Anchor CenterRight()		{ return Anchor(mathfu::Vector<float, 2>(1.0f, 0.5f)); }
+	static const Anchor BottomRight()		{ return Anchor(mathfu::Vector<float, 2>(1.0f, 1.0f)); }
+
+
+	mathfu::Vector<float, 2> GetNormalizedValue() const { return normalizedValue; }
+	
+private:
+	mathfu::Vector<float, 2> normalizedValue;
 };
+
+typedef Anchor Alignment;
 
 class BaseWidget
 {
@@ -31,11 +42,33 @@ public:
 	BaseWidget* GetParent() { return parent; }
 	virtual void Draw(Renderer* renderer);
 
+	void SetOffset(mathfu::Vector<float, 2> newOffset) 
+	{ 
+		offset = newOffset; 
+		assert(abs(offset.x) <= 1); 
+		assert(abs(offset.y) <= 1); 
+	}
+
+	void SetAnchor(Anchor newAnchor)
+	{
+		anchor = newAnchor;
+		assert(abs(anchor.GetNormalizedValue().x) <= 1);
+		assert(abs(anchor.GetNormalizedValue().y) <= 1);
+	}
+
+	void SetAlignment(Alignment newAlignment)
+	{
+		alignment = newAlignment;
+		assert(abs(alignment.GetNormalizedValue().x) <= 1);
+		assert(abs(alignment.GetNormalizedValue().y) <= 1);
+	}
+
 	std::vector<BaseWidget*> children;
-private:
+protected:
 
 	BaseWidget* parent;
 	char name[21];
 	Anchor anchor;
+	Alignment alignment;
 	mathfu::Vector<float, 2> offset;
 };

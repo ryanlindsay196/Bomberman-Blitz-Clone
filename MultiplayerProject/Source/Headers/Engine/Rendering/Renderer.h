@@ -23,6 +23,8 @@ public:
 
 	int GetWidth() { return windowWidth; }
 	int GetHeight() { return windowHeight; }
+	int GetViewportWidth() { return viewportWidth; }
+	int GetViewportHeight() { return viewportHeight; }
 
 	bool HasMouseFocus() { return hasMouseFocus; }
 	bool HasKeyboardFocus() { return hasKeyboardFocus; }
