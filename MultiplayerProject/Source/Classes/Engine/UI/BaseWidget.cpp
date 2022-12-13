@@ -1,3 +1,4 @@
+#include "Engine/Rendering/Renderer.h"
 #include "Engine/UI/BaseWidget.h"
 
 void BaseWidget::AddChild(BaseWidget* newChild)
@@ -30,13 +31,50 @@ void BaseWidget::SetParent(BaseWidget * inParent)
 	parent = inParent;
 }
 
-void BaseWidget::Draw(Renderer* renderer)
+void BaseWidget::Draw(Renderer* renderer, const SDL_Rect& parentRectBounds)
 {
 	for (BaseWidget* child : children)
 	{
 		if (child)
 		{
-			child->Draw(renderer);
+			child->Draw(renderer, parentRectBounds);
 		}
 	}
 }
+
+float BaseWidget::GetWidthInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const
+{
+	assert(renderer);
+
+	float parentAspectRatio = (float)parentRectBounds.w / parentRectBounds.h;
+
+	float viewportAspectRatioAdjustment = renderer->GetAspectRatio() / parentAspectRatio;
+
+	float widthInGlobalSpace = parentRectBounds.w * widthInLocalSpace / (float)renderer->GetViewportWidth();
+
+	if (viewportAspectRatioAdjustment < 1)
+	{
+		widthInGlobalSpace *= viewportAspectRatioAdjustment;
+	}
+
+	return widthInGlobalSpace;
+}
+
+float BaseWidget::GetHeightInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const
+{
+	assert(renderer);
+
+	float parentAspectRatio = (float)parentRectBounds.w / parentRectBounds.h;
+
+	float viewportAspectRatioAdjustment = renderer->GetAspectRatio() / parentAspectRatio;
+
+	float heightInGlobalSpace = parentRectBounds.h * heightInLocalSpace / (float)renderer->GetViewportHeight();
+
+	if (viewportAspectRatioAdjustment > 1)
+	{
+		heightInGlobalSpace /= viewportAspectRatioAdjustment;
+	}
+
+	return heightInGlobalSpace;
+}
+

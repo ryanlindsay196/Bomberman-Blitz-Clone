@@ -9,25 +9,31 @@ void Image::Initialize(Renderer* renderer)
 	BaseWidget::Initialize(renderer);
 }
 
-void Image::Draw(Renderer * renderer)
+void Image::Draw(Renderer * renderer, const SDL_Rect& parentRectBounds)
 {
-	const mathfu::Vector<float, 2> anchorPosition{
-		renderer->GetViewportWidth() * anchor.GetNormalizedValue().x,
-		renderer->GetViewportHeight() * anchor.GetNormalizedValue().y };
+	//Position within the parent container.
+	const mathfu::Vector<float, 2> anchorOffset{
+		parentRectBounds.w * anchor.GetNormalizedValue().x,
+		parentRectBounds.h * anchor.GetNormalizedValue().y 
+	};
 
+	float widthInGlobalSpace = GetWidthInGlobalSpace(renderer, parentRectBounds);
+	float heightInGlobalSpace = GetHeightInGlobalSpace(renderer, parentRectBounds);
+
+	//Determines the center of this widget
 	const mathfu::Vector<float, 2> alignmentPositionOffset{
-		width * alignment.GetNormalizedValue().x,
-		height * alignment.GetNormalizedValue().y };
-
-	const mathfu::Vector<float, 2> offsetPosition{ renderer->GetViewportWidth() * offset.x, renderer->GetViewportHeight() * offset.y };
+		widthInGlobalSpace * alignment.GetNormalizedValue().x,
+		heightInGlobalSpace * alignment.GetNormalizedValue().y
+	};
 
 	SDL_Rect srcRect{ 0, 0, 100, 100 };
 	SDL_Rect destRect = { 
-		anchorPosition.x - alignmentPositionOffset.x + offsetPosition.x, 
-		anchorPosition.y - alignmentPositionOffset.y + offsetPosition.y, 
-		width, 
-		height };
+		parentRectBounds.x + anchorOffset.x - alignmentPositionOffset.x,
+		parentRectBounds.y + anchorOffset.y - alignmentPositionOffset.y,
+		widthInGlobalSpace, 
+		heightInGlobalSpace };
 
 	renderer->UpdateRender(texture.get(), &srcRect, &destRect);
-	BaseWidget::Draw(renderer);
+
+	BaseWidget::Draw(renderer, destRect);
 }

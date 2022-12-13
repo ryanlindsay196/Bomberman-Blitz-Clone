@@ -103,12 +103,12 @@ void Renderer::Destroy()
 	window = nullptr;
 }
 
-float Renderer::GetWindowAspectRatio()
+float Renderer::GetWindowAspectRatio() const
 {
 	return (float)windowWidth / (float)windowHeight;
 }
 
-float Renderer::GetViewportAspectRatio()
+float Renderer::GetViewportAspectRatio() const
 {
 	return (float)viewportWidth / (float)viewportHeight;
 }
@@ -135,6 +135,11 @@ void Renderer::TryUpdateViewportSize()
 		viewportWidth = windowWidth;
 		viewportHeight = windowWidth / DEFAULT_ASPECT_RATIO;
 	}
+}
+
+float Renderer::GetDefaultAspectRatio() const
+{
+	return DEFAULT_ASPECT_RATIO;
 }
 
 void Renderer::HandleWindowEvent(const SDL_Event& e)

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "mathfu/vector.h"
+#include "SDL_rect.h"
 
 class Renderer;
 
@@ -40,14 +41,7 @@ public:
 
 	void SetParent(BaseWidget* inParent);
 	BaseWidget* GetParent() { return parent; }
-	virtual void Draw(Renderer* renderer);
-
-	void SetOffset(mathfu::Vector<float, 2> newOffset) 
-	{ 
-		offset = newOffset; 
-		assert(abs(offset.x) <= 1); 
-		assert(abs(offset.y) <= 1); 
-	}
+	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds);
 
 	void SetAnchor(Anchor newAnchor)
 	{
@@ -63,6 +57,30 @@ public:
 		assert(abs(alignment.GetNormalizedValue().y) <= 1);
 	}
 
+	virtual void SetWidthInLocalSpace(float inWidth)
+	{
+		widthInLocalSpace = inWidth;
+	}
+
+	virtual void SetHeightInLocalSpace(float inHeight)
+	{ 
+		heightInLocalSpace = inHeight;
+	}
+
+	virtual float GetWidthInLocalSpace() const
+	{
+		return widthInLocalSpace;
+	}
+
+	virtual float GetHeightInLocalSpace() const
+	{
+		return heightInLocalSpace;
+	}
+
+	virtual float GetWidthInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
+	virtual float GetHeightInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
+
+
 	std::vector<BaseWidget*> children;
 protected:
 
@@ -70,5 +88,5 @@ protected:
 	char name[21];
 	Anchor anchor;
 	Alignment alignment;
-	mathfu::Vector<float, 2> offset;
+	float widthInLocalSpace, heightInLocalSpace;
 };

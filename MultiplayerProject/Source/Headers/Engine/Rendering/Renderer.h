@@ -21,10 +21,13 @@ public:
 
 	void Destroy();
 
-	int GetWidth() { return windowWidth; }
-	int GetHeight() { return windowHeight; }
-	int GetViewportWidth() { return viewportWidth; }
-	int GetViewportHeight() { return viewportHeight; }
+	int GetWidth() const { return windowWidth; }
+	int GetHeight() const { return windowHeight; }
+	int GetViewportWidth() const { return viewportWidth; }
+	int GetViewportHeight() const { return viewportHeight; }
+
+	float GetAspectRatio() const { return (float)viewportWidth / viewportHeight; }
+	float GetDefaultAspectRatio() const;
 
 	bool HasMouseFocus() { return hasMouseFocus; }
 	bool HasKeyboardFocus() { return hasKeyboardFocus; }
@@ -41,8 +44,8 @@ public:
 	unsigned int GetWindowFlags() const;
 
 private:
-	float GetWindowAspectRatio();
-	float GetViewportAspectRatio();
+	float GetWindowAspectRatio() const;
+	float GetViewportAspectRatio() const;
 	void TryUpdateViewportSize();
 
 	SDL_Renderer* SDLRenderer;

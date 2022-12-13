@@ -39,7 +39,7 @@ public:
 
 	void RemoveWidget(BaseWidget* widgetToRemove);
 
-	void Draw(Renderer* renderer) { rootWidget.Draw(renderer); }
+	void Draw(Renderer* renderer);
 
 private:
 	BaseWidget rootWidget;
