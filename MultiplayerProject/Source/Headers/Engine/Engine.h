@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Engine/Rendering/Renderer.h"
-#include "Engine/InputManager.h"
 #include "Engine/UI/UIManager.h"
 
 class Engine
@@ -12,6 +11,5 @@ public:
 
 private:
 	Renderer renderer;
-	InputManager inputManager;
 	UIManager uiManager;
 };

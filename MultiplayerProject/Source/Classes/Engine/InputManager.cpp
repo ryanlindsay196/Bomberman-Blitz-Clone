@@ -130,6 +130,88 @@ bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool consumeEvent) const
 	return false;
 }
 
+inline bool CanConsumeMouseInput(Input& input, InputState inputStateToCheck, Uint8 inButtonId)
+{
+	return input.e.type == SDL_MOUSEBUTTONDOWN && input.e.button.button == inButtonId && input.inputState == inputStateToCheck;
+}
+
+bool InputManager::IsMouseButtonPressed(Uint8 inButtonId, bool consumeEvent) const
+{
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
+	for (Input& input : inputs)
+	{
+		if (CanConsumeMouseInput(input, InputState::Pressed, inButtonId))
+		{
+			if (input.isConsumed)
+			{
+				return false;
+			}
+
+			if (consumeEvent)
+			{
+				input.isConsumed = true;
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+bool InputManager::IsMouseButtonReleased(Uint8 inButtonId, bool consumeEvent) const
+{
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
+	for (Input& input : inputs)
+	{
+		if (CanConsumeMouseInput(input, InputState::Released, inButtonId))
+		{
+			if (input.isConsumed)
+			{
+				return false;
+			}
+
+			if (consumeEvent)
+			{
+				input.isConsumed = true;
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+bool InputManager::IsMouseButtonDown(Uint8 inButtonId, bool consumeEvent) const
+{
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
+	for (Input& input : inputs)
+	{
+		if (CanConsumeMouseInput(input, InputState::Down, inButtonId))
+		{
+			if (input.isConsumed)
+			{
+				return false;
+			}
+
+			if (consumeEvent)
+			{
+				input.isConsumed = true;
+			}
+			return true;
+		}
+	}
+	return false;
+}
 
 void InputManager::HandleWindowEvent(const SDL_Event & e)
 {
@@ -187,8 +269,36 @@ void InputManager::HandleKeyEvent(const SDL_Event & e)
 	}
 }
 
+void InputManager::HandleMouseEvent(const SDL_Event& e)
+{
+	switch (e.button.type)
+	{
+	case SDL_MOUSEBUTTONDOWN:
+		for (Input& input : inputs)
+		{
+			if (input.e.type == e.type)
+			{
+				assert(false && "Error: Mouse input is already present inside the inputs array.");
+			}
+		}
+		inputs.push_back({ e, InputState::Pressed, false });
+		break;
+	case SDL_MOUSEBUTTONUP:
+		for (Input& input : inputs)
+		{
+			if (input.e.type == SDL_MOUSEBUTTONDOWN)
+			{
+				input.inputState = InputState::Released;
+			}
+		}
+		break;
+	}
+}
+
 void InputManager::PollEvents()
 {
+	SDL_Event e;
+
 	//Poll for newly pressed/released inputs
 	while (SDL_PollEvent(&e) != 0)
 	{
@@ -203,6 +313,11 @@ void InputManager::PollEvents()
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
 			HandleKeyEvent(e);
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
+			HandleMouseEvent(e);
+			break;
 		}
 	}
 }

@@ -30,12 +30,16 @@ public:
 	bool IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent) const;
 	bool IsKeyDown(SDL_Keycode keyCode, bool consumeEvent) const;
 
+	bool IsMouseButtonPressed(Uint8 inButtonId, bool consumeEvent) const;
+	bool IsMouseButtonReleased(Uint8 inButtonId, bool consumeEvent) const;
+	bool IsMouseButtonDown(Uint8 inButtonId, bool consumeEvent) const;
+
 private:
 	void HandleWindowEvent(const SDL_Event& e);
 	void HandleKeyEvent(const SDL_Event& e);
+	void HandleMouseEvent(const SDL_Event& e);
 
 	void PollEvents();
 
-	SDL_Event e;
 	bool wantsToQuit;
 };
