@@ -1,7 +1,5 @@
 #include "Game/GameManager.h"
-#if !RunInEngine
-#include <iostream>
-#endif
+#include "Engine/Engine.h"
 
 void GameManager::Initialize()
 {
@@ -58,6 +56,22 @@ void GameManager::Destroy()
 		gameInstance.Destroy();
 	}
 #endif
+}
+
+Renderer * GameManager::GetRenderer()
+{
+	if (GameInstance* gameInstance = GetCurrentGameInstance())
+	{
+		return gameInstance->GetRenderer();
+	}
+#if RunInEngine
+	if (Engine* engine = GetEngine())
+	{
+		return engine->GetRenderer();
+	}
+#endif
+
+	return nullptr;
 }
 
 Renderer* GameManager::GetRendererFromWindowID(Uint32 windowID)

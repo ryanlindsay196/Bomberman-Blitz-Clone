@@ -2,9 +2,20 @@
 
 #ifdef RunInEngine
 #include "Engine/Engine.h"
+Engine engine;
 #else
 #include "Game/GameManager.h"
 #endif
+
+Engine* GetEngine()
+{
+#ifdef RunInEngine
+	return &engine;
+#else
+	return nullptr;
+#endif
+}
+
 int main(int argc, char* args[])
 {
 	bool isInGameLoop = true;
@@ -12,7 +23,6 @@ int main(int argc, char* args[])
 	float deltaTime = 0;
 	float frameStart = 0;
 #ifdef RunInEngine
-	Engine engine;
 	engine.Initialize();
 
 	while (isInGameLoop)

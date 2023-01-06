@@ -12,6 +12,8 @@
 #define GameInstanceCount 1
 #endif
 
+extern class Engine* GetEngine();
+
 class GameManager
 {
 	GameManager() {}
@@ -38,11 +40,7 @@ public:
 		return gameInstance ? &gameInstance->GetNetworkManager() : nullptr; 
 	}
 
-	static Renderer* GetRenderer() 
-	{ 
-		GameInstance* gameInstance = GetCurrentGameInstance();
-		return gameInstance ? gameInstance->GetRenderer() : nullptr; 
-	}
+	static Renderer* GetRenderer();
 	static Renderer* GetRendererFromWindowID(Uint32 windowID);
 	static InputManager* GetInputManager() { return &Get().inputManager; }
 	static EntityManager* GetEntityManager() 
