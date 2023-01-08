@@ -78,3 +78,30 @@ float BaseWidget::GetHeightInGlobalSpace(const Renderer* const renderer, const S
 	return heightInGlobalSpace;
 }
 
+SDL_Rect BaseWidget::CalculateBoundsInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const
+{
+	//Position within the parent container.
+	const mathfu::Vector<float, 2> anchorOffset{
+		parentRectBounds.w * anchor.GetNormalizedValue().x,
+		parentRectBounds.h * anchor.GetNormalizedValue().y
+	};
+
+	float widthInGlobalSpace = GetWidthInGlobalSpace(renderer, parentRectBounds);
+	float heightInGlobalSpace = GetHeightInGlobalSpace(renderer, parentRectBounds);
+
+	//Determines the center of this widget
+	const mathfu::Vector<float, 2> alignmentPositionOffset{
+		widthInGlobalSpace * alignment.GetNormalizedValue().x,
+		heightInGlobalSpace * alignment.GetNormalizedValue().y
+	};
+
+	SDL_Rect srcRect{ 0, 0, 100, 100 };
+	SDL_Rect destRect = {
+		parentRectBounds.x + anchorOffset.x - alignmentPositionOffset.x,
+		parentRectBounds.y + anchorOffset.y - alignmentPositionOffset.y,
+		widthInGlobalSpace,
+		heightInGlobalSpace };
+
+	return destRect;
+}
+

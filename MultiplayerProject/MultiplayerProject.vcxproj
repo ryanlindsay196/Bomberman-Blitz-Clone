@@ -85,6 +85,7 @@
     <ClCompile Include="Source\Classes\Engine\Rendering\Renderer.cpp" />
     <ClCompile Include="Source\Classes\Engine\Rendering\SpriteSheet.cpp" />
     <ClCompile Include="Source\Classes\Engine\UI\BaseWidget.cpp" />
+    <ClCompile Include="Source\Classes\Engine\UI\ButtonWidget.cpp" />
     <ClCompile Include="Source\Classes\Engine\UI\ImageWidget.cpp" />
     <ClCompile Include="Source\Classes\Engine\UI\UIManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\UI\WidgetTree.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="Source\Headers\Engine\Rendering\Renderer.h" />
     <ClInclude Include="Source\Headers\Engine\Rendering\SpriteSheet.h" />
     <ClInclude Include="Source\Headers\Engine\UI\BaseWidget.h" />
+    <ClInclude Include="Source\Headers\Engine\UI\ButtonWidget.h" />
     <ClInclude Include="Source\Headers\Engine\UI\ImageWidget.h" />
     <ClInclude Include="Source\Headers\Engine\UI\UIManager.h" />
     <ClInclude Include="Source\Headers\Engine\UI\WidgetTree.h" />

@@ -501,6 +501,9 @@
     <ClCompile Include="Source\Classes\Engine\GameInstances\ClientInstance.cpp">
       <Filter>Source Files\Classes\Engine\GameInstances</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\UI\ButtonWidget.cpp">
+      <Filter>Source Files\Classes\Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -681,6 +684,9 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\GameInstances\GameInstance.h">
       <Filter>Source Files\Headers\Engine\GameInstances</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\UI\ButtonWidget.h">
+      <Filter>Source Files\Headers\Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
