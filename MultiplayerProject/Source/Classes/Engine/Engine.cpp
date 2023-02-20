@@ -13,7 +13,8 @@ bool Engine::Update(float deltaTime)
 {
 	GameManager::Get().Update(deltaTime);
 
-	uiManager.Update(&renderer);
+	uiManager.Update();
+	uiManager.Draw(&renderer);
 	renderer.Update(deltaTime);
 
 	renderer.Render();

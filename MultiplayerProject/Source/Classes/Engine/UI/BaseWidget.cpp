@@ -31,6 +31,34 @@ void BaseWidget::SetParent(BaseWidget * inParent)
 	parent = inParent;
 }
 
+bool BaseWidget::ProcessMouseInput(mathfu::Vector<float, 2> mousePosition)
+{
+	for (BaseWidget* currentChild : children)
+	{
+		assert(currentChild);
+
+		if (currentChild->ProcessMouseInput(mousePosition))
+		{
+			return true;
+		}
+	}
+	bool isClickHandled = TryHandleMousePress(mousePosition) == InputResponse::Handled;
+	if (isClickHandled)
+	{
+		OnMousePressed(mousePosition);
+	}
+	return isClickHandled;
+}
+
+void BaseWidget::OnMousePressed(mathfu::Vector<float, 2> mousePressPosition)
+{
+}
+
+InputResponse BaseWidget::TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition)
+{
+	return InputResponse::UnHandled;
+}
+
 void BaseWidget::Draw(Renderer* renderer, const SDL_Rect& parentRectBounds)
 {
 	for (BaseWidget* child : children)

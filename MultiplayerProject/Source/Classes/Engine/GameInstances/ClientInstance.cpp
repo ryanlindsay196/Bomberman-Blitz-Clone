@@ -21,6 +21,7 @@ void ClientInstance::Update(float deltaTime)
 
 	networkManager.Update(deltaTime);
 	renderer.Update(deltaTime);
+	uiManager.Update();
 
 	entityManager.UpdateEntities(deltaTime);
 
@@ -28,7 +29,7 @@ void ClientInstance::Update(float deltaTime)
 
 	entityManager.RenderEntities();
 
-	uiManager.Update(&renderer);
+	uiManager.Draw(&renderer);
 
 	renderer.Render();
 }

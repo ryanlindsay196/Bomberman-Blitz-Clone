@@ -5,6 +5,12 @@
 
 class Renderer;
 
+enum class InputResponse
+{
+	Handled,
+	UnHandled
+};
+
 class Anchor
 {
 public:
@@ -41,6 +47,11 @@ public:
 
 	void SetParent(BaseWidget* inParent);
 	BaseWidget* GetParent() { return parent; }
+
+	bool ProcessMouseInput(mathfu::Vector<float, 2> mousePosition);
+	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition);
+	virtual InputResponse TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition);
+
 	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds);
 
 	void SetAnchor(Anchor newAnchor)

@@ -56,7 +56,12 @@ void UIManager::Initialize(Renderer* renderer)
 	//childImage->SetAlignment(Alignment({ 0.0f, 0.0f }));
 }
 
-void UIManager::Update(Renderer* renderer)
+void UIManager::Update()
+{
+	tree.ProcessInput();
+}
+
+void UIManager::Draw(Renderer* renderer)
 {
 	tree.Draw(renderer);
 }

@@ -41,6 +41,8 @@ public:
 
 	void Draw(Renderer* renderer);
 
+	void ProcessInput();
+
 private:
 	BaseWidget rootWidget;
 	FreeListAllocator allocator;
