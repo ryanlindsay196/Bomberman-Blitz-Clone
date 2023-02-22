@@ -50,90 +50,90 @@ bool InputManager::WantsToQuit() const
 	return wantsToQuit;
 }
 
-bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent) const
+Input& InputManager::GetInputByKeycode(SDL_Keycode keyCode, const InputState desiredInputState) const
 {
-	if (!IsUpdatingFocusedWindow())
-	{
-		return false;
-	}
-
 	for (Input& input : inputs)
 	{
 		SDL_KeyboardEvent& key = input.e.key;
-		if (key.keysym.sym == keyCode && input.inputState == InputState::Pressed)
+		if (key.keysym.sym == keyCode && input.inputState == desiredInputState)
 		{
-			if (input.isConsumed)
-			{
-				return false;
-			}
-	
-			if (consumeEvent)
-			{
-				input.isConsumed = true;
-			}
-			return true;
+			return input;
 		}
 	}
-	return false;
-}
 
-bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent) const
-{
-	if (!IsUpdatingFocusedWindow())
-	{
-		return false;
-	}
-
-	for (Input& input : inputs)
-	{
-		SDL_KeyboardEvent& key = input.e.key;
-		if (key.keysym.sym == keyCode && input.inputState == InputState::Released)
-		{
-			if (input.isConsumed)
-			{
-				return false;
-			}
-	
-			if (consumeEvent)
-			{
-				input.isConsumed = true;
-			}
-			return true;
-		}
-	}
-	return false;
-}
-
-bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool consumeEvent) const
-{
-	if (!IsUpdatingFocusedWindow())
-	{
-		return false;
-	}
-
-	for (Input& input : inputs)
-	{
-		SDL_KeyboardEvent& key = input.e.key;
-		if (key.keysym.sym == keyCode && input.inputState == InputState::Down)
-		{
-			if (input.isConsumed)
-			{
-				return false;
-			}
-	
-			if (consumeEvent)
-			{
-				input.isConsumed = true;
-			}
-			return true;
-		}
-	}
-	return false;
+	return nullInput;
 }
 
 inline bool CanConsumeMouseInput(Input& input, InputState inputStateToCheck, Uint8 inButtonId)
 {
 	return input.e.type == SDL_MOUSEBUTTONDOWN && input.e.button.button == inButtonId && input.inputState == inputStateToCheck;
+}
+
+Input& InputManager::GetInputByMouseButtonID(Uint8 mouseButtonID) const
+{
+	for (Input& input : inputs)
+	{
+		if (CanConsumeMouseInput(input, InputState::Pressed, mouseButtonID))
+		{
+			return input;
+		}
+	}
+
+	return nullInput;
+}
+
+bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool canConsumeInput) const
+{
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
+	Input& input = GetInputByKeycode(keyCode, InputState::Pressed);
+	bool isPressed = input.inputState == InputState::Pressed && !input.isConsumed;
+
+	if (isPressed && canConsumeInput)
+	{
+		input.isConsumed = true;
+	}
+
+	return isPressed;
+}
+
+bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool canConsumeInput) const
+{
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
+	Input& input = GetInputByKeycode(keyCode, InputState::Released);
+	bool isReleased = input.inputState == InputState::Released && !input.isConsumed;
+
+	if (isReleased && canConsumeInput)
+	{
+		input.isConsumed = true;
+	}
+
+	return isReleased;
+}
+
+bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool canConsumeInput) const
+{
+	if (!IsUpdatingFocusedWindow())
+	{
+		return false;
+	}
+
+	Input& input = GetInputByKeycode(keyCode, InputState::Down);
+	bool isDown = input.inputState == InputState::Down && !input.isConsumed;
+
+	if (isDown && canConsumeInput)
+	{
+		input.isConsumed = true;
+	}
+
+	return isDown;
 }
 
 bool InputManager::IsMouseButtonPressed(Uint8 inButtonId, bool consumeEvent) const
@@ -143,23 +143,13 @@ bool InputManager::IsMouseButtonPressed(Uint8 inButtonId, bool consumeEvent) con
 		return false;
 	}
 
-	for (Input& input : inputs)
+	Input& input = GetInputByMouseButtonID(inButtonId);
+	bool isPressed = input.inputState == InputState::Pressed && !input.isConsumed;
+	if (isPressed && CanConsumeMouseInput(input, InputState::Pressed, inButtonId) && consumeEvent)
 	{
-		if (CanConsumeMouseInput(input, InputState::Pressed, inButtonId))
-		{
-			if (input.isConsumed)
-			{
-				return false;
-			}
-
-			if (consumeEvent)
-			{
-				input.isConsumed = true;
-			}
-			return true;
-		}
+		input.isConsumed = true;
 	}
-	return false;
+	return isPressed;
 }
 
 bool InputManager::IsMouseButtonReleased(Uint8 inButtonId, bool consumeEvent) const
@@ -169,23 +159,13 @@ bool InputManager::IsMouseButtonReleased(Uint8 inButtonId, bool consumeEvent) co
 		return false;
 	}
 
-	for (Input& input : inputs)
+	Input& input = GetInputByMouseButtonID(inButtonId);
+	bool isReleased = input.inputState == InputState::Released && !input.isConsumed;
+	if (isReleased && CanConsumeMouseInput(input, InputState::Released, inButtonId) && consumeEvent)
 	{
-		if (CanConsumeMouseInput(input, InputState::Released, inButtonId))
-		{
-			if (input.isConsumed)
-			{
-				return false;
-			}
-
-			if (consumeEvent)
-			{
-				input.isConsumed = true;
-			}
-			return true;
-		}
+		input.isConsumed = true;
 	}
-	return false;
+	return isReleased;
 }
 
 bool InputManager::IsMouseButtonDown(Uint8 inButtonId, bool consumeEvent) const
@@ -195,23 +175,13 @@ bool InputManager::IsMouseButtonDown(Uint8 inButtonId, bool consumeEvent) const
 		return false;
 	}
 
-	for (Input& input : inputs)
+	Input& input = GetInputByMouseButtonID(inButtonId);
+	bool isDown = input.inputState == InputState::Down && !input.isConsumed;
+	if (isDown && CanConsumeMouseInput(input, InputState::Down, inButtonId) && consumeEvent)
 	{
-		if (CanConsumeMouseInput(input, InputState::Down, inButtonId))
-		{
-			if (input.isConsumed)
-			{
-				return false;
-			}
-
-			if (consumeEvent)
-			{
-				input.isConsumed = true;
-			}
-			return true;
-		}
+		input.isConsumed = true;
 	}
-	return false;
+	return isDown;
 }
 
 void InputManager::HandleWindowEvent(const SDL_Event & e)

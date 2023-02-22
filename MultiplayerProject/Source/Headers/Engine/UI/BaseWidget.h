@@ -3,6 +3,8 @@
 #include "mathfu/vector.h"
 #include "SDL_rect.h"
 
+#include "Engine/InputManager.h"
+
 class Renderer;
 
 enum class InputResponse
@@ -48,7 +50,7 @@ public:
 	void SetParent(BaseWidget* inParent);
 	BaseWidget* GetParent() { return parent; }
 
-	bool ProcessMouseInput(mathfu::Vector<float, 2> mousePosition);
+	bool ProcessMouseInput(Input& mouseInput);
 	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition);
 	virtual InputResponse TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition);
 

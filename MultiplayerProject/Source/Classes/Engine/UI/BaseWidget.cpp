@@ -31,17 +31,20 @@ void BaseWidget::SetParent(BaseWidget * inParent)
 	parent = inParent;
 }
 
-bool BaseWidget::ProcessMouseInput(mathfu::Vector<float, 2> mousePosition)
+bool BaseWidget::ProcessMouseInput(Input& mouseInput)
 {
 	for (BaseWidget* currentChild : children)
 	{
 		assert(currentChild);
 
-		if (currentChild->ProcessMouseInput(mousePosition))
+		if (currentChild->ProcessMouseInput(mouseInput))
 		{
 			return true;
 		}
 	}
+
+	mathfu::Vector<float, 2> mousePosition(mouseInput.e.button.x, mouseInput.e.button.y);
+
 	bool isClickHandled = TryHandleMousePress(mousePosition) == InputResponse::Handled;
 	if (isClickHandled)
 	{

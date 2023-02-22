@@ -1,5 +1,6 @@
 #include "Engine/UI/WidgetTree.h"
 #include "Engine/Rendering/Renderer.h"
+#include "Game/GameManager.h"
 
 void WidgetTree::Initialize(size_t widgetAllocatorSizeInBytes)
 {
@@ -26,8 +27,14 @@ void WidgetTree::Draw(Renderer * renderer)
 
 void WidgetTree::ProcessInput()
 {
-	mathfu::Vector<float, 2> clickPosition(150, 150);
-	rootWidget.ProcessMouseInput(clickPosition);
+	if (GameManager::Get().GetInputManager()->IsMouseButtonPressed(SDL_BUTTON_LEFT, false))
+	{
+		Input& mouseInput = GameManager::Get().GetInputManager()->GetInputByMouseButtonID(SDL_BUTTON_LEFT);
+		if(rootWidget.ProcessMouseInput(mouseInput))
+		{
+			mouseInput.isConsumed = true;
+		}
+	}
 
 	//TODO: OnMouseMoved
 

@@ -4,6 +4,7 @@
 
 enum InputState
 {
+	NullState,
 	//The key was pressed on this frame
 	Pressed,
 	//The key was pressed on a previous frame
@@ -19,6 +20,8 @@ struct Input
 	bool isConsumed;
 };
 
+static Input nullInput;
+
 class InputManager
 {
 public:
@@ -26,9 +29,12 @@ public:
 	void Update();
 	bool WantsToQuit() const;
 
-	bool IsKeyPressed(SDL_Keycode keyCode, bool consumeEvent) const;
-	bool IsKeyReleased(SDL_Keycode keyCode, bool consumeEvent) const;
-	bool IsKeyDown(SDL_Keycode keyCode, bool consumeEvent) const;
+	Input& GetInputByKeycode(SDL_Keycode keyCode, const InputState desiredInputState) const;
+	Input& GetInputByMouseButtonID(Uint8 mouseButtonID) const;
+
+	bool IsKeyPressed(SDL_Keycode keyCode, bool canConsumeInput) const;
+	bool IsKeyReleased(SDL_Keycode keyCode, bool canConsumeInput) const;
+	bool IsKeyDown(SDL_Keycode keyCode, bool canConsumeInput) const;
 
 	bool IsMouseButtonPressed(Uint8 inButtonId, bool consumeEvent) const;
 	bool IsMouseButtonReleased(Uint8 inButtonId, bool consumeEvent) const;
