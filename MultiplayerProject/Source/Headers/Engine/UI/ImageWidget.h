@@ -6,7 +6,7 @@ class Image : public BaseWidget
 {
 public:
 	virtual void Initialize(Renderer* renderer) override;
-	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds) override;
+	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty) override;
 
 	std::shared_ptr<Texture> GetTexture() { return texture; }
 private:

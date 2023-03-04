@@ -6,7 +6,7 @@
 class WidgetTree
 {
 public:
-	void Initialize(size_t widgetAllocatorSizeInBytes);
+	void Initialize(Renderer* renderer, size_t widgetAllocatorSizeInBytes);
 
 	template<class T>
 	T* CreateWidget(T* parentWidget, Renderer* renderer)
@@ -17,7 +17,7 @@ public:
 		}
 
 		void* newPtr = allocator.Alloc(sizeof(T), 8);
-		T* newWidget = new(newPtr) T;
+		T* newWidget = new(newPtr) T{};
 		newWidget->Initialize(renderer);
 #ifdef RunDebugMode
 		static_cast<T*>(newWidget);

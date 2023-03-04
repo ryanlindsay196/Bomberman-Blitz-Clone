@@ -3,7 +3,7 @@
 
 void UIManager::Initialize(Renderer* renderer)
 {
-	tree.Initialize(1000000);
+	tree.Initialize(renderer, 1000000);
 
 	//TODO: Remove this. This is just test code.
 	Button* button = tree.CreateWidget<Button>(nullptr, renderer);

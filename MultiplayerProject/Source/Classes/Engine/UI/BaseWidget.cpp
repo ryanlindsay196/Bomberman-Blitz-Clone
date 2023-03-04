@@ -62,15 +62,24 @@ InputResponse BaseWidget::TryHandleMousePress(mathfu::Vector<float, 2> mousePres
 	return InputResponse::UnHandled;
 }
 
-void BaseWidget::Draw(Renderer* renderer, const SDL_Rect& parentRectBounds)
+void BaseWidget::Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty)
 {
+	bool selfOrParentHasDirtyTransform = isTransformDirty || isAnyParentDirty;
+
+	if (selfOrParentHasDirtyTransform)
+	{
+		cachedBoundsInGlobalSpace = CalculateBoundsInGlobalSpace(renderer, parentRectBounds);
+	}
+
 	for (BaseWidget* child : children)
 	{
 		if (child)
 		{
-			child->Draw(renderer, parentRectBounds);
+			child->Draw(renderer, cachedBoundsInGlobalSpace, selfOrParentHasDirtyTransform);
 		}
 	}
+
+	isTransformDirty = false;
 }
 
 float BaseWidget::GetWidthInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const
@@ -81,7 +90,7 @@ float BaseWidget::GetWidthInGlobalSpace(const Renderer* const renderer, const SD
 
 	float viewportAspectRatioAdjustment = renderer->GetAspectRatio() / parentAspectRatio;
 
-	float widthInGlobalSpace = parentRectBounds.w * widthInLocalSpace / (float)renderer->GetViewportWidth();
+	float widthInGlobalSpace = parentRectBounds.w * boundsInLocalSpace.w / (float)renderer->GetViewportWidth();
 
 	if (viewportAspectRatioAdjustment < 1)
 	{
@@ -99,7 +108,7 @@ float BaseWidget::GetHeightInGlobalSpace(const Renderer* const renderer, const S
 
 	float viewportAspectRatioAdjustment = renderer->GetAspectRatio() / parentAspectRatio;
 
-	float heightInGlobalSpace = parentRectBounds.h * heightInLocalSpace / (float)renderer->GetViewportHeight();
+	float heightInGlobalSpace = parentRectBounds.h * boundsInLocalSpace.h / (float)renderer->GetViewportHeight();
 
 	if (viewportAspectRatioAdjustment > 1)
 	{
@@ -126,7 +135,6 @@ SDL_Rect BaseWidget::CalculateBoundsInGlobalSpace(const Renderer* const renderer
 		heightInGlobalSpace * alignment.GetNormalizedValue().y
 	};
 
-	SDL_Rect srcRect{ 0, 0, 100, 100 };
 	SDL_Rect destRect = {
 		parentRectBounds.x + anchorOffset.x - alignmentPositionOffset.x,
 		parentRectBounds.y + anchorOffset.y - alignmentPositionOffset.y,

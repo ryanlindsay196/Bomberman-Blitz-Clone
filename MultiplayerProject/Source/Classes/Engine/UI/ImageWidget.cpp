@@ -9,11 +9,10 @@ void Image::Initialize(Renderer* renderer)
 	BaseWidget::Initialize(renderer);
 }
 
-void Image::Draw(Renderer * renderer, const SDL_Rect& parentRectBounds)
+void Image::Draw(Renderer * renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty)
 {
 	SDL_Rect srcRect { 0, 0, 100, 100 };
-	SDL_Rect destRect = CalculateBoundsInGlobalSpace(renderer, parentRectBounds);
-	renderer->UpdateRender(texture.get(), &srcRect, &destRect);
+	BaseWidget::Draw(renderer, cachedBoundsInGlobalSpace, isAnyParentDirty);
 
-	BaseWidget::Draw(renderer, destRect);
+	renderer->UpdateRender(texture.get(), &srcRect, &cachedBoundsInGlobalSpace);
 }

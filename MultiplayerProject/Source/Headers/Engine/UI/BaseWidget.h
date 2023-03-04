@@ -41,7 +41,11 @@ typedef Anchor Alignment;
 class BaseWidget
 {
 public:
-	virtual void Initialize(Renderer* renderer){ strcpy_s(name, sizeof(name) + 1, "12345678901234567890"); }
+	virtual void Initialize(Renderer* renderer)
+	{ 
+		strcpy_s(name, sizeof(name) + 1, "12345678901234567890"); 
+		isTransformDirty = true;
+	}
 
 	void AddChild(BaseWidget* newChild);
 	void RemoveChild(BaseWidget* childToRemove);
@@ -54,10 +58,11 @@ public:
 	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition);
 	virtual InputResponse TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition);
 
-	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds);
+	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty = false);
 
 	void SetAnchor(Anchor newAnchor)
 	{
+		isTransformDirty = true;
 		anchor = newAnchor;
 		assert(abs(anchor.GetNormalizedValue().x) <= 1);
 		assert(abs(anchor.GetNormalizedValue().y) <= 1);
@@ -65,6 +70,7 @@ public:
 
 	void SetAlignment(Alignment newAlignment)
 	{
+		isTransformDirty = true;
 		alignment = newAlignment;
 		assert(abs(alignment.GetNormalizedValue().x) <= 1);
 		assert(abs(alignment.GetNormalizedValue().y) <= 1);
@@ -72,22 +78,24 @@ public:
 
 	virtual void SetWidthInLocalSpace(float inWidth)
 	{
-		widthInLocalSpace = inWidth;
+		isTransformDirty = true;
+		boundsInLocalSpace.w = inWidth;
 	}
 
 	virtual void SetHeightInLocalSpace(float inHeight)
-	{ 
-		heightInLocalSpace = inHeight;
+	{
+		isTransformDirty = true;
+		boundsInLocalSpace.h = inHeight;
 	}
 
 	virtual float GetWidthInLocalSpace() const
 	{
-		return widthInLocalSpace;
+		return boundsInLocalSpace.w;
 	}
 
 	virtual float GetHeightInLocalSpace() const
 	{
-		return heightInLocalSpace;
+		return boundsInLocalSpace.h;
 	}
 
 	virtual float GetWidthInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
@@ -102,5 +110,8 @@ protected:
 	char name[21];
 	Anchor anchor;
 	Alignment alignment;
-	float widthInLocalSpace, heightInLocalSpace;
+	SDL_Rect boundsInLocalSpace;
+	SDL_Rect cachedBoundsInGlobalSpace;
+	
+	bool isTransformDirty;
 };
