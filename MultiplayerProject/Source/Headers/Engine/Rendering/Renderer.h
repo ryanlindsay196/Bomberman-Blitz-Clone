@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL_stdinc.h>
 
+#include "Engine/Managers/TextureManager.h"
+
 struct SDL_Surface;
 struct SDL_Rect;
 struct SDL_Renderer;
@@ -42,6 +44,7 @@ public:
 	SDL_Renderer* GetSDLRenderer() const { return SDLRenderer; }
 	Uint32 GetWindowID() const;
 	unsigned int GetWindowFlags() const;
+	TextureManager* GetTextureManager() { return &textureManager; }
 
 private:
 	float GetWindowAspectRatio() const;
@@ -59,4 +62,6 @@ private:
 	bool hasKeyboardFocus;
 	bool isFullScreen;
 	bool isMinimized;
+
+	TextureManager textureManager;
 };

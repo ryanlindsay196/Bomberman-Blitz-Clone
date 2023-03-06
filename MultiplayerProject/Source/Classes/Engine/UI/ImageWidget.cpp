@@ -5,7 +5,7 @@
 
 void Image::Initialize(Renderer* renderer)
 {
-	texture = GameManager::GetTextureManager()->LoadTexture(renderer, "Resources/Images/HelloWorld.png");
+	texture = renderer->GetTextureManager()->LoadTexture(renderer, "Resources/Images/HelloWorld.png");
 	BaseWidget::Initialize(renderer);
 }
 

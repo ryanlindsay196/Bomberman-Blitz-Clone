@@ -14,13 +14,12 @@ public:
 	virtual NetworkManager& GetNetworkManager() override { return networkManager; }
 	virtual Renderer* GetRenderer() override { return &renderer; }
 	virtual EntityManager* GetEntityManager() override { return &entityManager; }
-	virtual TextureManager* GetTextureManager() override { return &textureManager; }
+	virtual TextureManager* GetTextureManager() override { return renderer.GetTextureManager(); }
 
 private:
 	Renderer renderer;
 	NetworkManager networkManager;
 	EntityManager entityManager;
-	TextureManager textureManager;
 	UIManager uiManager;
 
 	bool isOpen;
