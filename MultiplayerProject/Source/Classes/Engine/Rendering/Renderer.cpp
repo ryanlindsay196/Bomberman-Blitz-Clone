@@ -72,17 +72,17 @@ void Renderer::Update(float deltaTime)
 	SDL_RenderSetLogicalSize(SDLRenderer, viewportWidth, viewportHeight);
 }
 
-void Renderer::UpdateRender(Texture* textureToAdd, SDL_Rect * srcRect, SDL_Rect * destRect)
+void Renderer::UpdateRender(Texture* textureToAdd, SDL_Rect srcRect, SDL_Rect destRect)
 {
-	destRect->x *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
-	destRect->w *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
+	destRect.x *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
+	destRect.w *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
 	
-	destRect->y *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
-	destRect->h *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
+	destRect.y *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
+	destRect.h *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
 
 	SDL_Texture* sdlTexToAdd = textureToAdd->GetTexture();
 
-	SDL_RenderCopy(SDLRenderer, sdlTexToAdd, srcRect, destRect);
+	SDL_RenderCopy(SDLRenderer, sdlTexToAdd, &srcRect, &destRect);
 }
 
 void Renderer::Render()

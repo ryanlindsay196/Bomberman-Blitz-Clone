@@ -11,7 +11,7 @@ void Button::Draw(Renderer * renderer, const SDL_Rect & parentRectBounds, bool i
 {
 	SDL_Rect srcRect{ 0,0,100,100 };
 	BaseWidget::Draw(renderer, parentRectBounds, isAnyParentDirty);
-	renderer->UpdateRender(image.GetTexture().get(), &srcRect, &cachedBoundsInGlobalSpace);
+	renderer->UpdateRender(image.GetTexture().get(), srcRect, cachedBoundsInGlobalSpace);
 }
 
 InputResponse Button::TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition)

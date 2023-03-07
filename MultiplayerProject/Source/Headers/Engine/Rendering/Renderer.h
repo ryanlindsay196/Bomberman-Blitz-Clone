@@ -18,7 +18,7 @@ public:
 
 	void Update(float deltaTime);
 
-	void UpdateRender(Texture* textureToAdd, SDL_Rect* srcRect, SDL_Rect* destRect);
+	void UpdateRender(Texture* textureToAdd, SDL_Rect srcRect, SDL_Rect destRect);
 	void Render();
 
 	void Destroy();

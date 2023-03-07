@@ -62,7 +62,7 @@ void Entity::Render()
 
 	GameManager& gameManager = GameManager::Get();
 	Renderer* renderer = gameManager.GetRenderer();
-	renderer->UpdateRender(texture.get(), &srcRect, &destRect);
+	renderer->UpdateRender(texture.get(), srcRect, destRect);
 }
 
 void Entity::Destroy()
