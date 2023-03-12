@@ -72,8 +72,10 @@ void Renderer::Update(float deltaTime)
 	SDL_RenderSetLogicalSize(SDLRenderer, viewportWidth, viewportHeight);
 }
 
-void Renderer::UpdateRender(Texture* textureToAdd, SDL_Rect srcRect, SDL_Rect destRect)
+void Renderer::UpdateRender(Texture* textureToAdd, SDL_Rect srcRect, SDL_Rect destRect, SDL_Color color)
 {
+	SDL_SetTextureColorMod(textureToAdd->GetTexture(), color.r, color.g, color.b);
+
 	destRect.x *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
 	destRect.w *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
 	

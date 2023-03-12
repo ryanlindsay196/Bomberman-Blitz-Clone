@@ -14,5 +14,5 @@ void Image::Draw(Renderer * renderer, const SDL_Rect& parentRectBounds, bool isA
 	SDL_Rect srcRect { 0, 0, 100, 100 };
 	BaseWidget::Draw(renderer, cachedBoundsInGlobalSpace, isAnyParentDirty);
 
-	renderer->UpdateRender(texture.get(), srcRect, cachedBoundsInGlobalSpace);
+	renderer->UpdateRender(texture.get(), srcRect, cachedBoundsInGlobalSpace, color);
 }

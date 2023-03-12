@@ -8,6 +8,9 @@ public:
 
 	virtual InputResponse TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition) override;
 
+	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition) override;
+
 private:
 	Image image;
+	bool isPressed;
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL_stdinc.h>
+#include "SDL_pixels.h"
 
 #include "Engine/Managers/TextureManager.h"
 
@@ -18,7 +19,7 @@ public:
 
 	void Update(float deltaTime);
 
-	void UpdateRender(Texture* textureToAdd, SDL_Rect srcRect, SDL_Rect destRect);
+	void UpdateRender(Texture* textureToAdd, SDL_Rect srcRect, SDL_Rect destRect, SDL_Color color);
 	void Render();
 
 	void Destroy();

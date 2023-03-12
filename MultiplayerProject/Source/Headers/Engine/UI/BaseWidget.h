@@ -45,6 +45,7 @@ public:
 	{ 
 		strcpy_s(name, sizeof(name) + 1, "12345678901234567890"); 
 		isTransformDirty = true;
+		color = SDL_Color{ 255,255,255,255 };
 	}
 
 	void AddChild(BaseWidget* newChild);
@@ -98,6 +99,10 @@ public:
 		return boundsInLocalSpace.h;
 	}
 
+	SDL_Color GetColor() { return color; }
+
+	void SetColor(SDL_Color inColor) { color = inColor; }
+
 	virtual float GetWidthInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 	virtual float GetHeightInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 
@@ -112,6 +117,8 @@ protected:
 	Alignment alignment;
 	SDL_Rect boundsInLocalSpace;
 	SDL_Rect cachedBoundsInGlobalSpace;
+
+	SDL_Color color;
 	
 	bool isTransformDirty;
 };
