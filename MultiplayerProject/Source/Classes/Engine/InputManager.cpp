@@ -66,14 +66,15 @@ Input& InputManager::GetInputByKeycode(SDL_Keycode keyCode, const InputState des
 
 inline bool CanConsumeMouseInput(Input& input, InputState inputStateToCheck, Uint8 inButtonId)
 {
-	return input.e.type == SDL_MOUSEBUTTONDOWN && input.e.button.button == inButtonId && input.inputState == inputStateToCheck;
+	return input.e.type == SDL_MOUSEBUTTONDOWN && input.e.button.button == inButtonId && 
+		(input.inputState == inputStateToCheck || inputStateToCheck == InputState::AnyState);
 }
 
 Input& InputManager::GetInputByMouseButtonID(Uint8 mouseButtonID) const
 {
 	for (Input& input : inputs)
 	{
-		if (CanConsumeMouseInput(input, InputState::Pressed, mouseButtonID))
+		if (CanConsumeMouseInput(input, InputState::AnyState, mouseButtonID))
 		{
 			return input;
 		}

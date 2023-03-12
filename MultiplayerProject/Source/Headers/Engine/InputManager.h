@@ -10,7 +10,8 @@ enum InputState
 	//The key was pressed on a previous frame
 	Down,
 	//The key was released this frame
-	Released
+	Released,
+	AnyState
 };
 
 struct Input

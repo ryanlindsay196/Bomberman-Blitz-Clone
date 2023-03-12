@@ -55,8 +55,9 @@ public:
 	void SetParent(BaseWidget* inParent);
 	BaseWidget* GetParent() { return parent; }
 
-	bool ProcessMouseInput(Input& mouseInput);
+	BaseWidget* ProcessMouseInput(Input& mouseInput);
 	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition);
+	virtual void OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition);
 	virtual InputResponse TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition);
 
 	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty = false);

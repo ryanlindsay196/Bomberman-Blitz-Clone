@@ -44,6 +44,11 @@ public:
 	void ProcessInput();
 
 private:
+	void ProcessMouseClicked();
+	void ProcessMouseReleased();
+
 	BaseWidget rootWidget;
 	FreeListAllocator allocator;
+
+	BaseWidget* clickedWidget;
 };

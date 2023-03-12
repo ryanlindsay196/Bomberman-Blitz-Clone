@@ -31,16 +31,39 @@ void WidgetTree::Draw(Renderer * renderer)
 
 void WidgetTree::ProcessInput()
 {
-	if (GameManager::Get().GetInputManager()->IsMouseButtonPressed(SDL_BUTTON_LEFT, false))
+	ProcessMouseClicked();
+
+	//TODO: OnMouseMoved
+
+	ProcessMouseReleased();
+
+}
+
+void WidgetTree::ProcessMouseClicked()
+{
+	if (GameManager::GetInputManager()->IsMouseButtonPressed(SDL_BUTTON_LEFT, false))
 	{
-		Input& mouseInput = GameManager::Get().GetInputManager()->GetInputByMouseButtonID(SDL_BUTTON_LEFT);
-		if(rootWidget.ProcessMouseInput(mouseInput))
+		Input& mouseInput = GameManager::GetInputManager()->GetInputByMouseButtonID(SDL_BUTTON_LEFT);
+		clickedWidget = rootWidget.ProcessMouseInput(mouseInput);
+		if (clickedWidget)
 		{
 			mouseInput.isConsumed = true;
 		}
 	}
+}
 
-	//TODO: OnMouseMoved
+void WidgetTree::ProcessMouseReleased()
+{
+	if (clickedWidget)
+	{
+		if (GameManager::GetInputManager()->IsMouseButtonReleased(SDL_BUTTON_LEFT, false))
+		{
+			Input& mouseInput = GameManager::GetInputManager()->GetInputByMouseButtonID(SDL_BUTTON_LEFT);
+			mouseInput.isConsumed = true;
 
-	//TODO: OnMouseReleased
+			mathfu::Vector<float, 2> mousePosition(mouseInput.e.button.x, mouseInput.e.button.y);
+			clickedWidget->OnMouseReleased(mousePosition);
+			clickedWidget = nullptr;
+		}
+	}
 }

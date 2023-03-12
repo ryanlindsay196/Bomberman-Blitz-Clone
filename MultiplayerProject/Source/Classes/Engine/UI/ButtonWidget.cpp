@@ -45,3 +45,8 @@ void Button::OnMousePressed(mathfu::Vector<float, 2> mousePressPosition)
 {
 	isPressed = true;
 }
+
+void Button::OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
+{
+	isPressed = false;
+}

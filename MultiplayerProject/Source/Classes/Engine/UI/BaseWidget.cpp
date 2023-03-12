@@ -31,7 +31,7 @@ void BaseWidget::SetParent(BaseWidget * inParent)
 	parent = inParent;
 }
 
-bool BaseWidget::ProcessMouseInput(Input& mouseInput)
+BaseWidget* BaseWidget::ProcessMouseInput(Input& mouseInput)
 {
 	for (BaseWidget* currentChild : children)
 	{
@@ -39,7 +39,7 @@ bool BaseWidget::ProcessMouseInput(Input& mouseInput)
 
 		if (currentChild->ProcessMouseInput(mouseInput))
 		{
-			return true;
+			return currentChild;
 		}
 	}
 
@@ -49,11 +49,16 @@ bool BaseWidget::ProcessMouseInput(Input& mouseInput)
 	if (isClickHandled)
 	{
 		OnMousePressed(mousePosition);
+		return this;
 	}
-	return isClickHandled;
+	return nullptr;
 }
 
 void BaseWidget::OnMousePressed(mathfu::Vector<float, 2> mousePressPosition)
+{
+}
+
+void BaseWidget::OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
 {
 }
 
