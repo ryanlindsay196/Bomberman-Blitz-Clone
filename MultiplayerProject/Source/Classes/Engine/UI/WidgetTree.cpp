@@ -62,7 +62,7 @@ void WidgetTree::ProcessMouseReleased()
 			mouseInput.isConsumed = true;
 
 			mathfu::Vector<float, 2> mousePosition(mouseInput.e.button.x, mouseInput.e.button.y);
-			clickedWidget->OnMouseReleased(mousePosition);
+			clickedWidget->MouseReleased(mousePosition);
 			clickedWidget = nullptr;
 		}
 	}

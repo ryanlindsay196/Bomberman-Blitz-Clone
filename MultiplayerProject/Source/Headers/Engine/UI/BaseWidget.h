@@ -2,6 +2,7 @@
 #include <vector>
 #include "mathfu/vector.h"
 #include "SDL_rect.h"
+#include "Engine/Delegate.h"
 
 #include "Engine/InputManager.h"
 
@@ -56,8 +57,6 @@ public:
 	BaseWidget* GetParent() { return parent; }
 
 	BaseWidget* ProcessMouseInput(Input& mouseInput);
-	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition);
-	virtual void OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition);
 	virtual InputResponse TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition);
 
 	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty = false);
@@ -107,10 +106,16 @@ public:
 	virtual float GetWidthInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 	virtual float GetHeightInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 
+	void MousePressed(mathfu::Vector<float, 2> mousePressPosition);
+	void MouseReleased(mathfu::Vector<float, 2> mouseReleasePosition);
+
+protected:
 	virtual SDL_Rect CalculateBoundsInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 
+	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition);
+	virtual void OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition);
+
 	std::vector<BaseWidget*> children;
-protected:
 
 	BaseWidget* parent;
 	char name[21];
@@ -120,6 +125,9 @@ protected:
 	SDL_Rect cachedBoundsInGlobalSpace;
 
 	SDL_Color color;
+
+	SingleCastDelegate<void> onMousePressedDel;
+	SingleCastDelegate<void> onMouseReleasedDel;
 	
 	bool isTransformDirty;
 };

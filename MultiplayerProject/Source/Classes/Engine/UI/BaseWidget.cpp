@@ -48,7 +48,7 @@ BaseWidget* BaseWidget::ProcessMouseInput(Input& mouseInput)
 	bool isClickHandled = TryHandleMousePress(mousePosition) == InputResponse::Handled;
 	if (isClickHandled)
 	{
-		OnMousePressed(mousePosition);
+		MousePressed(mousePosition);
 		return this;
 	}
 	return nullptr;
@@ -60,6 +60,19 @@ void BaseWidget::OnMousePressed(mathfu::Vector<float, 2> mousePressPosition)
 
 void BaseWidget::OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
 {
+}
+
+void BaseWidget::MousePressed(mathfu::Vector<float, 2> mousePressPosition)
+{
+	OnMousePressed(mousePressPosition);
+	onMousePressedDel.Execute();
+
+}
+
+void BaseWidget::MouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
+{
+	OnMouseReleased(mouseReleasePosition);
+	onMouseReleasedDel.Execute();
 }
 
 InputResponse BaseWidget::TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition)
