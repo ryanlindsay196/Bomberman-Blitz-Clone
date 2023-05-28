@@ -43,6 +43,8 @@ public:
 
 	void ProcessInput();
 
+	BaseWidget* GetRootWidget() { return &rootWidget; }
+
 private:
 	void ProcessMouseClicked();
 	void ProcessMouseReleased();

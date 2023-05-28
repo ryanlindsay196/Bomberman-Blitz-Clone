@@ -12,10 +12,14 @@
 #define GameInstanceCount 1
 #endif
 
+class RawPointerTracker;
+
 extern class Engine* GetEngine();
 
 class GameManager
 {
+
+public:
 	GameManager() {}
 	GameManager(GameManager const&) = delete;
 	void operator=(GameManager const&) = delete;
@@ -54,6 +58,12 @@ public:
 	{ 
 		GameInstance* gameInstance = GetCurrentGameInstance(); 
 		return gameInstance ? gameInstance->GetTextureManager() : nullptr;
+	}
+
+	static RawPointerTracker* GetRawPointerTracker() 
+	{ 
+		GameInstance* gameInstance = GetCurrentGameInstance();
+		return gameInstance ? gameInstance->GetRawPointerTracker() : nullptr;
 	}
 
 	static GameManager& Get();

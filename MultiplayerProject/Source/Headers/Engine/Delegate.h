@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseObject.h"
+#include "RawPointerTracker.h"
 
 template<typename ReturnType, typename... Args>
 class NullFunctionPtr
@@ -21,25 +21,32 @@ template<class MyClass, typename ReturnType, typename... Args>
 class MemberFunctionPtr : public NullFunctionPtr<ReturnType, Args...>
 {
 public:
-	MemberFunctionPtr(std::weak_ptr<MyClass> inObject, ReturnType(MyClass::*delegateToBind)(Args...)) :
+	MemberFunctionPtr(MyClass* inObject, ReturnType(MyClass::*delegateToBind)(Args...)) :
 		boundObject(inObject),
-		myDelegate(delegateToBind)
+		myDelegate(delegateToBind),
+		boundObjectHandleLocation(inObject->GetRawPointerHandle()),
+		cachedPointerHandle(*(inObject->GetRawPointerHandle()))
 	{}
 
-	virtual bool IsBound() override { return !boundObject.expired() && myDelegate != nullptr; }
+	virtual bool IsBound() override { 		
+		bool isHandleValid = boundObjectHandleLocation && boundObjectHandleLocation->index == cachedPointerHandle.index;
+		return isHandleValid && myDelegate != nullptr; 
+	}
 
 	virtual ReturnType Execute(Args&&...args) override
 	{
 		if (IsBound())
 		{
-			auto boundObjectLock = boundObject.lock();
-			return (boundObjectLock.get()->*myDelegate)(std::forward<Args>(args)...);
+			return (boundObject->*myDelegate)(std::forward<Args>(args)...);
 		}
 		return ReturnType();
 	}
 
 private:
-	std::weak_ptr<MyClass> boundObject;
+	MyClass* boundObject;
+	RawPointerHandle* boundObjectHandleLocation;
+	RawPointerHandle cachedPointerHandle;
+
 	ReturnType(MyClass::*myDelegate)(Args...);
 };
 
@@ -47,24 +54,31 @@ template<class MyClass, typename... Args>
 class MemberFunctionPtr<MyClass, void, Args...> : public NullFunctionPtr<void, Args...>
 {
 public:
-	MemberFunctionPtr(std::weak_ptr<MyClass> inObject, void(MyClass::*delegateToBind)(Args...)) :
+	MemberFunctionPtr(MyClass* inObject, void(MyClass::*delegateToBind)(Args...)) :
 		boundObject(inObject),
-		myDelegate(delegateToBind)
+		myDelegate(delegateToBind),
+		boundObjectHandleLocation(inObject->GetRawPointerHandle()),
+		cachedPointerHandle(*(inObject->GetRawPointerHandle()))
 	{}
 
-	virtual bool IsBound() override { return !boundObject.expired() && myDelegate != nullptr; }
+	virtual bool IsBound() override 
+	{ 
+		bool isHandleValid = boundObjectHandleLocation && boundObjectHandleLocation->index == cachedPointerHandle.index;
+		return isHandleValid && myDelegate != nullptr; 
+	}
 
 	virtual void Execute(Args&&...args) override
 	{
 		if (IsBound())
 		{
-			auto boundObjectLock = boundObject.lock();
-			(boundObjectLock.get()->*myDelegate)(std::forward<Args>(args)...);
+			(boundObject->*myDelegate)(std::forward<Args>(args)...);
 		}
 	}
 
 private:
-	std::weak_ptr<MyClass> boundObject;
+	MyClass* boundObject;
+	RawPointerHandle* boundObjectHandleLocation;
+	RawPointerHandle cachedPointerHandle;
 	void(MyClass::*myDelegate)(Args...);
 };
 
@@ -123,7 +137,7 @@ public:
 	}
 
 	template <typename MyClass>
-	void BindMemberFunction(std::weak_ptr<MyClass> inObject, ReturnType(MyClass::*delegateToBind)(Args...))
+	void BindMemberFunction(MyClass* inObject, ReturnType(MyClass::*delegateToBind)(Args...))
 	{
 		CleanupFunctionPtr();
 		functionType = new MemberFunctionPtr<MyClass, ReturnType, Args...>(inObject, delegateToBind);
@@ -179,7 +193,7 @@ public:
 	}
 
 	template <typename MyClass>
-	void BindMemberFunction(std::weak_ptr<MyClass> inObject, void(MyClass::*delegateToBind)(Args...))
+	void BindMemberFunction(MyClass* inObject, void(MyClass::*delegateToBind)(Args...))
 	{
 		CleanupFunctionPtr();
 		functionType = new MemberFunctionPtr<MyClass, void, Args...>(inObject, delegateToBind);

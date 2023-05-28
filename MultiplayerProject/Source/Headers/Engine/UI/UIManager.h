@@ -8,6 +8,8 @@ public:
 	void Update();
 	void Draw(Renderer* renderer);
 
+
+	BaseWidget* GetRootWidget() { return tree.GetRootWidget(); }
 private:
 	WidgetTree tree;
 };

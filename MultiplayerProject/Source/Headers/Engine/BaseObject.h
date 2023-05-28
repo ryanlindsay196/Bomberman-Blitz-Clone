@@ -1,15 +1,16 @@
 #pragma once
 #include "Engine/Reflection/Reflection.h"
+#include "Engine/RawPointerTracker.h"
 #include "Engine/Networking/NetworkEnums.h"
 
 #include "mathfu/vector.h"
 
-class BaseObject
+class BaseObject : public RawPointerTrackableObject
 {
 public:
 	CreateClassMetadata(BaseObject)
 
-	virtual bool Initialize() = 0;
+	virtual bool Initialize() override { return RawPointerTrackableObject::Initialize(); }
 	void InitializeNetworkID(unsigned int newNetworkID);
 	void InitializeOwningClientID(unsigned int newClientID);
 	void RegisterSelfAsNetworked();

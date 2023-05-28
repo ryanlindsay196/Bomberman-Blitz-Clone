@@ -2,6 +2,7 @@
 
 bool ServerInstance::Initialize()
 {
+	rawPointerTracker.Initialize();
 	networkManager.Initialize(true);
 	entityManager.Initialize();
 

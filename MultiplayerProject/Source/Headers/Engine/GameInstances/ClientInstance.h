@@ -15,6 +15,7 @@ public:
 	virtual Renderer* GetRenderer() override { return &renderer; }
 	virtual EntityManager* GetEntityManager() override { return &entityManager; }
 	virtual TextureManager* GetTextureManager() override { return renderer.GetTextureManager(); }
+	virtual UIManager* GetUIManager() override { return &uiManager; }
 
 private:
 	Renderer renderer;
