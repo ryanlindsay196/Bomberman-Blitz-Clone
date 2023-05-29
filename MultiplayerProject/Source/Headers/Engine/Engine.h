@@ -10,6 +10,8 @@ public:
 
 	Renderer* GetRenderer() { return &renderer; }
 private:
+	void PlayInEditor();
+
 	Renderer renderer;
 	UIManager uiManager;
 };

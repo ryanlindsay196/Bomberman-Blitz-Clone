@@ -77,7 +77,8 @@ void BaseWidget::MouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
 
 InputResponse BaseWidget::TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition)
 {
-	return InputResponse::UnHandled;
+	//TODO: Switch to InputResponse::UnHandled after creating a main menu widget for the engine.
+	return InputResponse::Handled;
 }
 
 void BaseWidget::Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty)

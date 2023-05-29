@@ -2,6 +2,11 @@
 
 bool ServerInstance::Initialize()
 {
+	if (isOpen)
+	{
+		return false;
+	}
+
 	rawPointerTracker.Initialize();
 	networkManager.Initialize(true);
 	entityManager.Initialize();

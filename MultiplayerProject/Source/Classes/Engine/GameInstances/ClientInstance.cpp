@@ -2,6 +2,11 @@
 
 bool ClientInstance::Initialize()
 {
+	if (isOpen)
+	{
+		return false;
+	}
+
 	rawPointerTracker.Initialize();
 	networkManager.Initialize(false);
 	renderer.Initialize(640, 480, false, "Bomberman");

@@ -109,6 +109,8 @@ public:
 	void MousePressed(mathfu::Vector<float, 2> mousePressPosition);
 	void MouseReleased(mathfu::Vector<float, 2> mouseReleasePosition);
 
+	SingleCastDelegate<void>& GetOnMousePressedDel() { return onMousePressedDel; }
+	SingleCastDelegate<void>& GetOnMouseReleasedDel() { return onMouseReleasedDel; }
 protected:
 	virtual SDL_Rect CalculateBoundsInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 

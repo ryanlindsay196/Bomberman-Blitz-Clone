@@ -50,21 +50,50 @@ private:
 	ReturnType(MyClass::*myDelegate)(Args...);
 };
 
-template<class MyClass, typename... Args>
-class MemberFunctionPtr<MyClass, void, Args...> : public NullFunctionPtr<void, Args...>
+template<typename... Args>
+class MemberFunctionPtr<RawPointerTrackableObject, void, Args...> : public NullFunctionPtr<void, Args...>
 {
 public:
-	MemberFunctionPtr(MyClass* inObject, void(MyClass::*delegateToBind)(Args...)) :
+	MemberFunctionPtr(RawPointerTrackableObject* inObject, void(RawPointerTrackableObject::*delegateToBind)(Args...)) :
 		boundObject(inObject),
 		myDelegate(delegateToBind),
 		boundObjectHandleLocation(inObject->GetRawPointerHandle()),
 		cachedPointerHandle(*(inObject->GetRawPointerHandle()))
 	{}
 
-	virtual bool IsBound() override 
-	{ 
+	virtual bool IsBound() override
+	{
 		bool isHandleValid = boundObjectHandleLocation && boundObjectHandleLocation->index == cachedPointerHandle.index;
-		return isHandleValid && myDelegate != nullptr; 
+		return isHandleValid && myDelegate != nullptr;
+	}
+
+	virtual void Execute(Args&&...args) override
+	{
+		if (IsBound())
+		{
+			(boundObject->*myDelegate)(std::forward<Args>(args)...);
+		}
+	}
+
+private:
+	RawPointerTrackableObject* boundObject;
+	RawPointerHandle* boundObjectHandleLocation;
+	RawPointerHandle cachedPointerHandle;
+	void(RawPointerTrackableObject::*myDelegate)(Args...);
+};
+
+template<class MyClass, typename... Args>
+class MemberFunctionPtr<MyClass, void, Args...> : public NullFunctionPtr<void, Args...>
+{
+public:
+	MemberFunctionPtr(MyClass* inObject, void(MyClass::*delegateToBind)(Args...)) :
+		boundObject(inObject),
+		myDelegate(delegateToBind)
+	{}
+
+	virtual bool IsBound() override
+	{
+		return myDelegate != nullptr;
 	}
 
 	virtual void Execute(Args&&...args) override
@@ -77,9 +106,8 @@ public:
 
 private:
 	MyClass* boundObject;
-	RawPointerHandle* boundObjectHandleLocation;
-	RawPointerHandle cachedPointerHandle;
 	void(MyClass::*myDelegate)(Args...);
+
 };
 
 template<typename ReturnType, typename... Args>
