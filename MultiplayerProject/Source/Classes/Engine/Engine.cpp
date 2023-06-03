@@ -6,6 +6,12 @@ void Engine::Initialize()
 	renderer.Initialize(480, 640, false, "Blast Engine");
 	uiManager.Initialize(&renderer);
 
+	if (!GameManager::GetAssetManager()->GetIsInitialized())
+	{
+		GameManager::GetAssetManager()->InitializeAssetDatabase();
+	}
+
+	//TODO: Make the PlayInEditor function a specific button rather than clicking on the root widget.
 	uiManager.GetRootWidget()->GetOnMousePressedDel().BindMemberFunction(this, &Engine::PlayInEditor);
 }
 

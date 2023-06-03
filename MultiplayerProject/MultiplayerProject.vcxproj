@@ -77,6 +77,7 @@
     <ClCompile Include="Source\Classes\Engine\GameInstances\ServerInstance.cpp" />
     <ClCompile Include="Source\Classes\Engine\GameMode\GameMode.cpp" />
     <ClCompile Include="Source\Classes\Engine\InputManager.cpp" />
+    <ClCompile Include="Source\Classes\Engine\Managers\AssetManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\Managers\TextureManager.cpp" />
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp" />
     <ClCompile Include="Source\Classes\Engine\Networking\NetworkManager.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Source\Headers\Engine\GameInstances\ServerInstance.h" />
     <ClInclude Include="Source\Headers\Engine\GameMode\GameMode.h" />
     <ClInclude Include="Source\Headers\Engine\InputManager.h" />
+    <ClInclude Include="Source\Headers\Engine\Managers\AssetManager.h" />
     <ClInclude Include="Source\Headers\Engine\Managers\TextureManager.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkedObjectLinker.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkEnums.h" />

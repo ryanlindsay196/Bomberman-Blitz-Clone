@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Engine/Managers/AssetManager.h"
+
 #if RunClientMode || RunInEngine
 #include "Engine/GameInstances/ClientInstance.h"
 #endif
@@ -66,6 +69,11 @@ public:
 		return gameInstance ? gameInstance->GetRawPointerTracker() : nullptr;
 	}
 
+	static AssetManager* GetAssetManager()
+	{
+		return &Get().assetManager;
+	}
+
 	static GameManager& Get();
 	static GameInstance* GetCurrentGameInstance() { return Get().currentGameInstance; }
 	static void CloseGameInstance(int i);
@@ -73,6 +81,7 @@ public:
 
 private:
 	InputManager inputManager;
+	AssetManager assetManager;
 	void InitializeGameInstance(GameInstance& gameInstance);
 	void UpdateGameInstance(float deltaTime, GameInstance& gameInstance);
 };

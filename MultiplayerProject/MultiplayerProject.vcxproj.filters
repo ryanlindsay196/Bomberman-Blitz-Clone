@@ -507,6 +507,9 @@
     <ClCompile Include="Source\Classes\Engine\RawPointerTracker.cpp">
       <Filter>Source Files\Classes\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Classes\Engine\Managers\AssetManager.cpp">
+      <Filter>Source Files\Classes\Engine\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Vendor\Raknet\lib\RakNet_DLL.dll">
@@ -693,6 +696,9 @@
     </ClInclude>
     <ClInclude Include="Source\Headers\Engine\RawPointerTracker.h">
       <Filter>Source Files\Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\Managers\AssetManager.h">
+      <Filter>Source Files\Headers\Engine\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
