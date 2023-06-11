@@ -1,5 +1,6 @@
 #include "Engine/UI/WidgetTree.h"
 #include "Engine/Rendering/Renderer.h"
+#include "Engine/Managers/AssetManager.h"
 #include "Game/GameManager.h"
 
 void WidgetTree::Initialize(Renderer* renderer, size_t widgetAllocatorSizeInBytes)
@@ -8,6 +9,37 @@ void WidgetTree::Initialize(Renderer* renderer, size_t widgetAllocatorSizeInByte
 	rootWidget.Initialize(renderer);
 	rootWidget.SetWidthInLocalSpace(renderer->GetViewportWidth());
 	rootWidget.SetHeightInLocalSpace(renderer->GetViewportHeight());
+}
+
+BaseWidget* WidgetTree::CreateWidget(TEMPUINode * currentNode, BaseWidget * parentWidget, Renderer * renderer)
+{
+	if (!renderer)
+	{
+		return nullptr;
+	}
+
+	unsigned int sizeToAllocate = GameManager::GetAssetManager()->GetAssetSizeByStaticID(currentNode->ID);
+	void* newPtr = allocator.Alloc(sizeToAllocate, 8);
+	BaseWidget* newWidget = (BaseWidget*)GameManager::GetAssetManager()->InstantiateByStaticID(currentNode->ID, newPtr);
+	newWidget->Initialize(renderer);
+
+	if (parentWidget)
+	{
+		parentWidget->AddChild(newWidget);
+		newWidget->SetParent(parentWidget);
+	}
+	else
+	{
+		rootWidget.AddChild(newWidget);
+		newWidget->SetParent(nullptr);
+	}
+
+	for (TEMPUINode* child : currentNode->children)
+	{
+		CreateWidget(child, newWidget, renderer);
+	}
+
+	return newWidget;
 }
 
 void WidgetTree::RemoveWidget(BaseWidget * widgetToRemove)

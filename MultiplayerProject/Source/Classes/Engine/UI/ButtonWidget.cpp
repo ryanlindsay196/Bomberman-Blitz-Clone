@@ -1,6 +1,10 @@
 #include "Engine/UI/ButtonWidget.h"
 #include "Engine/Rendering/Renderer.h"
 
+#include "Engine/Managers/AssetManager.h"
+
+RegisterStaticAsset(Button);
+
 void Button::Initialize(Renderer * renderer)
 {
 	isPressed = false;

@@ -1,7 +1,10 @@
 #include "SDL.h"
 #include "Engine/UI/ImageWidget.h"
 #include "Engine/Rendering/Renderer.h"
+#include "Engine/Managers/AssetManager.h"
 #include "Game/GameManager.h"
+
+RegisterStaticAsset(Image);
 
 void Image::Initialize(Renderer* renderer)
 {

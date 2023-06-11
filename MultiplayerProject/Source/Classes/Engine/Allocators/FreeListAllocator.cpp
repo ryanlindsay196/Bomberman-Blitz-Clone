@@ -119,7 +119,7 @@ void * FreeListAllocator::Alloc(size_t size, size_t alignment)
 	headerPtr->blockSize = requiredSpace;
 	headerPtr->padding = alignmentPadding;
 
-	used = requiredSpace;
+	used += requiredSpace;
 
 	return (void*)((char*)headerPtr + sizeof(FreeListAllocationHeader));
 }

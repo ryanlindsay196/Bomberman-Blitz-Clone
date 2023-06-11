@@ -1,47 +1,62 @@
 #include "Engine/UI/UIManager.h"
-#include "Engine/UI/ButtonWidget.h"
+
+void TempInitializeTree(TEMPUINode* rootNode)
+{
+	for (unsigned int i = 0; i < 5; ++i)
+	{
+		TEMPUINode* newNode = new TEMPUINode();
+		newNode->ID = 0;
+		rootNode->children.push_back(newNode);
+	}
+}
 
 void UIManager::Initialize(Renderer* renderer)
 {
 	tree.Initialize(renderer, 1000000);
 
+	TEMPUINode rootNode;
+	rootNode.ID = 0;
+	TempInitializeTree(&rootNode);
+
+	tree.CreateWidget(&rootNode, nullptr, renderer);
+
 	//TODO: Remove this. This is just test code.
-	Button* button = tree.CreateWidget<Button>(nullptr, renderer);
-	button->SetWidthInLocalSpace(100);
-	button->SetHeightInLocalSpace(100);
-	button->SetAnchor(Anchor::TopLeft());
-	button->SetAlignment(Alignment({ 0.5f, 0.5f }));
-
-	button = tree.CreateWidget<Button>(nullptr, renderer);
-	button->SetWidthInLocalSpace(100);
-	button->SetHeightInLocalSpace(100);
-	button->SetAnchor(Anchor::TopRight());
-	button->SetAlignment(Alignment({ 0.5f, 0.5f }));
-
-	button = tree.CreateWidget<Button>(nullptr, renderer);
-	button->SetWidthInLocalSpace(100);
-	button->SetHeightInLocalSpace(100);
-	button->SetAnchor(Anchor::BottomLeft());
-	button->SetAlignment(Alignment({ 0.5f, 0.5f }));
-
-	button = tree.CreateWidget<Button>(nullptr, renderer);
-	button->SetWidthInLocalSpace(100);
-	button->SetHeightInLocalSpace(100);
-	button->SetAnchor(Anchor::BottomRight());
-	button->SetAlignment(Alignment({ 0.5f, 0.5f }));
-	
-	//On the center of the screen
-	button = tree.CreateWidget<Button>(nullptr, renderer);
-	button->SetWidthInLocalSpace(640);
-	button->SetHeightInLocalSpace(1);
-	button->SetAnchor(Anchor::CenterCenter());
-	button->SetAlignment(Alignment({ 0.5f, 0.5f }));
-
-	button = tree.CreateWidget<Button>(nullptr, renderer);
-	button->SetWidthInLocalSpace(1);
-	button->SetHeightInLocalSpace(480);
-	button->SetAnchor(Anchor::CenterCenter());
-	button->SetAlignment(Alignment({ 0.5f, 0.5f }));
+	//Button* button = tree.CreateWidget<Button>(nullptr, renderer);
+	//button->SetWidthInLocalSpace(100);
+	//button->SetHeightInLocalSpace(100);
+	//button->SetAnchor(Anchor::TopLeft());
+	//button->SetAlignment(Alignment({ 0.5f, 0.5f }));
+	//
+	//button = tree.CreateWidget<Button>(nullptr, renderer);
+	//button->SetWidthInLocalSpace(100);
+	//button->SetHeightInLocalSpace(100);
+	//button->SetAnchor(Anchor::TopRight());
+	//button->SetAlignment(Alignment({ 0.5f, 0.5f }));
+	//
+	//button = tree.CreateWidget<Button>(nullptr, renderer);
+	//button->SetWidthInLocalSpace(100);
+	//button->SetHeightInLocalSpace(100);
+	//button->SetAnchor(Anchor::BottomLeft());
+	//button->SetAlignment(Alignment({ 0.5f, 0.5f }));
+	//
+	//button = tree.CreateWidget<Button>(nullptr, renderer);
+	//button->SetWidthInLocalSpace(100);
+	//button->SetHeightInLocalSpace(100);
+	//button->SetAnchor(Anchor::BottomRight());
+	//button->SetAlignment(Alignment({ 0.5f, 0.5f }));
+	//
+	////On the center of the screen
+	//button = tree.CreateWidget<Button>(nullptr, renderer);
+	//button->SetWidthInLocalSpace(640);
+	//button->SetHeightInLocalSpace(1);
+	//button->SetAnchor(Anchor::CenterCenter());
+	//button->SetAlignment(Alignment({ 0.5f, 0.5f }));
+	//
+	//button = tree.CreateWidget<Button>(nullptr, renderer);
+	//button->SetWidthInLocalSpace(1);
+	//button->SetHeightInLocalSpace(480);
+	//button->SetAnchor(Anchor::CenterCenter());
+	//button->SetAlignment(Alignment({ 0.5f, 0.5f }));
 
 	//button = tree.CreateWidget<Image>(nullptr, renderer);
 	//button->SetWidthInLocalSpace(50);
