@@ -75,7 +75,7 @@ public:
 
 	void* InstantiateByStaticID(unsigned int staticID, void* addressToInstantiate);
 	unsigned int GetAssetSizeByStaticID(unsigned int staticID);
-private:
+public:
 
 	bool GetIsInitialized() { return isInitialized; }
 

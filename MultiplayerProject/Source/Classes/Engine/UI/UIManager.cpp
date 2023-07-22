@@ -1,24 +1,26 @@
 #include "Engine/UI/UIManager.h"
-
-void TempInitializeTree(TEMPUINode* rootNode)
-{
-	for (unsigned int i = 0; i < 5; ++i)
-	{
-		TEMPUINode* newNode = new TEMPUINode();
-		newNode->ID = 0;
-		rootNode->children.push_back(newNode);
-	}
-}
+#include "rapidjson/document.h"
+#include "rapidjson/filereadstream.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
 void UIManager::Initialize(Renderer* renderer)
 {
 	tree.Initialize(renderer, 1000000);
 
-	TEMPUINode rootNode;
-	rootNode.ID = 0;
-	TempInitializeTree(&rootNode);
+	FILE* fp = nullptr;
+	fopen_s(&fp, "Resources/UI/PlayerHud.JSON", "rb"); // non-Windows use "r"
 
-	tree.CreateWidget(&rootNode, nullptr, renderer);
+	char readBuffer[65536];
+	rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+
+	rapidjson::Document document;
+	document.ParseStream(is);
+
+	fclose(fp);
+
+	tree.CreateWidget(&document["RootWidget"], nullptr, renderer);
 
 	//TODO: Remove this. This is just test code.
 	//Button* button = tree.CreateWidget<Button>(nullptr, renderer);

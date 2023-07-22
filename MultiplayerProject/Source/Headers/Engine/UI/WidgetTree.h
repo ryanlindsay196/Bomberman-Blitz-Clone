@@ -2,19 +2,14 @@
 
 #include "Engine/UI/BaseWidget.h"
 #include "Engine/Allocators/FreeListAllocator.h"
-
-struct TEMPUINode
-{
-	unsigned int ID;
-	std::vector<TEMPUINode*> children;
-};
+#include "rapidjson/document.h"
 
 class WidgetTree
 {
 public:
 	void Initialize(Renderer* renderer, size_t widgetAllocatorSizeInBytes);
 
-	BaseWidget* CreateWidget(TEMPUINode* currentNode, BaseWidget* parentWidget, Renderer* renderer);
+	BaseWidget* CreateWidget(rapidjson::Value* currentNode, BaseWidget* parentWidget, Renderer* renderer);
 
 	void RemoveWidget(BaseWidget* widgetToRemove);
 

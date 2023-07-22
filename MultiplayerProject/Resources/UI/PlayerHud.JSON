@@ -1,7 +1,18 @@
 {
-  "children": {
-    "0": {
-      "Path": "3"
+  "RootWidget": [
+    {
+      "StaticID": 1,
+      "Children": [
+        {
+          "StaticID": 0
+        },
+        {
+          "StaticID": 1
+        }
+      ]
+    },
+    {
+      "StaticID": 0
     }
-  }
+  ]
 }

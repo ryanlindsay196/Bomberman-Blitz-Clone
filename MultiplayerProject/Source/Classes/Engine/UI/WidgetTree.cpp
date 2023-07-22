@@ -11,34 +11,46 @@ void WidgetTree::Initialize(Renderer* renderer, size_t widgetAllocatorSizeInByte
 	rootWidget.SetHeightInLocalSpace(renderer->GetViewportHeight());
 }
 
-BaseWidget* WidgetTree::CreateWidget(TEMPUINode * currentNode, BaseWidget * parentWidget, Renderer * renderer)
+BaseWidget* WidgetTree::CreateWidget(rapidjson::Value* currentNode, BaseWidget * parentWidget, Renderer * renderer)
 {
 	if (!renderer)
 	{
 		return nullptr;
 	}
 
-	unsigned int sizeToAllocate = GameManager::GetAssetManager()->GetAssetSizeByStaticID(currentNode->ID);
-	void* newPtr = allocator.Alloc(sizeToAllocate, 8);
-	BaseWidget* newWidget = (BaseWidget*)GameManager::GetAssetManager()->InstantiateByStaticID(currentNode->ID, newPtr);
-	newWidget->Initialize(renderer);
+	auto jsonArray = currentNode->GetArray();
+	BaseWidget* newWidget = nullptr;
 
-	if (parentWidget)
+	for (unsigned int i = 0; i < jsonArray.Size(); ++i)
 	{
-		parentWidget->AddChild(newWidget);
-		newWidget->SetParent(parentWidget);
-	}
-	else
-	{
-		rootWidget.AddChild(newWidget);
-		newWidget->SetParent(nullptr);
-	}
+		auto& jsonArrayElement = jsonArray[i];
+		auto& staticIDValue = jsonArrayElement["StaticID"];
 
-	for (TEMPUINode* child : currentNode->children)
-	{
-		CreateWidget(child, newWidget, renderer);
-	}
+		unsigned int desiredID = staticIDValue.GetInt();
 
+		unsigned int sizeToAllocate = GameManager::GetAssetManager()->GetAssetSizeByStaticID(desiredID);
+		void* newPtr = allocator.Alloc(sizeToAllocate, 8);
+		newWidget = (BaseWidget*)GameManager::GetAssetManager()->InstantiateByStaticID(desiredID, newPtr);
+		newWidget->Initialize(renderer);
+
+		if (parentWidget)
+		{
+			parentWidget->AddChild(newWidget);
+			newWidget->SetParent(parentWidget);
+		}
+		else
+		{
+			rootWidget.AddChild(newWidget);
+			newWidget->SetParent(nullptr);
+		}
+
+		rapidjson::Value::MemberIterator child = jsonArrayElement.FindMember("Children");
+		if(child != jsonArrayElement.MemberEnd())
+		{
+			CreateWidget(&child->value, newWidget, renderer);
+		}
+	}
+	assert(newWidget);
 	return newWidget;
 }
 
