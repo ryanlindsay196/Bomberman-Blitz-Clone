@@ -5,11 +5,12 @@
 
 RegisterStaticAsset(Button);
 
-void Button::Initialize(Renderer * renderer)
+void Button::Initialize(Renderer * renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData)
 {
 	isPressed = false;
-	image.Initialize(renderer);
-	BaseWidget::Initialize(renderer);
+
+	image.Initialize(renderer, widgetData);
+	BaseWidget::Initialize(renderer, widgetData);
 }
 
 void Button::Draw(Renderer * renderer, const SDL_Rect & parentRectBounds, bool isAnyParentDirty)

@@ -220,13 +220,13 @@ private:\
 	void(*m_applyWrapper)(Class* entity, void(Class::*fun)(), Variable, Variable*, int);\
 };\
 \
-virtual BaseObject::MetaFunction* GetMetaFunctionByID(unsigned int id)\
+Class::MetaFunction* GetMetaFunctionByID(unsigned int id)\
 {\
 	for(Class::MetaFunction* metaFunction = Class::MetaFunction::Head(); metaFunction; metaFunction = metaFunction->Next())\
 	{\
 		if(id == metaFunction->GetMetaFunctionID())\
 		{\
-			return (BaseObject::MetaFunction*)metaFunction;\
+			return (Class::MetaFunction*)metaFunction;\
 		}\
 	}\
 	return nullptr;\

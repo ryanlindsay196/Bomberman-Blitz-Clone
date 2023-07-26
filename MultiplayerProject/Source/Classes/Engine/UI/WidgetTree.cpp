@@ -6,7 +6,7 @@
 void WidgetTree::Initialize(Renderer* renderer, size_t widgetAllocatorSizeInBytes)
 {
 	allocator.Init(widgetAllocatorSizeInBytes);
-	rootWidget.Initialize(renderer);
+	rootWidget.Initialize(renderer, nullptr);
 	rootWidget.SetWidthInLocalSpace(renderer->GetViewportWidth());
 	rootWidget.SetHeightInLocalSpace(renderer->GetViewportHeight());
 }
@@ -31,7 +31,7 @@ BaseWidget* WidgetTree::CreateWidget(rapidjson::Value* currentNode, BaseWidget *
 		unsigned int sizeToAllocate = GameManager::GetAssetManager()->GetAssetSizeByStaticID(desiredID);
 		void* newPtr = allocator.Alloc(sizeToAllocate, 8);
 		newWidget = (BaseWidget*)GameManager::GetAssetManager()->InstantiateByStaticID(desiredID, newPtr);
-		newWidget->Initialize(renderer);
+		newWidget->Initialize(renderer, &jsonArrayElement);
 
 		if (parentWidget)
 		{

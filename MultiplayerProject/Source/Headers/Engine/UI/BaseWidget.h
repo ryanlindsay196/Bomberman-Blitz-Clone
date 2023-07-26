@@ -5,6 +5,9 @@
 #include "Engine/Delegate.h"
 
 #include "Engine/InputManager.h"
+#include "Engine/Reflection/Reflection.h"
+
+#include "rapidjson/document.h"
 
 class Renderer;
 
@@ -41,13 +44,9 @@ typedef Anchor Alignment;
 
 class BaseWidget
 {
+	CreateClassMetadata(BaseWidget)
 public:
-	virtual void Initialize(Renderer* renderer)
-	{ 
-		strcpy_s(name, sizeof(name) + 1, "12345678901234567890"); 
-		isTransformDirty = true;
-		color = SDL_Color{ 255,255,255,255 };
-	}
+	virtual void Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData);
 
 	void AddChild(BaseWidget* newChild);
 	void RemoveChild(BaseWidget* childToRemove);

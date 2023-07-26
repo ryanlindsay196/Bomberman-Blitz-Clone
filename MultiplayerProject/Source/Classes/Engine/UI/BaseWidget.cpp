@@ -1,6 +1,39 @@
 #include "Engine/Rendering/Renderer.h"
 #include "Engine/UI/BaseWidget.h"
 
+void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData)
+{
+	strcpy_s(name, sizeof(name) + 1, "12345678901234567890");
+	isTransformDirty = true;
+	color = SDL_Color{ 255,255,255,255 };
+
+	if (!widgetData)
+		return;
+
+	CreateVariableMetadata(BaseWidget, boundsInLocalSpace);
+	rapidjson::Value::MemberIterator boundsInLocalSpaceMemberIterator = widgetData->FindMember(mv_boundsInLocalSpace.GetName());
+	if (boundsInLocalSpaceMemberIterator != widgetData->MemberEnd())
+	{
+		auto& jsonBoundsInLocalSpace = boundsInLocalSpaceMemberIterator->value;
+		auto jsonArray = jsonBoundsInLocalSpace.GetArray();
+		boundsInLocalSpace.x = jsonArray[0].GetInt();
+		boundsInLocalSpace.y = jsonArray[1].GetInt();
+		boundsInLocalSpace.w = jsonArray[2].GetInt();
+		boundsInLocalSpace.h = jsonArray[3].GetInt();
+	}
+
+	CreateVariableMetadata(BaseWidget, anchor);
+	rapidjson::Value::MemberIterator anchorMemberIterator = widgetData->FindMember(mv_anchor.GetName());
+	if (anchorMemberIterator != widgetData->MemberEnd())
+	{
+		auto& jsonAnchor = anchorMemberIterator->value;
+		auto jsonArray = jsonAnchor.GetArray();
+		anchor = Anchor({ jsonAnchor[0].GetFloat(), jsonAnchor[1].GetFloat() });
+	}
+
+	CreateVariableMetadata(BaseWidget, alignment);
+}
+
 void BaseWidget::AddChild(BaseWidget* newChild)
 {
 	children.push_back(newChild);
