@@ -102,23 +102,23 @@ public:
 	virtual void SetWidthInLocalSpace(float inWidth)
 	{
 		isTransformDirty = true;
-		boundsInLocalSpace.w = inWidth;
+		sizeInLocalSpace.x = inWidth;
 	}
 
 	virtual void SetHeightInLocalSpace(float inHeight)
 	{
 		isTransformDirty = true;
-		boundsInLocalSpace.h = inHeight;
+		sizeInLocalSpace.y = inHeight;
 	}
 
 	virtual float GetWidthInLocalSpace() const
 	{
-		return boundsInLocalSpace.w;
+		return sizeInLocalSpace.x;
 	}
 
 	virtual float GetHeightInLocalSpace() const
 	{
-		return boundsInLocalSpace.h;
+		return sizeInLocalSpace.y;
 	}
 
 	SDL_Color GetColor() { return color; }
@@ -145,7 +145,7 @@ protected:
 	char name[21];
 	Anchor anchor;
 	Alignment alignment;
-	SDL_Rect boundsInLocalSpace;
+	mathfu::Vector<int, 2> sizeInLocalSpace;
 	SDL_Rect cachedBoundsInGlobalSpace;
 
 	SDL_Color color;

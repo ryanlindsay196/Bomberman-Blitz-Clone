@@ -10,8 +10,8 @@ void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, r
 	if (!widgetData)
 		return;
 
-	CreateVariableMetadata(BaseWidget, boundsInLocalSpace);
-	PopulateWidgetData(mv_boundsInLocalSpace, widgetData, boundsInLocalSpace.x, boundsInLocalSpace.y, boundsInLocalSpace.w, boundsInLocalSpace.h);
+	CreateVariableMetadata(BaseWidget, sizeInLocalSpace);
+	PopulateWidgetData(mv_sizeInLocalSpace, widgetData, sizeInLocalSpace.x, sizeInLocalSpace.y);
 
 	CreateVariableMetadata(BaseWidget, anchor);
 	PopulateWidgetData(mv_anchor, widgetData, anchor.normalizedValue.x, anchor.normalizedValue.y);
@@ -128,7 +128,7 @@ float BaseWidget::GetWidthInGlobalSpace(const Renderer* const renderer, const SD
 
 	float viewportAspectRatioAdjustment = renderer->GetAspectRatio() / parentAspectRatio;
 
-	float widthInGlobalSpace = parentRectBounds.w * boundsInLocalSpace.w / (float)renderer->GetViewportWidth();
+	float widthInGlobalSpace = parentRectBounds.w * sizeInLocalSpace.x / (float)renderer->GetViewportWidth();
 
 	if (viewportAspectRatioAdjustment < 1)
 	{
@@ -146,7 +146,7 @@ float BaseWidget::GetHeightInGlobalSpace(const Renderer* const renderer, const S
 
 	float viewportAspectRatioAdjustment = renderer->GetAspectRatio() / parentAspectRatio;
 
-	float heightInGlobalSpace = parentRectBounds.h * boundsInLocalSpace.h / (float)renderer->GetViewportHeight();
+	float heightInGlobalSpace = parentRectBounds.h * sizeInLocalSpace.y / (float)renderer->GetViewportHeight();
 
 	if (viewportAspectRatioAdjustment > 1)
 	{
