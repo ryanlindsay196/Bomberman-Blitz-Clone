@@ -19,19 +19,19 @@ void Button::Draw(Renderer * renderer, const SDL_Rect & parentRectBounds, bool i
 
 	SDL_Color finalButtonDrawColor =
 	{
-		color.r * colorMultiplier,
-		color.g * colorMultiplier,
-		color.b * colorMultiplier,
-		color.a * colorMultiplier
+		(Uint8)(color.r * colorMultiplier),
+		(Uint8)(color.g * colorMultiplier),
+		(Uint8)(color.b * colorMultiplier),
+		(Uint8)(color.a * colorMultiplier)
 	};
 
 	float sizeMultiplier = isPressed ? 0.9f : 1.0f;
 	SDL_Rect finalButtonBounds =
 	{
-		cachedBoundsInGlobalSpace.x + (cachedBoundsInGlobalSpace.w * (1 - sizeMultiplier) / 2),
-		cachedBoundsInGlobalSpace.y + (cachedBoundsInGlobalSpace.h * (1 - sizeMultiplier) / 2),
-		cachedBoundsInGlobalSpace.w * sizeMultiplier,
-		cachedBoundsInGlobalSpace.h * sizeMultiplier,
+		(int)(cachedBoundsInGlobalSpace.x + (cachedBoundsInGlobalSpace.w * (1 - sizeMultiplier) / 2)),
+		(int)(cachedBoundsInGlobalSpace.y + (cachedBoundsInGlobalSpace.h * (1 - sizeMultiplier) / 2)),
+		(int)(cachedBoundsInGlobalSpace.w * sizeMultiplier),
+		(int)(cachedBoundsInGlobalSpace.h * sizeMultiplier),
 	};
 
 	SDL_Rect srcRect{ 0,0,100,100 };
@@ -39,19 +39,19 @@ void Button::Draw(Renderer * renderer, const SDL_Rect & parentRectBounds, bool i
 	renderer->UpdateRender(image.GetTexture().get(), srcRect, finalButtonBounds, finalButtonDrawColor);
 }
 
-InputResponse Button::TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition)
+InputResponse Button::TryHandleMousePress(mathfu::Vector<int, 2> mousePressPosition)
 {
-	return mathfu::InRange(mousePressPosition.x, (float)cachedBoundsInGlobalSpace.x, (float)cachedBoundsInGlobalSpace.x + (float)cachedBoundsInGlobalSpace.w) &&
-		mathfu::InRange(mousePressPosition.y, (float)cachedBoundsInGlobalSpace.y, (float)cachedBoundsInGlobalSpace.y + (float)cachedBoundsInGlobalSpace.h) ?
+	return mathfu::InRange(mousePressPosition.x, cachedBoundsInGlobalSpace.x, cachedBoundsInGlobalSpace.x + cachedBoundsInGlobalSpace.w) &&
+		mathfu::InRange(mousePressPosition.y, cachedBoundsInGlobalSpace.y, cachedBoundsInGlobalSpace.y + cachedBoundsInGlobalSpace.h) ?
 		InputResponse::Handled : InputResponse::UnHandled;
 }
 
-void Button::OnMousePressed(mathfu::Vector<float, 2> mousePressPosition)
+void Button::OnMousePressed(mathfu::Vector<int, 2> mousePressPosition)
 {
 	isPressed = true;
 }
 
-void Button::OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
+void Button::OnMouseReleased(mathfu::Vector<int, 2> mouseReleasePosition)
 {
 	isPressed = false;
 }

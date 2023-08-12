@@ -62,7 +62,7 @@ BaseWidget* BaseWidget::ProcessMouseInput(Input& mouseInput)
 		}
 	}
 
-	mathfu::Vector<float, 2> mousePosition(mouseInput.e.button.x, mouseInput.e.button.y);
+	mathfu::Vector<int, 2> mousePosition(mouseInput.e.button.x, mouseInput.e.button.y);
 
 	bool isClickHandled = TryHandleMousePress(mousePosition) == InputResponse::Handled;
 	if (isClickHandled)
@@ -73,28 +73,28 @@ BaseWidget* BaseWidget::ProcessMouseInput(Input& mouseInput)
 	return nullptr;
 }
 
-void BaseWidget::OnMousePressed(mathfu::Vector<float, 2> mousePressPosition)
+void BaseWidget::OnMousePressed(mathfu::Vector<int, 2> mousePressPosition)
 {
 }
 
-void BaseWidget::OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
+void BaseWidget::OnMouseReleased(mathfu::Vector<int, 2> mouseReleasePosition)
 {
 }
 
-void BaseWidget::MousePressed(mathfu::Vector<float, 2> mousePressPosition)
+void BaseWidget::MousePressed(mathfu::Vector<int, 2> mousePressPosition)
 {
 	OnMousePressed(mousePressPosition);
 	onMousePressedDel.Execute();
 
 }
 
-void BaseWidget::MouseReleased(mathfu::Vector<float, 2> mouseReleasePosition)
+void BaseWidget::MouseReleased(mathfu::Vector<int, 2> mouseReleasePosition)
 {
 	OnMouseReleased(mouseReleasePosition);
 	onMouseReleasedDel.Execute();
 }
 
-InputResponse BaseWidget::TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition)
+InputResponse BaseWidget::TryHandleMousePress(mathfu::Vector<int, 2> mousePressPosition)
 {
 	//TODO: Switch to InputResponse::UnHandled after creating a main menu widget for the engine.
 	return InputResponse::Handled;
@@ -174,10 +174,10 @@ SDL_Rect BaseWidget::CalculateBoundsInGlobalSpace(const Renderer* const renderer
 	};
 
 	SDL_Rect destRect = {
-		parentRectBounds.x + anchorOffset.x - alignmentPositionOffset.x,
-		parentRectBounds.y + anchorOffset.y - alignmentPositionOffset.y,
-		widthInGlobalSpace,
-		heightInGlobalSpace };
+		parentRectBounds.x + (int)(anchorOffset.x - alignmentPositionOffset.x),
+		parentRectBounds.y + (int)(anchorOffset.y - alignmentPositionOffset.y),
+		(int)widthInGlobalSpace,
+		(int)heightInGlobalSpace };
 
 	return destRect;
 }

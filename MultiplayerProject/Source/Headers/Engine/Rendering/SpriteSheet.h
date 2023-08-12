@@ -11,7 +11,7 @@ struct KeyFrame
 struct Animation
 {
 	//TODO: Remove hard coding of animation data. Maybe replace with a file format of some kind.
-	void InitializeKeyFrames(KeyFrame* inKeyFrames, int keyFrameCount);
+	void InitializeKeyFrames(KeyFrame* inKeyFrames, unsigned int keyFrameCount);
 
 	float GetAnimationPlaybackTimeInSeconds() { return animationPlaybackTimeInSeconds; }
 

@@ -79,7 +79,7 @@ public:
 	BaseWidget* GetParent() { return parent; }
 
 	BaseWidget* ProcessMouseInput(Input& mouseInput);
-	virtual InputResponse TryHandleMousePress(mathfu::Vector<float, 2> mousePressPosition);
+	virtual InputResponse TryHandleMousePress(mathfu::Vector<int, 2> mousePressPosition);
 
 	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty = false);
 
@@ -99,24 +99,24 @@ public:
 		assert(abs(alignment.normalizedValue.y) <= 1);
 	}
 
-	virtual void SetWidthInLocalSpace(float inWidth)
+	virtual void SetWidthInLocalSpace(int inWidth)
 	{
 		isTransformDirty = true;
 		sizeInLocalSpace.x = inWidth;
 	}
 
-	virtual void SetHeightInLocalSpace(float inHeight)
+	virtual void SetHeightInLocalSpace(int inHeight)
 	{
 		isTransformDirty = true;
 		sizeInLocalSpace.y = inHeight;
 	}
 
-	virtual float GetWidthInLocalSpace() const
+	virtual int GetWidthInLocalSpace() const
 	{
 		return sizeInLocalSpace.x;
 	}
 
-	virtual float GetHeightInLocalSpace() const
+	virtual int GetHeightInLocalSpace() const
 	{
 		return sizeInLocalSpace.y;
 	}
@@ -128,16 +128,16 @@ public:
 	virtual float GetWidthInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 	virtual float GetHeightInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 
-	void MousePressed(mathfu::Vector<float, 2> mousePressPosition);
-	void MouseReleased(mathfu::Vector<float, 2> mouseReleasePosition);
+	void MousePressed(mathfu::Vector<int, 2> mousePressPosition);
+	void MouseReleased(mathfu::Vector<int, 2> mouseReleasePosition);
 
 	SingleCastDelegate<void>& GetOnMousePressedDel() { return onMousePressedDel; }
 	SingleCastDelegate<void>& GetOnMouseReleasedDel() { return onMouseReleasedDel; }
 protected:
 	virtual SDL_Rect CalculateBoundsInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 
-	virtual void OnMousePressed(mathfu::Vector<float, 2> mousePressPosition);
-	virtual void OnMouseReleased(mathfu::Vector<float, 2> mouseReleasePosition);
+	virtual void OnMousePressed(mathfu::Vector<int, 2> mousePressPosition);
+	virtual void OnMouseReleased(mathfu::Vector<int, 2> mouseReleasePosition);
 
 	std::vector<BaseWidget*> children;
 

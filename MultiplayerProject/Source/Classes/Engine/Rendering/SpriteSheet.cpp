@@ -1,6 +1,6 @@
 #include "Engine/Rendering/SpriteSheet.h"
 
-void Animation::InitializeKeyFrames(KeyFrame * inKeyFrames, int keyFrameCount)
+void Animation::InitializeKeyFrames(KeyFrame * inKeyFrames, unsigned int keyFrameCount)
 {
 	//TODO: the keyframes we pass in have their start times at 0. This doesn't matter. It will matter once animations are loaded from files.
 

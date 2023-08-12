@@ -76,11 +76,11 @@ void Renderer::UpdateRender(Texture* textureToAdd, SDL_Rect srcRect, SDL_Rect de
 {
 	SDL_SetTextureColorMod(textureToAdd->GetTexture(), color.r, color.g, color.b);
 
-	destRect.x *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
-	destRect.w *= (float)viewportWidth / DEFAULT_SCREEN_WIDTH;
+	destRect.x = destRect.x * (int)((float)viewportWidth / DEFAULT_SCREEN_WIDTH);
+	destRect.w = destRect.w * (int)((float)viewportWidth / DEFAULT_SCREEN_WIDTH);
 	
-	destRect.y *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
-	destRect.h *= (float)viewportHeight / DEFAULT_SCREEN_HEIGHT;
+	destRect.y = destRect.y * (int)((float)viewportHeight / DEFAULT_SCREEN_HEIGHT);
+	destRect.h = destRect.h * (int)((float)viewportHeight / DEFAULT_SCREEN_HEIGHT);
 
 	SDL_Texture* sdlTexToAdd = textureToAdd->GetTexture();
 
@@ -117,8 +117,8 @@ float Renderer::GetViewportAspectRatio() const
 
 void Renderer::TryUpdateViewportSize()
 {
-	float oldWindowWidth = windowWidth;
-	float oldWindowHeight = windowHeight;
+	int oldWindowWidth = windowWidth;
+	int oldWindowHeight = windowHeight;
 	SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
 	bool viewportSizeChanged = oldWindowWidth != windowWidth || oldWindowHeight != windowHeight;
@@ -130,12 +130,12 @@ void Renderer::TryUpdateViewportSize()
 	if (GetWindowAspectRatio() > DEFAULT_ASPECT_RATIO)
 	{
 		viewportHeight = windowHeight;
-		viewportWidth = DEFAULT_ASPECT_RATIO * windowHeight;
+		viewportWidth = (int)(DEFAULT_ASPECT_RATIO * windowHeight);
 	}
 	else
 	{
 		viewportWidth = windowWidth;
-		viewportHeight = windowWidth / DEFAULT_ASPECT_RATIO;
+		viewportHeight = (int)(windowWidth / DEFAULT_ASPECT_RATIO);
 	}
 }
 

@@ -55,7 +55,7 @@ FreeListNode * FreeListAllocator::FindBest(size_t size, size_t alignment, size_t
 		padding = CalculatePaddingWithHeader((uintptr_t)node, (uintptr_t)alignment, sizeof(FreeListAllocationHeader));
 		size_t requiredSpace = size + padding;
 
-		int leftoverSpace = abs((int)node->blockSize - (int)requiredSpace);
+		size_t leftoverSpace = abs((int)node->blockSize - (int)requiredSpace);
 		if (node->blockSize >= requiredSpace && leftoverSpace < smallestDiff)
 		{
 			smallestDiff = leftoverSpace;
@@ -98,7 +98,7 @@ void * FreeListAllocator::Alloc(size_t size, size_t alignment)
 
 	if (node == nullptr)
 	{
-		assert(0, && "Allocator has no free memory");
+		assert(0 && "Allocator has no free memory");
 		return nullptr;
 	}
 

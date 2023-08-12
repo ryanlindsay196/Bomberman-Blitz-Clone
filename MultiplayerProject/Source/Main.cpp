@@ -27,9 +27,9 @@ int main(int argc, char* args[])
 
 	while (isInGameLoop)
 	{
-		frameStart = SDL_GetTicks64();
+		frameStart = (float)SDL_GetTicks64();
 		isInGameLoop = engine.Update(deltaTime);
-		deltaTime = SDL_GetTicks64() - frameStart;
+		deltaTime = (float)SDL_GetTicks64() - frameStart;
 	}
 #else
 	GameManager& gameManager = GameManager::Get();

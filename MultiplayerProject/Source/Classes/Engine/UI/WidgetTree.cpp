@@ -105,7 +105,7 @@ void WidgetTree::ProcessMouseReleased()
 			Input& mouseInput = GameManager::GetInputManager()->GetInputByMouseButtonID(SDL_BUTTON_LEFT);
 			mouseInput.isConsumed = true;
 
-			mathfu::Vector<float, 2> mousePosition(mouseInput.e.button.x, mouseInput.e.button.y);
+			mathfu::Vector<int, 2> mousePosition(mouseInput.e.button.x, mouseInput.e.button.y);
 			clickedWidget->MouseReleased(mousePosition);
 			clickedWidget = nullptr;
 		}
