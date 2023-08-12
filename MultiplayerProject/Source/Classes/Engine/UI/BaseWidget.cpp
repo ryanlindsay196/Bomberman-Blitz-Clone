@@ -182,3 +182,20 @@ SDL_Rect BaseWidget::CalculateBoundsInGlobalSpace(const Renderer* const renderer
 	return destRect;
 }
 
+void BaseWidget::CopyVariableFromJSON(Variable & destinationVar, const rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType & sourceJSON)
+{
+	if (sourceJSON.IsInt())
+	{
+		int intToCopy = sourceJSON.GetInt();
+		memcpy(destinationVar.v, &intToCopy, destinationVar.m->SizeOf());
+	}
+	else if (sourceJSON.IsFloat())
+	{
+		float floatToCopy = sourceJSON.GetFloat();
+		memcpy(destinationVar.v, &floatToCopy, destinationVar.m->SizeOf());
+	}
+	else if (sourceJSON.IsString())
+	{
+		*(char**)destinationVar.v = const_cast<char*>(sourceJSON.GetString());
+	}
+}
