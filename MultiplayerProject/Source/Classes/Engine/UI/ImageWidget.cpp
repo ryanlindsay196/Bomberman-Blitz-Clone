@@ -10,11 +10,9 @@ void Image::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidj
 {
 	BaseWidget::Initialize(renderer, widgetData);
 
-	assert(widgetData);
-
 	CreateVariableMetadata(Image, path);
-	rapidjson::Value::MemberIterator pathMemberIterator = widgetData->FindMember(mv_path.GetName());
-	path = const_cast<char*>(pathMemberIterator->value.GetString());
+	PopulateWidgetData(mv_path, widgetData, path);
+	
 	texture = renderer->GetTextureManager()->LoadTexture(renderer, path);
 }
 

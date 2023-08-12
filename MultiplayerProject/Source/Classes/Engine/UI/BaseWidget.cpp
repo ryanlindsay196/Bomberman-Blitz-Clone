@@ -11,27 +11,13 @@ void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, r
 		return;
 
 	CreateVariableMetadata(BaseWidget, boundsInLocalSpace);
-	rapidjson::Value::MemberIterator boundsInLocalSpaceMemberIterator = widgetData->FindMember(mv_boundsInLocalSpace.GetName());
-	if (boundsInLocalSpaceMemberIterator != widgetData->MemberEnd())
-	{
-		auto& jsonBoundsInLocalSpace = boundsInLocalSpaceMemberIterator->value;
-		auto jsonArray = jsonBoundsInLocalSpace.GetArray();
-		boundsInLocalSpace.x = jsonArray[0].GetInt();
-		boundsInLocalSpace.y = jsonArray[1].GetInt();
-		boundsInLocalSpace.w = jsonArray[2].GetInt();
-		boundsInLocalSpace.h = jsonArray[3].GetInt();
-	}
+	PopulateWidgetData(mv_boundsInLocalSpace, widgetData, boundsInLocalSpace.x, boundsInLocalSpace.y, boundsInLocalSpace.w, boundsInLocalSpace.h);
 
 	CreateVariableMetadata(BaseWidget, anchor);
-	rapidjson::Value::MemberIterator anchorMemberIterator = widgetData->FindMember(mv_anchor.GetName());
-	if (anchorMemberIterator != widgetData->MemberEnd())
-	{
-		auto& jsonAnchor = anchorMemberIterator->value;
-		auto jsonArray = jsonAnchor.GetArray();
-		anchor = Anchor({ jsonAnchor[0].GetFloat(), jsonAnchor[1].GetFloat() });
-	}
+	PopulateWidgetData(mv_anchor, widgetData, anchor.normalizedValue.x, anchor.normalizedValue.y);
 
 	CreateVariableMetadata(BaseWidget, alignment);
+	PopulateWidgetData(mv_alignment, widgetData, alignment.normalizedValue.x, alignment.normalizedValue.y);
 }
 
 void BaseWidget::AddChild(BaseWidget* newChild)
@@ -174,8 +160,8 @@ SDL_Rect BaseWidget::CalculateBoundsInGlobalSpace(const Renderer* const renderer
 {
 	//Position within the parent container.
 	const mathfu::Vector<float, 2> anchorOffset{
-		parentRectBounds.w * anchor.GetNormalizedValue().x,
-		parentRectBounds.h * anchor.GetNormalizedValue().y
+		parentRectBounds.w * anchor.normalizedValue.x,
+		parentRectBounds.h * anchor.normalizedValue.y
 	};
 
 	float widthInGlobalSpace = GetWidthInGlobalSpace(renderer, parentRectBounds);
@@ -183,8 +169,8 @@ SDL_Rect BaseWidget::CalculateBoundsInGlobalSpace(const Renderer* const renderer
 
 	//Determines the center of this widget
 	const mathfu::Vector<float, 2> alignmentPositionOffset{
-		widthInGlobalSpace * alignment.GetNormalizedValue().x,
-		heightInGlobalSpace * alignment.GetNormalizedValue().y
+		widthInGlobalSpace * alignment.normalizedValue.x,
+		heightInGlobalSpace * alignment.normalizedValue.y
 	};
 
 	SDL_Rect destRect = {

@@ -17,7 +17,7 @@ enum class InputResponse
 	UnHandled
 };
 
-class Anchor
+struct Anchor
 {
 public:
 	Anchor() : normalizedValue(0, 0) {}
@@ -33,10 +33,6 @@ public:
 	static const Anchor CenterRight()		{ return Anchor(mathfu::Vector<float, 2>(1.0f, 0.5f)); }
 	static const Anchor BottomRight()		{ return Anchor(mathfu::Vector<float, 2>(1.0f, 1.0f)); }
 
-
-	mathfu::Vector<float, 2> GetNormalizedValue() const { return normalizedValue; }
-	
-private:
 	mathfu::Vector<float, 2> normalizedValue;
 };
 
@@ -46,6 +42,52 @@ class BaseWidget
 {
 	CreateClassMetadata(BaseWidget)
 public:
+
+	void CopyVariableFromJSON(Variable& destinationVar, const rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType& sourceJSON)
+	{
+		if (sourceJSON.IsInt())
+		{
+			int intToCopy = sourceJSON.GetInt();
+			memcpy(destinationVar.v, &intToCopy, destinationVar.m->SizeOf());
+		}
+		else if (sourceJSON.IsFloat())
+		{
+			float floatToCopy = sourceJSON.GetFloat();
+			memcpy(destinationVar.v, &floatToCopy, destinationVar.m->SizeOf());
+		}
+		else if (sourceJSON.IsString())
+		{
+			*(char**)destinationVar.v = const_cast<char*>(sourceJSON.GetString());
+		}
+	}
+
+	template<typename MetaVarType, typename ...Args>
+	void PopulateWidgetData(MetaVarType& metaVar, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData, Args&&... args)
+	{
+		rapidjson::Value::MemberIterator varMemberIterator = widgetData->FindMember(metaVar.GetName());
+		if (varMemberIterator != widgetData->MemberEnd())
+		{
+			const auto& jsonVar = varMemberIterator->value;
+
+			Variable vars[]{ args... };
+			const unsigned int varArraySize = (sizeof(vars) / sizeof(Variable));
+
+			if (varArraySize > 1)
+			{
+				const auto& jsonArray = jsonVar.GetArray();
+
+				for (unsigned int i = 0; i < varArraySize; ++i)
+				{
+					CopyVariableFromJSON(vars[i], jsonArray[i]);
+				}
+			}
+			else
+			{
+				CopyVariableFromJSON(vars[0], jsonVar);
+			}
+		}
+	}
+
 	virtual void Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData);
 
 	void AddChild(BaseWidget* newChild);
@@ -64,16 +106,16 @@ public:
 	{
 		isTransformDirty = true;
 		anchor = newAnchor;
-		assert(abs(anchor.GetNormalizedValue().x) <= 1);
-		assert(abs(anchor.GetNormalizedValue().y) <= 1);
+		assert(abs(anchor.normalizedValue.x) <= 1);
+		assert(abs(anchor.normalizedValue.y) <= 1);
 	}
 
 	void SetAlignment(Alignment newAlignment)
 	{
 		isTransformDirty = true;
 		alignment = newAlignment;
-		assert(abs(alignment.GetNormalizedValue().x) <= 1);
-		assert(abs(alignment.GetNormalizedValue().y) <= 1);
+		assert(abs(alignment.normalizedValue.x) <= 1);
+		assert(abs(alignment.normalizedValue.y) <= 1);
 	}
 
 	virtual void SetWidthInLocalSpace(float inWidth)
