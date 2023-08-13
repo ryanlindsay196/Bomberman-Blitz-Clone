@@ -1,8 +1,11 @@
 #include "Engine\Managers\AssetManager.h"
 #include <assert.h>
 
-std::vector<StaticAssetData> staticAssetData;
-
+static std::vector<StaticAssetData>& GetStaticAssetData()
+{
+	static std::vector<StaticAssetData> staticAssetData;
+	return staticAssetData;
+}
 
 bool AssetManager::InitializeAssetDatabase()
 {
@@ -37,9 +40,9 @@ void* AssetManager::InstantiateByStaticID(unsigned int staticID, void* addressTo
 {
 	void* newAsset = nullptr;
 
-	if (staticID < staticAssetData.size())
+	if (staticID < GetStaticAssetData().size())
 	{
-		newAsset = staticAssetData[staticID].instanceCreateCallback(addressToInstantiate);
+		newAsset = GetStaticAssetData()[staticID].instanceCreateCallback(addressToInstantiate);
 	}
 
 	return newAsset;
@@ -48,12 +51,12 @@ void* AssetManager::InstantiateByStaticID(unsigned int staticID, void* addressTo
 unsigned int AssetManager::GetAssetSizeByStaticID(unsigned int staticID)
 {
 	unsigned int assetSize = -1;
-	assert(staticID < staticAssetData.size());
-	assetSize = staticAssetData[staticID].size;
+	assert(staticID < GetStaticAssetData().size());
+	assetSize = GetStaticAssetData()[staticID].size;
 	return assetSize;
 }
 
 void AssetManager::AddStaticAssetData(StaticAssetData newStaticAssetData)
 {
-	staticAssetData.push_back(newStaticAssetData);
+	GetStaticAssetData().push_back(newStaticAssetData);
 }
