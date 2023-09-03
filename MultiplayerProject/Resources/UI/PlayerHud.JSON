@@ -2,19 +2,19 @@
   "RootWidget": [
     {
       "class": "Button",
-      "path": "Resources/Images/HelloWorld.png",
+      "path": "Resources/Images/Button.png",
       "sizeInLocalSpace": [100,100],
       "anchor": [0, 0.25],
       "Children": [
         {
           "class": "Image",
-          "path": "Resources/Images/HelloWorld.png",
+          "path": "Resources/Images/Image.png",
           "sizeInLocalSpace": [2000,1000],
           "anchor": [0.25, 0.25]
         },
         {
           "class": "Button",
-          "path": "Resources/Images/HelloWorld.png",
+          "path": "Resources/Images/Button.png",
 	  "sizeInLocalSpace": [300,100],
           "anchor": [0.25, 0.5]
         }
@@ -22,7 +22,7 @@
     },
     {
       "class": "Button",
-      "path": "Resources/Images/HelloWorld.png",
+      "path": "Resources/Images/Button.png",
       "sizeInLocalSpace": [200,100],
       "anchor": [0.5, 0.75]
     }
