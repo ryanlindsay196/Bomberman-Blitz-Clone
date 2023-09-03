@@ -1,9 +1,5 @@
 #pragma once
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
+#include "Engine/Reflection/Reflection.h"
 
 struct StaticAssetData
 {
@@ -25,7 +21,7 @@ private:
 	StaticAsset()
 	{
 		StaticAssetData data = { sizeof(T), &StaticAsset<T>::CreateInstance };
-		AssetManager::AddStaticAssetData(data);
+		AssetManager::AddStaticAssetData(T::GetClassName(), data);
 		//AssetManager::AddSoftObject();
 	}
 	StaticAsset(StaticAsset const&) = delete;
@@ -67,20 +63,21 @@ private:
 
 class AssetManager
 {
+	CreateClassMetadata(AssetManager)
 public:
 	template<typename T>
 	friend class StaticAsset;
 
 	bool InitializeAssetDatabase();
 
-	void* InstantiateByStaticID(unsigned int staticID, void* addressToInstantiate);
-	unsigned int GetAssetSizeByStaticID(unsigned int staticID);
+	void* InstantiateByName(char* name, void* addressToInstantiate);
+	unsigned int GetAssetSizeByName(char* name);
 public:
 
 	bool GetIsInitialized() { return isInitialized; }
 
 private:
-	static void AddStaticAssetData(StaticAssetData newStaticAssetData);
+	static void AddStaticAssetData(char* name, StaticAssetData newStaticAssetData);
 
 	bool isInitialized;
 };

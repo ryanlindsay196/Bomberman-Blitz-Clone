@@ -24,13 +24,13 @@ BaseWidget* WidgetTree::CreateWidget(rapidjson::Value* currentNode, BaseWidget *
 	for (unsigned int i = 0; i < jsonArray.Size(); ++i)
 	{
 		auto& jsonArrayElement = jsonArray[i];
-		auto& staticIDValue = jsonArrayElement["StaticID"];
+		auto& jsonClassName = jsonArrayElement["class"];
 
-		unsigned int desiredID = staticIDValue.GetInt();
+		char* desiredClassName = const_cast<char*>(jsonClassName.GetString());
 
-		unsigned int sizeToAllocate = GameManager::GetAssetManager()->GetAssetSizeByStaticID(desiredID);
+		unsigned int sizeToAllocate = GameManager::GetAssetManager()->GetAssetSizeByName(desiredClassName);
 		void* newPtr = allocator.Alloc(sizeToAllocate, 8);
-		newWidget = (BaseWidget*)GameManager::GetAssetManager()->InstantiateByStaticID(desiredID, newPtr);
+		newWidget = (BaseWidget*)GameManager::GetAssetManager()->InstantiateByName(desiredClassName, newPtr);
 		newWidget->Initialize(renderer, &jsonArrayElement);
 
 		if (parentWidget)

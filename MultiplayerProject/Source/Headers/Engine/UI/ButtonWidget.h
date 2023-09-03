@@ -3,6 +3,8 @@
 class Button : public BaseWidget
 {
 public:
+	CreateClassMetadata(Button)
+
 	virtual void Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData) override;
 	virtual void Draw(Renderer* renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty) override;
 

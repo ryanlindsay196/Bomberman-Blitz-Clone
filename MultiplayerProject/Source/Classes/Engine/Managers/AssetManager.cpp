@@ -1,11 +1,16 @@
-#include "Engine\Managers\AssetManager.h"
+#include "Engine/Managers/AssetManager.h"
+#include <unordered_map>
 #include <assert.h>
 
-static std::vector<StaticAssetData>& GetStaticAssetData()
+struct CompareCStrings
 {
-	static std::vector<StaticAssetData> staticAssetData;
-	return staticAssetData;
-}
+	bool operator()( const char* lhs, const char* rhs) const 
+	{
+		return std::strcmp(lhs, rhs) == 0;
+	}
+};
+
+static std::unordered_map<char*, StaticAssetData, std::hash<std::string>, CompareCStrings> staticAssetData;
 
 bool AssetManager::InitializeAssetDatabase()
 {
@@ -36,27 +41,30 @@ bool AssetManager::InitializeAssetDatabase()
 	return isInitialized;
 }
 
-void* AssetManager::InstantiateByStaticID(unsigned int staticID, void* addressToInstantiate)
+void* AssetManager::InstantiateByName(char* name, void* addressToInstantiate)
 {
 	void* newAsset = nullptr;
 
-	if (staticID < GetStaticAssetData().size())
-	{
-		newAsset = GetStaticAssetData()[staticID].instanceCreateCallback(addressToInstantiate);
-	}
+	auto it = staticAssetData.find(name);
+	assert(it != staticAssetData.end());
+	
+	newAsset = it->second.instanceCreateCallback(addressToInstantiate);
 
 	return newAsset;
 }
 
-unsigned int AssetManager::GetAssetSizeByStaticID(unsigned int staticID)
+unsigned int AssetManager::GetAssetSizeByName(char* name)
 {
 	unsigned int assetSize = -1;
-	assert(staticID < GetStaticAssetData().size());
-	assetSize = GetStaticAssetData()[staticID].size;
+
+	auto it = staticAssetData.find(name);
+	assert(it != staticAssetData.end());
+	assetSize = it->second.size;
+	
 	return assetSize;
 }
 
-void AssetManager::AddStaticAssetData(StaticAssetData newStaticAssetData)
+void AssetManager::AddStaticAssetData(char* name, StaticAssetData newStaticAssetData)
 {
-	GetStaticAssetData().push_back(newStaticAssetData);
+	staticAssetData.insert(std::pair<char*, StaticAssetData>(name, newStaticAssetData));
 }
