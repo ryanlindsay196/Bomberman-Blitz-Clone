@@ -23,6 +23,8 @@ fieldSize = BITS_TO_BYTES(fieldBitset.count());\
 
 static RakNet::AddressOrGUID serverGUID = RakNet::UNASSIGNED_RAKNET_GUID;
 
+CreateClassMetadata(NetworkManager);
+
 void NetworkManager::Initialize(bool inIsServer)
 {
 	networkedObjectLinker.Initialize();
@@ -367,7 +369,7 @@ void NetworkManager::RegisterNetworkedObject(BaseObject * objectPtr)
 	networkedObjectLinker.AddBaseObject(objectPtr);
 }
 
-void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType)
+void NetworkManager::RegisterNetworkedVariable(unsigned int networkID, ClassMetaData<BaseObject>::MetaVariable* networkedVariable, MetaFunction<BaseObject>* onRepMetaFunction, AuthorityType authorityType)
 {
 	auto* proxy = networkedObjectLinker.GetNetworkedObjectProxy(networkID);
 	if (!proxy)

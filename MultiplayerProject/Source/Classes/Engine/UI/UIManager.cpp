@@ -5,12 +5,12 @@
 #include <fstream>
 #include <string>
 
-void UIManager::Initialize(Renderer* renderer)
+void UIManager::Initialize(Renderer* renderer, char* uiFile)
 {
 	tree.Initialize(renderer, 1000000);
 
 	FILE* fp = nullptr;
-	fopen_s(&fp, "Resources/UI/PlayerHud.JSON", "rb"); // non-Windows use "r"
+	fopen_s(&fp, uiFile, "rb"); // non-Windows use "r"
 
 	char readBuffer[65536];
 	rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));

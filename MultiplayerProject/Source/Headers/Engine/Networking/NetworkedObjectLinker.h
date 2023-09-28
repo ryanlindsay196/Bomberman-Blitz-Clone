@@ -9,13 +9,13 @@ class BaseObject;
 
 struct NetworkedMetaVariable
 {
-	NetworkedMetaVariable(BaseObject::MetaVariable* inMetaVariable, AuthorityType inAuthorityType, BaseObject::MetaFunction* inOnRepMetaFunction) :
+	NetworkedMetaVariable(ClassMetaData<BaseObject>::MetaVariable* inMetaVariable, AuthorityType inAuthorityType, MetaFunction<BaseObject>* inOnRepMetaFunction) :
 		metaVariable(inMetaVariable),
 		authorityType(inAuthorityType),
 		onRepMetaFunction(inOnRepMetaFunction)
 	{}
-	BaseObject::MetaVariable* metaVariable;
-	BaseObject::MetaFunction* onRepMetaFunction;
+	ClassMetaData<BaseObject>::MetaVariable* metaVariable;
+	MetaFunction<BaseObject>* onRepMetaFunction;
 	AuthorityType authorityType;
 	char data[8];
 };
@@ -35,7 +35,7 @@ public:
 		unsigned int GetNetworkID() const { return networkID; }
 		BaseObject* GetNetworkedObject() const { return networkedObject; }
 
-		void AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType);
+		void AddNetworkedVariable(ClassMetaData<BaseObject>::MetaVariable* metaVariable, MetaFunction<BaseObject>* onRepMetaFunction, AuthorityType authorityType);
 		const std::vector<NetworkedMetaVariable>& GetNetworkedVariables() const { return networkedMetaVariables; }
 	private:
 		unsigned int networkID;

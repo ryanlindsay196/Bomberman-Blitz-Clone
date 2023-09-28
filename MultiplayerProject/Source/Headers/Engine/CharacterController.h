@@ -3,8 +3,6 @@
 
 class CharacterController : public BaseObject
 {
-	CreateClassMetadata(CharacterController)
-
 public:
 	virtual bool Initialize() override;
 

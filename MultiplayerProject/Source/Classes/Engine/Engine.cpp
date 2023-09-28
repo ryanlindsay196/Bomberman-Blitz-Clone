@@ -4,7 +4,7 @@
 void Engine::Initialize()
 {
 	renderer.Initialize(480, 640, false, "Blast Engine");
-	uiManager.Initialize(&renderer);
+	uiManager.Initialize(&renderer, (char*)"Resources/UI/PlayerHud.JSON");
 
 	if (!GameManager::GetAssetManager()->GetIsInitialized())
 	{

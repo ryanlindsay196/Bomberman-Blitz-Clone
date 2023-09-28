@@ -1,6 +1,8 @@
 #include "Game/Player.h"
 #include "Engine/Networking/NetworkManager.h"
 
+CreateClassMetadata(Player);
+
 void Player::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);

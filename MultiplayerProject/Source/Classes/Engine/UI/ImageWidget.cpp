@@ -4,6 +4,7 @@
 #include "Engine/Managers/AssetManager.h"
 #include "Game/GameManager.h"
 
+CreateClassMetadata(Image);
 RegisterStaticAsset(Image);
 
 void Image::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData)

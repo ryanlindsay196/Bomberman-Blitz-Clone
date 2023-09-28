@@ -41,8 +41,6 @@ typedef Anchor Alignment;
 class BaseWidget
 {
 public:
-	CreateClassMetadata(BaseWidget)
-
 	template<typename MetaVarType, typename ...Args>
 	void PopulateWidgetData(MetaVarType& metaVar, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData, Args&&... args)
 	{

@@ -4,13 +4,16 @@
 #include "Game/Player.h"
 #include "Game/Entity.h"
 
+CreateClassMetadata(EntityManager);
+
 bool EntityManager::Initialize()
 {
 	NetworkManager* networkManager = GameManager::GetNetworkManager();
 
 	InitializeNetworkID(networkManager->GenerateNewNetworkID());
 	RegisterSelfAsNetworked();
-	CreateTemplatedClassFunctionMetadata(EntityManager, CreateEntity, <Player>);
+	CreateTemplatedClassFunctionMetadata(EntityManager, CreateEntity, <Player>);	
+
 	CreateClassFunctionMetadata(EntityManager, CreateController);
 
 	return true;

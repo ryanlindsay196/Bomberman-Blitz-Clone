@@ -2,6 +2,8 @@
 #include <unordered_map>
 #include <assert.h>
 
+CreateClassMetadata(AssetManager);
+
 struct CompareCStrings
 {
 	bool operator()( const char* lhs, const char* rhs) const 

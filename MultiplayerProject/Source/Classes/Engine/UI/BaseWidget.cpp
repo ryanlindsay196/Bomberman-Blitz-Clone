@@ -1,6 +1,8 @@
 #include "Engine/Rendering/Renderer.h"
 #include "Engine/UI/BaseWidget.h"
 
+CreateClassMetadata(BaseWidget);
+
 void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData)
 {
 	strcpy_s(name, sizeof(name) + 1, "12345678901234567890");

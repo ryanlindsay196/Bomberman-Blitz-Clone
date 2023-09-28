@@ -10,7 +10,6 @@ struct SDL_Rect;
 class Entity : public BaseObject
 {
 public:
-	CreateClassMetadata(Entity)
 	friend class EntityManager;
 
 	virtual ~Entity() {};

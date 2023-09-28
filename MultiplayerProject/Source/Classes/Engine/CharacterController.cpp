@@ -1,6 +1,8 @@
 #include "Engine/CharacterController.h"
 #include "Game/GameManager.h"
 
+CreateClassMetadata(CharacterController);
+
 bool CharacterController::Initialize()
 {
 	RegisterSelfAsNetworked();

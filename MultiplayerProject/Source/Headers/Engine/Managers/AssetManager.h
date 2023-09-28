@@ -8,22 +8,22 @@ struct StaticAssetData
 };
 
 template <typename T>
-class  StaticAsset
+class StaticAsset
 {
-public:
-	static StaticAsset& Get() 
-	{
-		static StaticAsset instance;
-		return instance;
-	}
-
-private:
 	StaticAsset()
 	{
 		StaticAssetData data = { sizeof(T), &StaticAsset<T>::CreateInstance };
-		AssetManager::AddStaticAssetData(T::GetClassName(), data);
+		AssetManager::AddStaticAssetData(ClassMetaData<T>::Get()->GetClassName(), data);
 		//AssetManager::AddSoftObject();
 	}
+
+public:
+	static StaticAsset<T>& Get() 
+	{
+		static StaticAsset<T> instance;
+		return instance;
+	}
+
 	StaticAsset(StaticAsset const&) = delete;
 	void operator=(StaticAsset const&) = delete;
 
@@ -44,7 +44,7 @@ private:
 
 
 
-#define RegisterStaticAsset(T) StaticAsset<T>& T##StaticAsset = StaticAsset<T>::Get()
+#define RegisterStaticAsset(T) StaticAsset<T>& T##StaticAsset = StaticAsset<T>::Get();
 
 //struct SoftGameAsset
 //{
@@ -63,7 +63,6 @@ private:
 
 class AssetManager
 {
-	CreateClassMetadata(AssetManager)
 public:
 	template<typename T>
 	friend class StaticAsset;

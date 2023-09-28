@@ -9,11 +9,10 @@
 class Entity;
 class CharacterController;
 
+
 class EntityManager : public BaseObject
 {
 public:
-	CreateClassMetadata(EntityManager)
-
 	EntityManager() {}
 
 	EntityManager(EntityManager const&) = delete;

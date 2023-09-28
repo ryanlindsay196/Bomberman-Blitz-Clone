@@ -24,7 +24,6 @@ const MetaType& GetGlobalMetaType(void*)
 	return metaType;
 }
 
-template<>
 const MetaType& GetMetaTypeByType<void>()
 {
 	void* v = nullptr;
@@ -48,4 +47,10 @@ void DoubleMetaType::Cast(void * to, void * from, const MetaType & fromType) con
 
 void VoidMetaType::Cast(void * to, void * from, const MetaType & fromType) const
 {
+}
+
+Variable::Variable()
+	: v(0), m(&GetMetaTypeByType<void>()) 
+{
+
 }

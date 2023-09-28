@@ -14,7 +14,7 @@ public:
 			return;
 		}
 		
-		auto* metaFunction = Class::GetMetaFunctionByName(functionName);
+		auto* metaFunction = GetMetaFunctionByName<Class>(functionName);
 
 		if (!metaFunction)
 		{

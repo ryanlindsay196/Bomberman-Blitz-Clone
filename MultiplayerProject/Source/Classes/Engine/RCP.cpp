@@ -54,7 +54,7 @@ void RPC::ReceiveRpc(RakNet::BitStream & bsIn, const NetworkedObjectLinker & net
 	bsIn.Read((char*)&functionID, sizeof(functionID));
 
 	BaseObject* object = networkedObjectLinker.GetBaseObject(networkID);
-	BaseObject::MetaFunction* metaFunc = object ? object->GetMetaFunctionByID(functionID) : nullptr;
+	MetaFunction<BaseObject>* metaFunc = object ? GetMetaFunctionByID<BaseObject>(functionID) : nullptr;
 
 	if (!metaFunc)
 	{

@@ -2,6 +2,7 @@
 #include "Game/GameManager.h"
 #include "Engine/Networking/NetworkManager.h"
 
+CreateClassMetadata(BaseObject);
 
 void BaseObject::InitializeNetworkID(unsigned int newNetworkID)
 {
@@ -25,7 +26,7 @@ void BaseObject::RegisterSelfAsNetworked()
 	networkManager->RegisterNetworkedObject(this);
 }
 
-void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::MetaVariable* metaVariable, MetaFunction* onRepMetaFunction)
+void BaseObject::RegisterNetworkedVariable(const AuthorityType authorityType, ClassMetaData<BaseObject>::MetaVariable* metaVariable, MetaFunction<BaseObject>* onRepMetaFunction)
 {
 	if (!metaVariable)
 	{

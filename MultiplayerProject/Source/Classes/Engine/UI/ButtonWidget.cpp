@@ -3,6 +3,7 @@
 
 #include "Engine/Managers/AssetManager.h"
 
+CreateClassMetadata(Button);
 RegisterStaticAsset(Button);
 
 void Button::Initialize(Renderer * renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData)

@@ -8,14 +8,12 @@
 class BaseObject : public RawPointerTrackableObject
 {
 public:
-	CreateClassMetadata(BaseObject)
-
 	virtual bool Initialize() override { return RawPointerTrackableObject::Initialize(); }
 	void InitializeNetworkID(unsigned int newNetworkID);
 	void InitializeOwningClientID(unsigned int newClientID);
 	void RegisterSelfAsNetworked();
 
-	void RegisterNetworkedVariable(const AuthorityType authorityType, BaseObject::MetaVariable* metaVariable, MetaFunction* onRepMetaFunction = nullptr);
+	void RegisterNetworkedVariable(const AuthorityType authorityType, ClassMetaData<BaseObject>::MetaVariable* metaVariable, MetaFunction<BaseObject>* onRepMetaFunction = nullptr);
 	unsigned int GetNetworkID() const { return networkID; }
 	unsigned int GetOwningClientID() const { return owningClientID; }
 	bool HasValidNetworkID() const { return networkID != 0; }

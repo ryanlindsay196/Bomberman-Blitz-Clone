@@ -39,7 +39,7 @@ NetworkedObjectLinker::NetworkedObjectProxy::NetworkedObjectProxy(BaseObject * i
 	networkedObject(inObject)
 {}
 
-void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(BaseObject::MetaVariable* metaVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType)
+void NetworkedObjectLinker::NetworkedObjectProxy::AddNetworkedVariable(ClassMetaData<BaseObject>::MetaVariable* metaVariable, MetaFunction<BaseObject>* onRepMetaFunction, AuthorityType authorityType)
 {
 	assert(metaVariable);
 

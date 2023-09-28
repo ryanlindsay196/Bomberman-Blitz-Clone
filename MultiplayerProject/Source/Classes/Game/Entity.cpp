@@ -3,6 +3,8 @@
 
 #include "Engine/Rendering/Renderer.h"
 
+CreateClassMetadata(Entity);
+
 bool Entity::Initialize()
 {
 	RegisterSelfAsNetworked();

@@ -10,7 +10,6 @@ class GameMode;
 
 class NetworkManager
 {
-	CreateClassMetadata(NetworkManager)
 public:
 	void Initialize(bool inIsServer);
 	void Update(float deltaTime);
@@ -22,7 +21,7 @@ public:
 	void SerializeNetworkedObjects();
 
 	void RegisterNetworkedObject(BaseObject* objectPtr);
-	void RegisterNetworkedVariable(unsigned int networkID, BaseObject::MetaVariable* networkedVariable, BaseObject::MetaFunction* onRepMetaFunction, AuthorityType authorityType);
+	void RegisterNetworkedVariable(unsigned int networkID, ClassMetaData<BaseObject>::MetaVariable* networkedVariable, MetaFunction<BaseObject>* onRepMetaFunction, AuthorityType authorityType);
 	unsigned int GenerateNewNetworkID();
 	unsigned int GenerateClientID();
 

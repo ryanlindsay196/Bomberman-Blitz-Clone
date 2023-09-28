@@ -4,7 +4,7 @@
 class UIManager
 {
 public:
-	void Initialize(Renderer* renderer);
+	void Initialize(Renderer* renderer, char* uiFile);
 	void Update();
 	void Draw(Renderer* renderer);
 

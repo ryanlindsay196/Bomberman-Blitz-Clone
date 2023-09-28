@@ -4,7 +4,6 @@
 class Player : public Entity
 {
 public:
-	CreateClassMetadata(Player)
 
 	friend class EntityManager;
 
