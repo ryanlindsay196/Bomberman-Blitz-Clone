@@ -248,9 +248,9 @@ void InputManager::HandleMouseEvent(const SDL_Event& e)
 	case SDL_MOUSEBUTTONDOWN:
 		for (Input& input : inputs)
 		{
-			if (input.e.type == e.type)
+			if (input.e.type == e.type && input.inputState == InputState::Pressed)
 			{
-				assert(false && "Error: Mouse input is already present inside the inputs array.");
+				assert(false && "Error: Mouse pressed input is already present inside the inputs array.");
 			}
 		}
 		inputs.push_back({ e, InputState::Pressed, false });
