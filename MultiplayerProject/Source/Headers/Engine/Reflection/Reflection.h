@@ -298,8 +298,14 @@ MetaFunction<Class>* GetMetaFunctionByName(const char* Name)
 }
 
 #define CreateClassMetadata(Class)\
-const ClassMetaData<Class>& Class##ClassMetaData = *ClassMetaData<Class>::Get((char*)#Class);
+const ClassMetaData<Class>& Class##ClassMetaData = *ClassMetaData<Class>::Get((char*)#Class);\
 
+#define DefineClassMetaFunctionGetters(Class)\
+virtual MetaFunction<BaseObject>* GetClassMetaFunctionByID(unsigned int functionID)\
+{\
+	MetaFunction<BaseObject>* metaFunc = (MetaFunction<BaseObject>*)GetMetaFunctionByID<Class>(functionID);\
+	return metaFunc;\
+}
 
 template <class Class, typename Ret>
 inline void Apply(Class* classInstance, Ret(Class::*fun) (), Variable ret, Variable* args, int argCount)

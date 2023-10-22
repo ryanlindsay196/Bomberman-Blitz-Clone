@@ -19,6 +19,8 @@ public:
 	void operator=(EntityManager const&) = delete;
 
 public:
+	DefineClassMetaFunctionGetters(EntityManager)
+
 	virtual bool Initialize() override;
 
 	template<typename T>
