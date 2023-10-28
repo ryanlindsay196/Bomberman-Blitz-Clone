@@ -260,7 +260,7 @@ public:
 	}
 
 	inline unsigned int GetMetaFunctionID() { return m_metaFunctionID; }
-
+	auto& GetFunction() { return m_fun; }
 private:
 	unsigned int m_metaFunctionID;
 	const char* m_name;
@@ -287,7 +287,7 @@ MetaFunction<Class>* GetMetaFunctionByName(const char* Name)
 {
 	for (MetaFunction<Class>* mf = MetaFunction<Class>::Head(); mf; mf = mf->Next())
 	{
-		if (mf->Name() == Name)
+		if (std::strcmp(mf->Name(), Name) == 0)
 		{
 			return mf;
 		}

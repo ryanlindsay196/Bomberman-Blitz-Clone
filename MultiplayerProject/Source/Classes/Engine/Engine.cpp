@@ -3,6 +3,8 @@
 
 void Engine::Initialize()
 {
+	CreateClassFunctionMetadata(Engine, PlayInEditor);
+	
 	renderer.Initialize(480, 640, false, "Blast Engine");
 	uiManager.Initialize(&renderer, (char*)"Resources/UI/PlayerHud.JSON");
 
@@ -10,9 +12,6 @@ void Engine::Initialize()
 	{
 		GameManager::GetAssetManager()->InitializeAssetDatabase();
 	}
-
-	//TODO: Make the PlayInEditor function a specific button rather than clicking on the root widget.
-	uiManager.GetRootWidget()->GetOnMousePressedDel().BindMemberFunction(this, &Engine::PlayInEditor);
 }
 
 bool Engine::Update(float deltaTime)

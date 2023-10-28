@@ -3,6 +3,31 @@
 
 CreateClassMetadata(BaseWidget);
 
+#include "Engine/Engine.h"
+//TODO: Remove the engine include from this file when moving the PopulateDelegateData to its own file (for use in the eventual level editor)
+template<typename MetaVarType, typename ObjectType, typename DelType>
+void PopulateDelegateData(MetaVarType& metaVar, ObjectType* object, SingleCastDelegate<DelType>& del, const char* functionName)
+{
+	auto& fun = GetMetaFunctionByName<ObjectType>(functionName)->GetFunction();
+	del.BindMemberFunction(object, fun);
+}
+
+template<typename MetaVarType, typename DelType>
+void CallPopulateDelegateData(MetaVarType& metaVar, SingleCastDelegate<DelType>& del, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType& widgetData)
+{
+	rapidjson::Value::MemberIterator varMemberIterator = widgetData.FindMember(metaVar.GetName());
+	if (varMemberIterator != widgetData.MemberEnd())
+	{
+		const auto& jsonVar = varMemberIterator->value;
+		const auto& jsonArray = jsonVar.GetArray();
+		if (strcmp((char*)"Engine", jsonArray[0].GetString()) == 0)
+		{
+			extern Engine* GetEngine();
+			PopulateDelegateData(metaVar, GetEngine(), del, jsonArray[1].GetString());
+		}
+	}
+}
+
 void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData)
 {
 	strcpy_s(name, sizeof(name) + 1, "12345678901234567890");
@@ -20,6 +45,9 @@ void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, r
 
 	CreateVariableMetadata(BaseWidget, alignment);
 	PopulateWidgetData(mv_alignment, widgetData, alignment.normalizedValue.x, alignment.normalizedValue.y);
+	
+	CreateVariableMetadata(BaseWidget, onMousePressedDel);
+	CallPopulateDelegateData(mv_onMousePressedDel, onMousePressedDel, *widgetData);
 }
 
 void BaseWidget::AddChild(BaseWidget* newChild)
