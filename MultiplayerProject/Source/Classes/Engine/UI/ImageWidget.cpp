@@ -13,13 +13,15 @@ void Image::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidj
 
 	CreateVariableMetadata(Image, path);
 	PopulateWidgetData(mv_path, widgetData, path);
+
+	CreateVariableMetadata(Image, srcRect);
+	PopulateWidgetData(mv_srcRect, widgetData, srcRect.x, srcRect.y, srcRect.w, srcRect.h);
 	
 	texture = renderer->GetTextureManager()->LoadTexture(renderer, path);
 }
 
 void Image::Draw(Renderer * renderer, const SDL_Rect& parentRectBounds, bool isAnyParentDirty)
 {
-	SDL_Rect srcRect { 0, 0, 100, 100 };
 	BaseWidget::Draw(renderer, parentRectBounds, isAnyParentDirty);
 
 	renderer->UpdateRender(texture.get(), srcRect, cachedBoundsInGlobalSpace, color);

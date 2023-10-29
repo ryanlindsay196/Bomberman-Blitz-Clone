@@ -11,8 +11,10 @@ public:
 	virtual InputResponse TryHandleMousePress(mathfu::Vector<int, 2> mousePressPosition) override { return InputResponse::UnHandled; }
 
 	std::shared_ptr<Texture> GetTexture() { return texture; }
+	SDL_Rect GetSrcRect() { return srcRect; }
 private:
 	std::shared_ptr<Texture> texture;
 
 	char* path;
+	SDL_Rect srcRect;
 };

@@ -6,17 +6,20 @@
       "sizeInLocalSpace": [ 100, 100 ],
       "anchor": [ 0, 0.25 ],
       "onMousePressedDel": [ "Engine", "PlayInEditor" ],
+      "srcRect": [0, 0, 250, 150],
       "Children": [
         {
           "class": "Image",
           "path": "Resources/Images/Image.png",
           "sizeInLocalSpace": [ 2000, 1000 ],
+          "srcRect": [ 0, 0, 100, 100 ],
           "anchor": [ 0.25, 0.25 ]
         },
         {
           "class": "Button",
           "path": "Resources/Images/Button.png",
           "sizeInLocalSpace": [ 300, 100 ],
+          "srcRect": [ 0, 0, 100, 100 ],
           "anchor": [ 0.25, 0.5 ]
         }
       ]
@@ -25,6 +28,7 @@
       "class": "Button",
       "path": "Resources/Images/Button.png",
       "sizeInLocalSpace": [200,100],
+      "srcRect": [ 0, 0, 100, 100 ],
       "anchor": [0.5, 0.75]
     }
   ]
