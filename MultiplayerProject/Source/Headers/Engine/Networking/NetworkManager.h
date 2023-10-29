@@ -14,6 +14,7 @@ public:
 	void Initialize(bool inIsServer);
 	void Update(float deltaTime);
 	void Destroy();
+	void Close();
 
 	//Returns true if we have enough space to serialize "size" number of bytes.
 	bool CanSerializeNumberOfBytes(unsigned int size, const RakNet::BitStream& bsIn) const;
@@ -38,7 +39,8 @@ private:
 	class RakNet::RakPeerInterface* peer;
 	bool isServer;
 	unsigned int clientID;
-	int highestNetworkID;
+	unsigned int highestNetworkID;
+	unsigned int highestClientID;
 	std::vector<std::pair<unsigned int, RakNet::RakNetGUID>> clientIDToGuidVector;
 	RakNet::BitStream outputStream;
 	RakNet::BitStream inputStream;

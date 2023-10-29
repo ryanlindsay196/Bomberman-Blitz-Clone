@@ -82,3 +82,8 @@ void UIManager::Draw(Renderer* renderer)
 {
 	tree.Draw(renderer);
 }
+
+void UIManager::Close()
+{
+	tree.Close();
+}

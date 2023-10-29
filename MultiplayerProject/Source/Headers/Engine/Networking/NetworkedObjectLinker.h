@@ -26,6 +26,7 @@ public:
 	void Initialize();
 
 	BaseObject* GetBaseObject(unsigned int networkId) const;
+	void Close() { networkIdToNetworkObjectProxyMap.clear(); }
 
 	class NetworkedObjectProxy : public InstancedAutoLister<NetworkedObjectProxy>
 	{

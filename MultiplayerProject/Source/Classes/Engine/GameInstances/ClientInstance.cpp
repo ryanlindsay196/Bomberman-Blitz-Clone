@@ -49,6 +49,9 @@ void ClientInstance::Close()
 {
 	isOpen = false;
 	renderer.Close();
+	networkManager.Close();
+	uiManager.Close();
+	entityManager.Close();
 }
 
 void ClientInstance::Destroy()

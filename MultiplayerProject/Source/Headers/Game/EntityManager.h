@@ -18,6 +18,12 @@ public:
 	EntityManager(EntityManager const&) = delete;
 	void operator=(EntityManager const&) = delete;
 
+	void Close() 
+	{ 
+		entities.clear(); 
+		controllers.clear();
+	}
+
 public:
 	DefineClassMetaFunctionGetters(EntityManager)
 

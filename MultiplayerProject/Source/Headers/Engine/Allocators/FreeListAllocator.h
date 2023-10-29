@@ -36,6 +36,8 @@ public:
 
 	void Free(void* ptr);
 
+	void Destroy();
+
 private:
 	FreeListNode* FindFirst(size_t size, size_t alignment, size_t* padding_, FreeListNode** prevNode_);
 

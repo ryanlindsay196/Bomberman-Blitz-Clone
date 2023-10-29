@@ -179,6 +179,15 @@ void FreeListAllocator::Free(void * ptr)
 	}
 }
 
+void FreeListAllocator::Destroy()
+{
+	if (data)
+	{
+		delete(data);
+		data = nullptr;
+	}
+}
+
 void FreeListAllocator::NodeInsert(FreeListNode ** phead, FreeListNode * prevNode, FreeListNode * newNode)
 {
 	if (prevNode == nullptr)

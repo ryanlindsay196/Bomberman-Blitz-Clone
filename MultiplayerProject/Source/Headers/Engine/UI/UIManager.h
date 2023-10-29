@@ -7,6 +7,7 @@ public:
 	void Initialize(Renderer* renderer, char* uiFile);
 	void Update();
 	void Draw(Renderer* renderer);
+	void Close();
 
 
 	BaseWidget* GetRootWidget() { return tree.GetRootWidget(); }

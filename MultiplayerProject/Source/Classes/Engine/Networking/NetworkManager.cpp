@@ -30,6 +30,7 @@ void NetworkManager::Initialize(bool inIsServer)
 	networkedObjectLinker.Initialize();
 
 	highestNetworkID = 0;
+	highestClientID = 0;
 
 	char str[512];
 	peer = RakNet::RakPeerInterface::GetInstance();
@@ -239,6 +240,12 @@ void NetworkManager::Destroy()
 	RakNet::RakPeerInterface::DestroyInstance(peer);
 }
 
+void NetworkManager::Close()
+{
+	peer->Shutdown(0, 0, HIGH_PRIORITY);
+	networkedObjectLinker.Close();
+}
+
 bool NetworkManager::CanSerializeNumberOfBytes(unsigned int size, const RakNet::BitStream& bsIn) const
 {
 	return bsIn.GetNumberOfBytesUsed() + size < MAX_BYTES_FOR_STREAM;
@@ -388,7 +395,6 @@ unsigned int NetworkManager::GenerateNewNetworkID()
 
 unsigned int NetworkManager::GenerateClientID()
 {
-	static unsigned int clientID = 0;
-	++clientID;
-	return clientID;
+	++highestClientID;
+	return highestClientID;
 }

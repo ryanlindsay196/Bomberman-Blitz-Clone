@@ -132,6 +132,11 @@ public:
 
 	SingleCastDelegate<void>& GetOnMousePressedDel() { return onMousePressedDel; }
 	SingleCastDelegate<void>& GetOnMouseReleasedDel() { return onMouseReleasedDel; }
+
+	void RemoveAllChildren() 
+	{
+		children.clear();
+	}
 protected:
 	virtual SDL_Rect CalculateBoundsInGlobalSpace(const Renderer* const renderer, const SDL_Rect& parentRectBounds) const;
 

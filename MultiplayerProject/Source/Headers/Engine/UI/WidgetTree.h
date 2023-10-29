@@ -19,6 +19,12 @@ public:
 
 	BaseWidget* GetRootWidget() { return &rootWidget; }
 
+	void Close() 
+	{ 
+		allocator.Destroy(); 
+		rootWidget.RemoveAllChildren();
+	}
+
 private:
 	void ProcessMouseClicked();
 	void ProcessMouseReleased();

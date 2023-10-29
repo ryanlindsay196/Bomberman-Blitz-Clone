@@ -38,6 +38,8 @@ void ServerInstance::Open()
 void ServerInstance::Close()
 {
 	isOpen = false;
+	networkManager.Close();
+	entityManager.Close();
 }
 
 void ServerInstance::Destroy()
