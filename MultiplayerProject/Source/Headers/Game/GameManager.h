@@ -78,6 +78,7 @@ public:
 	static GameInstance* GetCurrentGameInstance() { return Get().currentGameInstance; }
 	static void CloseGameInstance(int i);
 	static void CloseGameInstances();
+	static bool IsUpdatingFocusedWindow();
 
 private:
 	InputManager inputManager;

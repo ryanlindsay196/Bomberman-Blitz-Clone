@@ -121,3 +121,20 @@ void GameManager::CloseGameInstances()
 	}
 #endif
 }
+
+
+bool GameManager::IsUpdatingFocusedWindow()
+{
+	static GameManager* gameManager = &GameManager::Get();
+
+	Renderer* renderer = gameManager->GetRenderer();
+
+	if (renderer)
+	{
+		Uint32 currentWindowFlags = renderer->GetWindowFlags();
+		bool isUpdatingFocusedWindow = currentWindowFlags & SDL_WINDOW_INPUT_FOCUS;
+		return isUpdatingFocusedWindow;
+	}
+
+	return false;
+}

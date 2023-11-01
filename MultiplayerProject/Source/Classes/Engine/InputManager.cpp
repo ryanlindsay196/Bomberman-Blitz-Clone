@@ -3,23 +3,6 @@
 
 std::vector<Input> inputs;
 
-bool IsUpdatingFocusedWindow()
-{
-	static GameManager* gameManager = &GameManager::Get();
-	
-	Renderer* renderer = gameManager->GetRenderer();
-
-	if (renderer)
-	{
-		Uint32 currentWindowFlags = renderer->GetWindowFlags();
-		bool isUpdatingFocusedWindow = currentWindowFlags & SDL_WINDOW_INPUT_FOCUS;
-		return isUpdatingFocusedWindow;
-	}
-
-	return false;
-}
-
-
 void InputManager::Initialize()
 {
 }
@@ -85,7 +68,7 @@ Input& InputManager::GetInputByMouseButtonID(Uint8 mouseButtonID) const
 
 bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool canConsumeInput) const
 {
-	if (!IsUpdatingFocusedWindow())
+	if (!GameManager::IsUpdatingFocusedWindow())
 	{
 		return false;
 	}
@@ -103,7 +86,7 @@ bool InputManager::IsKeyPressed(SDL_Keycode keyCode, bool canConsumeInput) const
 
 bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool canConsumeInput) const
 {
-	if (!IsUpdatingFocusedWindow())
+	if (!GameManager::IsUpdatingFocusedWindow())
 	{
 		return false;
 	}
@@ -121,7 +104,7 @@ bool InputManager::IsKeyReleased(SDL_Keycode keyCode, bool canConsumeInput) cons
 
 bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool canConsumeInput) const
 {
-	if (!IsUpdatingFocusedWindow())
+	if (!GameManager::IsUpdatingFocusedWindow())
 	{
 		return false;
 	}
@@ -139,7 +122,7 @@ bool InputManager::IsKeyDown(SDL_Keycode keyCode, bool canConsumeInput) const
 
 bool InputManager::IsMouseButtonPressed(Uint8 inButtonId, bool consumeEvent) const
 {
-	if (!IsUpdatingFocusedWindow())
+	if (!GameManager::IsUpdatingFocusedWindow())
 	{
 		return false;
 	}
@@ -155,7 +138,7 @@ bool InputManager::IsMouseButtonPressed(Uint8 inButtonId, bool consumeEvent) con
 
 bool InputManager::IsMouseButtonReleased(Uint8 inButtonId, bool consumeEvent) const
 {
-	if (!IsUpdatingFocusedWindow())
+	if (!GameManager::IsUpdatingFocusedWindow())
 	{
 		return false;
 	}
@@ -171,7 +154,7 @@ bool InputManager::IsMouseButtonReleased(Uint8 inButtonId, bool consumeEvent) co
 
 bool InputManager::IsMouseButtonDown(Uint8 inButtonId, bool consumeEvent) const
 {
-	if (!IsUpdatingFocusedWindow())
+	if (!GameManager::IsUpdatingFocusedWindow())
 	{
 		return false;
 	}

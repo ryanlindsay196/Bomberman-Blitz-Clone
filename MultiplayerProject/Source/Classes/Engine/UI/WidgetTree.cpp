@@ -100,7 +100,7 @@ void WidgetTree::ProcessMouseReleased()
 {
 	if (clickedWidget)
 	{
-		if (GameManager::GetInputManager()->IsMouseButtonReleased(SDL_BUTTON_LEFT, false))
+		if (GameManager::GetInputManager()->IsMouseButtonReleased(SDL_BUTTON_LEFT, false) || !GameManager::IsUpdatingFocusedWindow())
 		{
 			Input& mouseInput = GameManager::GetInputManager()->GetInputByMouseButtonID(SDL_BUTTON_LEFT);
 			mouseInput.isConsumed = true;
