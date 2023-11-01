@@ -5,6 +5,7 @@
 #include "Engine/Delegate.h"
 
 #include "Engine/InputManager.h"
+#include "Engine/JsonDataPopulator.h"
 #include "Engine/Reflection/Reflection.h"
 
 #include "rapidjson/document.h"
@@ -41,33 +42,6 @@ typedef Anchor Alignment;
 class BaseWidget
 {
 public:
-	template<typename MetaVarType, typename ...Args>
-	void PopulateWidgetData(MetaVarType& metaVar, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData, Args&&... args)
-	{
-		rapidjson::Value::MemberIterator varMemberIterator = widgetData->FindMember(metaVar.GetName());
-		if (varMemberIterator != widgetData->MemberEnd())
-		{
-			const auto& jsonVar = varMemberIterator->value;
-
-			Variable vars[]{ args... };
-			const unsigned int varArraySize = (sizeof(vars) / sizeof(Variable));
-
-			if (varArraySize > 1)
-			{
-				const auto& jsonArray = jsonVar.GetArray();
-
-				for (unsigned int i = 0; i < varArraySize; ++i)
-				{
-					CopyVariableFromJSON(vars[i], jsonArray[i]);
-				}
-			}
-			else
-			{
-				CopyVariableFromJSON(vars[0], jsonVar);
-			}
-		}
-	}
-
 	virtual void Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData);
 
 	void AddChild(BaseWidget* newChild);
@@ -158,7 +132,4 @@ protected:
 	SingleCastDelegate<void> onMouseReleasedDel;
 	
 	bool isTransformDirty;
-
-private:
-	void CopyVariableFromJSON(Variable& destinationVar, const rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType& sourceJSON);
 };

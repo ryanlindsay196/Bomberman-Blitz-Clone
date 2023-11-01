@@ -3,33 +3,6 @@
 
 CreateClassMetadata(BaseWidget);
 
-#include "Engine/Engine.h"
-//TODO: Remove the engine include from this file when moving the PopulateDelegateData to its own file (for use in the eventual level editor)
-template<typename MetaVarType, typename ObjectType, typename DelType>
-void PopulateDelegateData(MetaVarType& metaVar, ObjectType* object, SingleCastDelegate<DelType>& del, const char* functionName)
-{
-	auto& fun = GetMetaFunctionByName<ObjectType>(functionName)->GetFunction();
-	del.BindMemberFunction(object, fun);
-}
-
-template<typename MetaVarType, typename DelType>
-void CallPopulateDelegateData(MetaVarType& metaVar, SingleCastDelegate<DelType>& del, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType& widgetData)
-{
-	rapidjson::Value::MemberIterator varMemberIterator = widgetData.FindMember(metaVar.GetName());
-	if (varMemberIterator != widgetData.MemberEnd())
-	{
-		const auto& jsonVar = varMemberIterator->value;
-		const auto& jsonArray = jsonVar.GetArray();
-#if RunInEngine
-		if (strcmp((char*)"Engine", jsonArray[0].GetString()) == 0)
-		{
-			extern Engine* GetEngine();
-			PopulateDelegateData(metaVar, GetEngine(), del, jsonArray[1].GetString());
-		}
-#endif
-	}
-}
-
 void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData)
 {
 	strcpy_s(name, sizeof(name) + 1, "12345678901234567890");
@@ -40,16 +13,16 @@ void BaseWidget::Initialize(Renderer* renderer, rapidjson::GenericArray<false, r
 		return;
 
 	CreateVariableMetadata(BaseWidget, sizeInLocalSpace);
-	PopulateWidgetData(mv_sizeInLocalSpace, widgetData, sizeInLocalSpace.x, sizeInLocalSpace.y);
+	JsonDataPopulator::PopulateVarData(mv_sizeInLocalSpace, widgetData, sizeInLocalSpace.x, sizeInLocalSpace.y);
 
 	CreateVariableMetadata(BaseWidget, anchor);
-	PopulateWidgetData(mv_anchor, widgetData, anchor.normalizedValue.x, anchor.normalizedValue.y);
+	JsonDataPopulator::PopulateVarData(mv_anchor, widgetData, anchor.normalizedValue.x, anchor.normalizedValue.y);
 
 	CreateVariableMetadata(BaseWidget, alignment);
-	PopulateWidgetData(mv_alignment, widgetData, alignment.normalizedValue.x, alignment.normalizedValue.y);
+	JsonDataPopulator::PopulateVarData(mv_alignment, widgetData, alignment.normalizedValue.x, alignment.normalizedValue.y);
 	
 	CreateVariableMetadata(BaseWidget, onMousePressedDel);
-	CallPopulateDelegateData(mv_onMousePressedDel, onMousePressedDel, *widgetData);
+	JsonDataPopulator::PopulateDelegateData(mv_onMousePressedDel, onMousePressedDel, *widgetData);
 }
 
 void BaseWidget::AddChild(BaseWidget* newChild)
@@ -212,22 +185,4 @@ SDL_Rect BaseWidget::CalculateBoundsInGlobalSpace(const Renderer* const renderer
 		(int)heightInGlobalSpace };
 
 	return destRect;
-}
-
-void BaseWidget::CopyVariableFromJSON(Variable & destinationVar, const rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType & sourceJSON)
-{
-	if (sourceJSON.IsInt())
-	{
-		int intToCopy = sourceJSON.GetInt();
-		memcpy(destinationVar.v, &intToCopy, destinationVar.m->SizeOf());
-	}
-	else if (sourceJSON.IsFloat())
-	{
-		float floatToCopy = sourceJSON.GetFloat();
-		memcpy(destinationVar.v, &floatToCopy, destinationVar.m->SizeOf());
-	}
-	else if (sourceJSON.IsString())
-	{
-		*(char**)destinationVar.v = const_cast<char*>(sourceJSON.GetString());
-	}
 }

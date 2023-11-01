@@ -12,10 +12,10 @@ void Image::Initialize(Renderer* renderer, rapidjson::GenericArray<false, rapidj
 	BaseWidget::Initialize(renderer, widgetData);
 
 	CreateVariableMetadata(Image, path);
-	PopulateWidgetData(mv_path, widgetData, path);
+	JsonDataPopulator::PopulateVarData(mv_path, widgetData, path);
 
 	CreateVariableMetadata(Image, srcRect);
-	PopulateWidgetData(mv_srcRect, widgetData, srcRect.x, srcRect.y, srcRect.w, srcRect.h);
+	JsonDataPopulator::PopulateVarData(mv_srcRect, widgetData, srcRect.x, srcRect.y, srcRect.w, srcRect.h);
 	
 	texture = renderer->GetTextureManager()->LoadTexture(renderer, path);
 }
