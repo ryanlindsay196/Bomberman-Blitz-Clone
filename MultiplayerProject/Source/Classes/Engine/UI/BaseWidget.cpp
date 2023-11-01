@@ -20,11 +20,13 @@ void CallPopulateDelegateData(MetaVarType& metaVar, SingleCastDelegate<DelType>&
 	{
 		const auto& jsonVar = varMemberIterator->value;
 		const auto& jsonArray = jsonVar.GetArray();
+#if RunInEngine
 		if (strcmp((char*)"Engine", jsonArray[0].GetString()) == 0)
 		{
 			extern Engine* GetEngine();
 			PopulateDelegateData(metaVar, GetEngine(), del, jsonArray[1].GetString());
 		}
+#endif
 	}
 }
 
