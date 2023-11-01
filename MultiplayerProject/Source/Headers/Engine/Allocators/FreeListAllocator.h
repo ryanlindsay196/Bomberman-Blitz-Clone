@@ -38,6 +38,11 @@ public:
 
 	void Destroy();
 
+	void* GetDataAtOffset(unsigned int offsetInBytes) 
+	{ 
+		return (char*)data + offsetInBytes;
+	}
+
 private:
 	FreeListNode* FindFirst(size_t size, size_t alignment, size_t* padding_, FreeListNode** prevNode_);
 

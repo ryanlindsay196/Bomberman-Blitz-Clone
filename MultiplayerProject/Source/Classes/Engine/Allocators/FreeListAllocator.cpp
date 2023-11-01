@@ -140,8 +140,10 @@ void FreeListAllocator::Coalescence(FreeListNode * prevNode, FreeListNode * free
 }
 
 void FreeListAllocator::Free(void * ptr)
-
 {
+	//Do we have a valid pointer location?
+	assert(ptr > data && ptr < (char*)data + size);
+
 	FreeListAllocationHeader* header;
 	FreeListNode* freeNode;
 	FreeListNode* node;

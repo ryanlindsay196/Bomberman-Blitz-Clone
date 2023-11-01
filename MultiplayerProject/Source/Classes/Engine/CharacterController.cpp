@@ -5,6 +5,8 @@ CreateClassMetadata(CharacterController);
 
 bool CharacterController::Initialize()
 {
+	BaseObject::Initialize();
+
 	RegisterSelfAsNetworked();
 	CreateVariableMetadata(CharacterController, leftAxis, Networked(AuthorityType::OwningClient, leftAxis))
 	CreateVariableMetadata(CharacterController, rightAxis, Networked(AuthorityType::OwningClient, rightAxis))

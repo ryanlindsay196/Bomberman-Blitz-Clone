@@ -4,18 +4,39 @@
 
 struct RawPointerHandle
 {
-	int index;
-	void* pointer;
+	unsigned int index;
+	unsigned int offset;
 };
 
 class RawPointerTrackableObject
 {
 public:
-	RawPointerHandle* GetRawPointerHandle() { return &rawPointerHandle; }
+	RawPointerHandle* GetRawPointerHandle() { return rawPointerHandle; }
 protected:
 	virtual bool Initialize();
 	virtual ~RawPointerTrackableObject();
-	RawPointerHandle rawPointerHandle;
+	RawPointerHandle* rawPointerHandle;
+};
+
+class WeakRawPointerHandle
+{
+public:
+	WeakRawPointerHandle(RawPointerTrackableObject* rawPointerTrackableObject) : 
+		cachedHandle(*rawPointerTrackableObject->GetRawPointerHandle()),
+		handleOffset(cachedHandle.offset)
+	{
+	}
+
+	WeakRawPointerHandle(RawPointerHandle inHandle)  : 
+		cachedHandle(inHandle),
+		handleOffset(cachedHandle.offset)
+	{
+	}
+
+	bool IsValid();
+private:
+	RawPointerHandle cachedHandle;
+	unsigned int handleOffset;
 };
 
 class RawPointerTracker
@@ -25,6 +46,8 @@ public:
 	RawPointerHandle* CreateTrackedRawPointer(void* pointerToTrack);
 
 	void RemoveTrackedRawPointer(RawPointerTrackableObject* trackableObjectToRemove);
+
+	RawPointerHandle GetHandleByOffset(unsigned int offset) { return *(RawPointerHandle*)(allocator.GetDataAtOffset(offset)); }
 private:
 	FreeListAllocator allocator;
 	unsigned int largestIndex;

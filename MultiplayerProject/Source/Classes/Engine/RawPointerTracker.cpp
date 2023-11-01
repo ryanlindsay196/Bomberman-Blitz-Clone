@@ -5,7 +5,7 @@ bool RawPointerTrackableObject::Initialize()
 {
 	RawPointerTracker* rawPointerTracker = GameManager::GetRawPointerTracker();
 	assert(rawPointerTracker);
-	rawPointerHandle = *rawPointerTracker->CreateTrackedRawPointer(this);
+	rawPointerHandle = rawPointerTracker->CreateTrackedRawPointer(this);
 	return true;
 }
 
@@ -24,7 +24,7 @@ RawPointerHandle* RawPointerTracker::CreateTrackedRawPointer(void * pointerToTra
 	++largestIndex;
 	RawPointerHandle* handle = (RawPointerHandle*)allocator.Alloc(sizeof(RawPointerHandle), 32);
 	handle->index = largestIndex;
-	handle->pointer = pointerToTrack;
+	handle->offset = ((char*)handle - allocator.GetDataAtOffset(0));
 	return handle;
 }
 
@@ -32,6 +32,18 @@ void RawPointerTracker::RemoveTrackedRawPointer(RawPointerTrackableObject * trac
 {	
 	//Make the contents of the handle all equal 0;
 	RawPointerHandle* handleToClear = trackableObjectToRemove->GetRawPointerHandle();
+	
+	if (!handleToClear)
+	{
+		return;
+	}
+
 	*handleToClear = {};
-	allocator.Free(trackableObjectToRemove);
+	allocator.Free(handleToClear);
+}
+
+bool WeakRawPointerHandle::IsValid()
+{
+	RawPointerHandle handle = GameManager::GetRawPointerTracker()->GetHandleByOffset(handleOffset);
+	return handle.index == cachedHandle.index;
 }

@@ -24,12 +24,11 @@ public:
 	MemberFunctionPtr(MyClass* inObject, ReturnType(MyClass::*delegateToBind)(Args...)) :
 		boundObject(inObject),
 		myDelegate(delegateToBind),
-		boundObjectHandleLocation(inObject->GetRawPointerHandle()),
-		cachedPointerHandle(*(inObject->GetRawPointerHandle()))
+		weakHandle(*(inObject->GetRawPointerHandle()))
 	{}
 
 	virtual bool IsBound() override { 		
-		bool isHandleValid = boundObjectHandleLocation && boundObjectHandleLocation->index == cachedPointerHandle.index;
+		bool isHandleValid = weakHandle.IsValid();
 		return isHandleValid && myDelegate != nullptr; 
 	}
 
@@ -44,26 +43,24 @@ public:
 
 private:
 	MyClass* boundObject;
-	RawPointerHandle* boundObjectHandleLocation;
-	RawPointerHandle cachedPointerHandle;
+	WeakRawPointerHandle weakHandle;
 
 	ReturnType(MyClass::*myDelegate)(Args...);
 };
 
-template<typename... Args>
-class MemberFunctionPtr<RawPointerTrackableObject, void, Args...> : public NullFunctionPtr<void, Args...>
+template<class MyClass, typename... Args>
+class MemberFunctionPtr<MyClass, void, Args...> : public NullFunctionPtr<void, Args...>
 {
 public:
-	MemberFunctionPtr(RawPointerTrackableObject* inObject, void(RawPointerTrackableObject::*delegateToBind)(Args...)) :
+	MemberFunctionPtr(MyClass* inObject, void(MyClass::*delegateToBind)(Args...)) :
 		boundObject(inObject),
 		myDelegate(delegateToBind),
-		boundObjectHandleLocation(inObject->GetRawPointerHandle()),
-		cachedPointerHandle(*(inObject->GetRawPointerHandle()))
+		weakHandle(*(inObject->GetRawPointerHandle()))
 	{}
 
 	virtual bool IsBound() override
 	{
-		bool isHandleValid = boundObjectHandleLocation && boundObjectHandleLocation->index == cachedPointerHandle.index;
+		bool isHandleValid = weakHandle.IsValid();
 		return isHandleValid && myDelegate != nullptr;
 	}
 
@@ -76,17 +73,17 @@ public:
 	}
 
 private:
-	RawPointerTrackableObject* boundObject;
-	RawPointerHandle* boundObjectHandleLocation;
-	RawPointerHandle cachedPointerHandle;
-	void(RawPointerTrackableObject::*myDelegate)(Args...);
+	MyClass* boundObject;
+	WeakRawPointerHandle weakHandle;
+	void(MyClass::*myDelegate)(Args...);
 };
 
-template<class MyClass, typename... Args>
-class MemberFunctionPtr<MyClass, void, Args...> : public NullFunctionPtr<void, Args...>
+class Engine;
+template<typename... Args>
+class MemberFunctionPtr<Engine, void, Args...> : public NullFunctionPtr<void, Args...>
 {
 public:
-	MemberFunctionPtr(MyClass* inObject, void(MyClass::*delegateToBind)(Args...)) :
+	MemberFunctionPtr(Engine* inObject, void(Engine::*delegateToBind)(Args...)) :
 		boundObject(inObject),
 		myDelegate(delegateToBind)
 	{}
@@ -105,9 +102,8 @@ public:
 	}
 
 private:
-	MyClass* boundObject;
-	void(MyClass::*myDelegate)(Args...);
-
+	Engine* boundObject;
+	void(Engine::*myDelegate)(Args...);
 };
 
 template<typename ReturnType, typename... Args>
