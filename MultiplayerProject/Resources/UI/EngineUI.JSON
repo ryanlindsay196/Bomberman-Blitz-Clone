@@ -1,0 +1,12 @@
+{
+  "RootWidget": [
+    {
+      "class": "Button",
+      "path": "Resources/Images/PlayButton.png",
+      "sizeInLocalSpace": [ 100, 100 ],
+      "anchor": [ 0, 0.25 ],
+      "onMousePressedDel": [ "Engine", "PlayInEditor" ],
+      "srcRect": [0, 0, 512, 512]
+    }
+  ]
+}

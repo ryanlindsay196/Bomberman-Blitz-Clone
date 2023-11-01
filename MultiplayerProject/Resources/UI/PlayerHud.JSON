@@ -1,20 +1,13 @@
 {
   "RootWidget": [
     {
-      "class": "Button",
-      "path": "Resources/Images/PlayButton.png",
+      "class": "Image",
+      "path": "Resources/Images/Image.png",
       "sizeInLocalSpace": [ 100, 100 ],
-      "anchor": [ 0, 0.25 ],
-      "onMousePressedDel": [ "Engine", "PlayInEditor" ],
-      "srcRect": [0, 0, 512, 512],
+      "anchor": [ 0.0, 0.0 ],
+      "srcRect": [ 0, 0, 512, 512 ],
+      "alignment":  [0.0, 0.0],
       "Children": [
-        {
-          "class": "Image",
-          "path": "Resources/Images/Image.png",
-          "sizeInLocalSpace": [ 2000, 1000 ],
-          "srcRect": [ 0, 0, 100, 100 ],
-          "anchor": [ 0.25, 0.25 ]
-        },
         {
           "class": "Button",
           "path": "Resources/Images/Button.png",
