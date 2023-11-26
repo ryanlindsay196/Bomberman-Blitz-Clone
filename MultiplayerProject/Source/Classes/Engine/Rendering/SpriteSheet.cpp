@@ -1,17 +1,13 @@
 #include "Engine/Rendering/SpriteSheet.h"
+#include "Engine/JsonDataPopulator.h"
 
-void Animation::InitializeKeyFrames(KeyFrame * inKeyFrames, unsigned int keyFrameCount)
+#include "rapidjson/filereadstream.h"
+#include "rapidjson/document.h"
+
+Animation::Animation()
 {
-	//TODO: the keyframes we pass in have their start times at 0. This doesn't matter. It will matter once animations are loaded from files.
-
-	animationPlaybackTimeInSeconds = 0;
-	for (unsigned int i = 0; i < keyFrameCount; ++i)
-	{
-		KeyFrame& keyFrame = inKeyFrames[i];
-		keyFrame.startTimeInSeconds = animationPlaybackTimeInSeconds;
-		animationPlaybackTimeInSeconds += keyFrame.playbackTimeInSeconds;
-		keyFrames.push_back(keyFrame);
-	}
+	CreateVariableMetadata(Animation, keyFrames);
+	animationPlaybackTimeInSeconds = 0.0f;
 }
 
 KeyFrame* Animation::GetKeyFrameAtTime(float keyFrameTimeInSeconds)
@@ -27,15 +23,71 @@ KeyFrame* Animation::GetKeyFrameAtTime(float keyFrameTimeInSeconds)
 		}
 	}
 
-	return nullptr;
+	return &keyFrames[keyFrames.size() - 1];
 }
 
-void SpriteSheet::Initialize()
+void SpriteSheet::Initialize(const char* uiFile)
 {
 	currentAnimationTime = 0.0f;
 	currentAnimationIndex = 0;
 	animationPlaybackSpeed = 1.0f;
 	isPlayingLoopingAnimation = true;
+
+	FILE* fp = nullptr;
+	fopen_s(&fp, uiFile, "rb"); // non-Windows use "r"
+
+	char readBuffer[65536];
+	rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+
+	rapidjson::Document document;
+	document.ParseStream(is);
+
+	fclose(fp);
+
+	CreateVariableMetadata(SpriteSheet, frameBounds);
+	rapidjson::GenericArray<false, rapidjson::Value::ValueType> jsonBoundsArray = document["frameBounds"].GetArray();
+	frameBounds.reserve(jsonBoundsArray.Size());
+	for (unsigned int i = 0; i < jsonBoundsArray.Size(); ++i)
+	{
+		frameBounds.push_back(FrameBounds());
+
+		rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* jsonBoundsElement = &jsonBoundsArray[i];
+
+		ClassMetaData<FrameBounds>::MetaVariable& mv_startBounds = *ClassMetaData<FrameBounds>::Get()->GetMetaVariableByName("startBounds");
+		JsonDataPopulator::PopulateVarData(mv_startBounds, jsonBoundsElement,
+			frameBounds[i].startBounds.x,
+			frameBounds[i].startBounds.y);
+
+		ClassMetaData<FrameBounds>::MetaVariable& mv_endBounds = *ClassMetaData<FrameBounds>::Get()->GetMetaVariableByName("endBounds");
+		JsonDataPopulator::PopulateVarData(mv_endBounds, jsonBoundsElement,
+			frameBounds[i].endBounds.x,
+			frameBounds[i].endBounds.y);
+	}
+	
+	CreateVariableMetadata(SpriteSheet, animations);
+	rapidjson::GenericArray<false, rapidjson::Value::ValueType> jsonAnimationsArray = document["animations"].GetArray();
+	animations.reserve(jsonAnimationsArray.Size());
+	for (unsigned int i = 0; i < jsonAnimationsArray.Size(); ++i)
+	{
+		rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* jsonAnim = &jsonAnimationsArray[i];
+		animations.push_back(Animation());
+		
+		auto jsonKeyFrameArray = jsonAnim->FindMember("keyFrames");
+		unsigned int keyFrameCount = jsonKeyFrameArray->value.GetArray().Size();
+		for (unsigned int j = 0; j < keyFrameCount; ++j)
+		{			
+			animations[i].keyFrames.push_back(KeyFrame());
+			
+			ClassMetaData<KeyFrame>::MetaVariable& mv_boundsIndex = *ClassMetaData<KeyFrame>::Get()->GetMetaVariableByName("boundsIndex");
+			JsonDataPopulator::PopulateVarData(mv_boundsIndex, &jsonKeyFrameArray->value[j], animations[i].keyFrames[j].boundsIndex);
+			
+			ClassMetaData<KeyFrame>::MetaVariable& mv_playbackTimeInSeconds = *ClassMetaData<KeyFrame>::Get()->GetMetaVariableByName("playbackTimeInSeconds");
+			JsonDataPopulator::PopulateVarData(mv_playbackTimeInSeconds, &jsonKeyFrameArray->value[j], animations[i].keyFrames[j].playbackTimeInSeconds);
+
+			animations[i].keyFrames[j].startTimeInSeconds = animations[i].animationPlaybackTimeInSeconds;
+			animations[i].animationPlaybackTimeInSeconds += animations[i].keyFrames[j].playbackTimeInSeconds;
+		}
+	}
 }
 
 void SpriteSheet::Update(float deltaTime)
@@ -88,56 +140,19 @@ bool SpriteSheet::PlayAnimationAtIndex(unsigned int animIndex, bool shouldLoop, 
 	return true;
 }
 
-void SpriteSheet::InitializeAnimations()
+FrameBounds::FrameBounds()
 {
-	//TODO: Initialize from file instead of hard-coding frames in
-	Animation newAnimation;
-
-	KeyFrame keyFrames[]
-	{
-		{0, 0.25f, 0},
-		{0, 0.25f, 1},
-		{0, 0.25f, 2},
-		{0, 0.25f, 1},
-		{0, 0.25f, 3},
-		{0, 0.25f, 4},
-		{0, 0.25f, 5},
-		{0, 0.25f, 4}
-	};
-
-	newAnimation.InitializeKeyFrames(keyFrames, sizeof(keyFrames) / sizeof(KeyFrame));
-	animations.push_back(newAnimation);
-
-	Animation newAnimation2;
-
-	KeyFrame keyFrames2[]
-	{
-		0, 0.25, 6,
-		0, 0.25, 7,
-		0, 0.25, 8,
-		0, 0.25, 9,
-		0, 0.25, 10,
-		0, 0.25, 11
-	};
-
-	newAnimation2.InitializeKeyFrames(keyFrames2, sizeof(keyFrames2) / sizeof(KeyFrame));
-	animations.push_back(newAnimation2);
+	CreateVariableMetadata(FrameBounds, startBounds);
+	CreateVariableMetadata(FrameBounds, endBounds);
 }
 
-void SpriteSheet::InitializeFrameBounds()
+KeyFrame::KeyFrame()
 {
-	//TODO: Load this from file instead of hard coding it.
-	frameBounds.push_back({ {2, 62}, {21, 89} });
-	frameBounds.push_back({ {24, 62}, {42, 89} });
-	frameBounds.push_back({ {45, 62}, {62, 89} });
-	frameBounds.push_back({ {65, 62}, {83, 89} });
-	frameBounds.push_back({ {86, 62}, {104, 89} });
-	frameBounds.push_back({ {107, 62}, {124, 89} });
+	CreateVariableMetadata(KeyFrame, playbackTimeInSeconds);
+	CreateVariableMetadata(KeyFrame, boundsIndex);
 
-	frameBounds.push_back({ {134, 62}, {148, 89} });
-	frameBounds.push_back({ {152, 62}, {166, 89} });
-	frameBounds.push_back({ {169, 62}, {185, 89} });
-	frameBounds.push_back({ {189, 62}, {203, 89} });
-	frameBounds.push_back({ {207, 62}, {221, 89} });
-	frameBounds.push_back({ {225, 62}, {239, 89} });
+	startTimeInSeconds = 0.0f; 
+	playbackTimeInSeconds = 0.0f;
+	boundsIndex = 0;
+
 }

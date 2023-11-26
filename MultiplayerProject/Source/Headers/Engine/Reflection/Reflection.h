@@ -140,11 +140,27 @@ public:
 		const unsigned int GetOffset() { return offset; }
 		const unsigned int GetSize() const { return metaType.SizeOf(); }
 		const MetaType& GetMetaType() const { return metaType; }
+
 	private:
 		const char* const name;
 		const unsigned int offset;
 		const MetaType& metaType;
 	};
+
+
+	MetaVariable* GetMetaVariableByName(const char* Name)
+	{
+		for (MetaVariable* mv = MetaVariable::Head(); mv; mv = mv->Next())
+		{
+			if (std::strcmp(mv->GetName(), Name) == 0)
+			{
+				return mv;
+			}
+		}
+
+		assert(false && "No meta variable has been found. Check that the Name parameter matches a meta variable instance.");
+		return nullptr;
+	}
 
 private:
 	char* name;

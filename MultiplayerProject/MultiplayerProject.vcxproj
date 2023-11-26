@@ -223,6 +223,7 @@
     <ClInclude Include="Source\Headers\Engine\GameInstances\ServerInstance.h" />
     <ClInclude Include="Source\Headers\Engine\GameMode\GameMode.h" />
     <ClInclude Include="Source\Headers\Engine\InputManager.h" />
+    <ClInclude Include="Source\Headers\Engine\JsonDataPopulator.h" />
     <ClInclude Include="Source\Headers\Engine\Managers\AssetManager.h" />
     <ClInclude Include="Source\Headers\Engine\Managers\TextureManager.h" />
     <ClInclude Include="Source\Headers\Engine\Networking\NetworkedObjectLinker.h" />

@@ -6,6 +6,7 @@ CreateClassMetadata(Player);
 void Player::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
+	spriteSheet.Update(deltaTime);
 }
 
 bool Player::Initialize()
@@ -15,9 +16,7 @@ bool Player::Initialize()
 	RegisterSelfAsNetworked();
 	CreateVariableMetadata(Player, health, Networked(AuthorityType::Server, health))
 
-	spriteSheet.Initialize();
-	spriteSheet.InitializeFrameBounds();
-	spriteSheet.InitializeAnimations();
+	spriteSheet.Initialize("Resources/SpriteSheets/PlayerSpriteSheet.JSON");
 
 	return Entity::Initialize();
 }

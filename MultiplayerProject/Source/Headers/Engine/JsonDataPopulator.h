@@ -1,5 +1,8 @@
+#pragma once
+
 #include "rapidjson/document.h"
 #include "Reflection/Reflection.h"
+#include "Engine/Delegate.h"
 #if RunInEngine
 class Engine;
 #endif
@@ -34,10 +37,10 @@ private:
 
 public:
 	template<typename MetaVarType, typename DelType>
-	static void PopulateDelegateData(MetaVarType& metaVar, SingleCastDelegate<DelType>& del, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType& widgetData)
+	static void PopulateDelegateData(MetaVarType& metaVar, SingleCastDelegate<DelType>& del, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType& jsonData)
 	{
-		rapidjson::Value::MemberIterator varMemberIterator = widgetData.FindMember(metaVar.GetName());
-		if (varMemberIterator != widgetData.MemberEnd())
+		rapidjson::Value::MemberIterator varMemberIterator = jsonData.FindMember(metaVar.GetName());
+		if (varMemberIterator != jsonData.MemberEnd())
 		{
 			const auto& jsonVar = varMemberIterator->value;
 			const auto& jsonArray = jsonVar.GetArray();
@@ -52,10 +55,11 @@ public:
 	}
 
 	template<typename MetaVarType, typename ...Args>
-	static void PopulateVarData(MetaVarType& metaVar, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* widgetData, Args&&... args)
+	static void PopulateVarData(MetaVarType& metaVar, rapidjson::GenericArray<false, rapidjson::Value::ValueType>::PlainType* jsonData, Args&&... args)
 	{
-		rapidjson::Value::MemberIterator varMemberIterator = widgetData->FindMember(metaVar.GetName());
-		if (varMemberIterator != widgetData->MemberEnd())
+		rapidjson::Value::MemberIterator varMemberIterator = jsonData->FindMember(metaVar.GetName());
+		
+		if (varMemberIterator != jsonData->MemberEnd())
 		{
 			const auto& jsonVar = varMemberIterator->value;
 

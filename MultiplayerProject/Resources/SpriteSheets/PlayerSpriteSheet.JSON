@@ -1,0 +1,90 @@
+{
+  "frameBounds": [
+    {
+      "startBounds": [ 2, 62 ],
+      "endBounds": [ 21, 89 ]
+    },
+    {
+      "startBounds": [ 24, 62 ],
+      "endBounds": [ 42, 89 ]
+    },
+    {
+      "startBounds": [ 45, 62 ],
+      "endBounds": [ 62, 89 ]
+    },
+    {
+      "startBounds": [ 65, 62 ],
+      "endBounds": [ 83, 89 ]
+    },
+    {
+      "startBounds": [ 86, 62 ],
+      "endBounds": [ 104, 89 ]
+    },
+    {
+      "startBounds": [ 107, 62 ],
+      "endBounds": [ 124, 89 ]
+    },
+    {
+      "startBounds": [ 134, 62 ],
+      "endBounds": [ 148, 89 ]
+    },
+    {
+      "startBounds": [ 152, 62 ],
+      "endBounds": [ 166, 89 ]
+    },
+    {
+      "startBounds": [ 169, 62 ],
+      "endBounds": [ 185, 89 ]
+    },
+    {
+      "startBounds": [ 189, 62 ],
+      "endBounds": [ 203, 89 ]
+    },
+    {
+      "startBounds": [ 207, 62 ],
+      "endBounds": [ 221, 89 ]
+    },
+    {
+      "startBounds": [ 225, 62 ],
+      "endBounds": [ 239, 89 ]
+    }
+  ],
+  "animations": [
+    {
+      "keyFrames": [
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 0
+        },
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 1
+        },
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 2
+        },
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 1
+        },
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 3
+        },
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 4
+        },
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 5
+        },
+        {
+          "playbackTimeInSeconds": 0.25,
+          "boundsIndex": 4
+        }
+      ]
+    }
+  ]
+}

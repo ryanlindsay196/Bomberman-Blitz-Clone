@@ -3,6 +3,8 @@
 
 struct KeyFrame
 {
+	KeyFrame();
+
 	float startTimeInSeconds;
 	float playbackTimeInSeconds;
 	int boundsIndex;
@@ -10,38 +12,34 @@ struct KeyFrame
 
 struct Animation
 {
-	//TODO: Remove hard coding of animation data. Maybe replace with a file format of some kind.
-	void InitializeKeyFrames(KeyFrame* inKeyFrames, unsigned int keyFrameCount);
+	Animation();
 
 	float GetAnimationPlaybackTimeInSeconds() { return animationPlaybackTimeInSeconds; }
 
 	KeyFrame* GetKeyFrameAtTime(float keyFrameTimeInSeconds);
 
-private:
 	std::vector<KeyFrame> keyFrames;
+
 	float animationPlaybackTimeInSeconds;
 };
 
 struct FrameBounds
 {
+	FrameBounds();
+
 	mathfu::Vector<int, 2> startBounds, endBounds;
 };
 
 class SpriteSheet
 {
 public:
-	void Initialize();
+	void Initialize(const char* uiFile);
 
 	void Update(float deltaTime);
 
 	FrameBounds GetDisplayedFrameBounds();
 
 	bool PlayAnimationAtIndex(unsigned int animIndex, bool shouldLoop, float playbackSpeed = 1.0f);
-
-	//TODO: Load this from file instead of hard coding
-	void InitializeAnimations();
-
-	void InitializeFrameBounds();
 
 private:
 	float currentAnimationTime;

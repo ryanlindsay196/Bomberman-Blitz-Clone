@@ -700,5 +700,8 @@
     <ClInclude Include="Source\Headers\Engine\Managers\AssetManager.h">
       <Filter>Source Files\Headers\Engine\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Headers\Engine\JsonDataPopulator.h">
+      <Filter>Source Files\Headers\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
