@@ -1,0 +1,1600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{F3F6462C-5FD6-C5C7-68EE-509ED44C2C29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine">
+      <UniqueIdentifier>{18327931-0400-6D37-ED93-DD5DD900499C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\Allocators">
+      <UniqueIdentifier>{DB286C74-47EB-9FFE-909B-2E8BFC9C78DC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\GameInstances">
+      <UniqueIdentifier>{A9B63A4A-9571-2AF6-3E29-A3402AC37486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\GameMode">
+      <UniqueIdentifier>{E6F16C74-5229-B50B-5B33-192FC7E9DB04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\Managers">
+      <UniqueIdentifier>{F5CE1200-6106-5B97-6A10-BFBAD6C68190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\Networking">
+      <UniqueIdentifier>{2F7C9B60-9B3E-CFEA-E4EE-5D7750F0A7C8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\Reflection">
+      <UniqueIdentifier>{D2690D1E-3E2C-41A8-87DC-CF34F3DD1986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\Rendering">
+      <UniqueIdentifier>{6579C400-519E-1381-7AE9-F810666D129F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Engine\UI">
+      <UniqueIdentifier>{45EE5106-B104-509C-FA7B-DBBD66D12024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Game">
+      <UniqueIdentifier>{7C6061D7-68C3-F07B-1149-2932FD8ABCFE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine">
+      <UniqueIdentifier>{263E700F-120C-6415-FB9F-D43BE70C407A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\Allocators">
+      <UniqueIdentifier>{29D0B25F-9592-E6E9-DE42-75764A44BFC7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\GameInstances">
+      <UniqueIdentifier>{37C37E13-237E-6EBF-CC35-E709B8CFB84F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\GameMode">
+      <UniqueIdentifier>{B46DA5AF-20A5-ED46-29AF-516A95651440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\Managers">
+      <UniqueIdentifier>{C34A4B3B-2F82-93D2-388C-F7F5A442BACB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\Networking">
+      <UniqueIdentifier>{7D23E24B-E9E5-15D6-3296-A4629E97EEB3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\Reflection">
+      <UniqueIdentifier>{20115409-8CD3-8793-D583-162041856071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\Rendering">
+      <UniqueIdentifier>{F36E0CA3-DF93-5B23-08DF-40B3F4625A41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Engine\UI">
+      <UniqueIdentifier>{9327853B-FF3D-83D1-48B5-0EF3B40A5459}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Game">
+      <UniqueIdentifier>{0A116A50-F673-F9F4-9FF9-31AB8B3BC577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor">
+      <UniqueIdentifier>{935FDCD7-7F01-07AE-68BC-1A0254FD8DFE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Math">
+      <UniqueIdentifier>{4C78D415-B82D-4D0B-4122-47E2ADD6430F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Math\include">
+      <UniqueIdentifier>{BF2B4B8E-2B8D-289C-B4FA-6E4E205B5F5B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Math\include\mathfu">
+      <UniqueIdentifier>{B3BF1AA7-9FCF-C677-0889-2B96F4B7B510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Math\include\mathfu\internal">
+      <UniqueIdentifier>{5FBB5E6D-CB74-C917-54D4-E3F1C08C7F87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Math\include\vectorial">
+      <UniqueIdentifier>{17B562BB-83CD-49E5-4C7A-D97EB851DE7E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Raknet">
+      <UniqueIdentifier>{07BE78E8-737E-F41E-3CB9-3D9CA83839FB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Raknet\Include">
+      <UniqueIdentifier>{5A6403C7-C6D0-BEC1-8FC4-561FFBEFE029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\Raknet\lib">
+      <UniqueIdentifier>{AD0842D3-191F-4069-6296-CB8ACEEB10F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\RapidJSON">
+      <UniqueIdentifier>{6C84BD92-587D-DCE4-81AF-C1696D07BCF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\RapidJSON\include">
+      <UniqueIdentifier>{DF570E49-CB7C-5DC9-F4C7-4259E04B5CE7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\RapidJSON\include\rapidjson">
+      <UniqueIdentifier>{5884EBEB-44C0-EE55-ADD2-064D992D9770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\RapidJSON\include\rapidjson\error">
+      <UniqueIdentifier>{B1FD89E2-9D7A-7D25-C6F7-7D39B2D319B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\RapidJSON\include\rapidjson\internal">
+      <UniqueIdentifier>{A4891BCE-10EF-AE54-99C7-502D052CA4C3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\RapidJSON\include\rapidjson\msinttypes">
+      <UniqueIdentifier>{2725D9AC-9395-DB25-5CB4-55AEC8E31327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\SDL">
+      <UniqueIdentifier>{05217327-F1D8-B474-5AE0-8DD046B74F65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\SDL\include">
+      <UniqueIdentifier>{787DFF35-6461-C08B-CDC1-BADEB9C4AA0D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\SDL_image">
+      <UniqueIdentifier>{07A1AE59-F399-CDAB-1CCC-B2300824ADB7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vendor\SDL_image\include">
+      <UniqueIdentifier>{7ADFB394-6604-0315-8F4F-E8A47BD30133}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Allocators\AllocatorCommon.h">
+      <Filter>Headers\Engine\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Allocators\FreeListAllocator.h">
+      <Filter>Headers\Engine\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Allocators\StackAllocator.h">
+      <Filter>Headers\Engine\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\BaseObject.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\CharacterController.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Delegate.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Engine.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\GameInstances\ClientInstance.h">
+      <Filter>Headers\Engine\GameInstances</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\GameInstances\GameInstance.h">
+      <Filter>Headers\Engine\GameInstances</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\GameInstances\ServerInstance.h">
+      <Filter>Headers\Engine\GameInstances</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\GameMode\GameMode.h">
+      <Filter>Headers\Engine\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\InputManager.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\JsonDataPopulator.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Managers\AssetManager.h">
+      <Filter>Headers\Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Managers\TextureManager.h">
+      <Filter>Headers\Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Networking\NetworkEnums.h">
+      <Filter>Headers\Engine\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Networking\NetworkManager.h">
+      <Filter>Headers\Engine\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Networking\NetworkedObjectLinker.h">
+      <Filter>Headers\Engine\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\RCP.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\RawPointerTracker.h">
+      <Filter>Headers\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Reflection\Reflection.h">
+      <Filter>Headers\Engine\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Rendering\Renderer.h">
+      <Filter>Headers\Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\Rendering\SpriteSheet.h">
+      <Filter>Headers\Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\UI\BaseWidget.h">
+      <Filter>Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\UI\ButtonWidget.h">
+      <Filter>Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\UI\ImageWidget.h">
+      <Filter>Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\UI\UIManager.h">
+      <Filter>Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Engine\UI\WidgetTree.h">
+      <Filter>Headers\Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Game\Entity.h">
+      <Filter>Headers\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Game\EntityManager.h">
+      <Filter>Headers\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Game\GameManager.h">
+      <Filter>Headers\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Headers\Game\Player.h">
+      <Filter>Headers\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\constants.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\glsl_mappings.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\hlsl_mappings.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\disable_warnings_begin.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\disable_warnings_end.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\vector_2.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\vector_2_simd.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\vector_3.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\vector_3_simd.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\vector_4.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\internal\vector_4_simd.h">
+      <Filter>Vendor\Math\include\mathfu\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\io.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\matrix.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\quaternion.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\rect.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\utilities.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\mathfu\vector.h">
+      <Filter>Vendor\Math\include\mathfu</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\config.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\mat4f.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd2f.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd2f_common.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd2f_neon.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4f.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4f_common.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4f_gnu.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4f_neon.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4f_scalar.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4f_sse.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4x4f.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4x4f_gnu.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4x4f_neon.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4x4f_scalar.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\simd4x4f_sse.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\vec2f.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\vec3f.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\vec4f.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\vec_convert.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Math\include\vectorial\vectorial.h">
+      <Filter>Vendor\Math\include\vectorial</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\AutopatcherPatchContext.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\AutopatcherRepositoryInterface.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Base64Encoder.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\BitStream.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\CCRakNetSlidingWindow.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\CCRakNetUDT.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\CheckSum.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\CloudClient.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\CloudCommon.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\CloudServer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\CommandParserInterface.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ConnectionGraph2.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ConsoleServer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DR_SHA1.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_BPlusTree.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_BinarySearchTree.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_BytePool.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_ByteQueue.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_Hash.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_Heap.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_HuffmanEncodingTree.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_HuffmanEncodingTreeFactory.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_HuffmanEncodingTreeNode.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_LinkedList.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_List.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_Map.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_MemoryPool.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_Multilist.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_OrderedChannelHeap.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_OrderedList.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_Queue.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_QueueLinkedList.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_RangeList.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_Table.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_ThreadsafeAllocatingQueue.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_Tree.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DS_WeightedGraph.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DataCompressor.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DirectoryDeltaTransfer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\DynDNS.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\EmailSender.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\EmptyHeader.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\EpochTimeToString.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Export.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\FileList.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\FileListNodeContext.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\FileListTransfer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\FileListTransferCBInterface.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\FileOperations.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\FormatString.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\FullyConnectedMesh2.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\GetTime.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Getche.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Gets.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\GridSectorizer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\HTTPConnection.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\HTTPConnection2.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\IncrementalReadInterface.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\InternalPacket.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Itoa.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Kbhit.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\LinuxStrings.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\LocklessTypes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\LogCommandParser.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\MTUSize.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\MessageFilter.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\MessageIdentifiers.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NatPunchthroughClient.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NatPunchthroughServer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NatTypeDetectionClient.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NatTypeDetectionCommon.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NatTypeDetectionServer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NativeFeatureIncludes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NativeFeatureIncludesOverrides.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NativeTypes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NetworkIDManager.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\NetworkIDObject.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PS3Includes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PS4Includes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PacketConsoleLogger.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PacketFileLogger.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PacketLogger.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PacketOutputWindowLogger.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PacketPool.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PacketPriority.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PacketizedTCP.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\PluginInterface2.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RPC4Plugin.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Rackspace.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakAlloca.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakAssert.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakMemoryOverride.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetCommandParser.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetDefines.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetDefinesOverrides.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetSmartPtr.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetSocket.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetSocket2.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetStatistics.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetTime.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetTransport2.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetTypes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakNetVersion.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakPeer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakPeerInterface.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakSleep.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakString.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakThread.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RakWString.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Rand.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RandSync.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ReadyEvent.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RefCountedObj.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\RelayPlugin.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ReliabilityLayer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ReplicaEnums.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ReplicaManager3.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\Router2.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SecureHandshake.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SendToThread.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SignaledEvent.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SimpleMutex.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SimpleTCPServer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SingleProducerConsumer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SocketDefines.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SocketIncludes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SocketLayer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\StatisticsHistory.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\StringCompressor.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\StringTable.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\SuperFastHash.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\TCPInterface.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\TableSerializer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\TeamBalancer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\TeamManager.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\TelnetTransport.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ThreadPool.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\ThreadsafePacketLogger.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\TransportInterface.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\TwoWayAuthentication.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\UDPForwarder.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\UDPProxyClient.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\UDPProxyCommon.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\UDPProxyCoordinator.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\UDPProxyServer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\VariableDeltaSerializer.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\VariableListDeltaTracker.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\VariadicSQLParser.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\VitaIncludes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\WSAStartupSingleton.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\WindowsIncludes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\XBox360Includes.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\_FindFirst.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\Raknet\Include\gettimeofday.h">
+      <Filter>Vendor\Raknet\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\allocators.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\cursorstreamwrapper.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\document.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\encodedstream.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\encodings.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\error\en.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\error</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\error\error.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\error</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\filereadstream.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\filewritestream.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\fwd.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\biginteger.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\clzll.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\diyfp.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\dtoa.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\ieee754.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\itoa.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\meta.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\pow10.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\regex.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\stack.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\strfunc.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\strtod.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\internal\swap.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\istreamwrapper.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\memorybuffer.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\memorystream.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\msinttypes\inttypes.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\msinttypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\msinttypes\stdint.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson\msinttypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\ostreamwrapper.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\pointer.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\prettywriter.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\rapidjson.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\reader.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\schema.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\stream.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\stringbuffer.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\uri.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\RapidJSON\include\rapidjson\writer.h">
+      <Filter>Vendor\RapidJSON\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_assert.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_atomic.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_audio.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_bits.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_blendmode.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_clipboard.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_android.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_iphoneos.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_macosx.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_minimal.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_pandora.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_psp.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_windows.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_winrt.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_config_wiz.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_copying.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_cpuinfo.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_egl.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_endian.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_error.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_events.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_filesystem.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_gamecontroller.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_gesture.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_guid.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_haptic.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_hidapi.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_hints.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_joystick.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_keyboard.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_keycode.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_loadso.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_locale.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_log.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_main.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_messagebox.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_metal.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_misc.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_mouse.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_mutex.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_name.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengl.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengl_glext.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengles.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengles2.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengles2_gl2.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengles2_gl2ext.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengles2_gl2platform.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_opengles2_khrplatform.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_pixels.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_platform.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_power.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_quit.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_rect.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_render.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_revision.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_rwops.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_scancode.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_sensor.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_shape.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_stdinc.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_surface.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_system.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_syswm.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_assert.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_common.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_compare.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_crc32.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_font.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_fuzzer.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_harness.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_images.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_log.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_md5.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_memory.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_test_random.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_thread.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_timer.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_touch.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_types.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_version.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_video.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\SDL_vulkan.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\begin_code.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL\include\close_code.h">
+      <Filter>Vendor\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerProject\Source\Vendor\SDL_image\include\SDL_image.h">
+      <Filter>Vendor\SDL_image\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Allocators\AllocatorCommon.cpp">
+      <Filter>Classes\Engine\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Allocators\FreeListAllocator.cpp">
+      <Filter>Classes\Engine\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Allocators\StackAllocator.cpp">
+      <Filter>Classes\Engine\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\BaseObject.cpp">
+      <Filter>Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\CharacterController.cpp">
+      <Filter>Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Engine.cpp">
+      <Filter>Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\GameInstances\ClientInstance.cpp">
+      <Filter>Classes\Engine\GameInstances</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\GameInstances\ServerInstance.cpp">
+      <Filter>Classes\Engine\GameInstances</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\GameMode\GameMode.cpp">
+      <Filter>Classes\Engine\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\InputManager.cpp">
+      <Filter>Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Managers\AssetManager.cpp">
+      <Filter>Classes\Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Managers\TextureManager.cpp">
+      <Filter>Classes\Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Networking\NetworkManager.cpp">
+      <Filter>Classes\Engine\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Networking\NetworkedObjectLinker.cpp">
+      <Filter>Classes\Engine\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\RCP.cpp">
+      <Filter>Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\RawPointerTracker.cpp">
+      <Filter>Classes\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Reflection\Reflection.cpp">
+      <Filter>Classes\Engine\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Rendering\Renderer.cpp">
+      <Filter>Classes\Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\Rendering\SpriteSheet.cpp">
+      <Filter>Classes\Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\UI\BaseWidget.cpp">
+      <Filter>Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\UI\ButtonWidget.cpp">
+      <Filter>Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\UI\ImageWidget.cpp">
+      <Filter>Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\UI\UIManager.cpp">
+      <Filter>Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Engine\UI\WidgetTree.cpp">
+      <Filter>Classes\Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Game\Entity.cpp">
+      <Filter>Classes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Game\EntityManager.cpp">
+      <Filter>Classes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Game\GameManager.cpp">
+      <Filter>Classes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Classes\Game\Player.cpp">
+      <Filter>Classes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Main.cpp" />
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\Base64Encoder.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\BitStream.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\CCRakNetSlidingWindow.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\CCRakNetUDT.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\CheckSum.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\CloudClient.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\CloudCommon.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\CloudServer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\CommandParserInterface.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\ConnectionGraph2.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\ConsoleServer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DR_SHA1.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DS_BytePool.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DS_ByteQueue.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DS_HuffmanEncodingTree.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DS_Table.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DataCompressor.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DirectoryDeltaTransfer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\DynDNS.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\EmailSender.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\EpochTimeToString.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\FileList.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\FileListTransfer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\FileOperations.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\FormatString.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\FullyConnectedMesh2.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\GetTime.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\Getche.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\Gets.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\GridSectorizer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\HTTPConnection.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\HTTPConnection2.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\IncrementalReadInterface.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\Itoa.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\LinuxStrings.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\LocklessTypes.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\LogCommandParser.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\MessageFilter.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\NatPunchthroughClient.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\NatPunchthroughServer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\NatTypeDetectionClient.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\NatTypeDetectionCommon.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\NatTypeDetectionServer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\NetworkIDManager.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\NetworkIDObject.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\PS4Includes.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\PacketConsoleLogger.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\PacketFileLogger.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\PacketLogger.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\PacketOutputWindowLogger.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\PacketizedTCP.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\PluginInterface2.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RPC4Plugin.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\Rackspace.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakMemoryOverride.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetCommandParser.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_360_720.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_Berkley.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_Berkley_NativeClient.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_NativeClient.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_PS3_PS4.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_PS4.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_Vita.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_WindowsStore8.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_Windows_Linux.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetSocket2_Windows_Linux_360.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetStatistics.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetTransport2.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakNetTypes.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakPeer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakSleep.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakString.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakThread.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RakWString.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\Rand.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RandSync.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\ReadyEvent.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\RelayPlugin.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\ReliabilityLayer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\ReplicaManager3.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\Router2.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\SecureHandshake.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\SendToThread.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\SignaledEvent.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\SimpleMutex.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\SocketLayer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\StatisticsHistory.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\StringCompressor.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\StringTable.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\SuperFastHash.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\TCPInterface.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\TableSerializer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\TeamBalancer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\TeamManager.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\TelnetTransport.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\ThreadsafePacketLogger.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\TwoWayAuthentication.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\UDPForwarder.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\UDPProxyClient.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\UDPProxyCoordinator.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\UDPProxyServer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\VariableDeltaSerializer.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\VariableListDeltaTracker.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\VariadicSQLParser.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\VitaIncludes.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\WSAStartupSingleton.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\_FindFirst.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerProject\Source\Vendor\Raknet\lib\gettimeofday.cpp">
+      <Filter>Vendor\Raknet\lib</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -2,14 +2,14 @@
 
 #include "Engine/Managers/AssetManager.h"
 
-#if RunClientMode || RunInEngine
+#if ClientMode || InEditor
 #include "Engine/GameInstances/ClientInstance.h"
 #endif
-#if RunServerMode || RunInEngine
+#if ServerMode || InEditor
 #include "Engine/GameInstances/ServerInstance.h"
 #endif
 
-#ifdef RunInEngine
+#ifdef InEditor
 #define GameInstanceCount 4
 #else
 #define GameInstanceCount 1
@@ -27,10 +27,10 @@ public:
 	GameManager(GameManager const&) = delete;
 	void operator=(GameManager const&) = delete;
 
-#if RunServerMode || RunInEngine
+#if ServerMode || InEditor
 	ServerInstance serverInstance;
 #endif
-#if RunClientMode || RunInEngine
+#if ClientMode || InEditor
 	ClientInstance gameInstances[GameInstanceCount];
 #endif
 	GameInstance* currentGameInstance;

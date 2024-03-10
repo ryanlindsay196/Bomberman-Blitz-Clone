@@ -3,7 +3,7 @@
 #include "rapidjson/document.h"
 #include "Reflection/Reflection.h"
 #include "Engine/Delegate.h"
-#if RunInEngine
+#if InEditor
 class Engine;
 #endif
 
@@ -44,7 +44,7 @@ public:
 		{
 			const auto& jsonVar = varMemberIterator->value;
 			const auto& jsonArray = jsonVar.GetArray();
-#if RunInEngine
+#if InEditor
 			if (strcmp((char*)"Engine", jsonArray[0].GetString()) == 0)
 			{
 				extern Engine* GetEngine();

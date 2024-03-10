@@ -1,6 +1,6 @@
 #include <SDL.h>
 
-#ifdef RunInEngine
+#ifdef InEditor
 #include "Engine/Engine.h"
 Engine engine;
 #else
@@ -9,7 +9,7 @@ Engine engine;
 
 Engine* GetEngine()
 {
-#ifdef RunInEngine
+#ifdef InEditor
 	return &engine;
 #else
 	return nullptr;
@@ -22,7 +22,7 @@ int main(int argc, char* args[])
 	
 	float deltaTime = 0;
 	float frameStart = 0;
-#ifdef RunInEngine
+#ifdef InEditor
 	engine.Initialize();
 
 	while (isInGameLoop)

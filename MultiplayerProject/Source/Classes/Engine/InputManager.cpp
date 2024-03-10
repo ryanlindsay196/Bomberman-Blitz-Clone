@@ -175,13 +175,13 @@ void InputManager::HandleWindowEvent(const SDL_Event & e)
 	
 	if (e.window.event == SDL_WINDOWEVENT_CLOSE)
 	{
-#if RunInEngine
+#if InEditor
 		gameManager.CloseGameInstances();
 		//TODO: This assumes that the only way to get a null renderer is for the window to be the editor window.
 		SDL_Window* window = SDL_GetWindowFromID(e.window.windowID);
 		SDL_HideWindow(window);
 #endif
-#if RunClientMode
+#if ClientMode
 		wantsToQuit = true;
 #endif
 	}
